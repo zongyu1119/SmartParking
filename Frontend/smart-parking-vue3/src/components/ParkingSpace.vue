@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import Car from '@/components/Car'
+import Car from '@/components/Car.vue'
 export default {
   name: 'ParkingSpace',
   components: {

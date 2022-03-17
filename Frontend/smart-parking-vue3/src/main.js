@@ -1,15 +1,14 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
-import router from './router'
+import * as Vue from 'vue'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+import App from './App.vue'
+import router from './router/router'
 
-Vue.config.productionTip = false
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
-})
+// 5. 创建并挂载根实例
+const app = Vue.createApp(App)
+//确保 _use_ 路由实例使
+//整个应用支持路由。
+app.use(router)
+app.use(ElementPlus)
+app.mount('#app')

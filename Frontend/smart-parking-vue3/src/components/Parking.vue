@@ -7,7 +7,7 @@
 </div>
 </template>
 <script>
-import ParkingSpace from '@/components/ParkingSpace'
+import ParkingSpace from '@/components/ParkingSpace.vue'
 export default {
   name: 'Parking',
   components: {
