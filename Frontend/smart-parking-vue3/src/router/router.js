@@ -4,10 +4,10 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import Parking from '@/components/Parking.vue'
 
 const routes=[
-    {path:'/Hello',component:Hello},
-    {path:"/HelloWorld",component:HelloWorld},
+    {path:'/Hello',name:Hello,component:Hello},
+    {path:"/HelloWorld",name:HelloWorld,component:HelloWorld},
     {path:'',redirect:"Hello"},
-    {path:'/Parking',component:Parking}
+    {path:'/Parking',name:Parking,component:Parking}
 ]
 
 const router=new VueRouter.createRouter({

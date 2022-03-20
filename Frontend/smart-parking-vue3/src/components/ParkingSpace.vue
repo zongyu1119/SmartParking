@@ -22,8 +22,8 @@ export default {
   background-color: #fde091;
 }
 .ParkingSpace {
-  width: 80px;
-  height: 60px;
+  width: 140px;
+  height: 125px;
   border: 1px solid #aaaaaa;
   float: left;
   border-radius: 10px;

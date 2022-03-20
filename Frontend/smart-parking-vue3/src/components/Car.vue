@@ -15,8 +15,6 @@ export default {
   data () {
     return {
       styleObject: {
-        color: '#222222',
-        fontSize: '12px'
       }
     }
   }
@@ -25,16 +23,15 @@ export default {
 <!--添加“scoped”属性，将CSS限制为仅用于此组件-->
 <style scoped>
 .car {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(240, 240, 240, 0.8);
   border: 0.5px solid rgba(200, 200, 200, 0.5);
   float: left;
   border-radius: 10px;
   box-sizing: border-box;
   box-shadow: 2px 2px 1px #888888;
   overflow: hidden;
-  width: 70px;
-  height: 50px;
-  margin: 3px;
+  width: 120px;
+  height: 100px;
 }
 .car:hover {
   background-color: #bbbbbb;

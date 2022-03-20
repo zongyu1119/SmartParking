@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "3.5.7",
   "createdTime": "2022-3-12 10:44:41",
-  "updatedTime": "2022-3-20 22:34:02",
+  "updatedTime": "2022-3-20 22:33:18",
   "profile": {
     "default": {
       "db": "D9B958D0-2287-45E6-8B17-8877A088069C",
@@ -528,6 +528,22 @@
           "refDict": "",
           "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
           "id": "E886BC5C-2161-42B7-AA3F-AD894AABE314"
+        },
+        {
+          "defKey": "PARKING_SPACE_ID",
+          "defName": "固定车位ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "F3D606C9-3A41-4A43-A242-EC0C95C35101"
         },
         {
           "defKey": "CREATED_BY",
