@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "3.5.7",
   "createdTime": "2022-3-12 10:44:41",
-  "updatedTime": "2022-3-21 22:32:32",
+  "updatedTime": "2022-3-22 22:34:21",
   "profile": {
     "default": {
       "db": "D9B958D0-2287-45E6-8B17-8877A088069C",
@@ -456,9 +456,9 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
@@ -494,7 +494,7 @@
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
-          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "domain": "40962814-AB5E-4969-8215-34B5839D65F8",
           "id": "55F9F852-1B7A-4F51-BE45-4DA888312406"
         },
         {
@@ -510,11 +510,11 @@
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
-          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "domain": "40962814-AB5E-4969-8215-34B5839D65F8",
           "id": "9AFAD006-0282-4088-B040-9DF46D8E899E"
         },
         {
-          "defKey": "CAR_BELONG_PEOPLE_ID",
+          "defKey": "OWNER_ID",
           "defName": "车辆所属人ID",
           "comment": "",
           "type": "",
@@ -526,8 +526,72 @@
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
-          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
           "id": "E886BC5C-2161-42B7-AA3F-AD894AABE314"
+        },
+        {
+          "defKey": "PROVINCE",
+          "defName": "省",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "82A039A7-4283-4B24-8D9B-61C53641F638"
+        },
+        {
+          "defKey": "CITY",
+          "defName": "市",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "9B23815A-165C-4E85-B9CE-042210A92760"
+        },
+        {
+          "defKey": "BRAND",
+          "defName": "品牌",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "954965A4-38A3-4CE4-8EED-043A40669CFE"
+        },
+        {
+          "defKey": "MODEL",
+          "defName": "型号",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "05DB63CA-F989-438A-AE3B-F1279BE7E328"
         },
         {
           "defKey": "CREATED_BY",
@@ -598,7 +662,16 @@
           "id": "F310FB83-913F-4729-A62E-9E610EE10EA7"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "CF3B1ADC-5D0C-4613-9F7E-8ADB9FF4DAD2",
+          "refEntity": "2149D97E-D5BD-4078-B6D1-1D5A1564F020",
+          "refField": "DB891A20-DE09-44A9-9D4D-AAF10B017DED",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        }
+      ],
       "indexes": []
     },
     {
@@ -833,8 +906,8 @@
           "id": "3DF0B2FA-05B4-4E98-9E89-83228868D139"
         },
         {
-          "defKey": "PS_STATUS",
-          "defName": "车位当前状态（0：普通车位；1：长租车位；2：：已经出售）",
+          "defKey": "PS_RENT_STATUS",
+          "defName": "车位当前出租出售状态（0：普通车位；1：长租车位；2：：已经出售）",
           "comment": "",
           "type": "",
           "len": "",
@@ -879,6 +952,54 @@
           "refDict": "",
           "domain": "E7AD47B4-D9F2-4050-8E44-9195B1049850",
           "id": "957BD084-9C5C-4651-A0C4-B7E690B63AB0"
+        },
+        {
+          "defKey": "OCCUPY_STATUS",
+          "defName": "车位占用状态（0：空闲；1：占用）",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "40962814-AB5E-4969-8215-34B5839D65F8",
+          "id": "CBBE5C9D-4B21-42F3-8F61-FA831156A8E2"
+        },
+        {
+          "defKey": "CAR_ID",
+          "defName": "占用车辆ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
+          "id": "7D753763-4F60-44CB-AA6B-AAB5C62BA401"
+        },
+        {
+          "defKey": "OCCUPY_START_TIME",
+          "defName": "占用起始时间",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "E7AD47B4-D9F2-4050-8E44-9195B1049850",
+          "id": "2A941476-D29B-4C69-9B69-892BCBB98956"
         },
         {
           "defKey": "CREATED_BY",
@@ -949,7 +1070,32 @@
           "id": "8A4012A7-DF86-4ABE-807C-6970DD410010"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "7D753763-4F60-44CB-AA6B-AAB5C62BA401",
+          "refEntity": "0D4D651C-8625-410D-B716-A953FA6A4665",
+          "refField": "CF3B1ADC-5D0C-4613-9F7E-8ADB9FF4DAD2",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        },
+        {
+          "myField": "AF0374C4-9CB3-4806-8528-3D01096C62AD",
+          "refEntity": "2149D97E-D5BD-4078-B6D1-1D5A1564F020",
+          "refField": "F742F1C6-3F86-4AF3-83D7-AF88D470C9ED",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        },
+        {
+          "myField": "AF0374C4-9CB3-4806-8528-3D01096C62AD",
+          "refEntity": "C2A7423A-7B1E-4F3E-A0BD-5FFE8FE51419",
+          "refField": "48FBE972-BB83-4D72-AD0D-7A50767F32B6",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        }
+      ],
       "indexes": []
     },
     {
@@ -1072,6 +1218,70 @@
           "id": "C92C2E04-8362-4589-8253-E31D2B7C78C0"
         },
         {
+          "defKey": "PARKING_ID",
+          "defName": "停车场ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "F74B961E-B3BD-42A3-924D-B378A1509399"
+        },
+        {
+          "defKey": "PARKING_NAME",
+          "defName": "停车场名称",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "D8F61810-A906-461C-B7DB-E0E9605561CE"
+        },
+        {
+          "defKey": "PARKING_AREA",
+          "defName": "停车场面积",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "2750204D-8A31-4A02-95B5-7B6E5DDE8A4B"
+        },
+        {
+          "defKey": "PARKING_TYPE",
+          "defName": "停车场类型（0：平面分区；1：条状分区；立体）",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "40962814-AB5E-4969-8215-34B5839D65F8",
+          "id": "C616DD30-9A67-4809-AC3B-AE57EEB8A132"
+        },
+        {
           "defKey": "CREATED_BY",
           "defName": "创建人",
           "comment": "",
@@ -1140,7 +1350,24 @@
           "id": "6158D3B3-F6A7-48E1-B464-E6CCED981C52"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "F74B961E-B3BD-42A3-924D-B378A1509399",
+          "refEntity": "15B94797-9525-4D5B-AA8E-583E670BFF01",
+          "refField": "24C30DFC-E760-4CDB-A787-586EE15BC54D",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        },
+        {
+          "myField": "F74B961E-B3BD-42A3-924D-B378A1509399",
+          "refEntity": "2149D97E-D5BD-4078-B6D1-1D5A1564F020",
+          "refField": "583C88D6-A9F9-4106-B2E4-2C985ECE3097",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        }
+      ],
       "indexes": []
     },
     {
@@ -1327,6 +1554,22 @@
           "id": "24C30DFC-E760-4CDB-A787-586EE15BC54D"
         },
         {
+          "defKey": "PS_COUNT",
+          "defName": "分区车位数",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "374E89E5-2A84-438C-9541-0BD2AB785B97"
+        },
+        {
           "defKey": "AREA_ADDRESS",
           "defName": "分区地址",
           "comment": "",
@@ -1341,6 +1584,22 @@
           "refDict": "",
           "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
           "id": "EE39D2DF-E816-418A-83DE-A06E95842933"
+        },
+        {
+          "defKey": "AREA_NO",
+          "defName": "分区序号（立体停车场为层数，平面停车场为排序）",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "40962814-AB5E-4969-8215-34B5839D65F8",
+          "id": "B28456DB-8243-4B26-A82A-4C5D153A2BCA"
         },
         {
           "defKey": "CREATED_BY",
@@ -1411,7 +1670,16 @@
           "id": "2073F9AD-E8D0-4087-9BDD-F95FAAB8260E"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "87CFC08F-35CA-4D1E-8D60-06F9EF2C1E29",
+          "refEntity": "86E99604-A416-4964-8FF3-2594F03A1B17",
+          "refField": "8511063B-7FEC-45D6-A198-F4380BD9DC63",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        }
+      ],
       "indexes": []
     },
     {
@@ -2218,7 +2486,24 @@
           "id": "77FB1233-4CA8-45C7-9369-112CB039D8BF"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "D060B2AC-9F6D-41A2-BAE7-644C5C3D4384",
+          "refEntity": "C2A7423A-7B1E-4F3E-A0BD-5FFE8FE51419",
+          "refField": "8F0D10DF-A291-4D1C-832D-2F27B0135F89",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        },
+        {
+          "myField": "D060B2AC-9F6D-41A2-BAE7-644C5C3D4384",
+          "refEntity": "86E99604-A416-4964-8FF3-2594F03A1B17",
+          "refField": "EB91BFFB-8111-45F1-9DEB-7D2BB3549B7B",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        }
+      ],
       "indexes": []
     },
     {
@@ -2339,6 +2624,38 @@
           "refDict": "",
           "uiHint": "",
           "id": "A8CF09A3-CB02-4595-8989-B3CE185701A6"
+        },
+        {
+          "defKey": "ROLE_ID",
+          "defName": "角色ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": true,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
+          "id": "4717D654-7BDA-409F-9A96-770C86BB146D"
+        },
+        {
+          "defKey": "ROLE_NAME",
+          "defName": "角色名称",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "01158149-DA04-4CCB-856F-0A62570BD437"
         },
         {
           "defKey": "CREATED_BY",
@@ -2532,6 +2849,102 @@
           "id": "546A434E-083D-4882-8D7B-F9A9EAD685FA"
         },
         {
+          "defKey": "POWER_ID",
+          "defName": "权限ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
+          "id": "91A76A71-BBEC-475A-AF9C-9BB3BD840058"
+        },
+        {
+          "defKey": "POWER_NAME",
+          "defName": "权限名称",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "8DA2E54B-7B8E-4669-A3D2-9C8273473979"
+        },
+        {
+          "defKey": "POWER_PATH",
+          "defName": "权限路径",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "E5B085BF-5C4D-4188-941C-A435A31995DD"
+        },
+        {
+          "defKey": "POWER_LEVEL",
+          "defName": "权限级别(多级权限区分权限级别)",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "971E3C2B-FB0A-41AB-B200-9341FB53A6D1"
+        },
+        {
+          "defKey": "PARENT_ID",
+          "defName": "父权限ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
+          "id": "DB3F87A4-8848-4738-86EA-93A8EDADE3E8"
+        },
+        {
+          "defKey": "POWER_TYPE",
+          "defName": "权限类型（0：菜单和功能；1：功能）",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "40962814-AB5E-4969-8215-34B5839D65F8",
+          "id": "A01F8F29-E5E7-488A-BB21-97F921075461"
+        },
+        {
           "defKey": "CREATED_BY",
           "defName": "创建人",
           "comment": "",
@@ -2723,6 +3136,102 @@
           "id": "474167A6-9DE3-48C1-95FC-50D63A94882E"
         },
         {
+          "defKey": "ROLE_ID",
+          "defName": "角色ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
+          "id": "75C68149-AD0E-4598-9DD7-A916B5B5683C"
+        },
+        {
+          "defKey": "POWER_ID",
+          "defName": "权限ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
+          "id": "E31A8119-A3BB-486B-A3F8-50FB56818B78"
+        },
+        {
+          "defKey": "IS_SELECT",
+          "defName": "是否允许查询(1:允许;0:不允许)",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "40962814-AB5E-4969-8215-34B5839D65F8",
+          "id": "F646335C-E0A4-4460-B81C-2F80D9A657E3"
+        },
+        {
+          "defKey": "IS_INSERT",
+          "defName": "是否允许新增(1:允许;0:不允许)",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "40962814-AB5E-4969-8215-34B5839D65F8",
+          "id": "BC87FBBA-6AF8-405D-B759-01C3AA0B3A3F"
+        },
+        {
+          "defKey": "IS_UPDATE",
+          "defName": "是否允许修改(1:允许;0:不允许)",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "40962814-AB5E-4969-8215-34B5839D65F8",
+          "id": "4A42F359-6C4D-42BB-99AD-DE274507A98C"
+        },
+        {
+          "defKey": "IS_DELETE",
+          "defName": "是否允许删除(1:允许;0:不允许)",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "40962814-AB5E-4969-8215-34B5839D65F8",
+          "id": "5DAA92E2-06C2-477E-9E2F-2D6699324EC7"
+        },
+        {
           "defKey": "CREATED_BY",
           "defName": "创建人",
           "comment": "",
@@ -2886,8 +3395,8 @@
           "type": "",
           "len": 32,
           "scale": "",
-          "primaryKey": false,
-          "notNull": false,
+          "primaryKey": true,
+          "notNull": true,
           "autoIncrement": false,
           "defaultValue": "",
           "hideInGraph": true,
@@ -2912,6 +3421,86 @@
           "refDict": "",
           "uiHint": "",
           "id": "FC3ADE51-BC90-498F-9857-829FCFB78409"
+        },
+        {
+          "defKey": "CONFIG_SORT",
+          "defName": "配置项类别",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "CC278497-CFA7-4764-ADA7-91D6D39CDE23"
+        },
+        {
+          "defKey": "CONFIG_KEY",
+          "defName": "配置项键",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "A06677E8-9E4D-4C18-A227-8A1B730BFD2A"
+        },
+        {
+          "defKey": "CONFIG_ORDER",
+          "defName": "配置项序号（某个键下得序号）",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "7DD97AD4-63BD-4B6A-854E-337D8AE770B3"
+        },
+        {
+          "defKey": "CONFIG_VALUE",
+          "defName": "配置项值",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "EB0F166B-BD79-4D93-A93F-11A2AB80FCF3"
+        },
+        {
+          "defKey": "CONFIG_REMARK",
+          "defName": "配置项备注",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "B18A4ED5-48B8-43A8-9233-C95334349927"
         },
         {
           "defKey": "CREATED_BY",
@@ -3103,6 +3692,102 @@
           "refDict": "",
           "uiHint": "",
           "id": "2475B7AF-D96E-44ED-A846-2AFD0AD15C97"
+        },
+        {
+          "defKey": "IO_ID",
+          "defName": "进出流水ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": true,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
+          "id": "00362665-0013-4DF4-ABE8-E2C9D74ADAB0"
+        },
+        {
+          "defKey": "IO_TYPE",
+          "defName": "进出类别（1:进;0:出）",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "CFEC73F6-D9CF-4CF5-82A7-7B0ECE74D723"
+        },
+        {
+          "defKey": "IO_PLACE_TYPE",
+          "defName": "进出地点类别(0:停车场;1:车位)",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "id": "44E80BCD-9440-4283-9C07-A25D06AFE44A"
+        },
+        {
+          "defKey": "PARKING_ID",
+          "defName": "停车场ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
+          "id": "583C88D6-A9F9-4106-B2E4-2C985ECE3097"
+        },
+        {
+          "defKey": "PS_ID",
+          "defName": "车位ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
+          "id": "F742F1C6-3F86-4AF3-83D7-AF88D470C9ED"
+        },
+        {
+          "defKey": "CAR_ID",
+          "defName": "车辆ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
+          "id": "DB891A20-DE09-44A9-9D4D-AAF10B017DED"
         },
         {
           "defKey": "CREATED_BY",
@@ -3508,7 +4193,16 @@
           "id": "E0E7C8B2-AA3A-467A-95EF-B96FD577EA2B"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "9F2DD71E-77F2-4B7D-A8EF-029758609B80",
+          "refEntity": "930D2729-48C0-495D-950F-B2B3F7AB00D0",
+          "refField": "F74B961E-B3BD-42A3-924D-B378A1509399",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        }
+      ],
       "indexes": []
     },
     {
@@ -3643,7 +4337,7 @@
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
-          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
           "id": "F3DA5D9A-E56F-4DB3-8B9E-D524AEE8066B"
         },
         {
@@ -3664,7 +4358,7 @@
         },
         {
           "defKey": "OWNER_ID",
-          "defName": "出租出售对象",
+          "defName": "出租出售对象(车主/业主表ID)",
           "comment": "",
           "type": "",
           "len": "",
@@ -3675,12 +4369,12 @@
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
-          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
           "id": "8F0D10DF-A291-4D1C-832D-2F27B0135F89"
         },
         {
           "defKey": "PRICE",
-          "defName": "出租/出售价格",
+          "defName": "出租/出售价格(元)",
           "comment": "",
           "type": "",
           "len": "",
@@ -3691,12 +4385,12 @@
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
-          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "domain": "99F17C1A-EA84-43FD-8C39-C85E185D8970",
           "id": "CA44B3B6-7AF4-46F6-9E77-EB86CD2AC3EB"
         },
         {
           "defKey": "DURATION_TIME",
-          "defName": "出租/出售时长",
+          "defName": "出租/出售时长（天）",
           "comment": "",
           "type": "",
           "len": "",
@@ -3707,7 +4401,7 @@
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
-          "domain": "B79F834F-09DF-4067-A34D-77A039EFFE2C",
+          "domain": "40962814-AB5E-4969-8215-34B5839D65F8",
           "id": "535A5865-B86B-4435-8997-0B3E92881AFA"
         },
         {
@@ -4098,7 +4792,7 @@
     {
       "id": "B37D1692-6F82-402C-B96B-07828DCAB483",
       "defKey": "bc_parking_area_manager",
-      "defName": "停车场分区与管理员对应关系表",
+      "defName": "停车场分区与管理员对应关系表(多对多关系)",
       "comment": "",
       "properties": {},
       "nameTemplate": "{defKey}[{defName}]",
@@ -4215,6 +4909,38 @@
           "id": "985DACBA-4D88-4725-9581-4092DEA1774B"
         },
         {
+          "defKey": "MANAGER_ID",
+          "defName": "管理员ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
+          "id": "430071F7-F3BD-438E-9AFA-D31B93B3EA2C"
+        },
+        {
+          "defKey": "PARKING_AREA_ID",
+          "defName": "停车场分区ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "394A8400-0E87-4D89-B102-E0B425C98341",
+          "id": "9C700CED-705C-45FB-8228-D600ACD9CA6D"
+        },
+        {
           "defKey": "CREATED_BY",
           "defName": "创建人",
           "comment": "",
@@ -4283,7 +5009,24 @@
           "id": "EC45E290-8B34-41BF-AC98-6BDEC4BCBB03"
         }
       ],
-      "correlations": [],
+      "correlations": [
+        {
+          "myField": "430071F7-F3BD-438E-9AFA-D31B93B3EA2C",
+          "refEntity": "135FB75B-A114-4535-9627-0EC69A69D794",
+          "refField": "F0CF5813-9AF4-4343-82F0-275D4C2C5723",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        },
+        {
+          "myField": "9C700CED-705C-45FB-8228-D600ACD9CA6D",
+          "refEntity": "15B94797-9525-4D5B-AA8E-583E670BFF01",
+          "refField": "87CFC08F-35CA-4D1E-8D60-06F9EF2C1E29",
+          "myRows": "n",
+          "refRows": "1",
+          "innerType": ""
+        }
+      ],
       "indexes": []
     }
   ],
@@ -4489,7 +5232,334 @@
       "id": "17FE04A7-1BC3-424E-B822-B2C417F8FFF8"
     }
   ],
-  "diagrams": [],
+  "diagrams": [
+    {
+      "defKey": "CAR",
+      "defName": "车辆关系",
+      "relationType": "field",
+      "canvasData": {
+        "cells": [
+          {
+            "id": "ae8a1a9c-cc26-4b59-86e2-921025426820",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "49617b92-b71d-4144-bdec-d9137cb69979",
+              "port": "CF3B1ADC-5D0C-4613-9F7E-8ADB9FF4DAD2%in"
+            },
+            "target": {
+              "cell": "f7fb54c5-63e9-4c54-bd90-a41c82c9a080",
+              "port": "7D753763-4F60-44CB-AA6B-AAB5C62BA401%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
+            "id": "283ef6e7-f920-435d-abf6-82ab46b6ffa6",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "f7fb54c5-63e9-4c54-bd90-a41c82c9a080",
+              "port": "8511063B-7FEC-45D6-A198-F4380BD9DC63%out"
+            },
+            "target": {
+              "cell": "f684aec2-638c-4770-9f00-311f13b965cd",
+              "port": "87CFC08F-35CA-4D1E-8D60-06F9EF2C1E29%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
+            "id": "c5428225-257a-4353-b9d5-8dcf3e8e1e7f",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "f684aec2-638c-4770-9f00-311f13b965cd",
+              "port": "24C30DFC-E760-4CDB-A787-586EE15BC54D%in"
+            },
+            "target": {
+              "cell": "10187b8c-4dc0-4b59-9196-450582894ae3",
+              "port": "F74B961E-B3BD-42A3-924D-B378A1509399%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
+            "id": "12ca999d-dfdb-4abd-b41f-410992a5ca83",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "45c4ed77-c5ce-4f93-938e-bbe3d5684367",
+              "port": "DB891A20-DE09-44A9-9D4D-AAF10B017DED%in"
+            },
+            "target": {
+              "cell": "49617b92-b71d-4144-bdec-d9137cb69979",
+              "port": "CF3B1ADC-5D0C-4613-9F7E-8ADB9FF4DAD2%out"
+            },
+            "relation": "1:n",
+            "vertices": [
+              {
+                "x": 180,
+                "y": 520
+              }
+            ],
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
+            "id": "a832dcfe-08b8-4163-84ef-8b6db68b380d",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "45c4ed77-c5ce-4f93-938e-bbe3d5684367",
+              "port": "F742F1C6-3F86-4AF3-83D7-AF88D470C9ED%in"
+            },
+            "target": {
+              "cell": "f7fb54c5-63e9-4c54-bd90-a41c82c9a080",
+              "port": "AF0374C4-9CB3-4806-8528-3D01096C62AD%out"
+            },
+            "relation": "1:n",
+            "vertices": [
+              {
+                "x": 180,
+                "y": 330
+              }
+            ],
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
+            "id": "8ed69cbc-1f18-432d-93ba-7be51143a0ad",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "10187b8c-4dc0-4b59-9196-450582894ae3",
+              "port": "F74B961E-B3BD-42A3-924D-B378A1509399%out"
+            },
+            "target": {
+              "cell": "6383fd91-d447-42ef-a389-2dd9374ca5fe",
+              "port": "9F2DD71E-77F2-4B7D-A8EF-029758609B80%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
+            "id": "205d8f5a-1412-4d3c-a55e-6a5b8ee6727e",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "2a556e0b-6367-437a-a27c-cb9098f4e0f8",
+              "port": "48FBE972-BB83-4D72-AD0D-7A50767F32B6%out"
+            },
+            "target": {
+              "cell": "f7fb54c5-63e9-4c54-bd90-a41c82c9a080",
+              "port": "AF0374C4-9CB3-4806-8528-3D01096C62AD%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
+            "id": "18260fb9-a0e3-40ed-abf2-e20a63c64c37",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "2a556e0b-6367-437a-a27c-cb9098f4e0f8",
+              "port": "8F0D10DF-A291-4D1C-832D-2F27B0135F89%out"
+            },
+            "target": {
+              "cell": "8bd54c15-6c9a-47f3-a1e1-af09f97bfc5d",
+              "port": "D060B2AC-9F6D-41A2-BAE7-644C5C3D4384%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
+            "id": "2a556e0b-6367-437a-a27c-cb9098f4e0f8",
+            "shape": "table",
+            "position": {
+              "x": -1270,
+              "y": -122
+            },
+            "count": 0,
+            "originKey": "C2A7423A-7B1E-4F3E-A0BD-5FFE8FE51419"
+          },
+          {
+            "id": "b3789ce9-d50c-45ac-b408-8f87981c5b68",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "55def9f4-75bf-4b1a-8e18-7f69429cfc56",
+              "port": "F0CF5813-9AF4-4343-82F0-275D4C2C5723%out"
+            },
+            "target": {
+              "cell": "2ea2d6ec-0547-401a-93b0-76c51b78ee25",
+              "port": "430071F7-F3BD-438E-9AFA-D31B93B3EA2C%in"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
+            "id": "55def9f4-75bf-4b1a-8e18-7f69429cfc56",
+            "shape": "table",
+            "position": {
+              "x": -320,
+              "y": -420
+            },
+            "count": 0,
+            "originKey": "135FB75B-A114-4535-9627-0EC69A69D794"
+          },
+          {
+            "id": "48b85bc8-621d-40d5-91a4-29ed223f8eef",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "f684aec2-638c-4770-9f00-311f13b965cd",
+              "port": "87CFC08F-35CA-4D1E-8D60-06F9EF2C1E29%out"
+            },
+            "target": {
+              "cell": "2ea2d6ec-0547-401a-93b0-76c51b78ee25",
+              "port": "9C700CED-705C-45FB-8228-D600ACD9CA6D%out"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
+            "id": "dd639a37-934a-4fc8-871a-eb2faaae4018",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "45c4ed77-c5ce-4f93-938e-bbe3d5684367",
+              "port": "583C88D6-A9F9-4106-B2E4-2C985ECE3097%out"
+            },
+            "target": {
+              "cell": "10187b8c-4dc0-4b59-9196-450582894ae3",
+              "port": "F74B961E-B3BD-42A3-924D-B378A1509399%out"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
+            "id": "6383fd91-d447-42ef-a389-2dd9374ca5fe",
+            "shape": "table",
+            "position": {
+              "x": 1230,
+              "y": 0
+            },
+            "count": 0,
+            "originKey": "EFCCFD15-87B0-49FC-9ED3-F765E3105E52"
+          },
+          {
+            "id": "45c4ed77-c5ce-4f93-938e-bbe3d5684367",
+            "shape": "table",
+            "position": {
+              "x": 410,
+              "y": 260
+            },
+            "count": 0,
+            "originKey": "2149D97E-D5BD-4078-B6D1-1D5A1564F020"
+          },
+          {
+            "id": "10187b8c-4dc0-4b59-9196-450582894ae3",
+            "shape": "table",
+            "position": {
+              "x": 413.5,
+              "y": 87.5
+            },
+            "count": 0,
+            "originKey": "930D2729-48C0-495D-950F-B2B3F7AB00D0"
+          },
+          {
+            "id": "f684aec2-638c-4770-9f00-311f13b965cd",
+            "shape": "table",
+            "position": {
+              "x": 410,
+              "y": -150
+            },
+            "count": 0,
+            "originKey": "15B94797-9525-4D5B-AA8E-583E670BFF01"
+          },
+          {
+            "id": "2ea2d6ec-0547-401a-93b0-76c51b78ee25",
+            "shape": "table",
+            "position": {
+              "x": 413.5,
+              "y": -300
+            },
+            "count": 0,
+            "originKey": "B37D1692-6F82-402C-B96B-07828DCAB483"
+          },
+          {
+            "id": "fac06afc-8a0f-4c45-90dd-c4a4a75114df",
+            "shape": "erdRelation",
+            "source": {
+              "cell": "f7fb54c5-63e9-4c54-bd90-a41c82c9a080",
+              "port": "EB91BFFB-8111-45F1-9DEB-7D2BB3549B7B%out"
+            },
+            "target": {
+              "cell": "8bd54c15-6c9a-47f3-a1e1-af09f97bfc5d",
+              "port": "D060B2AC-9F6D-41A2-BAE7-644C5C3D4384%out"
+            },
+            "relation": "1:n",
+            "fillColor": "#ACDAFC",
+            "router": {
+              "name": "manhattan"
+            }
+          },
+          {
+            "id": "f7fb54c5-63e9-4c54-bd90-a41c82c9a080",
+            "shape": "table",
+            "position": {
+              "x": -640,
+              "y": -170
+            },
+            "count": 0,
+            "originKey": "86E99604-A416-4964-8FF3-2594F03A1B17"
+          },
+          {
+            "id": "8bd54c15-6c9a-47f3-a1e1-af09f97bfc5d",
+            "shape": "table",
+            "position": {
+              "x": -450,
+              "y": 200
+            },
+            "count": 0,
+            "originKey": "C193DBFD-963D-4562-A485-BA24016B72FE"
+          },
+          {
+            "id": "49617b92-b71d-4144-bdec-d9137cb69979",
+            "shape": "table",
+            "position": {
+              "x": -980,
+              "y": 480
+            },
+            "count": 0,
+            "originKey": "0D4D651C-8625-410D-B716-A953FA6A4665"
+          }
+        ]
+      },
+      "id": "AB5C076A-59A3-457B-8AB2-50BCF54AD9E1"
+    }
+  ],
   "standardFields": [],
   "dbConn": [
     {
