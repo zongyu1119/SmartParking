@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AppHelper\AppHelper.csproj" />
+    <ProjectReference Include="..\DataBaseHelper\DataBaseHelper.csproj" />
+    <ProjectReference Include="..\RabbitMQHelper\RabbitMQHelper.csproj" />
+    <ProjectReference Include="..\RedisHelper\RedisHelper.csproj" />
+  </ItemGroup>
+
+</Project>

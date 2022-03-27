@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartParking", "SmartParking\SmartParking.csproj", "{D8A34AEA-AB0D-4D8D-9D5D-659E4C028980}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBaseHelper", "DataBaseHelper\DataBaseHelper.csproj", "{6A8EB374-A3E6-407E-8CA5-2AC1B7D04842}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisHelper", "RedisHelper\RedisHelper.csproj", "{53920668-D399-4494-A53C-4E59A3C0AE60}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQHelper", "RabbitMQHelper\RabbitMQHelper.csproj", "{EEB5BF05-7A49-4CEA-B967-BCC82CF7BE1F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{2667E30E-D8AA-4F01-93C3-BDB35340278C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppHelper", "AppHelper\AppHelper.csproj", "{210DE7F0-1394-4358-9E87-5BD37AE60637}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8A34AEA-AB0D-4D8D-9D5D-659E4C028980}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8A34AEA-AB0D-4D8D-9D5D-659E4C028980}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8A34AEA-AB0D-4D8D-9D5D-659E4C028980}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8A34AEA-AB0D-4D8D-9D5D-659E4C028980}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A8EB374-A3E6-407E-8CA5-2AC1B7D04842}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A8EB374-A3E6-407E-8CA5-2AC1B7D04842}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A8EB374-A3E6-407E-8CA5-2AC1B7D04842}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A8EB374-A3E6-407E-8CA5-2AC1B7D04842}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53920668-D399-4494-A53C-4E59A3C0AE60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53920668-D399-4494-A53C-4E59A3C0AE60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53920668-D399-4494-A53C-4E59A3C0AE60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53920668-D399-4494-A53C-4E59A3C0AE60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEB5BF05-7A49-4CEA-B967-BCC82CF7BE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEB5BF05-7A49-4CEA-B967-BCC82CF7BE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEB5BF05-7A49-4CEA-B967-BCC82CF7BE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEB5BF05-7A49-4CEA-B967-BCC82CF7BE1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2667E30E-D8AA-4F01-93C3-BDB35340278C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2667E30E-D8AA-4F01-93C3-BDB35340278C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2667E30E-D8AA-4F01-93C3-BDB35340278C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2667E30E-D8AA-4F01-93C3-BDB35340278C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{210DE7F0-1394-4358-9E87-5BD37AE60637}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{210DE7F0-1394-4358-9E87-5BD37AE60637}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{210DE7F0-1394-4358-9E87-5BD37AE60637}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{210DE7F0-1394-4358-9E87-5BD37AE60637}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {682437BF-D96A-4E1B-A0E6-B1170026D725}
+	EndGlobalSection
+EndGlobal

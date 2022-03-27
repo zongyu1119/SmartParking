@@ -1,0 +1,268 @@
+DROP TABLE IF EXISTS bc_carinfo;
+CREATE TABLE bc_carinfo(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    CAR_ID INT(32) NOT NULL AUTO_INCREMENT  COMMENT '车辆ID' ,
+    CAR_NUM VARCHAR(255)    COMMENT '车牌号' ,
+    CAR_TYPE INT    COMMENT '车辆类型（0:普通车;1:新能源车;2:其他车）' ,
+    CAR_PAY_TYPE INT    COMMENT '车辆计费类型（0:临时车;1:月卡;2:年卡;3:免费）' ,
+    OWNER_ID INT(32)    COMMENT '车辆所属人ID' ,
+    PROVINCE VARCHAR(255)    COMMENT '省' ,
+    CITY VARCHAR(255)    COMMENT '市' ,
+    BRAND VARCHAR(255)    COMMENT '品牌' ,
+    MODEL VARCHAR(255)    COMMENT '型号' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    PRIMARY KEY (CAR_ID)
+)  COMMENT = '车辆信息表';
+
+DROP TABLE IF EXISTS bc_parking_space;
+CREATE TABLE bc_parking_space(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    PS_ID INT(32) NOT NULL   COMMENT '车位ID' ,
+    PS_CODE VARCHAR(255)    COMMENT '车位编码' ,
+    PARKING_AREA_ID VARCHAR(255)    COMMENT '所属停车场区域' ,
+    PS_TYPE INT    COMMENT '车位类型（0：普通车位；1：无障碍车位）' ,
+    PS_AREA DECIMAL(24,6)    COMMENT '车位面积' ,
+    PS_LASH INT    COMMENT '子母车位(0:标准车位；1：子母车位；)' ,
+    PS_CHARG VARCHAR(255)    COMMENT '是否有充电桩（0：无；1：有）' ,
+    PS_RENT_STATUS VARCHAR(255)    COMMENT '车位当前出租出售状态（0：普通车位；1：长租车位；2：：已经出售）' ,
+    PS_OWNER VARCHAR(255)    COMMENT '车位当前归属（租受人/业主）' ,
+    RENT_END_TIME DATETIME    COMMENT '租期截止时间' ,
+    OCCUPY_STATUS INT    COMMENT '车位占用状态（0：空闲；1：占用）' ,
+    CAR_ID INT(32)    COMMENT '占用车辆ID' ,
+    OCCUPY_START_TIME DATETIME    COMMENT '占用起始时间' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' 
+)  COMMENT = '车位表';
+
+DROP TABLE IF EXISTS bc_parking;
+CREATE TABLE bc_parking(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    PARKING_ID VARCHAR(255)    COMMENT '停车场ID' ,
+    PARKING_NAME VARCHAR(255)    COMMENT '停车场名称' ,
+    PARKING_AREA VARCHAR(255)    COMMENT '停车场面积' ,
+    PARKING_TYPE INT    COMMENT '停车场类型（0：平面分区；1：条状分区；立体）' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' 
+)  COMMENT = '停车场表';
+
+DROP TABLE IF EXISTS bc_parking_area;
+CREATE TABLE bc_parking_area(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    AREA_ID INT(32) NOT NULL AUTO_INCREMENT  COMMENT '分区ID' ,
+    AREA_NAME VARCHAR(255)    COMMENT '分区名称' ,
+    AREA_CODE VARCHAR(255)    COMMENT '分区编码' ,
+    PARKING_ID INT(32)    COMMENT '所属停车场ID' ,
+    PS_COUNT VARCHAR(255)    COMMENT '分区车位数' ,
+    AREA_ADDRESS VARCHAR(255)    COMMENT '分区地址' ,
+    AREA_NO INT    COMMENT '分区序号（立体停车场为层数，平面停车场为排序）' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    PRIMARY KEY (AREA_ID)
+)  COMMENT = '停车场分区表';
+
+DROP TABLE IF EXISTS bc_tenant;
+CREATE TABLE bc_tenant(
+    TENANT_ID INT(32) NOT NULL AUTO_INCREMENT  COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    TENANT_NAME VARCHAR(255)    COMMENT '租户名称' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    PRIMARY KEY (TENANT_ID)
+)  COMMENT = '租户表';
+
+DROP TABLE IF EXISTS bc_userinfo;
+CREATE TABLE bc_userinfo(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    USER_ID INT(32) NOT NULL AUTO_INCREMENT  COMMENT '用户ID' ,
+    USER_NAME VARCHAR(255) NOT NULL   COMMENT '用户名' ,
+    PASSWORD VARCHAR(255) NOT NULL   COMMENT '密码' ,
+    USER_NAME_REL VARCHAR(255)    COMMENT '用户真实姓名' ,
+    USER_ID_CARD_NUM VARCHAR(255)    COMMENT '用户身份证号' ,
+    SEX VARCHAR(255)    COMMENT '用户性别' ,
+    PHONE VARCHAR(255)    COMMENT '用户电话' ,
+    ADDRESS VARCHAR(255)    COMMENT '住址' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    PRIMARY KEY (USER_ID)
+)  COMMENT = '用户表';
+
+DROP TABLE IF EXISTS bc_owner_info;
+CREATE TABLE bc_owner_info(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    OWNER_ID INT(32) NOT NULL AUTO_INCREMENT  COMMENT '车主/业主ID' ,
+    OWNER_NAME VARCHAR(255) NOT NULL   COMMENT '车主名' ,
+    USER_ID_CARD_NUM VARCHAR(255)    COMMENT '用户身份证号' ,
+    SEX VARCHAR(255)    COMMENT '用户性别' ,
+    PHONE VARCHAR(255)    COMMENT '用户电话' ,
+    ADDRESS VARCHAR(255)    COMMENT '住址' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    PRIMARY KEY (OWNER_ID)
+)  COMMENT = '车主/车位业主信息表';
+
+DROP TABLE IF EXISTS bc_role;
+CREATE TABLE bc_role(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    ROLE_ID INT(32) NOT NULL AUTO_INCREMENT  COMMENT '角色ID' ,
+    ROLE_NAME VARCHAR(255)    COMMENT '角色名称' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    PRIMARY KEY (ROLE_ID)
+)  COMMENT = '角色表';
+
+DROP TABLE IF EXISTS bc_power;
+CREATE TABLE bc_power(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    POWER_ID INT(32) NOT NULL   COMMENT '权限ID' ,
+    POWER_NAME VARCHAR(255)    COMMENT '权限名称' ,
+    POWER_PATH VARCHAR(255)    COMMENT '权限路径' ,
+    POWER_LEVEL VARCHAR(255)    COMMENT '权限级别(多级权限区分权限级别)' ,
+    PARENT_ID INT(32)    COMMENT '父权限ID' ,
+    POWER_TYPE INT    COMMENT '权限类型（0：菜单和功能；1：功能）' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' 
+)  COMMENT = '权限表';
+
+DROP TABLE IF EXISTS bc_role_power;
+CREATE TABLE bc_role_power(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    ROLE_ID INT(32) NOT NULL   COMMENT '角色ID' ,
+    POWER_ID INT(32) NOT NULL   COMMENT '权限ID' ,
+    IS_SELECT INT    COMMENT '是否允许查询(1:允许;0:不允许)' ,
+    IS_INSERT INT    COMMENT '是否允许新增(1:允许;0:不允许)' ,
+    IS_UPDATE INT    COMMENT '是否允许修改(1:允许;0:不允许)' ,
+    IS_DELETE INT    COMMENT '是否允许删除(1:允许;0:不允许)' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' 
+)  COMMENT = '角色权限中间表';
+
+DROP TABLE IF EXISTS bc_config;
+CREATE TABLE bc_config(
+    TENANT_ID INT(32) NOT NULL   COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    CONFIG_SORT VARCHAR(255) NOT NULL   COMMENT '配置项类别' ,
+    CONFIG_KEY VARCHAR(255) NOT NULL   COMMENT '配置项键' ,
+    CONFIG_ORDER VARCHAR(255) NOT NULL   COMMENT '配置项序号（某个键下得序号）' ,
+    CONFIG_VALUE VARCHAR(255)    COMMENT '配置项值' ,
+    CONFIG_REMARK VARCHAR(255)    COMMENT '配置项备注' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    PRIMARY KEY (TENANT_ID,CONFIG_SORT,CONFIG_KEY,CONFIG_ORDER)
+)  COMMENT = '配置信息表';
+
+DROP TABLE IF EXISTS op_car_io;
+CREATE TABLE op_car_io(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    IO_ID INT(32) NOT NULL AUTO_INCREMENT  COMMENT '进出流水ID' ,
+    IO_TYPE VARCHAR(255)    COMMENT '进出类别（1:进;0:出）' ,
+    IO_PLACE_TYPE VARCHAR(255)    COMMENT '进出地点类别(0:停车场;1:车位)' ,
+    PARKING_ID INT(32)    COMMENT '停车场ID' ,
+    PS_ID INT(32)    COMMENT '车位ID' ,
+    CAR_ID INT(32)    COMMENT '车辆ID' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    PRIMARY KEY (IO_ID)
+)  COMMENT = '车辆进出历史表';
+
+DROP TABLE IF EXISTS bc_parking_rate;
+CREATE TABLE bc_parking_rate(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    PARKING_ID INT(32)    COMMENT '停车场id' ,
+    FREE_TIME DECIMAL(24,6)    COMMENT '免费时长' ,
+    FREE_TIME_ADD_TO_NORMAL VARCHAR(1)    COMMENT '超出免费时长后免费时长是否计费' ,
+    START_TIME DECIMAL(24,6)    COMMENT '起步计费时长（如：前一小时每小时10元，本字段代表前一小时）' ,
+    START_PRICE DECIMAL(24,6)    COMMENT '起步计费单价' ,
+    PRICE DECIMAL(24,6)    COMMENT '计费单价（超出起步后得正常计费单价）' ,
+    TOP_MONEY_DAY DECIMAL(24,6)    COMMENT '每日封顶计费金额（为0表示无）' ,
+    TOP_MONEY_MONTH DECIMAL(24,6)    COMMENT '每月封顶价格（为0表示无）' ,
+    TOP_MONEY_YEAR DECIMAL(24,6)    COMMENT '每年封顶价格（为0表示无）' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' 
+)  COMMENT = '停车收费标准表';
+
+DROP TABLE IF EXISTS op_parking_status_his;
+CREATE TABLE op_parking_status_his(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    ID INT(32) NOT NULL AUTO_INCREMENT  COMMENT '流水号' ,
+    PS_ID INT(32) NOT NULL   COMMENT '车位ID' ,
+    OWNER_ID INT(32)    COMMENT '出租出售对象(车主/业主表ID)' ,
+    PRICE DECIMAL(24,6)    COMMENT '出租/出售价格(元)' ,
+    DURATION_TIME INT    COMMENT '出租/出售时长（天）' ,
+    PS_STATUS_TYPE INT    COMMENT '出租/出售类型（1：出租；2出售）' ,
+    CHANGE_TIME DATETIME    COMMENT '操作时间' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    PRIMARY KEY (ID)
+)  COMMENT = '车位出租出售历史信息表';
+
+DROP TABLE IF EXISTS bc_parking_manager;
+CREATE TABLE bc_parking_manager(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    MANAGER_ID INT(32) NOT NULL AUTO_INCREMENT  COMMENT '车主/业主ID' ,
+    MANAGER_NAME VARCHAR(255) NOT NULL   COMMENT '车主名' ,
+    MANAGER_ID_CARD_NUM VARCHAR(255)    COMMENT '用户身份证号' ,
+    SEX VARCHAR(255)    COMMENT '用户性别' ,
+    PHONE VARCHAR(255)    COMMENT '用户电话' ,
+    ADDRESS VARCHAR(255)    COMMENT '住址' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    PRIMARY KEY (MANAGER_ID)
+)  COMMENT = '停车场管理员表';
+
+DROP TABLE IF EXISTS bc_parking_area_manager;
+CREATE TABLE bc_parking_area_manager(
+    TENANT_ID INT(32)    COMMENT '租户号' ,
+    REVISION INT(32)    COMMENT '乐观锁' ,
+    MANAGER_ID INT(32) NOT NULL   COMMENT '管理员ID' ,
+    PARKING_AREA_ID INT(32) NOT NULL   COMMENT '停车场分区ID' ,
+    CREATED_BY INT(32)    COMMENT '创建人' ,
+    CREATED_TIME DATETIME    COMMENT '创建时间' ,
+    UPDATED_BY INT(32)    COMMENT '更新人' ,
+    UPDATED_TIME DATETIME    COMMENT '更新时间' ,
+    PRIMARY KEY (MANAGER_ID,PARKING_AREA_ID)
+)  COMMENT = '停车场分区与管理员对应关系表(多对多关系)';
+
