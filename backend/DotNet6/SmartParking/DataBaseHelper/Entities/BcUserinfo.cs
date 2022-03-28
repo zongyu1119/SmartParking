@@ -49,6 +49,10 @@ namespace DataBaseHelper.Entities
         /// </summary>
         public string? Address { get; set; }
         /// <summary>
+        /// 权限ID
+        /// </summary>
+        public int? RoleId { get; set; }
+        /// <summary>
         /// 创建人
         /// </summary>
         public int? CreatedBy { get; set; }

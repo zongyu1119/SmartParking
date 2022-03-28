@@ -19,7 +19,7 @@ namespace DataBaseHelper.Entities
         /// <summary>
         /// 停车场ID
         /// </summary>
-        public string? ParkingId { get; set; }
+        public int ParkingId { get; set; }
         /// <summary>
         /// 停车场名称
         /// </summary>

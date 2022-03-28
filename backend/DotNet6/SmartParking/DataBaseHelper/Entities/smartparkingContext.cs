@@ -252,9 +252,11 @@ namespace DataBaseHelper.Entities
 
             modelBuilder.Entity<BcParking>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e=>e.ParkingId)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("bc_parking");
+
 
                 entity.HasComment("停车场表");
 
@@ -484,7 +486,8 @@ namespace DataBaseHelper.Entities
 
             modelBuilder.Entity<BcParkingRate>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e=>e.ParkingId)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("bc_parking_rate");
 
@@ -563,7 +566,8 @@ namespace DataBaseHelper.Entities
 
             modelBuilder.Entity<BcParkingSpace>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e=>e.PsId)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("bc_parking_space");
 
@@ -658,7 +662,8 @@ namespace DataBaseHelper.Entities
 
             modelBuilder.Entity<BcPower>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e=>e.PowerId)
+                    .HasName("PRIMARY");
 
                 entity.ToTable("bc_power");
 
@@ -765,7 +770,9 @@ namespace DataBaseHelper.Entities
 
             modelBuilder.Entity<BcRolePower>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => new { e.RoleId, e.PowerId })
+                    .HasName("PRIMARY")
+                    .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
 
                 entity.ToTable("bc_role_power");
 
@@ -936,6 +943,10 @@ namespace DataBaseHelper.Entities
                     .HasMaxLength(255)
                     .HasColumnName("USER_NAME_REL")
                     .HasComment("用户真实姓名");
+                entity.Property(e => e.RoleId)
+                    .HasMaxLength(255)
+                    .HasColumnName("ROLE_ID")
+                    .HasComment("用户角色");
             });
 
             modelBuilder.Entity<OpCarIo>(entity =>
