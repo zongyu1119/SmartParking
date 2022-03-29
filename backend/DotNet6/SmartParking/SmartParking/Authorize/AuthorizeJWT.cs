@@ -12,12 +12,11 @@ namespace SmartParking.Authorize
     {
         private readonly IConfiguration _configuration;
         private readonly ILogger<AuthorizeJWT> _logger;
-        private smartparkingContext _dbContext;
-        public AuthorizeJWT(IConfiguration configuration, ILogger<AuthorizeJWT> logger, smartparkingContext dbContext)
+        private smartparkingContext _dbContext=new smartparkingContext();
+        public AuthorizeJWT(IConfiguration configuration, ILogger<AuthorizeJWT> logger)
         {
             _configuration = configuration;
             _logger = logger;
-            _dbContext = dbContext;
         }
         /// <summary>
         /// 获得JWTBear
@@ -73,7 +72,7 @@ namespace SmartParking.Authorize
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        private static string GetPassword(string password)
+        private  string GetPassword(string password)
         {
             MD5 md5Hasher = MD5.Create();
             // Convert the input string to a byte array and compute the hash.

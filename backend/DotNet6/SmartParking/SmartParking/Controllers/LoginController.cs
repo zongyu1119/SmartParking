@@ -34,6 +34,7 @@ namespace SmartParking.Controllers
         [HttpPost]
         public string Login([FromBody]ViewModels.UserLogin user)
         {
+            _logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{user.ToString()}");
             return _authorizeJWT.GetJWTBear(user);
         }
       

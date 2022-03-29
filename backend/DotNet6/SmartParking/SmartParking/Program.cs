@@ -1,7 +1,12 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Service;
+using SmartParking.Authorize;
+using System.Reflection;
 using System.Text;
 
 IConfiguration configuration = new ConfigurationBuilder()
@@ -55,9 +60,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
     };
 });
+// 以下是autofac依赖注入
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
+{
+     //先注入JWT
+     builder.RegisterType<AuthorizeJWT>().As<IAuthorizeJWT>();
+     // 注入Service程序集
+     Assembly assembly = Assembly.Load(ServiceCore.GetAssemblyName());
+    builder.RegisterAssemblyTypes(assembly)
+    .AsImplementedInterfaces()
+    .InstancePerDependency();
+});
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

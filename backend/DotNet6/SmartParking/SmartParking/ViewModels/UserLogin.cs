@@ -5,10 +5,14 @@
     /// </summary>
     public class UserLogin
     {
-        public UserLogin(string userNmae,string password)
+       
+        /// <summary>
+        /// 重写ToString方法
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
         {
-            UserName = userNmae;
-            Password = password;
+            return $"UserName:{UserName};Password:{Password}";
         }
         /// <summary>
         /// 登录用户名
