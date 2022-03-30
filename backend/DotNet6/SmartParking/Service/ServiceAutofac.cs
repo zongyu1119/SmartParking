@@ -2,7 +2,7 @@
 
 namespace Service
 {
-    public static class ServiceCore
+    public static class ServiceAutofac
     {
         /// <summary>
         /// 获取程序集名称

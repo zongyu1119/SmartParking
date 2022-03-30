@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using SmartParking.ViewModels;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
+using Serilog;
 
 namespace SmartParking.Controllers
 {
@@ -17,9 +12,10 @@ namespace SmartParking.Controllers
     [EnableCors("CorsPolicy")]//配置Cors,允许跨域
     public class LoginController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        private readonly ILogger<LoginController> _logger;
-        private Authorize.IAuthorizeJWT _authorizeJWT;
+        private readonly IConfiguration _configuration;//配置
+        private Authorize.IAuthorizeJWT _authorizeJWT;//认证
+        private readonly ILogger<LoginController> _logger;//日志
+       //依赖注入
         public LoginController(IConfiguration configuration, ILogger<LoginController> logger, Authorize.IAuthorizeJWT authorizeJWT)
         {
             _configuration = configuration;
@@ -34,7 +30,7 @@ namespace SmartParking.Controllers
         [HttpPost]
         public string Login([FromBody]ViewModels.UserLogin user)
         {
-            _logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{user.ToString()}");
+            _logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{user.ToString()}");
             return _authorizeJWT.GetJWTBear(user);
         }
       

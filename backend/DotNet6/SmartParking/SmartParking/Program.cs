@@ -8,6 +8,7 @@ using Service;
 using SmartParking.Authorize;
 using System.Reflection;
 using System.Text;
+using Serilog;
 
 IConfiguration configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -67,12 +68,17 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
      //先注入JWT
      builder.RegisterType<AuthorizeJWT>().As<IAuthorizeJWT>();
      // 注入Service程序集
-     Assembly assembly = Assembly.Load(ServiceCore.GetAssemblyName());
+     Assembly assembly = Assembly.Load(ServiceAutofac.GetAssemblyName());
     builder.RegisterAssemblyTypes(assembly)
     .AsImplementedInterfaces()
     .InstancePerDependency();
 });
-
+// 使用日志
+builder.Host.UseSerilog((context, logger) =>
+{
+    logger.ReadFrom.Configuration(context.Configuration);
+    logger.Enrich.FromLogContext();
+});
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
