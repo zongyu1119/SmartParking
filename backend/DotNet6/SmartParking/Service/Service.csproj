@@ -13,4 +13,9 @@
     <ProjectReference Include="..\RedisHelper\RedisHelper.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Service\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

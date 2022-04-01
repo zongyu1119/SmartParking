@@ -38,6 +38,7 @@ namespace SmartParking.Authorize
                 new Claim("Id", userinfo.UserId.ToString()),
                 new Claim("Name", userinfo.UserName),
                 new Claim(ClaimTypes.Role,"1"),
+                new Claim(ClaimTypes.)
             };
 
             // 2. 从 appsettings.json 中读取SecretKey
