@@ -20,16 +20,46 @@ namespace Service.Comm
     public class ResBase
     {
         /// <summary>
+        /// 使用是否成功初始化
+        /// </summary>
+        /// <param name="_success"></param>
+        public ResBase(bool _success)
+        {
+            Success = _success;
+            if (Success)
+            {
+                Code =ResCodeType.Success;
+            }
+        }
+        public ResBase()
+        {
+
+        }
+        /// <summary>
         /// 是否成功
         /// </summary>
-        public bool Success { get; set; }
+        public bool Success { get; set; } = false;
         /// <summary>
         /// 代码
         /// </summary>
-        public string Code { get; set; } = "200";
+        public ResCodeType Code { get; set; } = ResCodeType.Fail;
         /// <summary>
         /// 消息
         /// </summary>
-        public string? Message { get; set; }
+        public string? Message { get; set; } = "";
+    }
+    /// <summary>
+    /// 返回消息代码类型
+    /// </summary>
+    public enum ResCodeType
+    {
+        /// <summary>
+        /// 成功0
+        /// </summary>
+        Success = 0,
+        /// <summary>
+        /// 失败1
+        /// </summary>
+        Fail = 1,
     }
 }

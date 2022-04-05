@@ -4,7 +4,7 @@
   "avatar": "",
   "version": "3.5.7",
   "createdTime": "2022-3-12 10:44:41",
-  "updatedTime": "2022-3-22 22:35:05",
+  "updatedTime": "2022-3-28 22:46:53",
   "profile": {
     "default": {
       "db": "D9B958D0-2287-45E6-8B17-8877A088069C",
@@ -662,16 +662,7 @@
           "id": "F310FB83-913F-4729-A62E-9E610EE10EA7"
         }
       ],
-      "correlations": [
-        {
-          "myField": "CF3B1ADC-5D0C-4613-9F7E-8ADB9FF4DAD2",
-          "refEntity": "2149D97E-D5BD-4078-B6D1-1D5A1564F020",
-          "refField": "DB891A20-DE09-44A9-9D4D-AAF10B017DED",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        }
-      ],
+      "correlations": [],
       "indexes": []
     },
     {
@@ -800,9 +791,9 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
@@ -1070,32 +1061,7 @@
           "id": "8A4012A7-DF86-4ABE-807C-6970DD410010"
         }
       ],
-      "correlations": [
-        {
-          "myField": "7D753763-4F60-44CB-AA6B-AAB5C62BA401",
-          "refEntity": "0D4D651C-8625-410D-B716-A953FA6A4665",
-          "refField": "CF3B1ADC-5D0C-4613-9F7E-8ADB9FF4DAD2",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        },
-        {
-          "myField": "AF0374C4-9CB3-4806-8528-3D01096C62AD",
-          "refEntity": "2149D97E-D5BD-4078-B6D1-1D5A1564F020",
-          "refField": "F742F1C6-3F86-4AF3-83D7-AF88D470C9ED",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        },
-        {
-          "myField": "AF0374C4-9CB3-4806-8528-3D01096C62AD",
-          "refEntity": "C2A7423A-7B1E-4F3E-A0BD-5FFE8FE51419",
-          "refField": "48FBE972-BB83-4D72-AD0D-7A50767F32B6",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        }
-      ],
+      "correlations": [],
       "indexes": []
     },
     {
@@ -1224,9 +1190,9 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
@@ -1350,24 +1316,7 @@
           "id": "6158D3B3-F6A7-48E1-B464-E6CCED981C52"
         }
       ],
-      "correlations": [
-        {
-          "myField": "F74B961E-B3BD-42A3-924D-B378A1509399",
-          "refEntity": "15B94797-9525-4D5B-AA8E-583E670BFF01",
-          "refField": "24C30DFC-E760-4CDB-A787-586EE15BC54D",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        },
-        {
-          "myField": "F74B961E-B3BD-42A3-924D-B378A1509399",
-          "refEntity": "2149D97E-D5BD-4078-B6D1-1D5A1564F020",
-          "refField": "583C88D6-A9F9-4106-B2E4-2C985ECE3097",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        }
-      ],
+      "correlations": [],
       "indexes": []
     },
     {
@@ -1670,16 +1619,7 @@
           "id": "2073F9AD-E8D0-4087-9BDD-F95FAAB8260E"
         }
       ],
-      "correlations": [
-        {
-          "myField": "87CFC08F-35CA-4D1E-8D60-06F9EF2C1E29",
-          "refEntity": "86E99604-A416-4964-8FF3-2594F03A1B17",
-          "refField": "8511063B-7FEC-45D6-A198-F4380BD9DC63",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        }
-      ],
+      "correlations": [],
       "indexes": []
     },
     {
@@ -2137,6 +2077,22 @@
           "id": "64FC790B-2CE8-4C06-AD96-1B094FACD527"
         },
         {
+          "defKey": "ROLE_ID",
+          "defName": "角色ID",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "domain": "40962814-AB5E-4969-8215-34B5839D65F8",
+          "id": "5EC2ED71-2DCA-4E5A-BB3E-2D0F509FC2D5"
+        },
+        {
           "defKey": "CREATED_BY",
           "defName": "创建人",
           "comment": "",
@@ -2486,32 +2442,7 @@
           "id": "77FB1233-4CA8-45C7-9369-112CB039D8BF"
         }
       ],
-      "correlations": [
-        {
-          "myField": "D060B2AC-9F6D-41A2-BAE7-644C5C3D4384",
-          "refEntity": "C2A7423A-7B1E-4F3E-A0BD-5FFE8FE51419",
-          "refField": "8F0D10DF-A291-4D1C-832D-2F27B0135F89",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        },
-        {
-          "myField": "D060B2AC-9F6D-41A2-BAE7-644C5C3D4384",
-          "refEntity": "86E99604-A416-4964-8FF3-2594F03A1B17",
-          "refField": "EB91BFFB-8111-45F1-9DEB-7D2BB3549B7B",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        },
-        {
-          "myField": "D060B2AC-9F6D-41A2-BAE7-644C5C3D4384",
-          "refEntity": "0D4D651C-8625-410D-B716-A953FA6A4665",
-          "refField": "E886BC5C-2161-42B7-AA3F-AD894AABE314",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        }
-      ],
+      "correlations": [],
       "indexes": []
     },
     {
@@ -2863,9 +2794,9 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true,
-          "autoIncrement": false,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
@@ -3995,9 +3926,9 @@
           "type": "",
           "len": "",
           "scale": "",
-          "primaryKey": false,
-          "notNull": false,
-          "autoIncrement": false,
+          "primaryKey": true,
+          "notNull": true,
+          "autoIncrement": true,
           "defaultValue": "",
           "hideInGraph": false,
           "refDict": "",
@@ -4201,16 +4132,7 @@
           "id": "E0E7C8B2-AA3A-467A-95EF-B96FD577EA2B"
         }
       ],
-      "correlations": [
-        {
-          "myField": "9F2DD71E-77F2-4B7D-A8EF-029758609B80",
-          "refEntity": "930D2729-48C0-495D-950F-B2B3F7AB00D0",
-          "refField": "F74B961E-B3BD-42A3-924D-B378A1509399",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        }
-      ],
+      "correlations": [],
       "indexes": []
     },
     {
@@ -5017,24 +4939,7 @@
           "id": "EC45E290-8B34-41BF-AC98-6BDEC4BCBB03"
         }
       ],
-      "correlations": [
-        {
-          "myField": "430071F7-F3BD-438E-9AFA-D31B93B3EA2C",
-          "refEntity": "135FB75B-A114-4535-9627-0EC69A69D794",
-          "refField": "F0CF5813-9AF4-4343-82F0-275D4C2C5723",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        },
-        {
-          "myField": "9C700CED-705C-45FB-8228-D600ACD9CA6D",
-          "refEntity": "15B94797-9525-4D5B-AA8E-583E670BFF01",
-          "refField": "87CFC08F-35CA-4D1E-8D60-06F9EF2C1E29",
-          "myRows": "n",
-          "refRows": "1",
-          "innerType": ""
-        }
-      ],
+      "correlations": [],
       "indexes": []
     }
   ],

@@ -1,6 +1,6 @@
 <template>
   <div class='car' :style='styleObject' >
-    <div class="top" :style="{backgroundColor:CarData.}">
+    <div class="top">
       <div class="topfree" style="height:3px"></div>
       <div class="topTitle">{{ CarData.CarNum }}</div>
     </div>

@@ -9,6 +9,12 @@ using SmartParking.Authorize;
 using System.Reflection;
 using System.Text;
 using Serilog;
+using DataBaseHelper;
+using Service.Comm;
+using DataBaseHelper.Entities;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using Swashbuckle.Swagger;
 
 IConfiguration configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -25,6 +31,17 @@ builder.Services.AddSingleton(new AppHelper.AppSettings(configuration));
 
 builder.Services.AddSwaggerGen(swgger =>
 {
+    swgger.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "SmartParking API",
+        Description = "智能停车场系统API",
+        Contact = new OpenApiContact
+        {
+            Name = "ZY",
+            Email = "wuguoqiang0927@hotmail.com"
+        }
+    });
     //添加安全定义
     swgger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -46,6 +63,10 @@ builder.Services.AddSwaggerGen(swgger =>
             },new string[]{ }
         }
     });
+    // 为 Swagger JSON and UI设置xml文档注释路径
+    var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);//获取应用程序所在目录（绝对，不受工作目录影响，建议采用此方法获取路径）
+    var xmlPath = Path.Combine(basePath, "SmartParking.xml");
+    swgger.IncludeXmlComments(xmlPath);
 });
 
 // 以下是加入了JWT身份认证
@@ -61,12 +82,28 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
     };
 });
+
+/// <summary>
+/// 注入NewtonsoftJson
+/// </summary>
+builder.Services.AddMvc().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm";
+});
+/// <summary>
+/// AutoMapper依赖
+/// </summary>
+// builder.Services.AddAutoMapper(typeof(Service.Comm.AutoMapperConfig));//如果在web层可以这样
+ builder.Services.AddAutoMapper(Assembly.Load("Service"));//Service层可以这样，会自动寻找
 // 以下是autofac依赖注入
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
      //先注入JWT
      builder.RegisterType<AuthorizeJWT>().As<IAuthorizeJWT>();
+    //注入数据库资源
+    builder.RegisterType<Repository>().As<IRepository>();
      // 注入Service程序集
      Assembly assembly = Assembly.Load(ServiceAutofac.GetAssemblyName());
     builder.RegisterAssemblyTypes(assembly)
@@ -79,7 +116,11 @@ builder.Host.UseSerilog((context, logger) =>
     logger.ReadFrom.Configuration(context.Configuration);
     logger.Enrich.FromLogContext();
 });
+//这个配置在调试时是不发挥作用的，实际部署后可以用
+builder.WebHost.UseUrls(new[] { configuration["Url"].ToString() });
+
 var app = builder.Build();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -97,5 +138,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+Console.WriteLine($"Smart Parking WebApi Start!");
 
 app.Run();

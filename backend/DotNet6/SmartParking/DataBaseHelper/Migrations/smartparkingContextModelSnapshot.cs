@@ -759,9 +759,8 @@ namespace DataBaseHelper.Migrations
                         .HasColumnName("PARENT_ID")
                         .HasComment("父权限ID");
 
-                    b.Property<string>("PowerLevel")
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)")
+                    b.Property<int?>("PowerLevel")
+                        .HasColumnType("int")
                         .HasColumnName("POWER_LEVEL")
                         .HasComment("权限级别(多级权限区分权限级别)");
 
@@ -808,6 +807,172 @@ namespace DataBaseHelper.Migrations
                     b.ToTable("bc_power", (string)null);
 
                     b.HasComment("权限表");
+
+                    b.HasData(
+                        new
+                        {
+                            PowerId = 1,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2070),
+                            PowerLevel = 0,
+                            PowerName = "停车场监控",
+                            PowerPath = "/",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            PowerId = 2,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2093),
+                            PowerLevel = 0,
+                            PowerName = "停车场设置",
+                            PowerPath = "/",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            PowerId = 3,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2098),
+                            PowerLevel = 0,
+                            PowerName = "统计和报表",
+                            PowerPath = "/",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            PowerId = 4,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2102),
+                            PowerLevel = 0,
+                            PowerName = "用户和权限",
+                            PowerPath = "/",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            PowerId = 5,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2106),
+                            PowerLevel = 0,
+                            PowerName = "系统设置",
+                            PowerPath = "/",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            PowerId = 101,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2110),
+                            ParentId = 1,
+                            PowerLevel = 1,
+                            PowerName = "工作台",
+                            PowerPath = "/Workbench",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            PowerId = 102,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2117),
+                            ParentId = 1,
+                            PowerLevel = 1,
+                            PowerName = "停车监控",
+                            PowerPath = "/ParkingMonitor",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            PowerId = 401,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2121),
+                            ParentId = 4,
+                            PowerLevel = 1,
+                            PowerName = "用户管理",
+                            PowerPath = "/UserInfoManagement",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            PowerId = 402,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2125),
+                            ParentId = 4,
+                            PowerLevel = 1,
+                            PowerName = "角色管理",
+                            PowerPath = "/RoleInfoManagement",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            PowerId = 201,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2128),
+                            ParentId = 2,
+                            PowerLevel = 1,
+                            PowerName = "停车场管理",
+                            PowerPath = "/ParkingManagement",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            PowerId = 301,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2132),
+                            ParentId = 3,
+                            PowerLevel = 1,
+                            PowerName = "停车统计",
+                            PowerPath = "/ParkingReport",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            PowerId = 501,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2136),
+                            ParentId = 5,
+                            PowerLevel = 1,
+                            PowerName = "配置管理",
+                            PowerPath = "/ConfigManagement",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            PowerId = 502,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(2141),
+                            ParentId = 5,
+                            PowerLevel = 1,
+                            PowerName = "租户管理",
+                            PowerPath = "/TenantManagement",
+                            PowerType = 0,
+                            Revision = 1,
+                            TenantId = 1
+                        });
                 });
 
             modelBuilder.Entity("DataBaseHelper.Entities.BcRole", b =>
@@ -860,6 +1025,17 @@ namespace DataBaseHelper.Migrations
                     b.ToTable("bc_role", (string)null);
 
                     b.HasComment("角色表");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(5570),
+                            Revision = 1,
+                            RoleName = "管理员",
+                            TenantId = 1
+                        });
                 });
 
             modelBuilder.Entity("DataBaseHelper.Entities.BcRolePower", b =>
@@ -931,6 +1107,177 @@ namespace DataBaseHelper.Migrations
                     b.ToTable("bc_role_power", (string)null);
 
                     b.HasComment("角色权限中间表");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 1,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9718),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 2,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9732),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 3,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9734),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 4,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9737),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 5,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9739),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 101,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9741),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 102,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9743),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 201,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9745),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 301,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9750),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 401,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9752),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 402,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9754),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 501,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9756),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        },
+                        new
+                        {
+                            RoleId = 1,
+                            PowerId = 502,
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 745, DateTimeKind.Local).AddTicks(9758),
+                            IsDelete = 1,
+                            IsInsert = 1,
+                            IsSelect = 1,
+                            IsUpdate = 1,
+                            Revision = 1,
+                            TenantId = 1
+                        });
                 });
 
             modelBuilder.Entity("DataBaseHelper.Entities.BcTenant", b =>
@@ -978,6 +1325,14 @@ namespace DataBaseHelper.Migrations
                     b.ToTable("bc_tenant", (string)null);
 
                     b.HasComment("租户表");
+
+                    b.HasData(
+                        new
+                        {
+                            TenantId = 1,
+                            Revision = 1,
+                            TenantName = "租户1"
+                        });
                 });
 
             modelBuilder.Entity("DataBaseHelper.Entities.BcUserinfo", b =>
@@ -1074,6 +1429,40 @@ namespace DataBaseHelper.Migrations
                     b.ToTable("bc_userinfo", (string)null);
 
                     b.HasComment("用户表");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Address = "北京市长安街1号",
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 746, DateTimeKind.Local).AddTicks(4344),
+                            Password = "827ccb0eea8a706c4c34a16891f84e7b",
+                            Phone = "13333333332",
+                            Revision = 1,
+                            RoleId = 1,
+                            Sex = "男",
+                            TenantId = 1,
+                            UserIdCardNum = "622222222222222221",
+                            UserName = "Admin",
+                            UserNameRel = "Administrator"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            Address = "北京市长安街1号",
+                            CreatedBy = 1,
+                            CreatedTime = new DateTime(2022, 4, 4, 10, 50, 1, 746, DateTimeKind.Local).AddTicks(4358),
+                            Password = "827ccb0eea8a706c4c34a16891f84e7b",
+                            Phone = "13333333333",
+                            Revision = 1,
+                            RoleId = 1,
+                            Sex = "男",
+                            TenantId = 1,
+                            UserIdCardNum = "622222222222222222",
+                            UserName = "User",
+                            UserNameRel = "User"
+                        });
                 });
 
             modelBuilder.Entity("DataBaseHelper.Entities.OpCarIo", b =>

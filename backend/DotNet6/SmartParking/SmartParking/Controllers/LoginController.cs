@@ -2,25 +2,29 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using Serilog;
+using SmartParking.Common;
+using Service.Comm;
+using Service.Models;
+using Service.IService;
 
 namespace SmartParking.Controllers
 {
+    /// <summary>
+    /// 登录相关
+    /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
     [EnableCors("CorsPolicy")]//配置Cors,允许跨域
-    public class LoginController : ControllerBase
+    public class LoginController : ZyControllerBase
     {
-        private readonly IConfiguration _configuration;//配置
-        private Authorize.IAuthorizeJWT _authorizeJWT;//认证
-        private readonly ILogger<LoginController> _logger;//日志
-       //依赖注入
-        public LoginController(IConfiguration configuration, ILogger<LoginController> logger, Authorize.IAuthorizeJWT authorizeJWT)
+
+        private readonly Authorize.IAuthorizeJWT authorizeJWT;//认证
+        private readonly IUserInfoService service;
+        //依赖注入
+        public LoginController(IConfiguration _configuration, ILogger<LoginController> _logger, Authorize.IAuthorizeJWT _authorizeJWT, IUserInfoService _service) :base(_configuration,_logger)
         {
-            _configuration = configuration;
-            _logger = logger;
-           _authorizeJWT=authorizeJWT;
+            authorizeJWT= _authorizeJWT;
+            service= _service;
         }
         /// <summary>
         /// 用户登录
@@ -28,23 +32,46 @@ namespace SmartParking.Controllers
         /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost]
-        public string Login([FromBody]ViewModels.UserLogin user)
+        public HttpResponseMessage Login([FromBody]ViewModels.UserLoginArgs user)
         {
-            _logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{user.ToString()}");
-            return _authorizeJWT.GetJWTBear(user);
+            logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{user.ToString()}");
+             HttpResponseMessage res = new HttpResponseMessage();
+            if(authorizeJWT.GetJWTBear(user,out string bear))
+            {
+
+                res.StatusCode = System.Net.HttpStatusCode.OK;
+                res.Headers.Add("Authorization", bear);
+            }
+            else
+            {
+                res.StatusCode = System.Net.HttpStatusCode.Unauthorized;
+                res.Content=new StringContent(bear);
+            }
+            return res;
         }
-      
+        /// <summary>
+        /// 获得用户的登录信息，只要有工作台权限的人就可以获取
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Authorize(Roles = $"{PowerType.Select}:{PowerID.Workbench}")]
+        public Res<UserDetailInfoModel> GetUserDetailInfoToView(int id)
+        {
+            logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{id}");
+            return service.GetUserDetailInfoToView(id);
+        }
         /// <summary>
         /// pass Authorize test
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles ="2")]
+        [Authorize(Roles = $"{PowerType.Select}:{PowerID.Workbench}")]
         public string Hello(string name)
         {
-            string currRole = HttpContext.User.Claims.Where(x=>x.Type==ClaimTypes.Role).FirstOrDefault().ToString();
-            return $"Hello {name},you pass Authorize.Role is {currRole}";
+            return $"Hello {name},you pass Authorize.UserID is {base.UserId}";
         }
     }
+    
 }

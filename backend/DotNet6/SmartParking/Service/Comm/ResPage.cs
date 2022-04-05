@@ -17,9 +17,16 @@ namespace Service.Comm
     /// <summary>
     /// 分页返回值
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class ResPage<T>:Res<T>
+    /// <typeparam name="TList"></typeparam>
+    public class ResPage<TList>:Res<List<TList>>
     {
+        public ResPage(bool _success):base(_success)
+        {           
+        }
+        public ResPage()
+        {
+
+        }
         /// <summary>
         /// 每页个数
         /// </summary>

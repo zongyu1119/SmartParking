@@ -31,7 +31,7 @@ namespace DataBaseHelper.Entities
         /// <summary>
         /// 权限级别(多级权限区分权限级别)
         /// </summary>
-        public string? PowerLevel { get; set; }
+        public int? PowerLevel { get; set; }
         /// <summary>
         /// 父权限ID
         /// </summary>

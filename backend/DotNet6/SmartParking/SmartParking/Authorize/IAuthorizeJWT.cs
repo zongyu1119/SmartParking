@@ -10,6 +10,6 @@
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        string GetJWTBear(ViewModels.UserLogin user);
+        bool GetJWTBear(ViewModels.UserLoginArgs user,out string bear);
     }
 }

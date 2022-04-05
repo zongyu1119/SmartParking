@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,15 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppHelper\AppHelper.csproj" />
-    <ProjectReference Include="..\DataBaseHelper\DataBaseHelper.csproj" />
-    <ProjectReference Include="..\RabbitMQHelper\RabbitMQHelper.csproj" />
-    <ProjectReference Include="..\RedisHelper\RedisHelper.csproj" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Service\" />
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\AppHelper\AppHelper.csproj" />
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <ProjectReference Include="..\DataBaseHelper\DataBaseHelper.csproj" />
+    <ProjectReference Include="..\RabbitMQHelper\RabbitMQHelper.csproj" />
+    <ProjectReference Include="..\RedisHelper\RedisHelper.csproj" />
   </ItemGroup>
 
 </Project>

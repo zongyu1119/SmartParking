@@ -24,7 +24,7 @@ namespace DataBaseHelper.Entities
         {
             _connectionString = AppHelper.AppSettings.ReadAppSettings("ConnectionString");
         }
-
+        #region DbSet
         public virtual DbSet<BcCarinfo> BcCarinfos { get; set; } = null!;
         public virtual DbSet<BcConfig> BcConfigs { get; set; } = null!;
         public virtual DbSet<BcOwnerInfo> BcOwnerInfos { get; set; } = null!;
@@ -41,8 +41,8 @@ namespace DataBaseHelper.Entities
         public virtual DbSet<BcUserinfo> BcUserinfos { get; set; } = null!;
         public virtual DbSet<OpCarIo> OpCarIos { get; set; } = null!;
         public virtual DbSet<OpParkingStatusHi> OpParkingStatusHis { get; set; } = null!;
+        #endregion
 
-      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -687,7 +687,6 @@ namespace DataBaseHelper.Entities
                     .HasComment("权限ID");
 
                 entity.Property(e => e.PowerLevel)
-                    .HasMaxLength(255)
                     .HasColumnName("POWER_LEVEL")
                     .HasComment("权限级别(多级权限区分权限级别)");
 
@@ -721,6 +720,173 @@ namespace DataBaseHelper.Entities
                     .HasColumnType("datetime")
                     .HasColumnName("UPDATED_TIME")
                     .HasComment("更新时间");
+                entity.HasData(new BcPower[]
+                {
+                    new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=null,
+                            PowerId=1,
+                             PowerLevel=0,
+                              PowerName="停车场监控",
+                               PowerPath="/",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    },new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=null,
+                            PowerId=2,
+                             PowerLevel=0,
+                              PowerName="停车场设置",
+                               PowerPath="/",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    },  new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=null,
+                            PowerId=3,
+                             PowerLevel=0,
+                              PowerName="统计和报表",
+                               PowerPath="/",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    }
+                    ,new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=null,
+                            PowerId=4,
+                             PowerLevel=0,
+                              PowerName="用户和权限",
+                               PowerPath="/",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    },
+                    new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=null,
+                            PowerId=5,
+                             PowerLevel=0,
+                              PowerName="系统设置",
+                               PowerPath="/",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    },new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=1,
+                            PowerId=101,
+                             PowerLevel=1,
+                              PowerName="工作台",
+                               PowerPath="/Workbench",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    }
+                    ,new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=1,
+                            PowerId=102,
+                             PowerLevel=1,
+                              PowerName="停车监控",
+                               PowerPath="/ParkingMonitor",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    },new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=4,
+                            PowerId=401,
+                             PowerLevel=1,
+                              PowerName="用户管理",
+                               PowerPath="/UserInfoManagement",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    }
+                    ,new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=4,
+                            PowerId=402,
+                             PowerLevel=1,
+                              PowerName="角色管理",
+                               PowerPath="/RoleInfoManagement",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    },new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=2,
+                            PowerId=201,
+                             PowerLevel=1,
+                              PowerName="停车场管理",
+                               PowerPath="/ParkingManagement",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    }
+                    ,new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=3,
+                            PowerId=301,
+                             PowerLevel=1,
+                              PowerName="停车统计",
+                               PowerPath="/ParkingReport",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    },
+                    new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=5,
+                            PowerId=501,
+                             PowerLevel=1,
+                              PowerName="配置管理",
+                               PowerPath="/ConfigManagement",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    },
+                    new BcPower()
+                    {
+                         CreatedBy =1,
+                          CreatedTime=DateTime.Now,
+                           ParentId=5,
+                            PowerId=502,
+                             PowerLevel=1,
+                              PowerName="租户管理",
+                               PowerPath="/TenantManagement",
+                                PowerType=0,
+                                Revision=1,
+                                 TenantId=1,
+                    }
+                });
             });
 
             modelBuilder.Entity<BcRole>(entity =>
@@ -766,6 +932,17 @@ namespace DataBaseHelper.Entities
                     .HasColumnType("datetime")
                     .HasColumnName("UPDATED_TIME")
                     .HasComment("更新时间");
+                entity.HasData(new BcRole[]{
+                    new BcRole
+                    {
+                         TenantId =1,
+                         RoleName ="管理员",
+                         RoleId =1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         Revision=1
+                    }
+                });
             });
 
             modelBuilder.Entity<BcRolePower>(entity =>
@@ -827,6 +1004,166 @@ namespace DataBaseHelper.Entities
                     .HasColumnType("datetime")
                     .HasColumnName("UPDATED_TIME")
                     .HasComment("更新时间");
+                entity.HasData(new BcRolePower[]
+                {
+                    new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=1,
+                    },new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=2,
+                    },new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=3,
+                    },new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=4,
+                    },new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=5,
+                    },new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=101,
+                    },new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=102,
+                    },new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=201,
+                    },new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=301,
+                    },new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=401,
+                    },new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=402,
+                    },new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=501,
+                    },new BcRolePower
+                    {
+                         Revision=1,
+                         TenantId=1,
+                         CreatedBy=1,
+                         CreatedTime=DateTime.Now,
+                         IsDelete=1,
+                         IsInsert=1,
+                         IsSelect=1,
+                         IsUpdate=1,
+                         RoleId =1,
+                         PowerId=502,
+                    }
+                });
             });
 
             modelBuilder.Entity<BcTenant>(entity =>
@@ -868,6 +1205,13 @@ namespace DataBaseHelper.Entities
                     .HasColumnType("datetime")
                     .HasColumnName("UPDATED_TIME")
                     .HasComment("更新时间");
+                //数据
+                entity.HasData(new BcTenant
+                {
+                     Revision=1,
+                      TenantId=1,
+                       TenantName="租户1"
+                });
             });
 
             modelBuilder.Entity<BcUserinfo>(entity =>
@@ -878,7 +1222,7 @@ namespace DataBaseHelper.Entities
                 entity.ToTable("bc_userinfo");
 
                 entity.HasComment("用户表");
-
+                #region Property
                 entity.Property(e => e.UserId)
                     .HasColumnName("USER_ID")
                     .HasComment("用户ID");
@@ -947,6 +1291,44 @@ namespace DataBaseHelper.Entities
                     .HasMaxLength(255)
                     .HasColumnName("ROLE_ID")
                     .HasComment("用户角色");
+                #endregion Property
+                entity.HasData(new List<BcUserinfo>
+                {
+                    new BcUserinfo
+                    {
+                        UserId=1,
+                          RoleId=1,
+                          UserName="Admin",
+                          UserNameRel="Administrator",
+                           Address="北京市长安街1号",
+                            CreatedBy=1,
+                             CreatedTime=DateTime.Now,
+                              Password="827ccb0eea8a706c4c34a16891f84e7b",
+                               Phone="13333333332",
+                                Revision=1,
+                                 Sex="男",
+                                  TenantId=1,
+                                  UserIdCardNum="622222222222222221"
+
+                    },
+                    new BcUserinfo
+                    {
+                        UserId=2,
+                          RoleId=1,
+                          UserName="User",
+                          UserNameRel="User",
+                          Address="北京市长安街1号",
+                          CreatedBy=1,
+                             CreatedTime=DateTime.Now,
+                              Password="827ccb0eea8a706c4c34a16891f84e7b",
+                               Phone="13333333333",
+                                Revision=1,
+                                 Sex="男",
+                                  TenantId=1,
+                                   UserIdCardNum="622222222222222222"
+
+                    }
+                });
             });
 
             modelBuilder.Entity<OpCarIo>(entity =>
@@ -1080,3 +1462,7 @@ namespace DataBaseHelper.Entities
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
+#region 每次更改需要执行的命令
+// Add-Migration dataBaseUpdate-v0.3-mom
+// Update-Database
+#endregion

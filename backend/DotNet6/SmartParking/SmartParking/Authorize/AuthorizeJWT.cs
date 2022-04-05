@@ -1,48 +1,92 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using SmartParking.ViewModels;
 using System.Security.Claims;
-using DataBaseHelper.Entities;
 using System.Security.Cryptography;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using Service.Comm;
+using Service.Models;
+using Common.Str;
+using Service.IService;
 
 namespace SmartParking.Authorize
 {
+    /// <summary>
+    /// JWT认证
+    /// </summary>
     public class AuthorizeJWT : IAuthorizeJWT
     {
-        private readonly IConfiguration _configuration;
-        private readonly ILogger<AuthorizeJWT> _logger;
-        private smartparkingContext _dbContext=new smartparkingContext();
-        public AuthorizeJWT(IConfiguration configuration, ILogger<AuthorizeJWT> logger)
+        private readonly IConfiguration configuration;
+        private readonly ILogger<AuthorizeJWT> logger;
+        private readonly IUserInfoService service;
+        /// <summary>
+        /// JWT认证
+        /// </summary>
+        /// <param name="_configuration"></param>
+        /// <param name="_logger"></param>
+        /// <param name="_service"></param>
+        public AuthorizeJWT(IConfiguration _configuration, ILogger<AuthorizeJWT> _logger, IUserInfoService _service)
         {
-            _configuration = configuration;
-            _logger = logger;
+            this.configuration = _configuration;
+            this.logger = _logger;
+            this.service = _service;
         }
         /// <summary>
         /// 获得JWTBear
         /// </summary>
         /// <param name="user"></param>
+        /// <param name="bear"></param>
         /// <returns></returns>
-        public string GetJWTBear(UserLogin user)
+        public bool GetJWTBear(UserLoginArgs user,out string bear)
         {
             string psdMd5 = GetPassword(user.Password);
-            BcUserinfo userinfo=_dbContext.BcUserinfos.FirstOrDefault(x => x.UserName == user.UserName&&x.Password==psdMd5);
-            if(userinfo == null)
+            UserDetailInfoModel userDetailInfoModel = service.GetUserDetailInfo(user.UserName);
+            if(userDetailInfoModel == null)
             {
-                _logger.LogError("用户名或密码错误");
-                return null;
+                logger.LogError("登录用户不存在！");
+                bear = "登录用户不存在！";
+                return false;
+            }
+            if (userDetailInfoModel.Password != user.Password.GetMd5())
+            {
+                logger.LogError("用户名或密码错误！");
+                bear = "用户名或密码错误！";
+                return false;
             }
             // 1. 定义需要使用到的Claims
-            var claims = new[]
+            var claims = new List<Claim>()
             {
-                new Claim("Id", userinfo.UserId.ToString()),
-                new Claim("Name", userinfo.UserName),
-                new Claim(ClaimTypes.Role,"1"),
-                new Claim(ClaimTypes.)
+                new Claim("Id", userDetailInfoModel.UserId.ToString()),
+                new Claim(ClaimTypes.Name, userDetailInfoModel.UserName),
+                new Claim("UserNameRel", userDetailInfoModel.UserNameRel),
+                new Claim("TenantId",userDetailInfoModel.TenantId.ToString()),
+                new Claim("RoleId",userDetailInfoModel.RoleId.ToString()),
             };
+            if (userDetailInfoModel.RolePowers != null)
+            {
+                userDetailInfoModel.RolePowers.ForEach(p =>
+                {
+                    if (p.IsDelete != null && p.IsDelete == 1)
+                    {
+                        claims.Add(new Claim(ClaimTypes.Role, $"{PowerType.Delete}:{p.PowerId}"));
+                    }
+                    if (p.IsSelect != null && p.IsSelect == 1)
+                    {
+                        claims.Add(new Claim(ClaimTypes.Role, $"{PowerType.Select}:{p.PowerId}"));
+                    }
+                    if (p.IsInsert != null && p.IsInsert == 1)
+                    {
+                        claims.Add(new Claim(ClaimTypes.Role, $"{PowerType.Insert}:{p.PowerId}"));
+                    }
+                    if (p.IsUpdate != null && p.IsUpdate == 1)
+                    {
+                        claims.Add(new Claim(ClaimTypes.Role, $"{PowerType.Update}:{p.PowerId}"));
+                    }
+                });
+            }
 
             // 2. 从 appsettings.json 中读取SecretKey
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SecretKey"]));
 
             // 3. 选择加密算法
             var algorithm = SecurityAlgorithms.HmacSha256;
@@ -51,13 +95,13 @@ namespace SmartParking.Authorize
             var signingCredentials = new SigningCredentials(secretKey, algorithm);
 
             // 5. 从 appsettings.json 中读取Expires
-            var expires = Convert.ToDouble(_configuration["JWT:Expires"]);
+            var expires = Convert.ToDouble(configuration["JWT:Expires"]);
 
 
             // 6. 根据以上，生成token
             var token = new JwtSecurityToken(
-                _configuration["JWT:Issuer"],     //Issuer
-                _configuration["JWT:Audience"],   //Audience
+                configuration["JWT:Issuer"],     //Issuer
+                configuration["JWT:Audience"],   //Audience
                 claims,                          //Claims,
                 DateTime.Now,                    //notBefore
                 DateTime.Now.AddDays(expires),   //expires
@@ -66,29 +110,18 @@ namespace SmartParking.Authorize
 
             // 7. 将token变为string
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
-            return "Bearer " + jwtToken;
+            bear= "Bearer " + jwtToken;
+            return true;
         }
         /// <summary>
         /// 获得字符串的MD5
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        private  string GetPassword(string password)
+        private static string GetPassword(string password)
         {
-            MD5 md5Hasher = MD5.Create();
-            // Convert the input string to a byte array and compute the hash.
-            byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(password));
-            // Create a new Stringbuilder to collect the bytes
-            // and create a string.
-            StringBuilder sBuilder = new StringBuilder();
-            // Loop through each byte of the hashed data
-            // and format each one as a hexadecimal string.
-            for (int i = 0; i < data.Length; i++)
-            {
-                sBuilder.Append(data[i].ToString("x2"));
-            }
-            // Return the hexadecimal string.
-            return sBuilder.ToString();
+            return password.GetMd5();
         }
+       
     }
 }

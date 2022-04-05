@@ -19,10 +19,18 @@ namespace Service.Comm
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class Res<T>:ResBase
-    {       
+    {
+        public Res(bool _success) : base(_success)
+        {
+        }
+        public Res()
+        {
+
+        }
         /// <summary>
         /// 数据
         /// </summary>
         public T? Data { get; set; }
     }
+   
 }
