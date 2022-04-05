@@ -76,5 +76,11 @@ namespace Service.IService
         /// <param name="id"></param>
         /// <returns></returns>
         public Res<bool> DeleteUserInfo(int id);
+        /// <summary>
+        /// 修改用户密码
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public Res<bool> UpdateUserInfoPassword(UserInfoUpdatePasswordParam param);
     }
 }

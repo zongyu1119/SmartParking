@@ -353,8 +353,7 @@ namespace Service.Service
         /// <exception cref="NotImplementedException"></exception>
         public Res<bool> UpdateUserInfo(UserInfoUpdateParam param)
         {
-            var user = repository.DbContext.BcUserinfos.FirstOrDefault(x => x.UserId.Equals(param.UserId));
-            
+            var user = repository.DbContext.BcUserinfos.FirstOrDefault(x => x.UserId.Equals(param.UserId));            
             if (user == null)
             {
                 Res<bool> res = new Res<bool>(false);
@@ -369,6 +368,33 @@ namespace Service.Service
                 if (!res.Success)
                 {
                     res.Message = "修改用户失败！";
+                    logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}新增失败！", param);
+                }
+                return res;
+            }
+        }
+        /// <summary>
+        /// 修改用户密码
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        public Res<bool> UpdateUserInfoPassword(UserInfoUpdatePasswordParam param)
+        {
+            var user = repository.DbContext.BcUserinfos.FirstOrDefault(x => x.UserId.Equals(param.UserId));
+            if (user == null)
+            {
+                Res<bool> res = new Res<bool>(false);
+                res.Data = false;
+                res.Message = "未找到要修改的用户！";
+                return res;
+            }
+            else
+            {
+                user.Password = param.Password.GetMd5();
+                Res<bool> res = new Res<bool>(repository.DbContext.SaveChanges() > 0);
+                if (!res.Success)
+                {
+                    res.Message = "修改用户密码失败！";
                     logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}新增失败！", param);
                 }
                 return res;

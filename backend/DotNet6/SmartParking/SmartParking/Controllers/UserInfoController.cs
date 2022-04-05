@@ -111,5 +111,17 @@ namespace SmartParking.Controllers
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{id}");
             return service.DeleteUserInfo(id);
         }
+        /// <summary>
+        /// 修改用户密码
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Authorize(Roles = $"{PowerType.Update}:{PowerID.UserInfoManagement}")]
+        public Res<bool> UpdateUserInfoPassword([FromBody]UserInfoUpdatePasswordParam param)
+        {
+            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{param}");
+            return service.UpdateUserInfoPassword(param);
+        }
     }
 }
