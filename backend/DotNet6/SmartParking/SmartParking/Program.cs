@@ -15,6 +15,7 @@ using DataBaseHelper.Entities;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Swashbuckle.Swagger;
+using Autofac.Extras.DynamicProxy;
 
 IConfiguration configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -96,19 +97,27 @@ builder.Services.AddMvc().AddNewtonsoftJson(options =>
 /// </summary>
 // builder.Services.AddAutoMapper(typeof(Service.Comm.AutoMapperConfig));//如果在web层可以这样
  builder.Services.AddAutoMapper(Assembly.Load("Service"));//Service层可以这样，会自动寻找
+
+
 // 以下是autofac依赖注入
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
-     //先注入JWT
-     builder.RegisterType<AuthorizeJWT>().As<IAuthorizeJWT>();
+
+    //拦截器
+    builder.RegisterType<Service.Comm.ServiceInterceptor>();
+
+    //先注入JWT
+    builder.RegisterType<AuthorizeJWT>().As<IAuthorizeJWT>();
     //注入数据库资源
     builder.RegisterType<Repository>().As<IRepository>();
      // 注入Service程序集
      Assembly assembly = Assembly.Load(ServiceAutofac.GetAssemblyName());
     builder.RegisterAssemblyTypes(assembly)
     .AsImplementedInterfaces()
-    .InstancePerDependency();
+    .InstancePerDependency()
+    .EnableInterfaceInterceptors();//拦截器
 });
 // 使用日志
 builder.Host.UseSerilog((context, logger) =>

@@ -78,7 +78,7 @@ namespace SmartParking.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = $"{PowerType.Select}:{PowerID.UserInfoManagement}")]
-        public ResPage<UserInfo> GetUserInfoList([FromBody]ParamPage<UserInfoQueryParam> param)
+        public ResPage<UserInfo> GetUserInfoListPage([FromBody]ParamPage<UserInfoQueryParam> param)
         {
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{param}");
             if(param.Param==null)

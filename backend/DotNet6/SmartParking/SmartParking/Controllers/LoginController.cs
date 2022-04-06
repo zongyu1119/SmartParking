@@ -34,7 +34,7 @@ namespace SmartParking.Controllers
         [HttpPost]
         public HttpResponseMessage Login([FromBody]ViewModels.UserLoginArgs user)
         {
-            logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{user.ToString()}");
+            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{user.ToString()}");
              HttpResponseMessage res = new HttpResponseMessage();
             if(authorizeJWT.GetJWTBear(user,out string bear))
             {

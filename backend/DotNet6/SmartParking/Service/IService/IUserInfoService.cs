@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Service.Models;
 using Service.Comm;
 using Service.Params;
-
+using Autofac.Extras.DynamicProxy;
 /// <summary>
 ///  Namespace: Service.IService
 ///  Name： IUserInfoService
@@ -20,6 +20,7 @@ namespace Service.IService
     /// <summary>
     /// 用户信息服务接口
     /// </summary>
+    [Intercept(typeof(Comm.ServiceInterceptor))]
     public interface IUserInfoService
     {
         /// <summary>
