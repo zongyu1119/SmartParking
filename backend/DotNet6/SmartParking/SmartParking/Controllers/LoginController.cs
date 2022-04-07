@@ -38,7 +38,6 @@ namespace SmartParking.Controllers
              HttpResponseMessage res = new HttpResponseMessage();
             if(authorizeJWT.GetJWTBear(user,out string bear))
             {
-
                 res.StatusCode = System.Net.HttpStatusCode.OK;
                 res.Headers.Add("Authorization", bear);
             }

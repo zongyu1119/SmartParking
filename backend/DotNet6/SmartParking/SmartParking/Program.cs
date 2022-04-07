@@ -98,6 +98,8 @@ builder.Services.AddMvc().AddNewtonsoftJson(options =>
 // builder.Services.AddAutoMapper(typeof(Service.Comm.AutoMapperConfig));//如果在web层可以这样
  builder.Services.AddAutoMapper(Assembly.Load("Service"));//Service层可以这样，会自动寻找
 
+//将AudienceValidator添加到DI
+//builder.Services.AddScoped<SmartParking.Common.AuditFilterAttribute>();
 
 // 以下是autofac依赖注入
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
@@ -107,7 +109,8 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 
     //拦截器
     builder.RegisterType<Service.Comm.ServiceInterceptor>();
-
+    //过滤器
+    builder.RegisterType<SmartParking.Common.AuditFilterAttribute>();
     //先注入JWT
     builder.RegisterType<AuthorizeJWT>().As<IAuthorizeJWT>();
     //注入数据库资源

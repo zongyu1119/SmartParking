@@ -38,6 +38,7 @@ namespace SmartParking.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = $"{PowerType.Insert}:{PowerID.UserInfoManagement}")]
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         public Res<bool> AddUserInfo([FromBody]UserInfoAddParam param)
         {
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{param}");
@@ -53,6 +54,7 @@ namespace SmartParking.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles = $"{PowerType.Select}:{PowerID.UserInfoManagement}")]
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         public Res<UserInfo> GetUserInfo(int id)
         {
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{id}");
@@ -65,6 +67,7 @@ namespace SmartParking.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = $"{PowerType.Select}:{PowerID.UserInfoManagement}")]
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         public Res<List<UserInfo>> GetUserInfoList([FromBody]UserInfoQueryParam param)
         {
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{param}");
@@ -78,6 +81,7 @@ namespace SmartParking.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = $"{PowerType.Select}:{PowerID.UserInfoManagement}")]
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         public ResPage<UserInfo> GetUserInfoListPage([FromBody]ParamPage<UserInfoQueryParam> param)
         {
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{param}");
@@ -93,6 +97,7 @@ namespace SmartParking.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = $"{PowerType.Update}:{PowerID.UserInfoManagement}")]
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         public Res<bool> UpdateUserInfo([FromBody]UserInfoUpdateParam param)
         {
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{param}");
@@ -106,6 +111,7 @@ namespace SmartParking.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles =$"{PowerType.Delete}:{PowerID.UserInfoManagement}")]
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         public Res<bool> DeleteUserInfo(int id)
         {
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{id}");
@@ -118,6 +124,7 @@ namespace SmartParking.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = $"{PowerType.Update}:{PowerID.UserInfoManagement}")]
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         public Res<bool> UpdateUserInfoPassword([FromBody]UserInfoUpdatePasswordParam param)
         {
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{param}");
