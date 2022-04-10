@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Common.ObjExt;
+using DataBaseHelper;
 
 namespace SmartParking.Common
 {
@@ -9,13 +10,16 @@ namespace SmartParking.Common
     public class AuditFilterAttribute : Attribute, IResourceFilter
     {
         ILogger<AuditFilterAttribute> logger;
+        IRepository repository;
         /// <summary>
         /// 审计过滤器
         /// </summary>
         /// <param name="_logger"></param>
-        public AuditFilterAttribute(ILogger<AuditFilterAttribute> _logger)
+        /// <param name="_repository"></param>
+        public AuditFilterAttribute(ILogger<AuditFilterAttribute> _logger, IRepository _repository)
         {
             logger = _logger;
+            repository = _repository;
         }
         /// <summary>
         /// 请求成功后
@@ -25,6 +29,7 @@ namespace SmartParking.Common
         public void OnResourceExecuted(ResourceExecutedContext context)
         {
             logger?.LogInformation("[Audit]"+ context.HttpContext.Request.Path.ToString() +" "+ context.Result.GetType().GetProperty("Value").GetValue(context.Result).ToJson());
+
         }
         /// <summary>
         /// 请求之前

@@ -3,6 +3,7 @@ using System;
 using DataBaseHelper.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataBaseHelper.Migrations
 {
     [DbContext(typeof(smartparkingContext))]
-    partial class smartparkingContextModelSnapshot : ModelSnapshot
+    [Migration("20220410141816_addTableOpAudit-v0.3")]
+    partial class addTableOpAuditv03
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

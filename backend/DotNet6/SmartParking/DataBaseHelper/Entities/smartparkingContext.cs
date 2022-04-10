@@ -1456,6 +1456,10 @@ namespace DataBaseHelper.Entities
                     .HasComment("更新时间");
             });
 
+            modelBuilder.Entity<OpAudit>(entity =>
+            {
+
+            });
             OnModelCreatingPartial(modelBuilder);
         }
 
