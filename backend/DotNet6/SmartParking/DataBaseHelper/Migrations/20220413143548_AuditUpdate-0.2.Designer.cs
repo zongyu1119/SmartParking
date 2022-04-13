@@ -3,6 +3,7 @@ using System;
 using DataBaseHelper.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataBaseHelper.Migrations
 {
     [DbContext(typeof(smartparkingContext))]
-    partial class smartparkingContextModelSnapshot : ModelSnapshot
+    [Migration("20220413143548_AuditUpdate-0.2")]
+    partial class AuditUpdate02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -813,7 +815,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 1,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9655),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3883),
                             PowerLevel = 0,
                             PowerName = "停车场监控",
                             PowerPath = "/",
@@ -825,7 +827,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 2,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9674),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3907),
                             PowerLevel = 0,
                             PowerName = "停车场设置",
                             PowerPath = "/",
@@ -837,7 +839,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 3,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9676),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3909),
                             PowerLevel = 0,
                             PowerName = "统计和报表",
                             PowerPath = "/",
@@ -849,7 +851,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 4,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9678),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3911),
                             PowerLevel = 0,
                             PowerName = "用户和权限",
                             PowerPath = "/",
@@ -861,7 +863,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 5,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9679),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3913),
                             PowerLevel = 0,
                             PowerName = "系统设置",
                             PowerPath = "/",
@@ -873,7 +875,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 101,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9681),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3915),
                             ParentId = 1,
                             PowerLevel = 1,
                             PowerName = "工作台",
@@ -886,7 +888,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 102,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9682),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3918),
                             ParentId = 1,
                             PowerLevel = 1,
                             PowerName = "停车监控",
@@ -899,7 +901,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 401,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9684),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3921),
                             ParentId = 4,
                             PowerLevel = 1,
                             PowerName = "用户管理",
@@ -912,7 +914,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 402,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9686),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3926),
                             ParentId = 4,
                             PowerLevel = 1,
                             PowerName = "角色管理",
@@ -925,7 +927,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 201,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9687),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3929),
                             ParentId = 2,
                             PowerLevel = 1,
                             PowerName = "停车场管理",
@@ -938,7 +940,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 301,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9689),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3933),
                             ParentId = 3,
                             PowerLevel = 1,
                             PowerName = "停车统计",
@@ -951,7 +953,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 501,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9690),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3934),
                             ParentId = 5,
                             PowerLevel = 1,
                             PowerName = "配置管理",
@@ -964,7 +966,7 @@ namespace DataBaseHelper.Migrations
                         {
                             PowerId = 502,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 334, DateTimeKind.Local).AddTicks(9691),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(3936),
                             ParentId = 5,
                             PowerLevel = 1,
                             PowerName = "租户管理",
@@ -1031,7 +1033,7 @@ namespace DataBaseHelper.Migrations
                         {
                             RoleId = 1,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(993),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(5418),
                             Revision = 1,
                             RoleName = "管理员",
                             TenantId = 1
@@ -1114,7 +1116,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 1,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2868),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7712),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1127,7 +1129,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 2,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2873),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7724),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1140,7 +1142,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 3,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2875),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7726),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1153,7 +1155,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 4,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2877),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7728),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1166,7 +1168,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 5,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2878),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7731),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1179,7 +1181,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 101,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2880),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7733),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1192,7 +1194,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 102,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2881),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7735),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1205,7 +1207,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 201,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2883),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7739),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1218,7 +1220,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 301,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2884),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7743),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1231,7 +1233,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 401,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2886),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7745),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1244,7 +1246,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 402,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2887),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7747),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1257,7 +1259,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 501,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2889),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7749),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1270,7 +1272,7 @@ namespace DataBaseHelper.Migrations
                             RoleId = 1,
                             PowerId = 502,
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(2942),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 217, DateTimeKind.Local).AddTicks(7751),
                             IsDelete = 1,
                             IsInsert = 1,
                             IsSelect = 1,
@@ -1436,7 +1438,7 @@ namespace DataBaseHelper.Migrations
                             UserId = 1,
                             Address = "北京市长安街1号",
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(5668),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 218, DateTimeKind.Local).AddTicks(2733),
                             Password = "827ccb0eea8a706c4c34a16891f84e7b",
                             Phone = "13333333332",
                             Revision = 1,
@@ -1452,7 +1454,7 @@ namespace DataBaseHelper.Migrations
                             UserId = 2,
                             Address = "北京市长安街1号",
                             CreatedBy = 1,
-                            CreatedTime = new DateTime(2022, 4, 13, 22, 37, 47, 335, DateTimeKind.Local).AddTicks(5675),
+                            CreatedTime = new DateTime(2022, 4, 13, 22, 35, 47, 218, DateTimeKind.Local).AddTicks(2754),
                             Password = "827ccb0eea8a706c4c34a16891f84e7b",
                             Phone = "13333333333",
                             Revision = 1,
@@ -1492,12 +1494,11 @@ namespace DataBaseHelper.Migrations
 
                     b.Property<int?>("Revision")
                         .HasColumnType("int")
-                        .HasColumnName("REVISION")
                         .HasComment("乐观锁");
 
                     b.Property<int?>("TenantId")
                         .HasColumnType("int")
-                        .HasColumnName("TENANT_ID")
+                        .HasColumnName("TenantId")
                         .HasComment("租户号");
 
                     b.Property<string>("Type")

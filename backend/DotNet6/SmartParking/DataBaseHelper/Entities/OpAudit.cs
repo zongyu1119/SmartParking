@@ -24,6 +24,18 @@ namespace DataBaseHelper.Entities
     public class OpAudit
     {
         /// <summary>
+        /// 租户号
+        /// </summary>
+        [Column("TENANT_ID")]
+        [Comment("租户号")]
+        public int? TenantId { get; set; }
+        /// <summary>
+        /// 乐观锁
+        /// </summary>
+        [Comment("乐观锁")]
+        [Column("REVISION")]
+        public int? Revision { get; set; }
+        /// <summary>
         /// 审计ID
         /// </summary>
         [Key]
