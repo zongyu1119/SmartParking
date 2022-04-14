@@ -32,6 +32,7 @@ namespace Service.Comm
             CreateMap<BcUserinfo, UserInfo>();
             CreateMap<UserInfoAddParam, BcUserinfo>().ForMember(d=>d.Password,o=>o.MapFrom(a=>a.Password.GetMd5()));
             CreateMap<UserInfoUpdateParam, BcUserinfo>();
+            CreateMap<AuditAddParam, OpAudit>().ForMember(d => d.CreatedTime,o=>o.MapFrom(a=>DateTime.Now));
         }
     }
 }

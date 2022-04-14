@@ -67,14 +67,13 @@ namespace DataBaseHelper.Entities
         /// 用户
         /// </summary>
         [Comment("操作用户")]
-        [Column("USER_ID")]
-        public int? UserId { get; set; }
+        [Column("CREATE_BY")]
+        public int? CreatedBy { get; set; }
         /// <summary>
         /// 操作时间
         /// </summary>
         [Comment("操作时间")]
         [Column(name:"CREATE_TIME", TypeName= "datetime")]
-        public DateTime? CreatedDate { get; set; }
-
+        public DateTime? CreatedTime { get; set; }
     }
 }

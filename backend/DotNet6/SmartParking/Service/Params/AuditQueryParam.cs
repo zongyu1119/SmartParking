@@ -5,24 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
-///  Namespace: Service.Models
-///  Name： AuditModel
+///  Namespace: Service.Params
+///  Name： AuditQueryParam
 ///  Author: zy
-///  Time:  2022-04-13 22:31:37
+///  Time:  2022-04-14 22:24:08
 ///  Version:  0.1
 /// </summary>
 
-namespace Service.Models
+namespace Service.Params
 {
     /// <summary>
-    /// 审计模型
+    /// 
     /// </summary>
-    public class AuditModel
+    public class AuditQueryParam: ParamBase
     {
-        /// <summary>
-        /// 审计ID
-        /// </summary>
-        public int Id { get; set; }
         /// <summary>
         /// 操作类型
         /// </summary>
@@ -32,17 +28,9 @@ namespace Service.Models
         /// </summary>
         public string? ActionNmae { set; get; }
         /// <summary>
-        /// 操作说明
-        /// </summary>
-        public string? Description { get; set; }
-        /// <summary>
         /// 用户
         /// </summary>
         public int? UserId { get; set; }
-        /// <summary>
-        /// 操作时间
-        /// </summary>
-        public DateTime? CreatedDate { get; set; }
         /// <summary>
         /// 用户姓名
         /// </summary>

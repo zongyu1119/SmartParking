@@ -41,6 +41,7 @@ namespace DataBaseHelper.Entities
         public virtual DbSet<BcUserinfo> BcUserinfos { get; set; } = null!;
         public virtual DbSet<OpCarIo> OpCarIos { get; set; } = null!;
         public virtual DbSet<OpParkingStatusHi> OpParkingStatusHis { get; set; } = null!;
+        public virtual DbSet<OpAudit> OpAudits { get; set; } = null!;
         #endregion
 
 
