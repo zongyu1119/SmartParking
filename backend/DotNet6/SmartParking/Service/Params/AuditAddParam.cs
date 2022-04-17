@@ -19,10 +19,7 @@ namespace Service.Params
     /// </summary>
     public class AuditAddParam: AddParamBase
     {
-        /// <summary>
-        /// 审计ID
-        /// </summary>
-        public int Id { get; set; }
+      
         /// <summary>
         /// 操作类型
         /// </summary>

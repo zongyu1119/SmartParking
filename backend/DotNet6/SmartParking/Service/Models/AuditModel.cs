@@ -42,7 +42,7 @@ namespace Service.Models
         /// <summary>
         /// 操作时间
         /// </summary>
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? CreateTime { get; set; }
         /// <summary>
         /// 用户姓名
         /// </summary>

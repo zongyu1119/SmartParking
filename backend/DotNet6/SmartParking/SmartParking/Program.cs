@@ -130,7 +130,16 @@ builder.Host.UseSerilog((context, logger) =>
 });
 //这个配置在调试时是不发挥作用的，实际部署后可以用
 builder.WebHost.UseUrls(new[] { configuration["Url"].ToString() });
-
+builder.Services.AddCors(cor =>
+{
+    cor.AddPolicy("Cors", policy =>
+    {
+        policy
+        .AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -139,8 +148,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseCors("AllowCors");
+app.UseCors("Cors");//这里写啥，控制器就要写啥
 
 app.UseHttpsRedirection();
 
@@ -150,7 +158,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-Console.WriteLine($"Smart Parking WebApi Start!");
-
+StringBuilder urlStr = new StringBuilder();
+app.Urls.ToList().ForEach(url => urlStr.Append(url+";"));
+app.Logger.LogInformation($"Smart Parking WebApi Start!{urlStr}");
 app.Run();

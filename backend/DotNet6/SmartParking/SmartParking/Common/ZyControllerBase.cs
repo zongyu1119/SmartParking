@@ -22,15 +22,22 @@ namespace SmartParking.Common
         {
             get
             {
-                string? identityUserName = HttpContext.User.Identity.Name;
-                if (identityUserName != null && int.TryParse(identityUserName, out int userId))
+                string id = HttpContext.User.Claims.FirstOrDefault(x => x.Type.Equals("Id")).Value;
+                if (int.TryParse(id, out int ID))
                 {
-                    return userId;
+                    return ID;
                 }
-                else
-                {
-                    return null;
-                }
+                else { return null; }
+            }
+        }
+        /// <summary>
+        /// 用户名
+        /// </summary>
+        public string UserName
+        {
+            get
+            {
+                return HttpContext.User.Identity.Name;
             }
         }
         /// <summary>

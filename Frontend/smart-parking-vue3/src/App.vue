@@ -83,6 +83,9 @@ export default {
       bodyHeight: window.innerHeight,
       bodyWidth: window.innerWidth,
       isCollapse: ref(true),
+      auth:{
+        isLogin:false
+      }
     };
   },
   mounted() {

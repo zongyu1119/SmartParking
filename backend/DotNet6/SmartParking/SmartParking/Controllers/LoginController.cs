@@ -14,13 +14,18 @@ namespace SmartParking.Controllers
     /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [EnableCors("CorsPolicy")]//配置Cors,允许跨域
+    [EnableCors("Cors")]//配置Cors,允许跨域
     public class LoginController : ZyControllerBase
     {
-
         private readonly Authorize.IAuthorizeJWT authorizeJWT;//认证
         private readonly IUserInfoService service;
-        //依赖注入
+        /// <summary>
+        /// 登录相关
+        /// </summary>
+        /// <param name="_configuration"></param>
+        /// <param name="_logger"></param>
+        /// <param name="_authorizeJWT"></param>
+        /// <param name="_service"></param>
         public LoginController(IConfiguration _configuration, ILogger<LoginController> _logger, Authorize.IAuthorizeJWT _authorizeJWT, IUserInfoService _service) :base(_configuration,_logger)
         {
             authorizeJWT= _authorizeJWT;
@@ -32,6 +37,7 @@ namespace SmartParking.Controllers
         /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost]
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         public HttpResponseMessage Login([FromBody]ViewModels.UserLoginArgs user)
         {
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{user.ToString()}");
@@ -55,10 +61,11 @@ namespace SmartParking.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles = $"{PowerType.Select}:{PowerID.Workbench}")]
-        public Res<UserDetailInfoModel> GetUserDetailInfoToView(int id)
+        [ServiceFilter(typeof(AuditFilterAttribute))]
+        public Res<UserDetailInfoModel> GetUserDetailInfoToView()
         {
-            logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{id}");
-            return service.GetUserDetailInfoToView(id);
+            logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} ");
+            return service.GetUserDetailInfoToView((int)base.UserId);
         }
         /// <summary>
         /// pass Authorize test
@@ -67,6 +74,7 @@ namespace SmartParking.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles = $"{PowerType.Select}:{PowerID.Workbench}")]
+        [ServiceFilter(typeof(AuditFilterAttribute))]
         public string Hello(string name)
         {
             return $"Hello {name},you pass Authorize.UserID is {base.UserId}";
