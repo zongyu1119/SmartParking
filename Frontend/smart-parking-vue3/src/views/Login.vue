@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import {login} from "@/assets/Scripts/api"
 export default {
  name: 'Login',
     data: function() {
@@ -32,12 +33,18 @@ export default {
           Password: this.Password,
           ReturnUrl:""
         };
+        login(params).then(res=>{
+           let bear=res.data.headers.find(x=>x.key==="Authorization").value;
+          localStorage.setItem("token",bear);
+          this.$router.push('/Hello');
+        })
+        /*//原生
         this.axios.post("/Login/Login",params).then(res=>{
             let bear=res.data.headers.find(x=>x.key==="Authorization").value;
             this.$cookies.set("token",bear);
         }).catch(err=>{
             console.log(err);
-        })
+        })*/
       }
     }
 }
