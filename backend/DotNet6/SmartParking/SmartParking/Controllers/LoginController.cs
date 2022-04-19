@@ -6,6 +6,7 @@ using SmartParking.Common;
 using Service.Comm;
 using Service.Models;
 using Service.IService;
+using RedisHelper;
 
 namespace SmartParking.Controllers
 {
@@ -19,6 +20,7 @@ namespace SmartParking.Controllers
     {
         private readonly Authorize.IAuthorizeJWT authorizeJWT;//认证
         private readonly IUserInfoService service;
+        private readonly IRedisManage redis;
         /// <summary>
         /// 登录相关
         /// </summary>
@@ -26,10 +28,15 @@ namespace SmartParking.Controllers
         /// <param name="_logger"></param>
         /// <param name="_authorizeJWT"></param>
         /// <param name="_service"></param>
-        public LoginController(IConfiguration _configuration, ILogger<LoginController> _logger, Authorize.IAuthorizeJWT _authorizeJWT, IUserInfoService _service) :base(_configuration,_logger)
+        public LoginController(IConfiguration _configuration, 
+            ILogger<LoginController> _logger, 
+            Authorize.IAuthorizeJWT _authorizeJWT, 
+            IUserInfoService _service,
+            IRedisManage _redis) :base(_configuration,_logger)
         {
             authorizeJWT= _authorizeJWT;
             service= _service;
+            redis= _redis;
         }
         /// <summary>
         /// 用户登录
@@ -44,6 +51,7 @@ namespace SmartParking.Controllers
              HttpResponseMessage res = new HttpResponseMessage();
             if(authorizeJWT.GetJWTBear(user,out string bear))
             {
+                redis.Set($"Bear{user.UserName}",bear,TimeSpan.FromHours(24));
                 res.StatusCode = System.Net.HttpStatusCode.OK;
                 res.Headers.Add("Authorization", bear);
             }
@@ -77,7 +85,7 @@ namespace SmartParking.Controllers
         [ServiceFilter(typeof(AuditFilterAttribute))]
         public string Hello(string name)
         {
-            return $"Hello {name},you pass Authorize.UserID is {base.UserId}";
+            return $"Hello {name},you pass Authorize.UserID is {base.UserId};bear:{redis.Get(name)}";
         }
     }
     

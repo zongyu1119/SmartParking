@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Swashbuckle.Swagger;
 using Autofac.Extras.DynamicProxy;
+using RedisHelper;
 
 IConfiguration configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -27,9 +28,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
+//简单的配置文件读取类
 builder.Services.AddSingleton(new AppHelper.AppSettings(configuration));
-
+//redis缓存
+builder.Services.AddSingleton<IRedisManage,RedisManage>();
+//Swagger
 builder.Services.AddSwaggerGen(swgger =>
 {
     swgger.SwaggerDoc("v1", new OpenApiInfo
