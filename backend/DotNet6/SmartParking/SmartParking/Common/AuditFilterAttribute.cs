@@ -19,7 +19,7 @@ namespace SmartParking.Common
         /// 审计过滤器
         /// </summary>
         /// <param name="_logger"></param>
-        /// <param name="_repository"></param>
+        /// <param name="_service"></param>
         public AuditFilterAttribute(ILogger<AuditFilterAttribute> _logger, IAuditService _service)
         {
             logger = _logger;

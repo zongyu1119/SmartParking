@@ -49,11 +49,15 @@ namespace SmartParking.Controllers
         {
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{user.ToString()}");
              HttpResponseMessage res = new HttpResponseMessage();
-            if(authorizeJWT.GetJWTBear(user,out string bear))
+            if(authorizeJWT.GetJWTBear(user,out string bear, out UserDetailInfoModel? model))
             {
-                redis.Set($"Bear{user.UserName}",bear,TimeSpan.FromHours(24));
+                base.UserId = model.UserId;
+                base.UserName = model.UserName;
+                base.TenantId = model.TenantId;
+                redis.Set($"Bear{UserId}",bear,TimeSpan.FromHours(24));
                 res.StatusCode = System.Net.HttpStatusCode.OK;
-                res.Headers.Add("Authorization", bear);
+                res.Headers.Add("Authorization", bear);               
+                res.Content = new StringContent(System.Text.Json.JsonSerializer.Serialize(model));
             }
             else
             {
@@ -65,7 +69,6 @@ namespace SmartParking.Controllers
         /// <summary>
         /// 获得用户的登录信息，只要有工作台权限的人就可以获取
         /// </summary>
-        /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
         [Authorize(Roles = $"{PowerType.Select}:{PowerID.Workbench}")]
@@ -85,7 +88,7 @@ namespace SmartParking.Controllers
         [ServiceFilter(typeof(AuditFilterAttribute))]
         public string Hello(string name)
         {
-            return $"Hello {name},you pass Authorize.UserID is {base.UserId};bear:{redis.Get(name)}";
+            return $"Hello {name},you pass Authorize.UserID is {base.UserId};bear:{redis.Get("Bear"+UserId)}";
         }
     }
     

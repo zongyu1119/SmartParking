@@ -36,8 +36,9 @@ namespace SmartParking.Authorize
         /// </summary>
         /// <param name="user"></param>
         /// <param name="bear"></param>
+        /// <param name="model"></param>
         /// <returns></returns>
-        public bool GetJWTBear(UserLoginArgs user,out string bear)
+        public bool GetJWTBear(UserLoginArgs user,out string bear,out UserDetailInfoModel? model)
         {
             string psdMd5 = GetPassword(user.Password);
             UserDetailInfoModel userDetailInfoModel = service.GetUserDetailInfo(user.UserName);
@@ -45,14 +46,17 @@ namespace SmartParking.Authorize
             {
                 logger.LogError("登录用户不存在！");
                 bear = "登录用户不存在！";
+                model = null;
                 return false;
             }
             if (userDetailInfoModel.Password != user.Password.GetMd5())
             {
                 logger.LogError("用户名或密码错误！");
                 bear = "用户名或密码错误！";
+                model = null;
                 return false;
             }
+            model = userDetailInfoModel;
             // 1. 定义需要使用到的Claims
             var claims = new List<Claim>()
             {

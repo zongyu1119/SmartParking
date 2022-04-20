@@ -16,28 +16,39 @@ namespace SmartParking.Common
             logger = _logger;
         }
         /// <summary>
-        /// 获得登录用户ID
+        /// 当前用户的Id
         /// </summary>
         public int? UserId
         {
             get
             {
-                string id = HttpContext.User.Claims.FirstOrDefault(x => x.Type.Equals("Id")).Value;
-                if (int.TryParse(id, out int ID))
-                {
-                    return ID;
-                }
-                else { return null; }
+                //2022-04-20修改为使用Session获取信息，需要在登录时将Session记住
+                //string id = HttpContext.User.Claims.FirstOrDefault(x => x.Type.Equals("Id")).Value;
+                return HttpContext.Session.GetInt32("UserId");
+            }
+            set
+            {
+                if (value != null)
+                    HttpContext.Session.SetInt32("UserId", (int)value);
+                else
+                    HttpContext.Session.Remove("UserId");
             }
         }
         /// <summary>
         /// 用户名
         /// </summary>
-        public string UserName
+        public string? UserName
         {
             get
             {
-                return HttpContext.User.Identity.Name;
+                return HttpContext.Session.GetString("UserName");
+            }
+            set
+            {
+                if (value != null)
+                    HttpContext.Session.SetString("UserName", (string)value);
+                else
+                    HttpContext.Session.Remove("UserName");
             }
         }
         /// <summary>
@@ -47,12 +58,14 @@ namespace SmartParking.Common
         {
             get
             {
-               string roleIdStr  = HttpContext.User.Claims.FirstOrDefault(x=>x.Type.Equals("RoleId")).Value;
-                if(int.TryParse(roleIdStr, out int roleId))
-                {
-                    return roleId;
-                }
-                else { return null; }
+                return HttpContext.Session.GetInt32("RoleId");
+            }
+            set
+            {
+                if (value != null)
+                    HttpContext.Session.SetInt32("RoleId", (int)value);
+                else
+                    HttpContext.Session.Remove("RoleId");
             }
         }
         /// <summary>
@@ -62,12 +75,14 @@ namespace SmartParking.Common
         {
             get
             {
-                string roleIdStr = HttpContext.User.Claims.FirstOrDefault(x => x.Type.Equals("TenantId")).Value;
-                if (int.TryParse(roleIdStr, out int roleId))
-                {
-                    return roleId;
-                }
-                else { return null; }
+                return HttpContext.Session.GetInt32("TenantId");
+            }
+            set
+            {
+                if (value != null)
+                    HttpContext.Session.SetInt32("TenantId", (int)value);
+                else
+                    HttpContext.Session.Remove("TenantId");
             }
         }
     }

@@ -107,9 +107,15 @@ builder.Services.AddMvc().AddNewtonsoftJson(options =>
 // 以下是autofac依赖注入
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromHours(24);
+    options.Cookie.HttpOnly = false;
+    //options.Cookie.IsEssential = true;
+});
+
 builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
 {
-
     //拦截器
     builder.RegisterType<Service.Comm.ServiceInterceptor>();
     //过滤器
@@ -133,6 +139,7 @@ builder.Host.UseSerilog((context, logger) =>
 });
 //这个配置在调试时是不发挥作用的，实际部署后可以用
 builder.WebHost.UseUrls(new[] { configuration["Url"].ToString() });
+
 builder.Services.AddCors(cor =>
 {
     cor.AddPolicy("Cors", policy =>
@@ -151,6 +158,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseSession();//Session
+
 app.UseCors("Cors");//这里写啥，控制器就要写啥
 
 app.UseHttpsRedirection();
