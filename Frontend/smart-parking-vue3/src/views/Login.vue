@@ -36,7 +36,7 @@ export default {
         login(params).then(res=>{
            let bear=res.data.headers.find(x=>x.key==="Authorization").value;
           localStorage.setItem("token",bear);
-          this.$router.push('/Hello');
+          this.$router.push('/Home');
         })
         /*//原生
         this.axios.post("/Login/Login",params).then(res=>{
