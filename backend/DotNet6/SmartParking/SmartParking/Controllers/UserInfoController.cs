@@ -27,6 +27,12 @@ namespace SmartParking.Controllers
     public class UserInfoController : ZyControllerBase
     {
         private readonly IUserInfoService service;
+        /// <summary>
+        /// 用户相关
+        /// </summary>
+        /// <param name="_configuration"></param>
+        /// <param name="_logger"></param>
+        /// <param name="_service"></param>
         public UserInfoController(IConfiguration _configuration, ILogger<LoginController> _logger, IUserInfoService _service) : base(_configuration, _logger)
         {
             service = _service;

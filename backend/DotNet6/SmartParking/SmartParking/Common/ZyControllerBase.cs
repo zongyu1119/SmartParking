@@ -8,8 +8,19 @@ namespace SmartParking.Common
     /// </summary>
     public class ZyControllerBase : ControllerBase
     {
+        /// <summary>
+        /// 配置
+        /// </summary>
         protected  IConfiguration configuration;//配置
+        /// <summary>
+        /// 日志
+        /// </summary>
         protected ILogger<ZyControllerBase> logger;//日志
+        /// <summary>
+        /// 控制器基础类
+        /// </summary>
+        /// <param name="_configuration"></param>
+        /// <param name="_logger"></param>
         public ZyControllerBase(IConfiguration _configuration, ILogger<ZyControllerBase> _logger)
         {
             configuration = _configuration;

@@ -9,10 +9,12 @@ const routes = [
     path: "/Home",
     name: "Home",
     component: Home,
-  },
-  { path: "/Hello", name: Hello, component: Hello },
-  { path: "/HelloWorld", name: HelloWorld, component: HelloWorld },
-  { path: "/Parking", name: Parking, component: Parking },
+    children:[
+      { path: "/Hello", name: Hello, component: Hello },
+      { path: "/HelloWorld", name: HelloWorld, component: HelloWorld },
+      { path: "/Parking", name: Parking, component: Parking },
+    ]
+  }, 
   {
     path: "/login",
     name: "Login",

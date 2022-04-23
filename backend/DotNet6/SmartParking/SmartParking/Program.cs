@@ -156,7 +156,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
+        c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+        c.DefaultModelsExpandDepth(2);
+    });
 }
 
 app.UseSession();//Session
@@ -171,7 +175,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-StringBuilder urlStr = new StringBuilder();
-app.Urls.ToList().ForEach(url => urlStr.Append(url+";"));
-app.Logger.LogInformation($"Smart Parking WebApi Start!{urlStr}");
+app.Logger.LogInformation($"Smart Parking WebApi Start!");
 app.Run();

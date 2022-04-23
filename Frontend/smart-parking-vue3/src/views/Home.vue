@@ -1,22 +1,22 @@
 <template>
      <el-container>
       <el-header id="header" height="40px">
-        <el-radio-group v-model="isCollapse" style="margin-bottom: 20px">
+        <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;float:left">
           <el-radio-button :label="false">expand</el-radio-button>
           <el-radio-button :label="true">collapse</el-radio-button>
         </el-radio-group>
       </el-header>
       <el-container :style="{ height: bodyHeight - 60 + 'px' }">
         <el-aside
-          width="200px"
           id="aside"
-          :style="{ height: bodyHeight - 40 + 'px' }"
+          :style="{ height: bodyHeight - 40 + 'px',maxWidth:200+'px' }"
         >
           <el-menu
             default-active="2"
             :collapse="isCollapse"
             @open="handleOpen"
-            @close="handleClose"           
+            @close="handleClose"  
+            :router="true"
           >
             <el-sub-menu index="1">
               <template #title>
