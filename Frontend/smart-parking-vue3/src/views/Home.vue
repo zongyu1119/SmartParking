@@ -2,15 +2,12 @@
      <el-container>
       <el-header id="header" height="40px">
         <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;float:left">
-          <el-radio-button :label="false">expand</el-radio-button>
-          <el-radio-button :label="true">collapse</el-radio-button>
+          <el-radio-button :label="false">展开</el-radio-button>
+          <el-radio-button :label="true">折叠</el-radio-button>
         </el-radio-group>
       </el-header>
       <el-container :style="{ height: bodyHeight - 60 + 'px' }">
-        <el-aside
-          id="aside"
-          :style="{ height: bodyHeight - 40 + 'px',maxWidth:200+'px' }"
-        >
+     
           <el-menu
             default-active="2"
             :collapse="isCollapse"
@@ -49,7 +46,6 @@
               <template #title>Navigator Four</template>
             </el-menu-item>
           </el-menu>
-        </el-aside>
         <el-container id="container">
           <el-main
             id="main"
