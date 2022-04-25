@@ -5,6 +5,7 @@
           <el-radio-button :label="false">展开</el-radio-button>
           <el-radio-button :label="true">折叠</el-radio-button>
         </el-radio-group>
+         <el-button type="info" round>Info</el-button>
       </el-header>
       <el-container :style="{ height: bodyHeight - 60 + 'px' }">
      
