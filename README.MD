@@ -11,7 +11,9 @@
 
 2.2	后端
 
-系统后端使用spring boot开发，数据库使用mysql 8以后的版本，ORM框架使用Mybatis，安全认证使用spring security。
+系统后端前期用.Net6开发，使用Ocelot网关，Identity Server 4身份认证，Autofac依赖注入，ORM框架使用EF Core,使用AutoMap对象关系映射，缓存使用Redis,不使用持久化,数据库使用MySql，消息推送使用RabbitMQ,前后端实时通信使用WebSocket。
+
+后期系统后端会使用spring boot开发，数据库使用mysql 8以后的版本，ORM框架使用Mybatis，安全认证使用spring security。
 
 2.3	设备控制类
 
