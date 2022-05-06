@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 // 请求
 const http = axios.create({
-    baseURL: 'https://localhost:7246/api/',
+    baseURL: 'https://localhost:44381/api/',
     timeout: 6000
 })
 // 请求拦截

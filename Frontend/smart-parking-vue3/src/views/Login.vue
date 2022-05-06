@@ -20,7 +20,7 @@
 import {login} from "@/assets/Scripts/api"
 export default {
  name: 'Login',
-    data: function() {
+    data () {
       return {
         UserName: "admin",
         Password: "12345"
@@ -34,6 +34,7 @@ export default {
           ReturnUrl:""
         };
         login(params).then(res=>{
+          console.log(res)
            let bear=res.data.headers.find(x=>x.key==="Authorization").value;
           localStorage.setItem("token",bear);
           this.$router.push('/Home');

@@ -1,7 +1,7 @@
 <template>
-     <el-container>
+     <el-container class="content">
       <el-header id="header" height="40px">
-        <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;float:left">
+        <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;float:left;margin-left:1px">
           <el-radio-button :label="false">展开</el-radio-button>
           <el-radio-button :label="true">折叠</el-radio-button>
         </el-radio-group>
@@ -110,15 +110,27 @@ name: "Home",
   position: fixed;
   bottom: 0;
   width: 100%;
+  margin:0;
+  padding:0;
 }
 #header {
   background-color: #ebeef5;
   width: 100%;
+  margin:0;
+  padding:0;
 }
 #aside {
   background-color: whitesmoke;
+  margin:0;
+  padding:0;
 }
 #main {
   background-color: #FFFFFF;
+  margin:0;
+  padding:0;
+}
+.content{
+  margin:0;
+  padding:0;
 }
 </style>

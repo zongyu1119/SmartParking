@@ -120,7 +120,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
     builder.RegisterType<Service.Comm.ServiceInterceptor>();
     //过滤器
     builder.RegisterType<SmartParking.Common.AuditFilterAttribute>();
-    //先注入JWT
+    //注入JWT
     builder.RegisterType<AuthorizeJWT>().As<IAuthorizeJWT>();
     //注入数据库资源
     builder.RegisterType<Repository>().As<IRepository>();
@@ -131,7 +131,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
     .InstancePerDependency()
     .EnableInterfaceInterceptors();//拦截器
 });
-// 使用日志
+// 日志
 builder.Host.UseSerilog((context, logger) =>
 {
     logger.ReadFrom.Configuration(context.Configuration);
@@ -165,7 +165,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseSession();//Session
 
-app.UseCors("Cors");//这里写啥，控制器就要写啥
+app.UseCors("Cors");//策略名称，这里写啥，控制器就要写啥
 
 app.UseHttpsRedirection();
 
@@ -173,7 +173,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
-
+app.UseSerilogRequestLogging();
 app.MapControllers();
 app.Logger.LogInformation($"Smart Parking WebApi Start!");
 app.Run();

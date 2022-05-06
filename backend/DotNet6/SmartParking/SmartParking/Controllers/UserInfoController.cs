@@ -23,7 +23,7 @@ namespace SmartParking.Controllers
     /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [EnableCors("CorsPolicy")]//配置Cors,允许跨域
+    [EnableCors("Cors")]//配置Cors,允许跨域
     public class UserInfoController : ZyControllerBase
     {
         private readonly IUserInfoService service;
