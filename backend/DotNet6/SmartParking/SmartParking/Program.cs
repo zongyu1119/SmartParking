@@ -17,12 +17,12 @@ using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Swashbuckle.Swagger;
 using Autofac.Extras.DynamicProxy;
 using RedisHelper;
+using SmartParking.Middleware;
 
 IConfiguration configuration = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
                             .Build();
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -151,7 +151,7 @@ builder.Services.AddCors(cor =>
     });
 });
 var app = builder.Build();
-
+app.UseExceptionMiddleware();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
