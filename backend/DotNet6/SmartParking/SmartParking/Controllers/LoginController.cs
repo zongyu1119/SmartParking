@@ -76,6 +76,10 @@ namespace SmartParking.Controllers
         public Res<UserDetailInfoModel> GetUserDetailInfoToView()
         {
             logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} ");
+            if(base.UserId == null)
+            {
+                throw new Exception("登录用户获取失败！");
+            }
             return service.GetUserDetailInfoToView((int)base.UserId);
         }
         /// <summary>

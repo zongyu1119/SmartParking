@@ -69,6 +69,7 @@ import {
   Setting,
 } from "@element-plus/icons-vue";
 import { ref } from "vue";
+import {GetUserDetailInfoToView} from "@/assets/Scripts/api"
 </script>
 <script>
 export default {
@@ -91,6 +92,9 @@ name: "Home",
         that.bodyWidth = window.innerWidth;
       })();
     };
+    GetUserDetailInfoToView().then((Res)=>{
+        console.log(Res)
+    });
   },
   methods: {
     handleOpen: (key, keyPath) => {
