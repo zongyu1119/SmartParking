@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace DataBaseHelper.Entities
 {
     /// <summary>
     /// 配置信息表
     /// </summary>
-    public partial class BcConfig
+    public partial class BcConfig : Entity
     {
         /// <summary>
         /// 租户号

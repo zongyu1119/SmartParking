@@ -1,0 +1,15 @@
+﻿global using Service.IService;
+global using Service.Models;
+global using Service.Comm;
+global using Service.Params;
+global using DataBaseHelper.Entities;
+global using DataBaseHelper;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.Logging;
+global using Common.Str;
+global using AutoMapper;
+global using Common.Service;
+global using Service.Comm;
+global using Service.Models;
+global using Service.Params;
+global using Microsoft.Extensions.DependencyInjection;

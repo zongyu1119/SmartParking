@@ -1,18 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.Extensions.Configuration;
-using DataBaseHelper;
-using Microsoft.Extensions.Logging;
-using Service.Comm;
-using Service.Models;
-using Service.Params;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataBaseHelper.Entities;
-
-/// <summary>
+﻿/// <summary>
 ///  Namespace: Service.Service
 ///  Name： AuditService
 ///  Author: zy
@@ -25,6 +11,7 @@ namespace Service.Service
     /// <summary>
     /// 审计service
     /// </summary>
+    [AppService(Lifetime = ServiceLifetime.Scoped)]
     public class AuditService : ServiceBase, IService.IAuditService
     {
         /// <summary>
@@ -36,7 +23,7 @@ namespace Service.Service
         /// <param name="_mapper"></param>
         public AuditService(IConfiguration _configuration,
              ILogger<AuditService> _logger,
-             IRepository _repository, IMapper _mapper) : base(_configuration, _logger, _repository, _mapper)
+             IEFRepository _repository, IMapper _mapper) : base(_configuration, _logger, _repository, _mapper)
         {
         }
         /// <summary>
@@ -45,23 +32,23 @@ namespace Service.Service
         /// <param name="param"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Res<bool> Add(AuditAddParam param)
+        public async Task<Res<bool>> Add(AuditAddParam param)
         {
             var model = mapper.Map<OpAudit>(param);//使用AutoMapper
             model.CreatedTime = DateTime.Now;
             model.Revision = 1;
             repository.DbContext.OpAudits.Add(model);
-            return new Res<bool>(repository.DbContext.SaveChanges()>0);
+            return new Res<bool>(await repository.DbContext.SaveChangesAsync()>0);
         }
         /// <summary>
         /// 获得不分页的列表
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public Res<List<AuditModel>> GetList(AuditQueryParam param)
+        public async Task<Res<List<AuditModel>>> GetList(AuditQueryParam param)
         {
-            var resDb = repository.DbContext.OpAudits.Where(x => x.TenantId.Equals(param.TenantId));
-
+            var resDb = repository.DbContext.OpAudits.Join(repository.DbContext.BcUserinfos,).Where(x => x.TenantId.Equals(param.TenantId));
+           
             if (param.Type != null)
             {
                 resDb.Where(x => x.Type.Equals(param.Type));
@@ -94,7 +81,7 @@ namespace Service.Service
             if (!res.Success)
             {
                 res.Message = "查询失败！";
-                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}执行失败！", param);
+                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name}执行失败！", param);
             }
             return res;
         }
@@ -103,7 +90,7 @@ namespace Service.Service
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public ResPage<AuditModel> GetList(ParamPage<AuditQueryParam> param)
+        public async Task<ResPage<AuditModel>> GetList(ParamPage<AuditQueryParam> param)
         {
             var resDb = repository.DbContext.OpAudits.Where(x => x.TenantId.Equals(param.Param.TenantId));
           
@@ -154,7 +141,7 @@ namespace Service.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Res<AuditModel> GetModel(int id)
+        public async Task<Res<AuditModel>> GetModel(int id)
         {
             var user = repository.DbContext.OpAudits.Where(x => x.Id.Equals(id))
              .Select(x => new AuditModel()

@@ -6,7 +6,7 @@ namespace DataBaseHelper.Entities
     /// <summary>
     /// 停车收费标准表
     /// </summary>
-    public partial class BcParkingRate
+    public partial class BcParkingRate : Entity
     {
         /// <summary>
         /// 租户号

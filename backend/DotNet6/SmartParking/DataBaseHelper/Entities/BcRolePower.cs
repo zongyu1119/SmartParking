@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Entity;
+using System;
 using System.Collections.Generic;
 
 namespace DataBaseHelper.Entities
@@ -6,7 +7,7 @@ namespace DataBaseHelper.Entities
     /// <summary>
     /// 角色权限中间表
     /// </summary>
-    public partial class BcRolePower
+    public partial class BcRolePower : Entity
     {
         /// <summary>
         /// 租户号

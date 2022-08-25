@@ -1,20 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Service.IService;
-using Service.Models;
-using Service.Comm;
-using Service.Params;
-using DataBaseHelper.Entities;
-using DataBaseHelper;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Common.Str;
-using AutoMapper;
-
-/// <summary>
+﻿/// <summary>
 ///  Namespace: Service.Service
 ///  Name： UserInfoService
 ///  Author: zy
@@ -38,7 +22,7 @@ namespace Service.Service
         /// <param name="_mapper"></param>
         public UserInfoService(IConfiguration _configuration,
              ILogger<UserInfoService> _logger,
-             IRepository _repository, IMapper _mapper) : base(_configuration,_logger,_repository,_mapper)
+             IEFRepository _repository, IMapper _mapper) : base(_configuration,_logger,_repository,_mapper)
         {
         }
         /// <summary>

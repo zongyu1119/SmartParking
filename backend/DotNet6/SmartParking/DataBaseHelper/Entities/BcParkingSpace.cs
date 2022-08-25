@@ -6,7 +6,7 @@ namespace DataBaseHelper.Entities
     /// <summary>
     /// 车位表
     /// </summary>
-    public partial class BcParkingSpace
+    public partial class BcParkingSpace : Entity
     {
         /// <summary>
         /// 租户号

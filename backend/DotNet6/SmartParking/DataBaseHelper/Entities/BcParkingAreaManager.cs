@@ -6,7 +6,7 @@ namespace DataBaseHelper.Entities
     /// <summary>
     /// 停车场分区与管理员对应关系表(多对多关系)
     /// </summary>
-    public partial class BcParkingAreaManager
+    public partial class BcParkingAreaManager : Entity
     {
         /// <summary>
         /// 租户号

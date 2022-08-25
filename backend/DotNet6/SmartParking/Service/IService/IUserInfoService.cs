@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Service.Models;
-using Service.Comm;
-using Service.Params;
-using Autofac.Extras.DynamicProxy;
-/// <summary>
+﻿/// <summary>
 ///  Namespace: Service.IService
 ///  Name： IUserInfoService
 ///  Author: zy
@@ -20,7 +11,6 @@ namespace Service.IService
     /// <summary>
     /// 用户信息服务接口
     /// </summary>
-    [Intercept(typeof(Comm.ServiceInterceptor))]
     public interface IUserInfoService
     {
         /// <summary>

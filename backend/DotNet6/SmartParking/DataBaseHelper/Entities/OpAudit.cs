@@ -21,7 +21,7 @@ namespace DataBaseHelper.Entities
     /// 审计相关表
     /// </summary>
     [Table("op_audit")]    
-    public class OpAudit
+    public class OpAudit : Entity
     {
         /// <summary>
         /// 租户号

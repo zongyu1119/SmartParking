@@ -6,7 +6,7 @@ namespace DataBaseHelper.Entities
     /// <summary>
     /// 角色表
     /// </summary>
-    public partial class BcRole
+    public partial class BcRole : Entity
     {
         /// <summary>
         /// 租户号

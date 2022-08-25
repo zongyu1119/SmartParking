@@ -26,7 +26,7 @@ namespace Service.Comm
         /// <summary>
         /// 数据库资源
         /// </summary>
-        protected  IRepository repository;
+        protected  IEFRepository repository;
         /// <summary>
         /// 配置
         /// </summary>
@@ -41,7 +41,7 @@ namespace Service.Comm
         protected IMapper mapper;
         public ServiceBase(IConfiguration _configuration,
             ILogger<ServiceBase> _logger,
-            IRepository _repository,IMapper _mapper)
+            IEFRepository _repository,IMapper _mapper)
         {
             this.configuration = _configuration;
             this.logger = _logger;

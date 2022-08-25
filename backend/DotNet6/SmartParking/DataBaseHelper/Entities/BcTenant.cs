@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Entity;
+using System;
 using System.Collections.Generic;
 
 namespace DataBaseHelper.Entities
@@ -6,7 +7,7 @@ namespace DataBaseHelper.Entities
     /// <summary>
     /// 租户表
     /// </summary>
-    public partial class BcTenant
+    public partial class BcTenant : Entity
     {
         /// <summary>
         /// 租户号

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace DataBaseHelper.Entities
 {
     /// <summary>
     /// 停车场表
     /// </summary>
-    public partial class BcParking
+    public partial class BcParking : Entity
     {
         /// <summary>
         /// 租户号

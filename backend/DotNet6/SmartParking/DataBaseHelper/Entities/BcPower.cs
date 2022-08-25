@@ -6,7 +6,7 @@ namespace DataBaseHelper.Entities
     /// <summary>
     /// 权限表
     /// </summary>
-    public partial class BcPower
+    public partial class BcPower : Entity
     {
         /// <summary>
         /// 租户号

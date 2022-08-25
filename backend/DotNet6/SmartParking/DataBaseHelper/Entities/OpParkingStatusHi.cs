@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace DataBaseHelper.Entities
 {
     /// <summary>
     /// 车位出租出售历史信息表
     /// </summary>
-    public partial class OpParkingStatusHi
+    public partial class OpParkingStatusHi : Entity
     {
         /// <summary>
         /// 租户号

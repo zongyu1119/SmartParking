@@ -1,6 +1,4 @@
-﻿using Autofac;
-using Autofac.Extras.DynamicProxy;
-using DataBaseHelper;
+﻿using DataBaseHelper;
 using RedisHelper;
 using Serilog;
 using Service;
@@ -50,26 +48,18 @@ namespace SmartParking.Registrar
             });
             builder.Services.AddSingleton(typeof(Service.Comm.ServiceInterceptor));
             builder.Services.AddSingleton(typeof(SmartParking.Common.AuditFilterAttribute));
-            builder.Services.AddScoped<IAuthorizeJWT>(typeof(Service.Comm.ServiceInterceptor));
+            builder.Services.AddScoped(typeof(Service.Comm.ServiceInterceptor));
             builder.Services.AddSingleton(typeof(Service.Comm.ServiceInterceptor));
             builder.Services.AddSingleton(typeof(Service.Comm.ServiceInterceptor));
-            builder.Host.ConfigureContainer<ContainerBuilder>(builder =>
-            {
                 //拦截器
-                builder.RegisterType<Service.Comm.ServiceInterceptor>();
                 //过滤器
-                builder.RegisterType<SmartParking.Common.AuditFilterAttribute>();
-                //注入JWT
-                builder.RegisterType<AuthorizeJWT>().As<IAuthorizeJWT>();
-                //注入数据库资源
-                builder.RegisterType<Repository>().As<IRepository>();
+                builder.Services.AddScoped<SmartParking.Common.AuditFilterAttribute>();
+            //注入JWT
+            builder.Services.AddScoped<IAuthorizeJWT, AuthorizeJWT>();
+            //注入数据库资源
+            builder.Services.AddScoped<IEFRepository,EFRepository>();
                 // 注入Service程序集
-                Assembly assembly = Assembly.Load(ServiceAutofac.GetAssemblyName());
-                builder.RegisterAssemblyTypes(assembly)
-                .AsImplementedInterfaces()
-                .InstancePerDependency()
-                .EnableInterfaceInterceptors();//拦截器
-            });
+
             // 日志
             builder.Host.UseSerilog((context, logger) =>
             {
@@ -88,6 +78,11 @@ namespace SmartParking.Registrar
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
+            });
+            builder.Services.AddCap(c =>
+            {
+                c.UseMySql(builder.Configuration["ConnectionStrings:mysql"]);
+                c.UseRabbitMQ(mq => builder.Configuration.GetSection("RabbitMQ"));
             });
             return builder;
         }

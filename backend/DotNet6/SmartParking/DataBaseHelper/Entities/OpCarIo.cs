@@ -6,7 +6,7 @@ namespace DataBaseHelper.Entities
     /// <summary>
     /// 车辆进出历史表
     /// </summary>
-    public partial class OpCarIo
+    public partial class OpCarIo : Entity
     {
         /// <summary>
         /// 租户号

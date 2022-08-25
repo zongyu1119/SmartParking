@@ -12,4 +12,10 @@
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="6.0.8" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.common.Development.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
