@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 
 namespace Common.Entity
 {
-     public interface IEntity
+    public interface IEntity
     {
-
+        public long Id { get; set; }
+        /// <summary>
+        /// 租户号
+        /// </summary>
+        public int? TenantId { get; set; }
     }
-    public class Entity:IEntity
+    public class Entity : IEntity
     {
-
+        public long Id { get; set; }
+        /// <summary>
+        /// 租户号
+        /// </summary>
+        public int? TenantId { get; set; }
     }
 }

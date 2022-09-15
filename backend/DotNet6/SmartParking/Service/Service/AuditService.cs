@@ -1,19 +1,21 @@
-﻿/// <summary>
+﻿
+
+/// <summary>
 ///  Namespace: Service.Service
 ///  Name： AuditService
 ///  Author: zy
 ///  Time:  2022-04-14 22:40:02
 ///  Version:  0.1
 /// </summary>
-
 namespace Service.Service
 {
     /// <summary>
     /// 审计service
     /// </summary>
     [AppService(Lifetime = ServiceLifetime.Scoped)]
-    public class AuditService : ServiceBase, IService.IAuditService
+    public class AuditService : ServiceBase<OpAudit>, IService.IAuditService
     {
+        private readonly IEFRepository<BcUserinfo> _userRepository;
         /// <summary>
         /// 实现依赖自动注入
         /// </summary>
@@ -23,8 +25,12 @@ namespace Service.Service
         /// <param name="_mapper"></param>
         public AuditService(IConfiguration _configuration,
              ILogger<AuditService> _logger,
-             IEFRepository _repository, IMapper _mapper) : base(_configuration, _logger, _repository, _mapper)
+             IEFRepository<OpAudit> _repository,
+             IMapper _mapper,
+             IEFRepository<BcUserinfo> userRepository) 
+            : base(_configuration, _logger, _repository, _mapper)
         {
+            _userRepository = userRepository;
         }
         /// <summary>
         /// 新增
@@ -37,8 +43,7 @@ namespace Service.Service
             var model = mapper.Map<OpAudit>(param);//使用AutoMapper
             model.CreatedTime = DateTime.Now;
             model.Revision = 1;
-            repository.DbContext.OpAudits.Add(model);
-            return new Res<bool>(await repository.DbContext.SaveChangesAsync()>0);
+            return new Res<bool>(await repository.InsertAsync(model) > 0);
         }
         /// <summary>
         /// 获得不分页的列表
@@ -47,7 +52,10 @@ namespace Service.Service
         /// <returns></returns>
         public async Task<Res<List<AuditModel>>> GetList(AuditQueryParam param)
         {
-            var resDb = repository.DbContext.OpAudits.Join(repository.DbContext.BcUserinfos,).Where(x => x.TenantId.Equals(param.TenantId));
+            var resDb = from audit in repository.Where(x => x.TenantId.Equals(param.TenantId))
+                        join user in _userRepository.
+                        on user.
+                        ;
            
             if (param.Type != null)
             {

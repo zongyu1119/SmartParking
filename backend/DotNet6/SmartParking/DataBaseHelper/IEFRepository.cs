@@ -19,7 +19,7 @@ namespace DataBaseHelper
     /// <summary>
     /// 存储库
     /// </summary>
-    public interface IEFRepository<TEntity>
+    public interface IEFRepository<TEntity> where TEntity : IEntity, new()
     {
       /// <summary>
       /// 新增
@@ -69,5 +69,161 @@ namespace DataBaseHelper
         /// <param name="noTracking"> 是否开启跟踪，默认false,可选参数</param>
         /// <returns></returns>
         IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression, bool writeDb = false, bool noTracking = true);
+
+
+        //
+        // 摘要:
+        //     返回IQueryable
+        //
+        // 参数:
+        //   writeDb:
+        //     是否读写库，默认false,可选参数
+        //
+        //   noTracking:
+        //     是否开启跟踪，默认false,可选参数
+        IQueryable<TEntity> GetAll(bool writeDb = false, bool noTracking = true);
+
+        IQueryable<TrdEntity> GetAll<TrdEntity>(bool writeDb = false, bool noTracking = true) where TrdEntity : Entity;
+
+        //
+        // 摘要:
+        //     根据Id查询,返回单个实体
+        //
+        // 参数:
+        //   keyValue:
+        //     Id
+        //
+        //   navigationPropertyPath:
+        //     导航属性,可选参数
+        //
+        //   writeDb:
+        //     是否读写库,默认false，可选参数
+        //
+        //   noTracking:
+        //     是否开启跟踪，默认不开启，可选参数
+        //
+        //   cancellationToken:
+        //     System.Threading.CancellationToken
+        //
+        // 返回结果:
+        //     TEntity
+        Task<TEntity?> FindAsync(long keyValue, Expression<Func<TEntity, dynamic>> navigationPropertyPath = null, bool writeDb = false, bool noTracking = true, CancellationToken cancellationToken = default(CancellationToken));
+
+        //
+        // 摘要:
+        //     根据条件查询,返回单个实体
+        //
+        // 参数:
+        //   whereExpression:
+        //     查询条件
+        //
+        //   navigationPropertyPath:
+        //     导航属性,可选参数
+        //
+        //   orderByExpression:
+        //     排序字段，默认主键，可选参数
+        //
+        //   ascending:
+        //     排序方式，默认逆序，可选参数
+        //
+        //   writeDb:
+        //     是否读写库,默认false，可选参数
+        //
+        //   noTracking:
+        //     是否开启跟踪，默认不开启，可选参数
+        //
+        //   cancellationToken:
+        //     System.Threading.CancellationToken
+        Task<TEntity?> FindAsync(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, dynamic>> navigationPropertyPath = null, Expression<Func<TEntity, object>> orderByExpression = null, bool ascending = false, bool writeDb = false, bool noTracking = true, CancellationToken cancellationToken = default(CancellationToken));
+
+        //
+        // 摘要:
+        //     根据条件查询,返回单个实体或对象
+        //
+        // 参数:
+        //   selector:
+        //     选择器
+        //
+        //   whereExpression:
+        //     查询条件
+        //
+        //   orderByExpression:
+        //     排序字段，默认主键，可选参数
+        //
+        //   ascending:
+        //     排序方式，默认逆序，可选参数
+        //
+        //   writeDb:
+        //     是否读写库,默认false，可选参数
+        //
+        //   noTracking:
+        //     是否开启跟踪，默认不开启，可选参数
+        //
+        //   cancellationToken:
+        //     System.Threading.CancellationToken
+        //
+        // 类型参数:
+        //   TResult:
+        //     匿名对象
+        Task<TResult?> FetchAsync<TResult>(Expression<Func<TEntity, TResult>> selector, Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, object>> orderByExpression = null, bool ascending = false, bool writeDb = false, bool noTracking = true, CancellationToken cancellationToken = default(CancellationToken));
+
+        //
+        // 摘要:
+        //     更新单个实体
+        //
+        // 参数:
+        //   entity:
+        //     entity
+        //
+        //   updatingExpressions:
+        //     需要更新列的表达式树数组
+        //
+        //   cancellationToken:
+        //     System.Threading.CancellationToken
+        Task<int> UpdateAsync(TEntity entity, Expression<Func<TEntity, object>>[] updatingExpressions, CancellationToken cancellationToken = default(CancellationToken));
+
+        //
+        // 摘要:
+        //     批量更新
+        //
+        // 参数:
+        //   whereExpression:
+        //     查询条件
+        //
+        //   updatingExpression:
+        //     需要更新的字段
+        //
+        //   cancellationToken:
+        //     System.Threading.CancellationToken
+        Task<int> UpdateRangeAsync(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TEntity>> updatingExpression, CancellationToken cancellationToken = default(CancellationToken));
+
+        Task<int> UpdateRangeAsync(Dictionary<long, List<(string propertyName, dynamic propertyValue)>> propertyNameAndValues, CancellationToken cancellationToken = default(CancellationToken));
+
+        //
+        // 摘要:
+        //     删除实体
+        //
+        // 参数:
+        //   keyValue:
+        //     Id
+        //
+        //   cancellationToken:
+        //     System.Threading.CancellationToken
+        Task<int> DeleteAsync(long keyValue, CancellationToken cancellationToken = default(CancellationToken));
+
+        //
+        // 摘要:
+        //     批量删除实体
+        //
+        // 参数:
+        //   whereExpression:
+        //     查询条件
+        //
+        //   isForceDel:
+        //     是否强制删除
+        //
+        //   cancellationToken:
+        //     System.Threading.CancellationToken
+        Task<int> DeleteRangeAsync(Expression<Func<TEntity, bool>> whereExpression, bool isForceDel = false, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Service.Models
 {
-    public class UserInfo
+    public class UserInfo:Entity
     {
         /// <summary>
         /// 用户ID

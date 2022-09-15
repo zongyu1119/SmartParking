@@ -1,4 +1,7 @@
-﻿using DataBaseHelper;
+﻿using AutoMapper;
+using Common.Entity;
+using DataBaseHelper;
+using Microsoft.EntityFrameworkCore;
 using RedisHelper;
 using Serilog;
 using Service;
@@ -51,13 +54,14 @@ namespace SmartParking.Registrar
             builder.Services.AddScoped(typeof(Service.Comm.ServiceInterceptor));
             builder.Services.AddSingleton(typeof(Service.Comm.ServiceInterceptor));
             builder.Services.AddSingleton(typeof(Service.Comm.ServiceInterceptor));
+            builder.Services.AddScoped<IMapper, Mapper>();
                 //拦截器
                 //过滤器
                 builder.Services.AddScoped<SmartParking.Common.AuditFilterAttribute>();
             //注入JWT
             builder.Services.AddScoped<IAuthorizeJWT, AuthorizeJWT>();
             //注入数据库资源
-            builder.Services.AddScoped<IEFRepository,EFRepository>();
+            builder.Services.AddScoped<IEFRepository<Entity>,EFRepository<DbContext,Entity>>();
                 // 注入Service程序集
 
             // 日志

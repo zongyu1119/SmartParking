@@ -42,5 +42,23 @@ namespace Common.Str
             // Return the hexadecimal string.
             return sBuilder.ToString();
         }
+        /// <summary>
+        /// 字符串是否是null和空
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool IsNullOrEmpty(this string str)
+        {
+            return string.IsNullOrEmpty(str);
+        }
+        /// <summary>
+        /// 字符串是否空
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool IsNullOrWhiteSpace(this string str)
+        {
+            return string.IsNullOrWhiteSpace(str);
+        }
     }
 }

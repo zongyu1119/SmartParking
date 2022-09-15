@@ -13,3 +13,5 @@ global using Service.Comm;
 global using Service.Models;
 global using Service.Params;
 global using Microsoft.Extensions.DependencyInjection;
+global using Common.Entity;
+global using DataBaseHelper.Entities;

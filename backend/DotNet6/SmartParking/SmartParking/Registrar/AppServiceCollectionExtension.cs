@@ -62,7 +62,7 @@ namespace SmartParking.Registrar
         /// 注册后台服务
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="serviceLifetime"></param>
+        /// <param name="allAssembly"></param>
         private static void RegisterBackgroundService(this IServiceCollection services, List<Assembly> allAssembly)
         {
             List<Type> types = allAssembly.SelectMany(t => t.GetTypes()).Where(t => typeof(BackgroundService).IsAssignableFrom(t) && t.IsClass && !t.IsAbstract).ToList();

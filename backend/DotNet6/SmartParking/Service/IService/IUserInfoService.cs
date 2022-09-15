@@ -18,60 +18,60 @@ namespace Service.IService
         /// </summary>
         /// <param name="id">用户ID</param>
         /// <returns></returns>
-        public UserDetailInfoModel? GetUserDetailInfo(int id);
+        Task<UserDetailInfoModel?> GetUserDetailInfo(int id);
         /// <summary>
         /// 使用用户名查询用户详情
         /// </summary>
         /// <param name="userName">用户名</param>
         /// <returns></returns>
-        public UserDetailInfoModel? GetUserDetailInfo(string userName);
+        Task<UserDetailInfoModel?> GetUserDetailInfo(string userName);
         /// <summary>
         /// 前端需要的用户详情
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Res<UserDetailInfoModel> GetUserDetailInfoToView(int id);
+        Task<Res<UserDetailInfoModel>> GetUserDetailInfoToView(int id);
         /// <summary>
         /// 获得用户信息
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Res<UserInfo> GetUserInfo(int id);
+        Task<Res<UserInfo>> GetUserInfo(int id);
         /// <summary>
         /// 获得用户列表
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public Res<List<UserInfo>> GetUserInfoList(UserInfoQueryParam param);
+        Task<Res<List<UserInfo>>> GetUserInfoList(UserInfoQueryParam param);
         /// <summary>
         /// 获得分页用户列表
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public ResPage<UserInfo> GetUserInfoList(ParamPage<UserInfoQueryParam> param);
+        Task<ResPage<UserInfo>> GetUserInfoList(ParamPage<UserInfoQueryParam> param);
         /// <summary>
         /// 新增用户
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public Res<bool> AddUserInfo(UserInfoAddParam param);
+        Task<Res<bool>> AddUserInfo(UserInfoAddParam param);
         /// <summary>
         /// 修改用户
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public Res<bool> UpdateUserInfo(UserInfoUpdateParam param);
+        Task<Res<bool>> UpdateUserInfo(UserInfoUpdateParam param);
         /// <summary>
         /// 删除用户
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Res<bool> DeleteUserInfo(int id);
+        Task<Res<bool>> DeleteUserInfo(int id);
         /// <summary>
         /// 修改用户密码
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        public Res<bool> UpdateUserInfoPassword(UserInfoUpdatePasswordParam param);
+        Task<Res<bool>> UpdateUserInfoPassword(UserInfoUpdatePasswordParam param);
     }
 }

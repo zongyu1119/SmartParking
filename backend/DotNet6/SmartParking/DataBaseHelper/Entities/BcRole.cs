@@ -9,10 +9,6 @@ namespace DataBaseHelper.Entities
     public partial class BcRole : Entity
     {
         /// <summary>
-        /// 租户号
-        /// </summary>
-        public int? TenantId { get; set; }
-        /// <summary>
         /// 乐观锁
         /// </summary>
         public int? Revision { get; set; }

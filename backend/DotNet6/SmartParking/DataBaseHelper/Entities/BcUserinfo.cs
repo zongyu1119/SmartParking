@@ -8,10 +8,7 @@ namespace DataBaseHelper.Entities
     /// </summary>
     public partial class BcUserinfo : Entity
     {
-        /// <summary>
-        /// 租户号
-        /// </summary>
-        public int? TenantId { get; set; }
+      
         /// <summary>
         /// 乐观锁
         /// </summary>
