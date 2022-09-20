@@ -18,33 +18,33 @@ namespace DataBaseHelper
     /// 资源库
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class EFRepository<TDbContext,TEntity> : IEFRepository<TEntity> where TDbContext : DbContext where TEntity : IEntity, new()
+    public class EFRepository<TDbContext,TEntity> : IEFRepository<TEntity> where TDbContext : DbContext where TEntity : Entity,new()
     {
-        protected virtual TDbContext DbContext { get; }
+        protected virtual TDbContext _dbContext { get; }
 
         protected EFRepository(TDbContext dbContext)
         {
-            DbContext = dbContext;
+            _dbContext = dbContext;
         }
-
+        public DbContext Context { get { return _dbContext; } }
         protected virtual IQueryable<TEntity> GetDbSet(bool writeDb, bool noTracking)
         {
             if (noTracking && writeDb)
             {
-                return DbContext.Set<TEntity>().AsNoTracking().TagWith(RepositoryConsts.MAXSCALE_ROUTE_TO_MASTER);//读写分离时，指定主库
+                return _dbContext.Set<TEntity>().AsNoTracking().TagWith(RepositoryConsts.MAXSCALE_ROUTE_TO_MASTER);//读写分离时，指定主库
             }
 
             if (noTracking)
             {
-                return DbContext.Set<TEntity>().AsNoTracking();//禁用追踪，减小追踪带来的开销
+                return _dbContext.Set<TEntity>().AsNoTracking();//禁用追踪，减小追踪带来的开销
             }
 
             if (writeDb)
             {
-                return DbContext.Set<TEntity>().TagWith(RepositoryConsts.MAXSCALE_ROUTE_TO_MASTER);//读写分离时，指定主库
+                return _dbContext.Set<TEntity>().TagWith(RepositoryConsts.MAXSCALE_ROUTE_TO_MASTER);//读写分离时，指定主库
             }
 
-            return DbContext.Set<TEntity>();
+            return _dbContext.Set<TEntity>();
         }
 
         public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression, bool writeDb = false, bool noTracking = true)
@@ -54,19 +54,19 @@ namespace DataBaseHelper
 
         public virtual async Task<int> InsertAsync(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
         {
-            await DbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
-            return await DbContext.SaveChangesAsync(cancellationToken);
+            await _dbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
+            return await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         public virtual async Task<int> InsertRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default(CancellationToken))
         {
-            await DbContext.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
-            return await DbContext.SaveChangesAsync(cancellationToken);
+            await _dbContext.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
+            return await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> whereExpression, bool writeDb = false, CancellationToken cancellationToken = default(CancellationToken))
         {
-            IQueryable<TEntity> source = DbContext.Set<TEntity>().AsNoTracking();
+            IQueryable<TEntity> source = _dbContext.Set<TEntity>().AsNoTracking();
             if (writeDb)
             {
                 source = source.TagWith(RepositoryConsts.MAXSCALE_ROUTE_TO_MASTER);
@@ -77,7 +77,7 @@ namespace DataBaseHelper
 
         public virtual async Task<int> CountAsync(Expression<Func<TEntity, bool>> whereExpression, bool writeDb = false, CancellationToken cancellationToken = default(CancellationToken))
         {
-            IQueryable<TEntity> source = DbContext.Set<TEntity>().AsNoTracking();
+            IQueryable<TEntity> source = _dbContext.Set<TEntity>().AsNoTracking();
             if (writeDb)
             {
                 source = source.TagWith(RepositoryConsts.MAXSCALE_ROUTE_TO_MASTER);
@@ -88,7 +88,7 @@ namespace DataBaseHelper
 
         public virtual Task<int> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
         {
-            EntityEntry<TEntity> entityEntry = DbContext.Entry(entity);
+            EntityEntry<TEntity> entityEntry = _dbContext.Entry(entity);
             if (entityEntry.State == EntityState.Detached)
             {
                 throw new ArgumentException("实体没有被跟踪，需要指定更新的列");
@@ -104,7 +104,7 @@ namespace DataBaseHelper
 
         protected virtual async Task<int> UpdateInternalAsync(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await DbContext.SaveChangesAsync(cancellationToken);
+            return await _dbContext.SaveChangesAsync(cancellationToken);
         }
         public virtual IQueryable<TEntity> GetAll(bool writeDb = false, bool noTracking = true)
         {
@@ -113,7 +113,7 @@ namespace DataBaseHelper
 
         public virtual IQueryable<TrdEntity> GetAll<TrdEntity>(bool writeDb = false, bool noTracking = true) where TrdEntity : Entity
         {
-            IQueryable<TrdEntity> queryable = DbContext.Set<TrdEntity>().AsQueryable();
+            IQueryable<TrdEntity> queryable = _dbContext.Set<TrdEntity>().AsQueryable();
             if (writeDb)
             {
                 queryable = queryable.TagWith(RepositoryConsts.MAXSCALE_ROUTE_TO_MASTER);
@@ -181,7 +181,7 @@ namespace DataBaseHelper
 
         public virtual async Task<int> DeleteAsync(long keyValue, CancellationToken cancellationToken = default(CancellationToken))
         {
-            TEntity? val = DbContext.Set<TEntity>().Local.FirstOrDefault((TEntity x) => x.Id == keyValue);
+            TEntity? val = _dbContext.Set<TEntity>().Local.FirstOrDefault((TEntity x) => x.Id == keyValue);
             if (val == null)
             {
                 val = new TEntity
@@ -190,10 +190,10 @@ namespace DataBaseHelper
                 };
             }
 
-            DbContext.Remove(val);
+            _dbContext.Remove(val);
             try
             {
-                return await DbContext.SaveChangesAsync(cancellationToken);
+                return await _dbContext.SaveChangesAsync(cancellationToken);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -208,7 +208,7 @@ namespace DataBaseHelper
                 await UpdateAsync(entity, cancellationToken);
             }
 
-            EntityEntry<TEntity> entry = DbContext.Entry(entity);
+            EntityEntry<TEntity> entry = _dbContext.Entry(entity);
             if (entry.State == EntityState.Added || entry.State == EntityState.Deleted)
             {
                 throw new ArgumentException($"entity,实体状态为{entry.State}");
@@ -240,7 +240,7 @@ namespace DataBaseHelper
                 });
             }
 
-            return await DbContext.SaveChangesAsync(cancellationToken);
+            return await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         public virtual Task<int> UpdateRangeAsync(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TEntity>> updatingExpression, CancellationToken cancellationToken = default(CancellationToken))
@@ -257,14 +257,14 @@ namespace DataBaseHelper
         public virtual async Task<int> UpdateRangeAsync(Dictionary<long, List<(string propertyName, dynamic propertyValue)>> propertyNameAndValues, CancellationToken cancellationToken = default(CancellationToken))
         {
             Dictionary<long, List<(string propertyName, dynamic propertyValue)>> propertyNameAndValues2 = propertyNameAndValues;
-            IEnumerable<TEntity> enumerable = DbContext.Set<TEntity>().Local.Where((TEntity x) => propertyNameAndValues2.ContainsKey(x.Id));
+            IEnumerable<TEntity> enumerable = _dbContext.Set<TEntity>().Local.Where((TEntity x) => propertyNameAndValues2.ContainsKey(x.Id));
             foreach (KeyValuePair<long, List<(string, object)>> item in propertyNameAndValues2)
             {
                 TEntity entity = ((enumerable != null) ? enumerable.FirstOrDefault((TEntity x) => x.Id == item.Key) : null) ?? new TEntity
                 {
                     Id = item.Key
                 };
-                EntityEntry<TEntity> entry = DbContext.Entry(entity);
+                EntityEntry<TEntity> entry = _dbContext.Entry(entity);
                 if (entry.State == EntityState.Detached)
                 {
                     entry.State = EntityState.Unchanged;
@@ -280,19 +280,19 @@ namespace DataBaseHelper
                 }
             }
 
-            return await DbContext.SaveChangesAsync(cancellationToken);
+            return await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         protected virtual async Task<int> UpdateRangeInternalAsync(Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TEntity>> updatingExpression, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return await Queryable.Where(DbContext.Set<TEntity>(), whereExpression).UpdateAsync(updatingExpression, cancellationToken);
+            return await Queryable.Where(_dbContext.Set<TEntity>(), whereExpression).UpdateAsync(updatingExpression, cancellationToken);
         }
 
         public virtual async Task<int> DeleteRangeAsync(Expression<Func<TEntity, bool>> whereExpression, bool isForceDel = false, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (isForceDel)
             {
-                return await Queryable.Where(DbContext.Set<TEntity>(), whereExpression).DeleteAsync(cancellationToken);
+                return await Queryable.Where(_dbContext.Set<TEntity>(), whereExpression).DeleteAsync(cancellationToken);
             }
 
             Type typeFromHandle = typeof(TEntity);
@@ -302,10 +302,10 @@ namespace DataBaseHelper
                 ParameterExpression parameterExpression = Expression.Parameter(typeFromHandle, "e");
                 MemberAssignment item = Expression.Bind(typeFromHandle.GetMember("IsDeleted")[0], Expression.Constant(true));
                 Expression<Func<TEntity, TEntity>> updateFactory = Expression.Lambda<Func<TEntity, TEntity>>(Expression.MemberInit(newExpression, new List<MemberBinding> { item }), new ParameterExpression[1] { parameterExpression });
-                return await Queryable.Where(DbContext.Set<TEntity>(), whereExpression).UpdateAsync(updateFactory, cancellationToken);
+                return await Queryable.Where(_dbContext.Set<TEntity>(), whereExpression).UpdateAsync(updateFactory, cancellationToken);
             }
 
-            return await Queryable.Where(DbContext.Set<TEntity>(), whereExpression).DeleteAsync(cancellationToken);
+            return await Queryable.Where(_dbContext.Set<TEntity>(), whereExpression).DeleteAsync(cancellationToken);
         }
     }
 }

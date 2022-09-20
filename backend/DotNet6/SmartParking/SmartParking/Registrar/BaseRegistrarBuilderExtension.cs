@@ -10,6 +10,9 @@ using System.Reflection;
 
 namespace SmartParking.Registrar
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class BaseRegistrarBuilderExtension
     {
         public static WebApplicationBuilder BaseRegistrarBuilder(this WebApplicationBuilder builder)
@@ -55,6 +58,7 @@ namespace SmartParking.Registrar
             builder.Services.AddSingleton(typeof(Service.Comm.ServiceInterceptor));
             builder.Services.AddSingleton(typeof(Service.Comm.ServiceInterceptor));
             builder.Services.AddScoped<IMapper, Mapper>();
+            builder.Services.AddScoped(typeof(DbContext));
                 //拦截器
                 //过滤器
                 builder.Services.AddScoped<SmartParking.Common.AuditFilterAttribute>();

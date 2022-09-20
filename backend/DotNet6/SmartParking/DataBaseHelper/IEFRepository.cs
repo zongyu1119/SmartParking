@@ -21,6 +21,10 @@ namespace DataBaseHelper
     /// </summary>
     public interface IEFRepository<TEntity> where TEntity : IEntity, new()
     {
+        /// <summary>
+        /// DbContext对象
+        /// </summary>
+        DbContext Context { get; }
       /// <summary>
       /// 新增
       /// </summary>

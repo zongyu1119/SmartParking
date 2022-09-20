@@ -91,7 +91,7 @@ namespace Service.Service
                     UserIdCardNum = x.UserIdCardNum,
                     UserName = x.UserName,
                     UserNameRel = x.UserNameRel,
-                    Role = _roleRepository.Where(r => r.RoleId.Equals(x.RoleId)).Select(r => new RoleModel
+                    Role = _repository.Context..Where(r => r.RoleId.Equals(x.RoleId)).Select(r => new RoleModel
                     {
                         RoleId = r.RoleId,
                         RoleName = r.RoleName,
