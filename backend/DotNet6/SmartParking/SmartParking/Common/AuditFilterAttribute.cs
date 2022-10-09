@@ -43,7 +43,6 @@ namespace SmartParking.Common
                     TenantId = int.Parse(TenantId.Value),
                     Description = context.HttpContext.Request.Path.ToString(),
                     Type = "Requested"
-
                 });
             }
             logger?.LogInformation("[Audit]"+ context.HttpContext.Request.Path.ToString() +" "+ context.Result.GetType().GetProperty("Value").GetValue(context.Result).ToJson());
@@ -67,7 +66,6 @@ namespace SmartParking.Common
                     TenantId = int.Parse(TenantId.Value),
                     Description = context.HttpContext.Request.Path.ToString(),
                     Type = "Requesting"
-
                 });
             }
             logger.LogInformation("[Audit]" + context.HttpContext.Request.Path.ToString());

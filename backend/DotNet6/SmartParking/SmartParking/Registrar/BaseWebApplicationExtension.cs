@@ -2,8 +2,16 @@
 
 namespace SmartParking.Registrar
 {
+    /// <summary>
+    /// 基础中间件扩展类
+    /// </summary>
     public static class BaseWebApplicationExtension
     {
+        /// <summary>
+        /// 基础中间件
+        /// </summary>
+        /// <param name="app"></param>
+        /// <returns></returns>
         public static WebApplication UseBaseWebApplication(this WebApplication app)
         {
             // Configure the HTTP request pipeline.
