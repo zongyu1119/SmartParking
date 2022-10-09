@@ -13,24 +13,26 @@ namespace Service.Service
     /// 审计service
     /// </summary>
     [AppService(Lifetime = ServiceLifetime.Scoped)]
-    public class AuditService : ServiceBase<OpAudit>, IService.IAuditService
+    public class AuditService : ServiceBase<Audit>, IService.IAuditService
     {
-        private readonly IEFRepository<BcUserinfo> _userRepository;
+        private readonly IEFRepository<Userinfo> _userRepository;
+        private readonly IEFRepository<Audit> _repository;
         /// <summary>
         /// 实现依赖自动注入
         /// </summary>
         /// <param name="_configuration"></param>
         /// <param name="_logger"></param>
-        /// <param name="_repository"></param>
+        /// <param name="repository"></param>
         /// <param name="_mapper"></param>
         public AuditService(IConfiguration _configuration,
              ILogger<AuditService> _logger,
-             IEFRepository<OpAudit> _repository,
+             IEFRepository<Audit> repository,
              IMapper _mapper,
-             IEFRepository<BcUserinfo> userRepository) 
-            : base(_configuration, _logger, _repository, _mapper)
+             IEFRepository<Userinfo> userRepository) 
+            : base(_configuration, _logger, _mapper)
         {
             _userRepository = userRepository;
+            _repository = repository;
         }
         /// <summary>
         /// 新增
@@ -40,10 +42,10 @@ namespace Service.Service
         /// <exception cref="NotImplementedException"></exception>
         public async Task<Res<bool>> Add(AuditAddParam param)
         {
-            var model = mapper.Map<OpAudit>(param);//使用AutoMapper
+            var model = mapper.Map<Audit>(param);//使用AutoMapper
             model.CreatedTime = DateTime.Now;
             model.Revision = 1;
-            return new Res<bool>(await repository.InsertAsync(model) > 0);
+            return new Res<bool>(await _repository.InsertAsync(model) > 0);
         }
         /// <summary>
         /// 获得不分页的列表
@@ -52,38 +54,12 @@ namespace Service.Service
         /// <returns></returns>
         public async Task<Res<List<AuditModel>>> GetList(AuditQueryParam param)
         {
-            var resDb = from audit in repository.Where(x => x.TenantId.Equals(param.TenantId))
-                        join user in _userRepository.
-                        on user.
-                        ;
-           
-            if (param.Type != null)
-            {
-                resDb.Where(x => x.Type.Equals(param.Type));
-            }
-            if (param.UserId != null)
-            {
-                resDb.Where(x => x.CreatedBy.Equals(param.UserId));
-            }
-            if (param.ActionNmae != null)
-            {
-                resDb.Where(x => x.ActionNmae.Contains(param.ActionNmae));
-            }
-            var list = resDb.Select(x => new AuditModel()
-            {
-                UserId = x.CreatedBy,
-                Id = x.Id,
-                ActionNmae = x.ActionNmae,
-                CreateTime = x.CreatedTime,
-                Description = x.Description,
-                Type = x.Type,
-                UserName = repository.DbContext.BcUserinfos.FirstOrDefault(u => u.UserId == x.CreatedBy).UserNameRel,
-
-            });
-            if (param.ActionNmae != null)
-            {
-                list = list.Where(x => x.UserName.Contains(param.UserName));
-            }
+            var whereCondition = getExpression(param);
+            var resDb = getIqueryable(whereCondition);
+            var list =await  resDb
+                .WhereIf(param.UserName.IsNotNullOrWhiteSpace(), x => x.UserName.Contains(param.UserName))
+                .ToListAsync();
+          
             Res<List<AuditModel>> res = new(list != null);
             res.Data = list.ToList();
             if (!res.Success)
@@ -100,43 +76,18 @@ namespace Service.Service
         /// <returns></returns>
         public async Task<ResPage<AuditModel>> GetList(ParamPage<AuditQueryParam> param)
         {
-            var resDb = repository.DbContext.OpAudits.Where(x => x.TenantId.Equals(param.Param.TenantId));
-          
-            if (param.Param.Type != null)
-            {
-                resDb.Where(x => x.Type.Equals(param.Param.Type));
-            }
-            if (param.Param.UserId != null)
-            {
-                resDb.Where(x => x.CreatedBy.Equals(param.Param.UserId));
-            }
-            if (param.Param.ActionNmae != null)
-            {
-                resDb.Where(x => x.ActionNmae.Contains(param.Param.ActionNmae));
-            }           
-            var list = resDb.Select(x => new AuditModel()
-            {
-                UserId = x.CreatedBy,
-                Id = x.Id,
-                ActionNmae = x.ActionNmae,
-                CreateTime = x.CreatedTime,
-                Description = x.Description,
-                Type = x.Type,
-                UserName = repository.DbContext.BcUserinfos.FirstOrDefault(u => u.UserId == x.CreatedBy).UserNameRel,
-
-            });
-            if (param.Param.ActionNmae != null)
-            {
-                list = list.Where(x => x.UserName.Contains(param.Param.UserName));
-            }
-            int count = list.Count();
-            list = list.Skip(param.PageCurrent * param.PageSize).Take(param.PageSize);       
+            var whereCondition = getExpression(param.Param);
+            var resDb = getIqueryable(whereCondition);
+            resDb = resDb
+                .WhereIf(param.Param.UserName.IsNotNullOrWhiteSpace(), x => x.UserName.Contains(param.Param.UserName))
+                .Skip(param.PageCurrent * param.PageSize).Take(param.PageSize);
+            int count = resDb.Count();
+            var list  = await resDb.Skip(param.PageCurrent * param.PageSize).Take(param.PageSize).ToListAsync();       
             ResPage<AuditModel> res = new(list!=null);
-            res.Data = list.ToList();
+            res.Data =  list.ToList();
             res.PageSize = param.PageSize;
             res.PageCurrent = param.PageCurrent;
             res.TotalCount = count;
-            res.PageCount = (int)Math.Ceiling((double)count / (double)param.PageSize);
             if (!res.Success)
             {
                 res.Message = "查询失败！";
@@ -149,28 +100,53 @@ namespace Service.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<Res<AuditModel>> GetModel(int id)
+        public async Task<Res<AuditModel>> GetModel(long Id)
         {
-            var user = repository.DbContext.OpAudits.Where(x => x.Id.Equals(id))
-             .Select(x => new AuditModel()
-             {
-                 UserId = x.CreatedBy,
-                 Id = x.Id,
-                 ActionNmae = x.ActionNmae,
-                 CreateTime = x.CreatedTime,
-                 Description = x.Description,
-                 Type = x.Type,
-                 UserName = repository.DbContext.BcUserinfos.FirstOrDefault(u => u.UserId == x.CreatedBy).UserNameRel,
-
-             }).FirstOrDefault();
+            var resDb = getIqueryable(ExpressionCreator.New<Audit>(x => x.Id == Id));
+            var user = await resDb.FirstOrDefaultAsync();
             Res<AuditModel> res = new(user != null);
             res.Data = user;
             if (!res.Success)
             {
                 res.Message = "查询失败！";
-                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}执行失败！", id);
+                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}执行失败！", Id);
             }
             return res;
+        }
+        /// <summary>
+        /// 查询条件拼接
+        /// </summary>
+        /// <param name="param"></param>
+        /// <returns></returns>
+        private Expression<Func<Audit, bool>> getExpression(AuditQueryParam param)
+        {
+            var whereCondition = ExpressionCreator.New<Audit>(x => x.TenantId == param.TenantId);
+            whereCondition = whereCondition.AndIf(param.Type != null, x => x.Type == param.Type)
+                .AndIf(param.UserId != null, x => x.CreatedBy == param.UserId)
+                .AndIf(param.ActionNmae.IsNotNullOrWhiteSpace(), x => x.ActionNmae == param.ActionNmae);
+            return whereCondition;
+        }
+        /// <summary>
+        /// 获得查询对象
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        private IQueryable<AuditModel> getIqueryable(Expression<Func<Audit,bool>> expression)
+        {           
+            var resDb = from audit in _repository.SmartparkingContext.Audits.WhereIf(expression!=null,expression)
+                        join user in _repository.SmartparkingContext.Userinfos
+                        on audit.CreatedBy equals user.Id
+                        select new AuditModel()
+                        {
+                            ActionNmae = audit.ActionNmae,
+                            CreateTime = audit.CreatedTime,
+                            Description = audit.Description,
+                            Id = audit.Id,
+                            Type = audit.Type,
+                            UserId = audit.CreatedBy,
+                            UserName = user.UserNameRel
+                        };
+            return resDb;
         }
     }
 }

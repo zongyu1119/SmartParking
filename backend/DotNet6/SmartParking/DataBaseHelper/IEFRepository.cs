@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataBaseHelper.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,10 @@ namespace DataBaseHelper
     /// </summary>
     public interface IEFRepository<TEntity> where TEntity : IEntity, new()
     {
+        /// <summary>
+        /// 停车场EFDbContext
+        /// </summary>
+        smartparkingContext SmartparkingContext { get; }
         /// <summary>
         /// DbContext对象
         /// </summary>

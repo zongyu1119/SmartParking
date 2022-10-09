@@ -12,7 +12,7 @@ namespace Common.Entity
         /// <summary>
         /// 租户号
         /// </summary>
-        public int? TenantId { get; set; }
+        public long? TenantId { get; set; }
     }
     public class Entity : IEntity
     {
@@ -20,6 +20,6 @@ namespace Common.Entity
         /// <summary>
         /// 租户号
         /// </summary>
-        public int? TenantId { get; set; }
+        public long? TenantId { get; set; }
     }
 }

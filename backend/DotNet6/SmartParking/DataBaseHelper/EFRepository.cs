@@ -1,4 +1,5 @@
 ﻿using Common.ObjExt;
+using DataBaseHelper.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
@@ -21,12 +22,22 @@ namespace DataBaseHelper
     public class EFRepository<TDbContext,TEntity> : IEFRepository<TEntity> where TDbContext : DbContext where TEntity : Entity,new()
     {
         protected virtual TDbContext _dbContext { get; }
+        private readonly smartparkingContext _smartparkingContext;
 
-        protected EFRepository(TDbContext dbContext)
+        protected EFRepository(TDbContext dbContext, smartparkingContext smartparkingContext)
         {
             _dbContext = dbContext;
+            _smartparkingContext = smartparkingContext;
         }
         public DbContext Context { get { return _dbContext; } }
+
+        public smartparkingContext SmartparkingContext
+        {
+            get
+            {
+                return _smartparkingContext;
+            }
+        }
         protected virtual IQueryable<TEntity> GetDbSet(bool writeDb, bool noTracking)
         {
             if (noTracking && writeDb)

@@ -18,30 +18,11 @@ using System.Threading.Tasks;
 namespace DataBaseHelper.Entities
 {
     /// <summary>
-    /// 审计相关表
+    /// 审计表
     /// </summary>
     [Table("op_audit")]    
-    public class OpAudit : Entity
+    public class Audit : ParkingEntityBase
     {
-        /// <summary>
-        /// 租户号
-        /// </summary>
-        [Column("TENANT_ID")]
-        [Comment("租户号")]
-        public int? TenantId { get; set; }
-        /// <summary>
-        /// 乐观锁
-        /// </summary>
-        [Comment("乐观锁")]
-        [Column("REVISION")]
-        public int? Revision { get; set; }
-        /// <summary>
-        /// 审计ID
-        /// </summary>
-        [Key]
-        [Column("ID")]
-        [Comment("ID")]
-        public int Id { get; set; }
         /// <summary>
         /// 操作类型
         /// </summary>
@@ -63,17 +44,5 @@ namespace DataBaseHelper.Entities
         [Column("DESCRIPTION",TypeName = "varchar")]
         [MaxLength(512)]
         public string? Description { get; set; }
-        /// <summary>
-        /// 用户
-        /// </summary>
-        [Comment("操作用户")]
-        [Column("CREATE_BY")]
-        public int? CreatedBy { get; set; }
-        /// <summary>
-        /// 操作时间
-        /// </summary>
-        [Comment("操作时间")]
-        [Column(name:"CREATE_TIME", TypeName= "datetime")]
-        public DateTime? CreatedTime { get; set; }
     }
 }

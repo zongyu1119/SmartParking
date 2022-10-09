@@ -6,20 +6,8 @@ namespace DataBaseHelper.Entities
     /// <summary>
     /// 车位表
     /// </summary>
-    public partial class BcParkingSpace : Entity
+    public partial class ParkingSpace : ParkingEntityBase
     {
-        /// <summary>
-        /// 租户号
-        /// </summary>
-        public int? TenantId { get; set; }
-        /// <summary>
-        /// 乐观锁
-        /// </summary>
-        public int? Revision { get; set; }
-        /// <summary>
-        /// 车位ID
-        /// </summary>
-        public int PsId { get; set; }
         /// <summary>
         /// 车位编码
         /// </summary>
@@ -68,21 +56,5 @@ namespace DataBaseHelper.Entities
         /// 占用起始时间
         /// </summary>
         public DateTime? OccupyStartTime { get; set; }
-        /// <summary>
-        /// 创建人
-        /// </summary>
-        public int? CreatedBy { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime? CreatedTime { get; set; }
-        /// <summary>
-        /// 更新人
-        /// </summary>
-        public int? UpdatedBy { get; set; }
-        /// <summary>
-        /// 更新时间
-        /// </summary>
-        public DateTime? UpdatedTime { get; set; }
     }
 }

@@ -30,18 +30,18 @@ namespace Service.Comm
         /// <summary>
         /// 每页个数
         /// </summary>
-        public int PageSize { get; set; }
+        public int PageSize { get; set; } = 15;
         /// <summary>
         /// 总页数
         /// </summary>
-        public int PageCount { get; set; }
+        public int PageCount { get { return (int)Math.Ceiling(((double)TotalCount / (double)PageSize)); } }
         /// <summary>
         /// 总条数
         /// </summary>
-        public int TotalCount { get; set; }
+        public int TotalCount { get; set; } = 0;
         /// <summary>
         /// 当前页
         /// </summary>
-        public int PageCurrent { get; set; }
+        public int PageCurrent { get; set; } = 1;
     }
 }

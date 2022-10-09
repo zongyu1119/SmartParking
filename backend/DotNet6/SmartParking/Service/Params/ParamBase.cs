@@ -23,7 +23,7 @@ namespace Service.Params
         /// <summary>
         /// 租户编号
         /// </summary>
-        public int? TenantId{get;set;}
+        public long? TenantId{get;set;}
         /// <summary>
         /// 重写ToString,返回Json
         /// </summary>

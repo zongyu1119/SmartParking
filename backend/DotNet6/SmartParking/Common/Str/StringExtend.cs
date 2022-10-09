@@ -47,7 +47,7 @@ namespace Common.Str
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static bool IsNullOrEmpty(this string str)
+        public static bool IsNullOrEmpty(this string? str)
         {
             return string.IsNullOrEmpty(str);
         }
@@ -56,9 +56,27 @@ namespace Common.Str
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static bool IsNullOrWhiteSpace(this string str)
+        public static bool IsNullOrWhiteSpace(this string? str)
         {
             return string.IsNullOrWhiteSpace(str);
+        }
+        /// <summary>
+        /// 字符串是否非null和空
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool IsNotNullOrEmpty(this string? str)
+        {
+            return !string.IsNullOrEmpty(str);
+        }
+        /// <summary>
+        /// 字符串是否非空
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static bool IsNotNullOrWhiteSpace(this string? str)
+        {
+            return !string.IsNullOrWhiteSpace(str);
         }
     }
 }

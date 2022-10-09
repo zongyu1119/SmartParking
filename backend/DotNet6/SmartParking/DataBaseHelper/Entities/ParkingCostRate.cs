@@ -6,16 +6,8 @@ namespace DataBaseHelper.Entities
     /// <summary>
     /// 停车收费标准表
     /// </summary>
-    public partial class BcParkingRate : Entity
-    {
-        /// <summary>
-        /// 租户号
-        /// </summary>
-        public int? TenantId { get; set; }
-        /// <summary>
-        /// 乐观锁
-        /// </summary>
-        public int? Revision { get; set; }
+    public partial class ParkingCostRate : ParkingEntityBase
+    {      
         /// <summary>
         /// 停车场id
         /// </summary>
@@ -52,21 +44,5 @@ namespace DataBaseHelper.Entities
         /// 每年封顶价格（为0表示无）
         /// </summary>
         public decimal? TopMoneyYear { get; set; }
-        /// <summary>
-        /// 创建人
-        /// </summary>
-        public int? CreatedBy { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime? CreatedTime { get; set; }
-        /// <summary>
-        /// 更新人
-        /// </summary>
-        public int? UpdatedBy { get; set; }
-        /// <summary>
-        /// 更新时间
-        /// </summary>
-        public DateTime? UpdatedTime { get; set; }
     }
 }

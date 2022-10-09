@@ -4,12 +4,8 @@ namespace DataBaseHelper.Entities
     /// <summary>
     /// 配置信息表
     /// </summary>
-    public partial class BcConfig : Entity
-    {
-        /// <summary>
-        /// 乐观锁
-        /// </summary>
-        public int? Revision { get; set; }
+    public partial class Config : ParkingEntityBase
+    {      
         /// <summary>
         /// 配置项类别
         /// </summary>
@@ -30,21 +26,5 @@ namespace DataBaseHelper.Entities
         /// 配置项备注
         /// </summary>
         public string? ConfigRemark { get; set; }
-        /// <summary>
-        /// 创建人
-        /// </summary>
-        public int? CreatedBy { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime? CreatedTime { get; set; }
-        /// <summary>
-        /// 更新人
-        /// </summary>
-        public int? UpdatedBy { get; set; }
-        /// <summary>
-        /// 更新时间
-        /// </summary>
-        public DateTime? UpdatedTime { get; set; }
     }
 }

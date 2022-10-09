@@ -29,10 +29,10 @@ namespace Service.Comm
         /// </summary>
         public AutoMapperConfig()
         {
-            CreateMap<BcUserinfo, UserInfo>();
-            CreateMap<UserInfoAddParam, BcUserinfo>().ForMember(d=>d.Password,o=>o.MapFrom(a=>a.Password.GetMd5()));
-            CreateMap<UserInfoUpdateParam, BcUserinfo>();
-            CreateMap<AuditAddParam, OpAudit>().ForMember(d => d.CreatedTime,o=>o.MapFrom(a=>DateTime.Now));
+            CreateMap<Userinfo, UserInfo>();
+            CreateMap<UserInfoAddParam, Userinfo>().ForMember(d=>d.Password,o=>o.MapFrom(a=>a.Password.GetMd5()));
+            CreateMap<UserInfoUpdateParam, Userinfo>();
+            CreateMap<AuditAddParam, Audit>().ForMember(d => d.CreatedTime,o=>o.MapFrom(a=>DateTime.Now));
         }
     }
 }

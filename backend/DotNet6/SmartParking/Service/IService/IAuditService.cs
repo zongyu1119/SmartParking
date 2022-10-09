@@ -19,7 +19,7 @@ namespace Service.IService
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<Res<AuditModel>> GetModel(int id);
+        public Task<Res<AuditModel>> GetModel(long Id);
         /// <summary>
         /// 获得列表
         /// </summary>

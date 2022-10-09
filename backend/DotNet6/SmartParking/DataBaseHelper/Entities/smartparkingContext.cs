@@ -25,23 +25,23 @@ namespace DataBaseHelper.Entities
             _connectionString = AppHelper.AppSettings.ReadAppSettings("ConnectionString");
         }
         #region DbSet
-        public virtual DbSet<BcCarinfo> BcCarinfos { get; set; } = null!;
-        public virtual DbSet<BcConfig> BcConfigs { get; set; } = null!;
-        public virtual DbSet<BcOwnerInfo> BcOwnerInfos { get; set; } = null!;
-        public virtual DbSet<BcParking> BcParkings { get; set; } = null!;
-        public virtual DbSet<BcParkingArea> BcParkingAreas { get; set; } = null!;
-        public virtual DbSet<BcParkingAreaManager> BcParkingAreaManagers { get; set; } = null!;
-        public virtual DbSet<BcParkingManager> BcParkingManagers { get; set; } = null!;
-        public virtual DbSet<BcParkingRate> BcParkingRates { get; set; } = null!;
-        public virtual DbSet<BcParkingSpace> BcParkingSpaces { get; set; } = null!;
-        public virtual DbSet<BcPower> BcPowers { get; set; } = null!;
-        public virtual DbSet<BcRole> BcRoles { get; set; } = null!;
-        public virtual DbSet<BcRolePower> BcRolePowers { get; set; } = null!;
-        public virtual DbSet<BcTenant> BcTenants { get; set; } = null!;
-        public virtual DbSet<BcUserinfo> BcUserinfos { get; set; } = null!;
-        public virtual DbSet<OpCarIo> OpCarIos { get; set; } = null!;
-        public virtual DbSet<OpParkingStatusHi> OpParkingStatusHis { get; set; } = null!;
-        public virtual DbSet<OpAudit> OpAudits { get; set; } = null!;
+        public virtual DbSet<CarInfo> Carinfos { get; set; } = null!;
+        public virtual DbSet<Config> Configs { get; set; } = null!;
+        public virtual DbSet<OwnerInfo> OwnerInfos { get; set; } = null!;
+        public virtual DbSet<Parking> Parkings { get; set; } = null!;
+        public virtual DbSet<ParkingArea> ParkingAreas { get; set; } = null!;
+        public virtual DbSet<ParkingAreaManager> ParkingAreaManagers { get; set; } = null!;
+        public virtual DbSet<ParkingManager> ParkingManagers { get; set; } = null!;
+        public virtual DbSet<ParkingCostRate> ParkingRates { get; set; } = null!;
+        public virtual DbSet<ParkingSpace> ParkingSpaces { get; set; } = null!;
+        public virtual DbSet<Power> Powers { get; set; } = null!;
+        public virtual DbSet<Role> Roles { get; set; } = null!;
+        public virtual DbSet<RolePower> RolePowers { get; set; } = null!;
+        public virtual DbSet<Tenant> Tenants { get; set; } = null!;
+        public virtual DbSet<Userinfo> Userinfos { get; set; } = null!;
+        public virtual DbSet<CarIo> CarIos { get; set; } = null!;
+        public virtual DbSet<ParkingStatusHi> ParkingStatusHis { get; set; } = null!;
+        public virtual DbSet<Audit> Audits { get; set; } = null!;
         #endregion
 
 
@@ -50,16 +50,16 @@ namespace DataBaseHelper.Entities
             modelBuilder.UseCollation("utf8mb4_0900_ai_ci")
                 .HasCharSet("utf8mb4");
 
-            modelBuilder.Entity<BcCarinfo>(entity =>
+            modelBuilder.Entity<CarInfo>(entity =>
             {
-                entity.HasKey(e => e.CarId)
+                entity.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
                 entity.ToTable("bc_carinfo");
 
                 entity.HasComment("车辆信息表");
 
-                entity.Property(e => e.CarId)
+                entity.Property(e => e.Id)
                     .HasColumnName("CAR_ID")
                     .HasComment("车辆ID");
 
@@ -127,7 +127,7 @@ namespace DataBaseHelper.Entities
                     .HasComment("更新时间");
             });
 
-            modelBuilder.Entity<BcConfig>(entity =>
+            modelBuilder.Entity<Config>(entity =>
             {
                 entity.HasKey(e => new { e.TenantId, e.ConfigSort, e.ConfigKey, e.ConfigOrder })
                     .HasName("PRIMARY")
@@ -186,16 +186,16 @@ namespace DataBaseHelper.Entities
                     .HasComment("更新时间");
             });
 
-            modelBuilder.Entity<BcOwnerInfo>(entity =>
+            modelBuilder.Entity<OwnerInfo>(entity =>
             {
-                entity.HasKey(e => e.OwnerId)
+                entity.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
                 entity.ToTable("bc_owner_info");
 
                 entity.HasComment("车主/车位业主信息表");
 
-                entity.Property(e => e.OwnerId)
+                entity.Property(e => e.Id)
                     .HasColumnName("OWNER_ID")
                     .HasComment("车主/业主ID");
 
@@ -251,9 +251,9 @@ namespace DataBaseHelper.Entities
                     .HasComment("用户身份证号");
             });
 
-            modelBuilder.Entity<BcParking>(entity =>
+            modelBuilder.Entity<Parking>(entity =>
             {
-                entity.HasKey(e=>e.ParkingId)
+                entity.HasKey(e=>e.Id)
                     .HasName("PRIMARY");
 
                 entity.ToTable("bc_parking");
@@ -275,7 +275,7 @@ namespace DataBaseHelper.Entities
                     .HasColumnName("PARKING_AREA")
                     .HasComment("停车场面积");
 
-                entity.Property(e => e.ParkingId)
+                entity.Property(e => e.Id)
                     .HasMaxLength(255)
                     .HasColumnName("PARKING_ID")
                     .HasComment("停车场ID");
@@ -307,16 +307,16 @@ namespace DataBaseHelper.Entities
                     .HasComment("更新时间");
             });
 
-            modelBuilder.Entity<BcParkingArea>(entity =>
+            modelBuilder.Entity<ParkingArea>(entity =>
             {
-                entity.HasKey(e => e.AreaId)
+                entity.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
                 entity.ToTable("bc_parking_area");
 
                 entity.HasComment("停车场分区表");
 
-                entity.Property(e => e.AreaId)
+                entity.Property(e => e.Id)
                     .HasColumnName("AREA_ID")
                     .HasComment("分区ID");
 
@@ -375,7 +375,7 @@ namespace DataBaseHelper.Entities
                     .HasComment("更新时间");
             });
 
-            modelBuilder.Entity<BcParkingAreaManager>(entity =>
+            modelBuilder.Entity<ParkingAreaManager>(entity =>
             {
                 entity.HasKey(e => new { e.ManagerId, e.ParkingAreaId })
                     .HasName("PRIMARY")
@@ -420,16 +420,16 @@ namespace DataBaseHelper.Entities
                     .HasComment("更新时间");
             });
 
-            modelBuilder.Entity<BcParkingManager>(entity =>
+            modelBuilder.Entity<ParkingManager>(entity =>
             {
-                entity.HasKey(e => e.ManagerId)
+                entity.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
                 entity.ToTable("bc_parking_manager");
 
                 entity.HasComment("停车场管理员表");
 
-                entity.Property(e => e.ManagerId)
+                entity.Property(e => e.Id)
                     .HasColumnName("MANAGER_ID")
                     .HasComment("车主/业主ID");
 
@@ -485,7 +485,7 @@ namespace DataBaseHelper.Entities
                     .HasComment("更新时间");
             });
 
-            modelBuilder.Entity<BcParkingRate>(entity =>
+            modelBuilder.Entity<ParkingCostRate>(entity =>
             {
                 entity.HasKey(e=>e.ParkingId)
                     .HasName("PRIMARY");
@@ -565,9 +565,9 @@ namespace DataBaseHelper.Entities
                     .HasComment("更新时间");
             });
 
-            modelBuilder.Entity<BcParkingSpace>(entity =>
+            modelBuilder.Entity<ParkingSpace>(entity =>
             {
-                entity.HasKey(e=>e.PsId)
+                entity.HasKey(e=>e.Id)
                     .HasName("PRIMARY");
 
                 entity.ToTable("bc_parking_space");
@@ -616,7 +616,7 @@ namespace DataBaseHelper.Entities
                     .HasColumnName("PS_CODE")
                     .HasComment("车位编码");
 
-                entity.Property(e => e.PsId)
+                entity.Property(e => e.Id)
                     .HasColumnName("PS_ID")
                     .HasComment("车位ID");
 
@@ -661,9 +661,9 @@ namespace DataBaseHelper.Entities
                     .HasComment("更新时间");
             });
 
-            modelBuilder.Entity<BcPower>(entity =>
+            modelBuilder.Entity<Power>(entity =>
             {
-                entity.HasKey(e=>e.PowerId)
+                entity.HasKey(e=>e.Id)
                     .HasName("PRIMARY");
 
                 entity.ToTable("bc_power");
@@ -683,7 +683,7 @@ namespace DataBaseHelper.Entities
                     .HasColumnName("PARENT_ID")
                     .HasComment("父权限ID");
 
-                entity.Property(e => e.PowerId)
+                entity.Property(e => e.Id)
                     .HasColumnName("POWER_ID")
                     .HasComment("权限ID");
 
@@ -721,38 +721,38 @@ namespace DataBaseHelper.Entities
                     .HasColumnType("datetime")
                     .HasColumnName("UPDATED_TIME")
                     .HasComment("更新时间");
-                entity.HasData(new BcPower[]
+                entity.HasData(new Power[]
                 {
-                    new BcPower()
+                    new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=null,
-                            PowerId=1,
+                            Id=1,
                              PowerLevel=0,
                               PowerName="停车场监控",
                                PowerPath="/",
                                 PowerType=0,
                                 Revision=1,
                                  TenantId=1,
-                    },new BcPower()
+                    },new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=null,
-                            PowerId=2,
+                            Id=2,
                              PowerLevel=0,
                               PowerName="停车场设置",
                                PowerPath="/",
                                 PowerType=0,
                                 Revision=1,
                                  TenantId=1,
-                    },  new BcPower()
+                    },  new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=null,
-                            PowerId=3,
+                            Id=3,
                              PowerLevel=0,
                               PowerName="统计和报表",
                                PowerPath="/",
@@ -760,12 +760,12 @@ namespace DataBaseHelper.Entities
                                 Revision=1,
                                  TenantId=1,
                     }
-                    ,new BcPower()
+                    ,new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=null,
-                            PowerId=4,
+                            Id=4,
                              PowerLevel=0,
                               PowerName="用户和权限",
                                PowerPath="/",
@@ -773,24 +773,24 @@ namespace DataBaseHelper.Entities
                                 Revision=1,
                                  TenantId=1,
                     },
-                    new BcPower()
+                    new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=null,
-                            PowerId=5,
+                            Id=5,
                              PowerLevel=0,
                               PowerName="系统设置",
                                PowerPath="/",
                                 PowerType=0,
                                 Revision=1,
                                  TenantId=1,
-                    },new BcPower()
+                    },new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=1,
-                            PowerId=101,
+                            Id=101,
                              PowerLevel=1,
                               PowerName="工作台",
                                PowerPath="/Workbench",
@@ -798,24 +798,24 @@ namespace DataBaseHelper.Entities
                                 Revision=1,
                                  TenantId=1,
                     }
-                    ,new BcPower()
+                    ,new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=1,
-                            PowerId=102,
+                            Id=102,
                              PowerLevel=1,
                               PowerName="停车监控",
                                PowerPath="/ParkingMonitor",
                                 PowerType=0,
                                 Revision=1,
                                  TenantId=1,
-                    },new BcPower()
+                    },new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=4,
-                            PowerId=401,
+                            Id=401,
                              PowerLevel=1,
                               PowerName="用户管理",
                                PowerPath="/UserInfoManagement",
@@ -823,24 +823,24 @@ namespace DataBaseHelper.Entities
                                 Revision=1,
                                  TenantId=1,
                     }
-                    ,new BcPower()
+                    ,new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=4,
-                            PowerId=402,
+                            Id=402,
                              PowerLevel=1,
                               PowerName="角色管理",
                                PowerPath="/RoleInfoManagement",
                                 PowerType=0,
                                 Revision=1,
                                  TenantId=1,
-                    },new BcPower()
+                    },new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=2,
-                            PowerId=201,
+                            Id=201,
                              PowerLevel=1,
                               PowerName="停车场管理",
                                PowerPath="/ParkingManagement",
@@ -848,12 +848,12 @@ namespace DataBaseHelper.Entities
                                 Revision=1,
                                  TenantId=1,
                     }
-                    ,new BcPower()
+                    ,new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=3,
-                            PowerId=301,
+                            Id=301,
                              PowerLevel=1,
                               PowerName="停车统计",
                                PowerPath="/ParkingReport",
@@ -861,12 +861,12 @@ namespace DataBaseHelper.Entities
                                 Revision=1,
                                  TenantId=1,
                     },
-                    new BcPower()
+                    new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=5,
-                            PowerId=501,
+                            Id=501,
                              PowerLevel=1,
                               PowerName="配置管理",
                                PowerPath="/ConfigManagement",
@@ -874,12 +874,12 @@ namespace DataBaseHelper.Entities
                                 Revision=1,
                                  TenantId=1,
                     },
-                    new BcPower()
+                    new Power()
                     {
                          CreatedBy =1,
                           CreatedTime=DateTime.Now,
                            ParentId=5,
-                            PowerId=502,
+                            Id=502,
                              PowerLevel=1,
                               PowerName="租户管理",
                                PowerPath="/TenantManagement",
@@ -890,16 +890,16 @@ namespace DataBaseHelper.Entities
                 });
             });
 
-            modelBuilder.Entity<BcRole>(entity =>
+            modelBuilder.Entity<Role>(entity =>
             {
-                entity.HasKey(e => e.RoleId)
+                entity.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
                 entity.ToTable("bc_role");
 
                 entity.HasComment("角色表");
 
-                entity.Property(e => e.RoleId)
+                entity.Property(e => e.Id)
                     .HasColumnName("ROLE_ID")
                     .HasComment("角色ID");
 
@@ -933,12 +933,12 @@ namespace DataBaseHelper.Entities
                     .HasColumnType("datetime")
                     .HasColumnName("UPDATED_TIME")
                     .HasComment("更新时间");
-                entity.HasData(new BcRole[]{
-                    new BcRole
+                entity.HasData(new Role[]{
+                    new Role
                     {
                          TenantId =1,
                          RoleName ="管理员",
-                         RoleId =1,
+                         Id =1,
                          CreatedBy=1,
                          CreatedTime=DateTime.Now,
                          Revision=1
@@ -946,7 +946,7 @@ namespace DataBaseHelper.Entities
                 });
             });
 
-            modelBuilder.Entity<BcRolePower>(entity =>
+            modelBuilder.Entity<RolePower>(entity =>
             {
                 entity.HasKey(e => new { e.RoleId, e.PowerId })
                     .HasName("PRIMARY")
@@ -1005,9 +1005,9 @@ namespace DataBaseHelper.Entities
                     .HasColumnType("datetime")
                     .HasColumnName("UPDATED_TIME")
                     .HasComment("更新时间");
-                entity.HasData(new BcRolePower[]
+                entity.HasData(new RolePower[]
                 {
-                    new BcRolePower
+                    new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1019,7 +1019,7 @@ namespace DataBaseHelper.Entities
                          IsUpdate=1,
                          RoleId =1,
                          PowerId=1,
-                    },new BcRolePower
+                    },new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1031,7 +1031,7 @@ namespace DataBaseHelper.Entities
                          IsUpdate=1,
                          RoleId =1,
                          PowerId=2,
-                    },new BcRolePower
+                    },new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1043,7 +1043,7 @@ namespace DataBaseHelper.Entities
                          IsUpdate=1,
                          RoleId =1,
                          PowerId=3,
-                    },new BcRolePower
+                    },new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1055,7 +1055,7 @@ namespace DataBaseHelper.Entities
                          IsUpdate=1,
                          RoleId =1,
                          PowerId=4,
-                    },new BcRolePower
+                    },new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1067,7 +1067,7 @@ namespace DataBaseHelper.Entities
                          IsUpdate=1,
                          RoleId =1,
                          PowerId=5,
-                    },new BcRolePower
+                    },new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1079,7 +1079,7 @@ namespace DataBaseHelper.Entities
                          IsUpdate=1,
                          RoleId =1,
                          PowerId=101,
-                    },new BcRolePower
+                    },new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1091,7 +1091,7 @@ namespace DataBaseHelper.Entities
                          IsUpdate=1,
                          RoleId =1,
                          PowerId=102,
-                    },new BcRolePower
+                    },new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1103,7 +1103,7 @@ namespace DataBaseHelper.Entities
                          IsUpdate=1,
                          RoleId =1,
                          PowerId=201,
-                    },new BcRolePower
+                    },new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1115,7 +1115,7 @@ namespace DataBaseHelper.Entities
                          IsUpdate=1,
                          RoleId =1,
                          PowerId=301,
-                    },new BcRolePower
+                    },new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1127,7 +1127,7 @@ namespace DataBaseHelper.Entities
                          IsUpdate=1,
                          RoleId =1,
                          PowerId=401,
-                    },new BcRolePower
+                    },new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1139,7 +1139,7 @@ namespace DataBaseHelper.Entities
                          IsUpdate=1,
                          RoleId =1,
                          PowerId=402,
-                    },new BcRolePower
+                    },new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1151,7 +1151,7 @@ namespace DataBaseHelper.Entities
                          IsUpdate=1,
                          RoleId =1,
                          PowerId=501,
-                    },new BcRolePower
+                    },new RolePower
                     {
                          Revision=1,
                          TenantId=1,
@@ -1167,7 +1167,7 @@ namespace DataBaseHelper.Entities
                 });
             });
 
-            modelBuilder.Entity<BcTenant>(entity =>
+            modelBuilder.Entity<Tenant>(entity =>
             {
                 entity.HasKey(e => e.TenantId)
                     .HasName("PRIMARY");
@@ -1207,7 +1207,7 @@ namespace DataBaseHelper.Entities
                     .HasColumnName("UPDATED_TIME")
                     .HasComment("更新时间");
                 //数据
-                entity.HasData(new BcTenant
+                entity.HasData(new Tenant
                 {
                      Revision=1,
                       TenantId=1,
@@ -1215,16 +1215,16 @@ namespace DataBaseHelper.Entities
                 });
             });
 
-            modelBuilder.Entity<BcUserinfo>(entity =>
+            modelBuilder.Entity<Userinfo>(entity =>
             {
-                entity.HasKey(e => e.UserId)
+                entity.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
                 entity.ToTable("bc_userinfo");
 
                 entity.HasComment("用户表");
                 #region Property
-                entity.Property(e => e.UserId)
+                entity.Property(e => e.Id)
                     .HasColumnName("USER_ID")
                     .HasComment("用户ID");
 
@@ -1293,11 +1293,11 @@ namespace DataBaseHelper.Entities
                     .HasColumnName("ROLE_ID")
                     .HasComment("用户角色");
                 #endregion Property
-                entity.HasData(new List<BcUserinfo>
+                entity.HasData(new List<Userinfo>
                 {
-                    new BcUserinfo
+                    new Userinfo
                     {
-                        UserId=1,
+                        Id=1,
                           RoleId=1,
                           UserName="Admin",
                           UserNameRel="Administrator",
@@ -1312,9 +1312,9 @@ namespace DataBaseHelper.Entities
                                   UserIdCardNum="622222222222222221"
 
                     },
-                    new BcUserinfo
+                    new Userinfo
                     {
-                        UserId=2,
+                        Id=2,
                           RoleId=1,
                           UserName="User",
                           UserNameRel="User",
@@ -1332,16 +1332,16 @@ namespace DataBaseHelper.Entities
                 });
             });
 
-            modelBuilder.Entity<OpCarIo>(entity =>
+            modelBuilder.Entity<CarIo>(entity =>
             {
-                entity.HasKey(e => e.IoId)
+                entity.HasKey(e => e.Id)
                     .HasName("PRIMARY");
 
                 entity.ToTable("op_car_io");
 
                 entity.HasComment("车辆进出历史表");
 
-                entity.Property(e => e.IoId)
+                entity.Property(e => e.Id)
                     .HasColumnName("IO_ID")
                     .HasComment("进出流水ID");
 
@@ -1394,7 +1394,7 @@ namespace DataBaseHelper.Entities
                     .HasComment("更新时间");
             });
 
-            modelBuilder.Entity<OpParkingStatusHi>(entity =>
+            modelBuilder.Entity<ParkingStatusHi>(entity =>
             {
                 entity.ToTable("op_parking_status_his");
 
@@ -1403,11 +1403,6 @@ namespace DataBaseHelper.Entities
                 entity.Property(e => e.Id)
                     .HasColumnName("ID")
                     .HasComment("流水号");
-
-                entity.Property(e => e.ChangeTime)
-                    .HasColumnType("datetime")
-                    .HasColumnName("CHANGE_TIME")
-                    .HasComment("操作时间");
 
                 entity.Property(e => e.CreatedBy)
                     .HasColumnName("CREATED_BY")
@@ -1457,7 +1452,7 @@ namespace DataBaseHelper.Entities
                     .HasComment("更新时间");
             });
 
-            modelBuilder.Entity<OpAudit>(entity =>
+            modelBuilder.Entity<Audit>(entity =>
             {
 
             });

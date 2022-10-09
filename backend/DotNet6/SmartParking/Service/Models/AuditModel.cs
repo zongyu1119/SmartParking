@@ -22,7 +22,7 @@ namespace Service.Models
         /// <summary>
         /// 审计ID
         /// </summary>
-        public int Id { get; set; }
+        public long Id { get; set; }
         /// <summary>
         /// 操作类型
         /// </summary>
@@ -38,7 +38,7 @@ namespace Service.Models
         /// <summary>
         /// 用户
         /// </summary>
-        public int? UserId { get; set; }
+        public long? UserId { get; set; }
         /// <summary>
         /// 操作时间
         /// </summary>

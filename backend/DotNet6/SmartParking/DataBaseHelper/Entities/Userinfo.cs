@@ -6,17 +6,8 @@ namespace DataBaseHelper.Entities
     /// <summary>
     /// 用户表
     /// </summary>
-    public partial class BcUserinfo : Entity
+    public partial class Userinfo : ParkingEntityBase
     {
-      
-        /// <summary>
-        /// 乐观锁
-        /// </summary>
-        public int? Revision { get; set; }
-        /// <summary>
-        /// 用户ID
-        /// </summary>
-        public int UserId { get; set; }
         /// <summary>
         /// 用户名
         /// </summary>
@@ -49,21 +40,5 @@ namespace DataBaseHelper.Entities
         /// 权限ID
         /// </summary>
         public int? RoleId { get; set; }
-        /// <summary>
-        /// 创建人
-        /// </summary>
-        public int? CreatedBy { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime? CreatedTime { get; set; }
-        /// <summary>
-        /// 更新人
-        /// </summary>
-        public int? UpdatedBy { get; set; }
-        /// <summary>
-        /// 更新时间
-        /// </summary>
-        public DateTime? UpdatedTime { get; set; }
     }
 }

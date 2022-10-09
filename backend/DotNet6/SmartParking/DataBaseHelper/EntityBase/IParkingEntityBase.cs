@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace DataBaseHelper.EntityBase
 {
-    public interface IParkingEntityBase
+    public interface IParkingEntityBase:IEntity,IAuditEntity,ITimeEntity
     {
+
+        /// <summary>
+        /// 乐观锁
+        /// </summary>
+        public int? Revision { get; set; }
     }
 }

@@ -4,15 +4,15 @@ namespace Service.Service
     /// <summary>
     /// 用户信息
     /// </summary>
-    public class UserInfoService : ServiceBase<BcUserinfo>,IUserInfoService
+    public class UserInfoService : ServiceBase<Userinfo>,IUserInfoService
     {
         /// <summary>
         /// 数据库资源
         /// </summary>
-        private readonly IEFRepository<BcUserinfo> _repository;
-        private readonly IEFRepository<BcRole> _roleRepository;
-        private readonly IEFRepository<BcRolePower> _rolePowerRepository;
-        private readonly IEFRepository<BcPower> _powerRepository;
+        private readonly IEFRepository<Userinfo> _repository;
+        private readonly IEFRepository<Role> _roleRepository;
+        private readonly IEFRepository<RolePower> _rolePowerRepository;
+        private readonly IEFRepository<Power> _powerRepository;
         /// <summary>
         /// 实现依赖自动注入
         /// </summary>
@@ -22,11 +22,11 @@ namespace Service.Service
         /// <param name="_mapper"></param>
         public UserInfoService(IConfiguration _configuration,
              ILogger<UserInfoService> _logger,
-             IEFRepository<BcUserinfo> repository,
+             IEFRepository<Userinfo> repository,
              IMapper _mapper,
-             IEFRepository<BcRole> roleRepository,
-             IEFRepository<BcRolePower> rolePowerRepository,
-             IEFRepository<BcPower> powerRepository
+             IEFRepository<Role> roleRepository,
+             IEFRepository<RolePower> rolePowerRepository,
+             IEFRepository<Power> powerRepository
             ) : base(_configuration,_logger,_mapper)
         {
             this._repository = repository;
@@ -42,7 +42,7 @@ namespace Service.Service
         /// <returns></returns>
         public async Task<Res<bool>> AddUserInfo(UserInfoAddParam param)
         {
-            var model=mapper.Map<BcUserinfo>(param);//使用AutoMapper
+            var model=mapper.Map<Userinfo>(param);//使用AutoMapper
             model.CreatedTime = DateTime.Now;
             model.Revision = 1;
             Res<bool> res =new Res<bool>(await _repository.InsertAsync(model) > 0);
@@ -91,7 +91,7 @@ namespace Service.Service
                     UserIdCardNum = x.UserIdCardNum,
                     UserName = x.UserName,
                     UserNameRel = x.UserNameRel,
-                    Role = _repository.Context..Where(r => r.RoleId.Equals(x.RoleId)).Select(r => new RoleModel
+                    Role = _repository.Where(r => r.RoleId.Equals(x.RoleId)).Select(r => new RoleModel
                     {
                         RoleId = r.RoleId,
                         RoleName = r.RoleName,

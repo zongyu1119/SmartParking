@@ -1,19 +1,13 @@
 ﻿
+
+
 namespace DataBaseHelper.Entities
 {
     /// <summary>
     /// 车辆信息表
     /// </summary>
-    public partial class BcCarinfo: Entity
+    public partial class CarInfo: ParkingEntityBase
     {
-        /// <summary>
-        /// 乐观锁
-        /// </summary>
-        public int? Revision { get; set; }
-        /// <summary>
-        /// 车辆ID
-        /// </summary>
-        public int CarId { get; set; }
         /// <summary>
         /// 车牌号
         /// </summary>
@@ -46,21 +40,5 @@ namespace DataBaseHelper.Entities
         /// 型号
         /// </summary>
         public string? Model { get; set; }
-        /// <summary>
-        /// 创建人
-        /// </summary>
-        public int? CreatedBy { get; set; }
-        /// <summary>
-        /// 创建时间
-        /// </summary>
-        public DateTime? CreatedTime { get; set; }
-        /// <summary>
-        /// 更新人
-        /// </summary>
-        public int? UpdatedBy { get; set; }
-        /// <summary>
-        /// 更新时间
-        /// </summary>
-        public DateTime? UpdatedTime { get; set; }
     }
 }
