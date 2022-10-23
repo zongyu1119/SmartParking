@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 ///  Version:  0.1
 /// </summary>
 
-namespace Const.Dtos.Audit
+namespace SmartParking.Server.Const.Dtos.Audit
 {
     /// <summary>
     /// 审计模型

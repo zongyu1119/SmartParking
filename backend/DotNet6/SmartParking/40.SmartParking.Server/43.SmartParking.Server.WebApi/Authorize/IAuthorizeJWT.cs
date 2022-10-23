@@ -1,4 +1,5 @@
-﻿using Service.Models;
+﻿using SmartParking.Server.Const.Dtos.DtoBase;
+using SmartParking.Server.Const.Dtos.User;
 
 namespace SmartParking.Authorize
 {
@@ -13,6 +14,6 @@ namespace SmartParking.Authorize
         /// <param name="user"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        bool GetJWTBear(ViewModels.UserLoginArgs user,out string bear, out UserDetailInfoModel? model);
+        Task<ResDto<(string bear, UserDetailOutputDto user)>> GetJWTBear(ViewModels.UserLoginArgs user);
     }
 }

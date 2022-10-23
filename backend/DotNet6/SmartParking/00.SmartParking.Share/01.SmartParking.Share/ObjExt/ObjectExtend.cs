@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 ///  Version:  0.1
 /// </summary>
 
-namespace Common.ObjExt
+namespace SmartParking.Share.ObjExt
 {
     /// <summary>
     /// Object的扩展方法
@@ -25,7 +25,7 @@ namespace Common.ObjExt
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string ToJson(this Object obj)
+        public static string ToJson(this object obj)
         {
             return JsonConvert.SerializeObject(obj, Formatting.Indented);
         }

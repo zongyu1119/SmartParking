@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace IdentityServer.Controllers
+namespace SmartParking.Auth.IdentityServer.Controllers
 {
     [ApiController]
     [Route("[controller]")]

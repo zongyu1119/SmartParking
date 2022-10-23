@@ -31,7 +31,7 @@ namespace SmartParking.Common
         /// <summary>
         /// 当前用户的Id
         /// </summary>
-        public int? UserId
+        public long? UserId
         {
             get
             {
@@ -85,7 +85,7 @@ namespace SmartParking.Common
         /// <summary>
         /// 租户号
         /// </summary>
-        public int? TenantId
+        public long? TenantId
         {
             get
             {

@@ -1,4 +1,5 @@
-﻿using Const.Dtos.DtoBase;
+﻿using SmartParking.Server.Const.Dtos.DtoBase;
+using SmartParking.Server.Const.Dtos.Power;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,18 +14,18 @@ using System.Threading.Tasks;
 ///  Version:  0.1
 /// </summary>
 
-namespace Const.Dtos.Role
+namespace SmartParking.Server.Const.Dtos.Role
 {
-    public class RolePowerModel : OutputDto
+    public class RolePowerOutputDto : OutputDto
     {
         /// <summary>
         /// 角色ID
         /// </summary>
-        public int RoleId { get; set; }
+        public long RoleId { get; set; }
         /// <summary>
         /// 权限ID
         /// </summary>
-        public int PowerId { get; set; }
+        public long PowerId { get; set; }
         /// <summary>
         /// 是否允许查询(1:允许;0:不允许)
         /// </summary>
@@ -45,6 +46,6 @@ namespace Const.Dtos.Role
         /// <summary>
         /// 权限信息
         /// </summary>
-        public PowerModel? Power { get; set; }
+        public PowerOutputDto? Power { get; set; }
     }
 }

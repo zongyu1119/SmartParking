@@ -1,13 +1,11 @@
-﻿using AutoMapper;
-using Common.Entity;
-using DataBaseHelper;
-using DataBaseHelper.Entities;
-using Microsoft.EntityFrameworkCore;
-using RedisHelper;
+﻿
 using Serilog;
 using Service;
 using SmartParking.Authorize;
 using SmartParking.Common;
+using SmartParking.Share.Core;
+using SmartParking.Share.Entity;
+using SmartParking.Share.RedisHelper;
 using System.Reflection;
 
 namespace SmartParking.Registrar
@@ -54,23 +52,23 @@ namespace SmartParking.Registrar
                 options.Cookie.HttpOnly = false;
                 //options.Cookie.IsEssential = true;
             });
-            builder.Services.AddSingleton(typeof(Service.Comm.ServiceInterceptor));
-            builder.Services.AddSingleton(typeof(SmartParking.Common.AuditFilterAttribute));
-            builder.Services.AddScoped(typeof(Service.Comm.ServiceInterceptor));
-            builder.Services.AddSingleton(typeof(Service.Comm.ServiceInterceptor));
-            builder.Services.AddSingleton(typeof(Service.Comm.ServiceInterceptor));
+            builder.Services.AddSingleton(typeof(ServiceInterceptor));
+            builder.Services.AddSingleton(typeof(AuditFilterAttribute));
+            builder.Services.AddScoped(typeof(ServiceInterceptor));
+            builder.Services.AddSingleton(typeof(ServiceInterceptor));
+            builder.Services.AddSingleton(typeof(ServiceInterceptor));
             builder.Services.AddScoped<IMapper, Mapper>();
             builder.Services.AddScoped(typeof(DbContext));
             builder.Services.AddScoped(typeof(smartparkingContext));
-                //拦截器
-                //过滤器
-                builder.Services.AddScoped<SmartParking.Common.AuditFilterAttribute>();
+            //拦截器
+            //过滤器
+            builder.Services.AddScoped<SmartParking.Common.AuditFilterAttribute>();
             //注入JWT
             builder.Services.AddScoped<IAuthorizeJWT, AuthorizeJWT>();
             builder.Services.AddScoped(typeof(UserContext));
             //注入数据库资源
-            builder.Services.AddScoped<IEFRepository<Entity>,EFRepository<DbContext,Entity>>();
-                // 注入Service程序集
+            builder.Services.AddScoped<IEFRepository<Entity>, EFRepository<DbContext, Entity>>();
+            // 注入Service程序集
 
             // 日志
             builder.Host.UseSerilog((context, logger) =>

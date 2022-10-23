@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
+using SmartParking.Server.Const.Dtos.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DataBaseHelper.Entities;
-using Service.Models;
-using Service.Params;
-using Common.Str;
+
 
 /// <summary>
 ///  Namespace: Service.Comm
@@ -17,7 +15,7 @@ using Common.Str;
 ///  Version:  0.1
 /// </summary>
 
-namespace Service.Comm
+namespace SmartParking.Server.Service.Comm
 {
     /// <summary>
     /// AutoMapper配置
@@ -29,10 +27,10 @@ namespace Service.Comm
         /// </summary>
         public AutoMapperConfig()
         {
-            CreateMap<Userinfo, UserInfoOutputDto>();
-            CreateMap<UserInfoAddParam, Userinfo>().ForMember(d=>d.Password,o=>o.MapFrom(a=>a.Password.GetMd5()));
-            CreateMap<UserInfoUpdateParam, Userinfo>();
-            CreateMap<AuditAddParam, Audit>().ForMember(d => d.CreatedTime,o=>o.MapFrom(a=>DateTime.Now));
+            CreateMap<Userinfo, UserOutputDto>();
+            CreateMap<UserCreateDto, Userinfo>().ForMember(d=>d.Password,o=>o.MapFrom(a=>a.Password.GetMd5()));
+            CreateMap<UserUpdateDto, Userinfo>();
+            CreateMap<AuditCreateDto, Audit>().ForMember(d => d.CreatedTime,o=>o.MapFrom(a=>DateTime.Now));
         }
     }
 }

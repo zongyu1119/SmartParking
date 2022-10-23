@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataBaseHelper.Entities
+namespace SmartParking.EFCore.EntityFramework.Entities
 {
     /// <summary>
     /// 停车收费标准表

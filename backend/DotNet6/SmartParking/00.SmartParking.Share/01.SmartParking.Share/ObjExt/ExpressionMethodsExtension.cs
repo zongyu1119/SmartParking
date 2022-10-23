@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Common.ObjExt
+namespace SmartParking.Share.ObjExt
 {
     public static class ExpressionMethodsExtension
     {

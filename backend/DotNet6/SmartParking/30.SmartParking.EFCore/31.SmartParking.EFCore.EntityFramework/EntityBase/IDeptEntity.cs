@@ -1,5 +1,5 @@
 ﻿
-namespace DataBaseHelper.EntityBase
+namespace SmartParking.EFCore.EntityFramework.EntityBase
 {
     public interface IDeptEntity
     {

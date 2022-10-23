@@ -12,17 +12,17 @@ using System.Threading.Tasks;
 ///  Version:  0.1
 /// </summary>
 
-namespace Const.Dtos.Power
+namespace SmartParking.Server.Const.Dtos.Power
 {
     /// <summary>
     /// 权限模型
     /// </summary>
-    public class PowerModel
+    public class PowerOutputDto
     {
         /// <summary>
         /// 权限ID
         /// </summary>
-        public int PowerId { get; set; }
+        public long PowerId { get; set; }
         /// <summary>
         /// 权限名称
         /// </summary>

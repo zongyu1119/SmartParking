@@ -8,14 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 /// <summary>
-///  Namespace: DataBaseHelper.Entities
+///  Namespace: SmartParking.EFCore.EntityFramework.Entities
 ///  Name： OpAudit
 ///  Author: zy
 ///  Time:  2022-04-10 21:54:54
 ///  Version:  0.1
 /// </summary>
 
-namespace DataBaseHelper.Entities
+namespace SmartParking.EFCore.EntityFramework.Entities
 {
     /// <summary>
     /// 审计表

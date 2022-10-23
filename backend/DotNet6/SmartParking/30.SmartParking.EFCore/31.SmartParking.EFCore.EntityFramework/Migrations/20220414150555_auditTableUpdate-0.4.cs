@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DataBaseHelper.Migrations
+namespace SmartParking.EFCore.EntityFramework.Migrations
 {
     public partial class auditTableUpdate04 : Migration
     {

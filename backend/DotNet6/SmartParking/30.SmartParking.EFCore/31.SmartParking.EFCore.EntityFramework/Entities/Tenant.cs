@@ -1,8 +1,6 @@
-﻿using Common.Entity;
-using System;
-using System.Collections.Generic;
+﻿
 
-namespace DataBaseHelper.Entities
+namespace SmartParking.EFCore.EntityFramework.Entities
 {
     /// <summary>
     /// 租户表

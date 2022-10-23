@@ -1,5 +1,5 @@
 ﻿
-namespace DataBaseHelper.Entities
+namespace SmartParking.EFCore.EntityFramework.Entities
 {
     /// <summary>
     /// 车位出租出售历史信息表

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-namespace Common.Service
+namespace SmartParking.Share.Service
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class AppServiceAttribute:Attribute

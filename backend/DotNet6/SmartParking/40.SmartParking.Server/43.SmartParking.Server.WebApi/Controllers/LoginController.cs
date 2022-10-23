@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using SmartParking.Common;
-using Service.Comm;
-using Service.Models;
-using Service.IService;
-using RedisHelper;
+using SmartParking.Server.Const.Dtos.DtoBase;
+using SmartParking.Server.Const.Dtos.User;
+using SmartParking.Share.RedisHelper;
 
 namespace SmartParking.Controllers
 {
@@ -45,24 +44,25 @@ namespace SmartParking.Controllers
         /// <returns></returns>
         [HttpPost]
         [ServiceFilter(typeof(AuditFilterAttribute))]
-        public HttpResponseMessage Login([FromBody]ViewModels.UserLoginArgs user)
+        public async Task<HttpResponseMessage> Login([FromBody]ViewModels.UserLoginArgs user)
         {
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{user.ToString()}");
              HttpResponseMessage res = new HttpResponseMessage();
-            if(authorizeJWT.GetJWTBear(user,out string bear, out UserDetailInfoModel? model))
+            var bear = await authorizeJWT.GetJWTBear(user);
+            if (bear.Success)
             {
-                base.UserId = model.UserId;
-                base.UserName = model.UserName;
-                base.TenantId = model.TenantId;
-                redis.Set($"Bear{UserId}",bear,TimeSpan.FromHours(24));
+                base.UserId = bear.Data.user.Id;
+                base.UserName = bear.Data.user.UserName;
+                base.TenantId = bear.Data.user.TenantId;
+                redis.Set($"Bear:{UserId}",bear,TimeSpan.FromHours(24));
                 res.StatusCode = System.Net.HttpStatusCode.OK;
-                res.Headers.Add("Authorization", bear);               
-                res.Content = new StringContent(System.Text.Json.JsonSerializer.Serialize(model));
+                res.Headers.Add("Authorization", bear.Data.bear);               
+                res.Content = new StringContent(System.Text.Json.JsonSerializer.Serialize(bear.Data.user));
             }
             else
             {
                 res.StatusCode = System.Net.HttpStatusCode.Unauthorized;
-                res.Content=new StringContent(bear);
+                res.Content=new StringContent(bear.Message);
             }
             return res;
         }
@@ -73,14 +73,14 @@ namespace SmartParking.Controllers
         [HttpGet]
         [Authorize(Roles = $"{PowerType.Select}:{PowerID.Workbench}")]
         [ServiceFilter(typeof(AuditFilterAttribute))]
-        public Res<UserDetailInfoModel> GetUserDetailInfoToView()
+        public async Task<ResDto<UserDetailOutputDto>> GetUserDetailInfoToView()
         {
             logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} ");
             if(base.UserId == null)
             {
                 throw new Exception("登录用户获取失败！");
             }
-            return service.GetUserDetailInfoToView((int)base.UserId);
+            return await service.GetUserDetailInfoToViewAsync((long)base.UserId);
         }
         /// <summary>
         /// pass Authorize test
@@ -92,7 +92,7 @@ namespace SmartParking.Controllers
         [ServiceFilter(typeof(AuditFilterAttribute))]
         public string Hello(string name)
         {
-            return $"Hello {name},you pass Authorize.UserID is {base.UserId};bear:{redis.Get("Bear"+UserId)}";
+            return $"Hello {name},you pass Authorize.UserID is {base.UserId};bear:{redis.Get("Bear:"+UserId)}";
         }
     }
     

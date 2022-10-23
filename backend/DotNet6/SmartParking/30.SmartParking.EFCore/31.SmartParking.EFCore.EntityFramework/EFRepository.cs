@@ -1,5 +1,5 @@
-﻿using Common.ObjExt;
-using DataBaseHelper.Entities;
+﻿
+using SmartParking.EFCore.EntityFramework.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
@@ -13,7 +13,7 @@ using Z.EntityFramework.Plus;
 ///  Version:  0.1
 /// </summary>
 
-namespace DataBaseHelper
+namespace SmartParking.EFCore.EntityFramework
 {
     /// <summary>
     /// 资源库
@@ -22,22 +22,13 @@ namespace DataBaseHelper
     public class EFRepository<TDbContext,TEntity> : IEFRepository<TEntity> where TDbContext : DbContext where TEntity : Entity,new()
     {
         protected virtual TDbContext _dbContext { get; }
-        private readonly smartparkingContext _smartparkingContext;
 
-        protected EFRepository(TDbContext dbContext, smartparkingContext smartparkingContext)
+        protected EFRepository(TDbContext dbContext)
         {
             _dbContext = dbContext;
-            _smartparkingContext = smartparkingContext;
         }
         public DbContext Context { get { return _dbContext; } }
 
-        public smartparkingContext SmartparkingContext
-        {
-            get
-            {
-                return _smartparkingContext;
-            }
-        }
         protected virtual IQueryable<TEntity> GetDbSet(bool writeDb, bool noTracking)
         {
             if (noTracking && writeDb)
@@ -57,12 +48,23 @@ namespace DataBaseHelper
 
             return _dbContext.Set<TEntity>();
         }
-
+        /// <summary>
+        /// 拼接条件
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <param name="writeDb"></param>
+        /// <param name="noTracking"></param>
+        /// <returns></returns>
         public virtual IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> expression, bool writeDb = false, bool noTracking = true)
         {
             return GetDbSet(writeDb, noTracking).Where(expression);
         }
-
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public virtual async Task<int> InsertAsync(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
         {
             await _dbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
@@ -74,7 +76,13 @@ namespace DataBaseHelper
             await _dbContext.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
             return await _dbContext.SaveChangesAsync(cancellationToken);
         }
-
+        /// <summary>
+        /// 是否存在
+        /// </summary>
+        /// <param name="whereExpression"></param>
+        /// <param name="writeDb"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public virtual async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> whereExpression, bool writeDb = false, CancellationToken cancellationToken = default(CancellationToken))
         {
             IQueryable<TEntity> source = _dbContext.Set<TEntity>().AsNoTracking();
@@ -85,7 +93,13 @@ namespace DataBaseHelper
 
             return await source.AnyAsync(whereExpression, cancellationToken);
         }
-
+        /// <summary>
+        /// 获取数量
+        /// </summary>
+        /// <param name="whereExpression"></param>
+        /// <param name="writeDb"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public virtual async Task<int> CountAsync(Expression<Func<TEntity, bool>> whereExpression, bool writeDb = false, CancellationToken cancellationToken = default(CancellationToken))
         {
             IQueryable<TEntity> source = _dbContext.Set<TEntity>().AsNoTracking();
@@ -96,7 +110,13 @@ namespace DataBaseHelper
 
             return await source.CountAsync(whereExpression, cancellationToken);
         }
-
+        /// <summary>
+        /// 修改数据
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public virtual Task<int> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default(CancellationToken))
         {
             EntityEntry<TEntity> entityEntry = _dbContext.Entry(entity);
@@ -117,6 +137,12 @@ namespace DataBaseHelper
         {
             return await _dbContext.SaveChangesAsync(cancellationToken);
         }
+        /// <summary>
+        /// 获取IQueryable
+        /// </summary>
+        /// <param name="writeDb"></param>
+        /// <param name="noTracking"></param>
+        /// <returns></returns>
         public virtual IQueryable<TEntity> GetAll(bool writeDb = false, bool noTracking = true)
         {
             return GetDbSet(writeDb, noTracking);

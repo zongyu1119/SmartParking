@@ -12,17 +12,17 @@ using System.Threading.Tasks;
 ///  Version:  0.1
 /// </summary>
 
-namespace Const.Dtos.Role
+namespace SmartParking.Server.Const.Dtos.Role
 {
     /// <summary>
     /// 角色模型
     /// </summary>
-    public class RoleModel
+    public class RoleOutputDto
     {
         /// <summary>
         /// 角色ID
         /// </summary>
-        public int RoleId { get; set; }
+        public long RoleId { get; set; }
         /// <summary>
         /// 角色名称
         /// </summary>

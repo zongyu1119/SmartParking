@@ -4,10 +4,8 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
-using Service.Comm;
-using Service.Models;
-using Common.Str;
-using Service.IService;
+using SmartParking.Server.Const.Dtos.User;
+using SmartParking.Server.Const.Dtos.DtoBase;
 
 namespace SmartParking.Authorize
 {
@@ -38,37 +36,31 @@ namespace SmartParking.Authorize
         /// <param name="bear"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public bool GetJWTBear(UserLoginArgs user,out string bear,out UserDetailInfoModel? model)
+        public async Task<ResDto<(string bear, UserDetailOutputDto user)>> GetJWTBear(UserLoginArgs user)
         {
             string psdMd5 = GetPassword(user.Password);
-            UserDetailInfoModel userDetailInfoModel = service.GetUserDetailInfo(user.UserName);
-            if(userDetailInfoModel == null)
+            var userRes = await service.GetUserDetailInfoAsync(user.UserName);
+            if (!userRes.Success)
             {
-                logger.LogError("登录用户不存在！");
-                bear = "登录用户不存在！";
-                model = null;
-                return false;
-            }
-            if (userDetailInfoModel.Password != user.Password.GetMd5())
+                return new ResDto<ValueTuple<string, UserDetailOutputDto>>(default, "登录用户不存在！");
+            }           
+            var bear = string.Empty;
+            if (userRes.Data.Password != user.Password.GetMd5())
             {
-                logger.LogError("用户名或密码错误！");
-                bear = "用户名或密码错误！";
-                model = null;
-                return false;
+                return new ResDto<ValueTuple<string, UserDetailOutputDto>>(default, "用户名或密码错误！");
             }
-            model = userDetailInfoModel;
             // 1. 定义需要使用到的Claims
             var claims = new List<Claim>()
             {
-                new Claim("Id", userDetailInfoModel.UserId.ToString()),
-                new Claim(ClaimTypes.Name, userDetailInfoModel.UserName),
-                new Claim("UserNameRel", userDetailInfoModel.UserNameRel),
-                new Claim("TenantId",userDetailInfoModel.TenantId.ToString()),
-                new Claim("RoleId",userDetailInfoModel.RoleId.ToString()),
+                new Claim("Id", userRes.Data.UserId.ToString()),
+                new Claim(ClaimTypes.Name, userRes.Data.UserName),
+                new Claim("UserNameRel", userRes.Data.UserNameRel),
+                new Claim("TenantId",userRes.Data.TenantId.ToString()),
+                new Claim("RoleId",userRes.Data.RoleId.ToString()),
             };
-            if (userDetailInfoModel.RolePowers != null)
+            if (userRes.Data.RolePowers != null)
             {
-                userDetailInfoModel.RolePowers.ForEach(p =>
+                userRes.Data.RolePowers.ForEach(p =>
                 {
                     if (p.IsDelete != null && p.IsDelete == 1)
                     {
@@ -115,7 +107,7 @@ namespace SmartParking.Authorize
             // 7. 将token变为string
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
             bear= "Bearer " + jwtToken;
-            return true;
+            return new ResDto<ValueTuple<string, UserDetailOutputDto>>((bear,userRes.Data)); 
         }
         /// <summary>
         /// 获得字符串的MD5

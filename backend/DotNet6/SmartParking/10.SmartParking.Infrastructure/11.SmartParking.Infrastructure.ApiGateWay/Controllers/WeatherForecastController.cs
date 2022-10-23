@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiGateWay.Controllers
+namespace SmartParking.Infrastructure.ApiGateWay.Controllers
 {
     [ApiController]
     [Route("[controller]")]

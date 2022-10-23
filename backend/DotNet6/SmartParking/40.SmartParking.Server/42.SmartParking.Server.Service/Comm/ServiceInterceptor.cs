@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 ///  Version:  0.1
 /// </summary>
 
-namespace Service.Comm
+namespace SmartParking.Server.Service.Comm
 {
     /// <summary>
     /// 拦截器

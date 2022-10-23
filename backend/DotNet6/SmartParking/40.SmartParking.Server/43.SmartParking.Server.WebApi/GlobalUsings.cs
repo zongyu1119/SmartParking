@@ -1,0 +1,9 @@
+﻿global using AutoMapper;
+global using Microsoft.EntityFrameworkCore;
+global using SmartParking.Server.Const.Dtos.Audit;
+global using SmartParking.EFCore.EntityFramework;
+global using SmartParking.EFCore.EntityFramework.Entities;
+global using SmartParking.Server.Const.IService;
+global using SmartParking.Server.Service.Comm;
+global using SmartParking.Share.Service;
+global using SmartParking.Share.Str;

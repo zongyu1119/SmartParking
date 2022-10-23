@@ -1,14 +1,11 @@
-﻿
-
-using Const.Dtos.Audit;
-/// <summary>
+﻿/// <summary>
 ///  Namespace: Service.IService
 ///  Name： IAuditService
 ///  Author: zy
 ///  Time:  2022-04-13 22:26:30
 ///  Version:  0.1
 /// </summary>
-namespace Const.IService
+namespace SmartParking.Server.Const.IService
 {
     /// <summary>
     /// 审计相关Service
@@ -18,27 +15,27 @@ namespace Const.IService
         /// <summary>
         /// 获得模型
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="Id"></param>
         /// <returns></returns>
-        public Task<Res<AuditOutputDto>> GetModel(long Id);
+        Task<ResDto<AuditOutputDto>> GetModelAsync(long Id);
         /// <summary>
         /// 获得列表
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
-        public Task<Res<List<AuditOutputDto>>> GetList(AuditQueryParam param);
+        Task<ResDto<List<AuditOutputDto>>> GetListAsync(AuditPageSearchDto dto);
         /// <summary>
         /// 获得分页列表
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
-        public Task<ResPage<AuditOutputDto>> GetList(ParamPage<AuditQueryParam> param);
+        Task<ResPageDto<AuditOutputDto>> GetPageListAsync(AuditPageSearchDto dto);
         /// <summary>
         /// 新增
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
-        public Task<Res<bool>> Add(AuditAddParam param);
+        Task<ResDto<bool>> CreateAsync(AuditCreateDto dto);
 
     }
 }

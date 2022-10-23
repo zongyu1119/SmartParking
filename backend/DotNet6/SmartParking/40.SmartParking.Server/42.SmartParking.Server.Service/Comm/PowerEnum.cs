@@ -1,4 +1,4 @@
-﻿namespace Service.Comm
+﻿namespace SmartParking.Server.Service.Comm
 {
     /// <summary>
     /// 权限ID对应关系

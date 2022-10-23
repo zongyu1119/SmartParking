@@ -1,12 +1,13 @@
-﻿/// <summary>
+﻿
+using SmartParking.Server.Const.Dtos.User;
+/// <summary>
 ///  Namespace: Service.IService
 ///  Name： IUserInfoService
 ///  Author: zy
 ///  Time:  2022-03-31 22:53:21
 ///  Version:  0.1
 /// </summary>
-
-namespace Const.IService
+namespace SmartParking.Server.Const.IService
 {
     /// <summary>
     /// 用户信息服务接口
@@ -18,60 +19,61 @@ namespace Const.IService
         /// </summary>
         /// <param name="id">用户ID</param>
         /// <returns></returns>
-        Task<UserDetailInfoModel?> GetUserDetailInfo(int id);
+        Task<ResDto<UserDetailOutputDto>> GetUserDetailInfoAsync(long id);
         /// <summary>
         /// 使用用户名查询用户详情
         /// </summary>
         /// <param name="userName">用户名</param>
         /// <returns></returns>
-        Task<UserDetailInfoModel?> GetUserDetailInfo(string userName);
+        Task<ResDto<UserDetailOutputDto>> GetUserDetailInfoAsync(string userName);
         /// <summary>
         /// 前端需要的用户详情
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<Res<UserDetailInfoModel>> GetUserDetailInfoToView(int id);
+        Task<ResDto<UserDetailOutputDto>> GetUserDetailInfoToViewAsync(long id);
         /// <summary>
         /// 获得用户信息
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<Res<UserInfo>> GetUserInfo(int id);
+        Task<ResDto<UserOutputDto>> GetModelAsync(long id);
         /// <summary>
         /// 获得用户列表
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
-        Task<Res<List<UserInfo>>> GetUserInfoList(UserInfoQueryParam param);
+        Task<ResDto<List<UserOutputDto>>> GetListAsync(UserPageSearchDto dto);
         /// <summary>
         /// 获得分页用户列表
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
-        Task<ResPage<UserInfo>> GetUserInfoList(ParamPage<UserInfoQueryParam> param);
+        Task<ResPageDto<UserOutputDto>> GetPageListAsync(UserPageSearchDto dto);
         /// <summary>
         /// 新增用户
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
-        Task<Res<bool>> AddUserInfo(UserInfoAddParam param);
+        Task<ResDto<bool>> CreateAsync(UserCreateDto dto);
         /// <summary>
         /// 修改用户
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        Task<Res<bool>> UpdateUserInfo(UserInfoUpdateParam param);
+        Task<ResDto<bool>> UpdateAsync(UserUpdateDto dto,long id);
         /// <summary>
         /// 删除用户
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<Res<bool>> DeleteUserInfo(int id);
+        Task<ResDto<bool>> DeleteAsync(long id);
         /// <summary>
         /// 修改用户密码
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="pwd"></param>
         /// <returns></returns>
-        Task<Res<bool>> UpdateUserInfoPassword(UserInfoUpdatePasswordParam param);
+        Task<ResDto<bool>> UpdatePwdAsync(string pwd);
     }
 }

@@ -1,10 +1,17 @@
-﻿using Const.Dtos.User;
+﻿
+
+using SmartParking.Server.Const.Dtos.DtoBase;
+using SmartParking.Server.Const.Dtos.Power;
+using SmartParking.Server.Const.Dtos.Role;
+using SmartParking.Server.Const.Dtos.User;
+using SmartParking.Share.Str;
+
 namespace Service.Service
 {
     /// <summary>
     /// 用户信息
     /// </summary>
-    public class UserInfoService : ServiceBase<Userinfo>,IUserInfoService
+    public class UserInfoService : AbstractAppService,IUserInfoService
     {
         /// <summary>
         /// 数据库资源
@@ -13,6 +20,7 @@ namespace Service.Service
         private readonly IEFRepository<Role> _roleRepository;
         private readonly IEFRepository<RolePower> _rolePowerRepository;
         private readonly IEFRepository<Power> _powerRepository;
+        private readonly ILogger<UserInfoService> _logger;
         /// <summary>
         /// 实现依赖自动注入
         /// </summary>
@@ -20,37 +28,37 @@ namespace Service.Service
         /// <param name="_logger"></param>
         /// <param name="repository"></param>
         /// <param name="_mapper"></param>
-        public UserInfoService(IConfiguration _configuration,
-             ILogger<UserInfoService> _logger,
+        public UserInfoService(
+             ILogger<UserInfoService> logger,
              IEFRepository<Userinfo> repository,
-             IMapper _mapper,
              IEFRepository<Role> roleRepository,
              IEFRepository<RolePower> rolePowerRepository,
              IEFRepository<Power> powerRepository
-            ) : base(_configuration,_logger,_mapper)
+            ) 
         {
             this._repository = repository;
             this._roleRepository = roleRepository;
             this._rolePowerRepository = rolePowerRepository;
             this._powerRepository = powerRepository;
+            _logger = logger;
         }
         /// <summary>
         /// 新增用户
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
         /// <param name="createByUserId"></param>
         /// <returns></returns>
-        public async Task<Res<bool>> AddUserInfo(UserInfoAddParam param)
+        public async Task<ResDto<bool>> CreateAsync(UserCreateDto dto)
         {
-            var model=mapper.Map<Userinfo>(param);//使用AutoMapper
+            var model=Mapper.Map<Userinfo>(dto);//使用AutoMapper
             model.CreatedTime = DateTime.Now;
             model.Revision = 1;
-            Res<bool> res =new Res<bool>(await _repository.InsertAsync(model) > 0);
-            res.Data = res.Success;
+            var success = await _repository.InsertAsync(model) > 0;
+            var res = new ResDto<bool>(success);
             if (!res.Success)
             {
                 res.Message = "新增用户失败！";
-                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}新增失败！", param);
+                _logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name}新增失败！", dto);
             }
             return res;
         }
@@ -60,14 +68,14 @@ namespace Service.Service
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<Res<bool>> DeleteUserInfo(int id)
+        public async Task<ResDto<bool>> DeleteAsync(long id)
         {
-            Res<bool> res = new Res<bool>(await _repository.DeleteAsync(id) > 0);
-            res.Data = res.Success;
+            var success = await _repository.DeleteAsync(id) > 0;
+            var res = new ResDto<bool>(success);
             if (!res.Success)
             {
                 res.Message = "删除用户失败！";
-                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}执行失败！", id);
+                _logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name}执行失败！", id);
             }
             return res;
         }
@@ -76,60 +84,15 @@ namespace Service.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<UserDetailInfoOutputDto?> GetUserDetailInfo(int id)
+        public async Task<ResDto<UserDetailOutputDto>> GetUserDetailInfoAsync(long id)
         {
-            var user = _repository.Where(x => x.UserId.Equals(id))
-                .Select(x => new UserDetailInfoOutputDto()
+            var roleRes = _roleRepository.GetAll();
+            var rolePowerRes= _rolePowerRepository.GetAll();
+            var powerRes = _powerRepository.GetAll();
+            var user = await _repository.Where(x => x.Id.Equals(id))
+                .Select(x => new UserDetailOutputDto()
                 {
                     TenantId=x.TenantId,
-                    UserId = x.UserId,
-                    Address = x.Address,
-                    Password = x.Password,
-                    Phone = x.Phone,
-                    RoleId = x.RoleId,
-                    Sex = x.Sex,
-                    UserIdCardNum = x.UserIdCardNum,
-                    UserName = x.UserName,
-                    UserNameRel = x.UserNameRel,
-                    Role = _repository.Where(r => r.RoleId.Equals(x.RoleId)).Select(r => new RoleOutputDto
-                    {
-                        RoleId = r.RoleId,
-                        RoleName = r.RoleName,
-                    }).FirstOrDefault(),
-                    RolePowers = _rolePowerRepository.Where(p => p.RoleId.Equals(x.RoleId))
-                    .Select(rp => new RolePowerOutputDto
-                    {
-                        RoleId = rp.RoleId,
-                        PowerId = rp.PowerId,
-                        IsDelete = rp.IsDelete,
-                        IsInsert = rp.IsInsert,
-                        IsSelect = rp.IsSelect,
-                        IsUpdate = rp.IsUpdate,
-                        Power = _powerRepository.Where(p => p.PowerId.Equals(rp.PowerId))
-                                   .Select(p => new PowerOutputDto
-                                   {
-                                       PowerId = p.PowerId,
-                                       ParentId = p.ParentId,
-                                       PowerLevel = p.PowerLevel,
-                                       PowerName = p.PowerName,
-                                       PowerPath = p.PowerPath,
-                                       PowerType = p.PowerType,
-                                   }).FirstOrDefault()
-                    }).ToList(),
-                }).FirstOrDefault();
-            return user;
-        }
-        /// <summary>
-        /// 根据用户名获得用户信息
-        /// </summary>
-        /// <param name="userName">用户名</param>
-        /// <returns></returns>
-        public UserDetailInfoOutputDto? GetUserDetailInfo(string userName)
-        {
-            var user = _repository.Where(x => x.UserName.Equals(userName))
-                .Select(x => new UserDetailInfoOutputDto()
-                {
-                     TenantId=x.TenantId,
                     UserId = x.Id,
                     Address = x.Address,
                     Password = x.Password,
@@ -139,12 +102,12 @@ namespace Service.Service
                     UserIdCardNum = x.UserIdCardNum,
                     UserName = x.UserName,
                     UserNameRel = x.UserNameRel,
-                    Role = _repository.DbContext.BcRoles.Where(r => r.RoleId.Equals(x.RoleId)).Select(r => new RoleOutputDto
+                    Role = roleRes.Where(r => r.Id.Equals(x.RoleId)).Select(r => new RoleOutputDto
                     {
-                        RoleId = r.RoleId,
+                        RoleId = r.Id,
                         RoleName = r.RoleName,
                     }).FirstOrDefault(),
-                    RolePowers = _repository.DbContext.BcRolePowers.Where(p => p.RoleId.Equals(x.RoleId))
+                    RolePowers = rolePowerRes.Where(p => p.RoleId.Equals(x.RoleId))
                     .Select(rp => new RolePowerOutputDto
                     {
                         RoleId = rp.RoleId,
@@ -153,10 +116,10 @@ namespace Service.Service
                         IsInsert = rp.IsInsert,
                         IsSelect = rp.IsSelect,
                         IsUpdate = rp.IsUpdate,
-                        Power = _repository.DbContext.BcPowers.Where(p => p.PowerId.Equals(rp.PowerId))
+                        Power = powerRes.Where(p => p.Id.Equals(rp.PowerId))
                                    .Select(p => new PowerOutputDto
                                    {
-                                       PowerId = p.PowerId,
+                                       PowerId = p.Id,
                                        ParentId = p.ParentId,
                                        PowerLevel = p.PowerLevel,
                                        PowerName = p.PowerName,
@@ -164,21 +127,75 @@ namespace Service.Service
                                        PowerType = p.PowerType,
                                    }).FirstOrDefault()
                     }).ToList(),
-                }).FirstOrDefault();
-            return user;
+                }).FirstAsync();
+            return new ResDto<UserDetailOutputDto>(user);
+        }
+        /// <summary>
+        /// 根据用户名获得用户信息
+        /// </summary>
+        /// <param name="userName">用户名</param>
+        /// <returns></returns>
+        public async Task<ResDto<UserDetailOutputDto>> GetUserDetailInfoAsync(string userName)
+        {
+            var roleRes = _roleRepository.GetAll();
+            var rolePowerRes = _rolePowerRepository.GetAll();
+            var powerRes = _powerRepository.GetAll();
+            var user = await _repository.Where(x => x.UserName.Equals(userName))
+                .Select(x => new UserDetailOutputDto()
+                {
+                    TenantId = x.TenantId,
+                    UserId = x.Id,
+                    Address = x.Address,
+                    Password = x.Password,
+                    Phone = x.Phone,
+                    RoleId = x.RoleId,
+                    Sex = x.Sex,
+                    UserIdCardNum = x.UserIdCardNum,
+                    UserName = x.UserName,
+                    UserNameRel = x.UserNameRel,
+                    Role = roleRes.Where(r => r.Id.Equals(x.RoleId)).Select(r => new RoleOutputDto
+                    {
+                        RoleId = r.Id,
+                        RoleName = r.RoleName,
+                    }).FirstOrDefault(),
+                    RolePowers = rolePowerRes.Where(p => p.RoleId.Equals(x.RoleId))
+                    .Select(rp => new RolePowerOutputDto
+                    {
+                        RoleId = rp.RoleId,
+                        PowerId = rp.PowerId,
+                        IsDelete = rp.IsDelete,
+                        IsInsert = rp.IsInsert,
+                        IsSelect = rp.IsSelect,
+                        IsUpdate = rp.IsUpdate,
+                        Power = powerRes.Where(p => p.Id.Equals(rp.PowerId))
+                                   .Select(p => new PowerOutputDto
+                                   {
+                                       PowerId = p.Id,
+                                       ParentId = p.ParentId,
+                                       PowerLevel = p.PowerLevel,
+                                       PowerName = p.PowerName,
+                                       PowerPath = p.PowerPath,
+                                       PowerType = p.PowerType,
+                                   }).FirstOrDefault()
+                    }).ToList(),
+                }).FirstAsync();
+            return new ResDto<UserDetailOutputDto>(user);
         }
         /// <summary>
         /// 获得页面用户列表
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Res<UserDetailInfoOutputDto> GetUserDetailInfoToView(int id)
+        public async Task<ResDto<UserDetailOutputDto>> GetUserDetailInfoToViewAsync(long id)
         {
-            var user = _repository.Where(x => x.UserId.Equals(id))
-               .Select(x => new UserDetailInfoOutputDto()
+            var roleRes = _roleRepository.GetAll();
+            var rolePowerRes = _rolePowerRepository.GetAll();
+            var powerRes = _powerRepository.GetAll();
+            var user = await _repository.Where(x => x.Id.Equals(id))
+               .Select(x => new UserDetailOutputDto()
                {
                    TenantId = x.TenantId,
-                   UserId = x.UserId,
+                   UserId = x.Id,
                    Address = x.Address,
                    Password = x.Password,
                    Phone = x.Phone,
@@ -187,12 +204,12 @@ namespace Service.Service
                    UserIdCardNum = x.UserIdCardNum,
                    UserName = x.UserName,
                    UserNameRel = x.UserNameRel,
-                   Role = _repository.DbContext.BcRoles.Where(r => r.RoleId.Equals(x.RoleId)).Select(r => new RoleOutputDto
+                   Role = roleRes.Where(r => r.Id.Equals(x.RoleId)).Select(r => new RoleOutputDto
                    {
-                       RoleId = r.RoleId,
+                       RoleId = r.Id,
                        RoleName = r.RoleName,
                    }).FirstOrDefault(),
-                   RolePowers = _repository.DbContext.BcRolePowers.Where(p => p.RoleId.Equals(x.RoleId))
+                   RolePowers = rolePowerRes.Where(p => p.RoleId.Equals(x.RoleId))
                    .Select(rp => new RolePowerOutputDto
                    {
                        RoleId = rp.RoleId,
@@ -201,10 +218,10 @@ namespace Service.Service
                        IsInsert = rp.IsInsert,
                        IsSelect = rp.IsSelect,
                        IsUpdate = rp.IsUpdate,
-                       Power = _repository.DbContext.BcPowers.Where(p => p.PowerId.Equals(rp.PowerId))
+                       Power = powerRes.Where(p => p.Id.Equals(rp.PowerId))
                                   .Select(p => new PowerOutputDto
                                   {
-                                      PowerId = p.PowerId,
+                                      PowerId = p.Id,
                                       ParentId = p.ParentId,
                                       PowerLevel = p.PowerLevel,
                                       PowerName = p.PowerName,
@@ -212,13 +229,11 @@ namespace Service.Service
                                       PowerType = p.PowerType,
                                   }).FirstOrDefault()
                    }).ToList(),
-               }).FirstOrDefault();
-            Res<UserDetailInfoOutputDto> res = new(user!=null);
-            res.Data = user;
+               }).FirstAsync();
+            var res = new ResDto<UserDetailOutputDto>(user);
             if (!res.Success)
             {
                 res.Message = "查询用户失败！";
-                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}执行失败！", id);
             }
             return res;
         }
@@ -227,12 +242,13 @@ namespace Service.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Res<UserInfoOutputDto> GetUserInfo(int id)
+        public async Task<ResDto<UserOutputDto>> GetModelAsync(long id)
         {
-            var user = _repository.Where(x => x.Id.Equals(id))
-             .Select(x => new UserInfoOutputDto()
+            var roleRes = _roleRepository.GetAll();
+            var user = await _repository.Where(x => x.Id.Equals(id))
+             .Select(x => new UserOutputDto()
              {
-                 UserId = x.Id,
+                 Id=x.Id,
                  Address = x.Address,
                  Password = x.Password,
                  Phone = x.Phone,
@@ -241,37 +257,30 @@ namespace Service.Service
                  UserIdCardNum = x.UserIdCardNum,
                  UserName = x.UserName,
                  UserNameRel = x.UserNameRel,
-                 RoleName= _repository.DbContext.BcRoles.Where(r => r.RoleId.Equals(x.RoleId)).FirstOrDefault().RoleName
+                 RoleName= roleRes.Where(r => r.Id.Equals(x.RoleId)).FirstOrDefault().RoleName
 
-             }).FirstOrDefault();
-            Res<UserInfoOutputDto> res = new(user != null);
-            res.Data = user;
+             }).FirstAsync();
+            var res = new ResDto<UserOutputDto>(user);
             if (!res.Success)
             {
                 res.Message = "查询用户失败！";
-                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}执行失败！", id);
             }
             return res;
         }
         /// <summary>
         /// 查询用户列表-不分页
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
-        public Res<List<UserInfoOutputDto>> GetUserInfoList(UserInfoQueryParam param)
+        public async Task<ResDto<List<UserOutputDto>>> GetListAsync(UserPageSearchDto dto)
         {
-            var resDb = _repository.DbContext.BcUserinfos.Where(x=>x.TenantId==param.TenantId);
-            if (param.UserName != null)
-            {
-                resDb.Where(x => x.UserName.Contains(param.UserName));
-            }
-            if (param.RoleId != null)
-            {
-                resDb.Where(x => x.RoleId.Equals(param.RoleId));
-            }
-            var user=resDb.Select(x => new UserInfoOutputDto()
+            var whereCondition = ExpressionCreator.New<Userinfo>().
+            AndIf(dto.UserName.IsNotNullOrWhiteSpace(), x => x.UserName.Contains(dto.UserName))
+            .AndIf(dto.RoleId.HasValue, x => x.RoleId == dto.RoleId);
+            var roleRes = _roleRepository.GetAll();
+            var user=await _repository.Where(whereCondition).Select(x => new UserOutputDto()
              {
-                 UserId = x.UserId,
+                 Id = x.Id,
                  Address = x.Address,
                  Password = x.Password,
                  Phone = x.Phone,
@@ -280,14 +289,12 @@ namespace Service.Service
                  UserIdCardNum = x.UserIdCardNum,
                  UserName = x.UserName,
                  UserNameRel = x.UserNameRel,
-                  RoleName=_repository.DbContext.BcRoles.Where(r=>r.RoleId.Equals(x.RoleId)).FirstOrDefault().RoleName
-             }).ToList();
-            Res<List<UserInfoOutputDto>> res = new(user != null);
-            res.Data = user;
+                  RoleName= roleRes.Where(r=>r.Id.Equals(x.RoleId)).FirstOrDefault().RoleName
+             }).ToListAsync();
+            var res = new ResDto<List<UserOutputDto>>(user);
             if (!res.Success)
             {
                 res.Message = "查询用户失败！";
-                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}执行失败！", param);
             }
             return res;
         }
@@ -295,24 +302,19 @@ namespace Service.Service
         /// <summary>
         /// 查询用户列表-分页
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public ResPage<UserInfoOutputDto> GetUserInfoList(ParamPage<UserInfoQueryParam> param)
+        public async Task<ResPageDto<UserOutputDto>> GetPageListAsync(UserPageSearchDto dto)
         {
-            var resDb = _repository.DbContext.BcUserinfos.Where(x => x.TenantId.Equals(param.Param.TenantId));
-            if (param.Param.UserName != null)
+            var whereCondition = ExpressionCreator.New<Userinfo>().
+            AndIf(dto.UserName.IsNotNullOrWhiteSpace(), x => x.UserName.Contains(dto.UserName))
+            .AndIf(dto.RoleId.HasValue, x => x.RoleId == dto.RoleId);
+            var roleRes = _roleRepository.GetAll();
+            var count = await _repository.CountAsync(whereCondition);
+            var user = await _repository.Where(whereCondition).Select(x => new UserOutputDto()
             {
-                resDb.Where(x => x.UserName.Contains(param.Param.UserName));
-            }
-            if (param.Param.RoleId != null)
-            {
-                resDb.Where(x => x.RoleId.Equals(param.Param.RoleId));
-            }
-            int count=resDb.Count();
-            var user = resDb.Select(x => new UserInfoOutputDto()
-            {
-                UserId = x.UserId,
+                Id = x.Id,
                 Address = x.Address,
                 Password = x.Password,
                 Phone = x.Phone,
@@ -321,45 +323,43 @@ namespace Service.Service
                 UserIdCardNum = x.UserIdCardNum,
                 UserName = x.UserName,
                 UserNameRel = x.UserNameRel,
-                RoleName = _repository.DbContext.BcRoles.Where(r => r.RoleId.Equals(x.RoleId)).FirstOrDefault().RoleName
-            }).Skip(param.PageCurrent * param.PageSize).Take(param.PageSize).ToList();
-            ResPage<UserInfoOutputDto> res = new(user != null);
-            res.Data = user;
-            res.PageSize = param.PageSize;
-            res.PageCurrent = param.PageCurrent;
+                RoleName = roleRes.Where(r => r.Id.Equals(x.RoleId)).FirstOrDefault().RoleName
+            }).Skip(dto.PageSize*(dto.Index-1)).Take(dto.PageSize).ToListAsync();
+            var res = new ResPageDto<UserOutputDto>(user);
+            res.PageSize = dto.PageSize;
+            res.PageCurrent = dto.Index;
             res.TotalCount = count;
-            res.PageCount =(int)Math.Ceiling((double)count / (double)param.PageSize);
             if (!res.Success)
             {
                 res.Message = "查询用户失败！";
-                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name}执行失败！", param);
             }
             return res;
         }
         /// <summary>
         /// 修改用户信息
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public Res<bool> UpdateUserInfo(UserInfoUpdateParam param)
+        public async Task<ResDto<bool>> UpdateAsync(UserUpdateDto dto, long id)
         {
-            var user = _repository.DbContext.BcUserinfos.FirstOrDefault(x => x.UserId.Equals(param.UserId));            
+            var user = await _repository.FindAsync(x => x.Id.Equals(id));            
             if (user == null)
             {
-                Res<bool> res = new Res<bool>(false);
+                var res = new ResDto<bool>(false);
                 res.Data = false;
                 res.Message = "未找到要修改的对象！";
                 return res;
             }
             else
             {
-                mapper.Map(param, user);
-                Res<bool> res = new Res<bool>(_repository.SaveChanges() > 0);
+                var newUser= Mapper.Map(dto, user);
+                var success = await _repository.UpdateAsync(newUser) > 0;
+                ResDto<bool> res = new ResDto<bool>(success);
                 if (!res.Success)
                 {
                     res.Message = "修改用户失败！";
-                    logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}新增失败！", param);
                 }
                 return res;
             }
@@ -367,26 +367,29 @@ namespace Service.Service
         /// <summary>
         /// 修改用户密码
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public Res<bool> UpdateUserInfoPassword(UserInfoUpdatePasswordParam param)
+        public async Task<ResDto<bool>> UpdatePwdAsync(string pwd)
         {
-            var user = _repository.DbContext.BcUserinfos.FirstOrDefault(x => x.UserId.Equals(param.UserId));
+            var user = await _repository.FindAsync(x => x.Id.Equals(id));
             if (user == null)
             {
-                Res<bool> res = new Res<bool>(false);
+                ResDto<bool> res = new ResDto<bool>(false);
                 res.Data = false;
                 res.Message = "未找到要修改的用户！";
                 return res;
             }
             else
             {
-                user.Password = param.Password.GetMd5();
-                Res<bool> res = new Res<bool>(_repository.DbContext.SaveChanges() > 0);
+                user.Password = pwd.GetMd5();
+                var success = await _repository.UpdateAsync(user, UpdatingProps<Userinfo>(
+                s => s.Password)) > 0;
+                ResDto<bool> res = new ResDto<bool>(success);
                 if (!res.Success)
                 {
                     res.Message = "修改用户密码失败！";
-                    logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}新增失败！", param);
+                    _logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name}失败！");
                 }
                 return res;
             }

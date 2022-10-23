@@ -1,10 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Common.ObjExt;
-using DataBaseHelper;
-using Service.IService;
-using Service.Models;
-using Service.Comm;
-using Service.Params;
 
 namespace SmartParking.Common
 {
@@ -36,16 +30,14 @@ namespace SmartParking.Common
             var userId = context.HttpContext.User.Claims.FirstOrDefault(x => x.Type.Equals("Id"));
             if (TenantId != null && userId != null)
             {
-                service.Add(new AuditAddParam()
+                service.CreateAsync(new AuditCreateDto()
                 {
                     ActionNmae = context.HttpContext.Request.Path.ToString(),
-                    CreatedBy = int.Parse(userId.Value),
-                    TenantId = int.Parse(TenantId.Value),
                     Description = context.HttpContext.Request.Path.ToString(),
                     Type = "Requested"
                 });
             }
-            logger?.LogInformation("[Audit]"+ context.HttpContext.Request.Path.ToString() +" "+ context.Result.GetType().GetProperty("Value").GetValue(context.Result).ToJson());
+            logger?.LogInformation("[Audit]"+ context.HttpContext.Request.Path.ToString() +" "+ context.Result.GetType().GetProperty("Value").GetValue(context.Result));
 
         }
         /// <summary>
@@ -59,11 +51,9 @@ namespace SmartParking.Common
             var userId =context.HttpContext.User.Claims.FirstOrDefault(x => x.Type.Equals("Id"));
             if (TenantId != null && userId != null)
             {
-                service.Add(new AuditAddParam()
+                service.CreateAsync(new AuditCreateDto()
                 {
                     ActionNmae = context.HttpContext.Request.Path.ToString(),
-                    CreatedBy = int.Parse(userId.Value),
-                    TenantId = int.Parse(TenantId.Value),
                     Description = context.HttpContext.Request.Path.ToString(),
                     Type = "Requesting"
                 });

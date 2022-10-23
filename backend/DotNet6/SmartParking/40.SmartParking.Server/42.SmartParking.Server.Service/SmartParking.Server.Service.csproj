@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="Castle.Core" Version="5.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\00.SmartParking.Share\01.SmartParking.Share\SmartParking.Share.csproj" />
+    <ProjectReference Include="..\..\00.SmartParking.Share\02.SmartParking.Share.AppHelper\SmartParking.Share.AppHelper.csproj" />
+    <ProjectReference Include="..\..\00.SmartParking.Share\03.SmartParking.Share.RabbitMQHelper\SmartParking.Share.RabbitMQHelper.csproj" />
+    <ProjectReference Include="..\..\00.SmartParking.Share\04.SmartParking.Share.RedisHelper\SmartParking.Share.RedisHelper.csproj" />
+    <ProjectReference Include="..\..\30.SmartParking.EFCore\31.SmartParking.EFCore.EntityFramework\SmartParking.EFCore.EntityFramework.csproj" />
+    <ProjectReference Include="..\41.SmartParking.Server.Const\SmartParking.Server.Const.csproj" />
+  </ItemGroup>
+
+</Project>

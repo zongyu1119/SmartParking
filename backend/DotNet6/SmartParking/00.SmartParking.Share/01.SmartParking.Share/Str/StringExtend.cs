@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 ///  Version:  0.1
 /// </summary>
 
-namespace Common.Str
+namespace SmartParking.Share.Str
 {
     /// <summary>
     /// 字符串扩展类

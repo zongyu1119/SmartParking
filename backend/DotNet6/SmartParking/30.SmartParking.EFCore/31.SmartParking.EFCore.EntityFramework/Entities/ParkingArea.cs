@@ -1,6 +1,6 @@
 ﻿
 
-namespace DataBaseHelper.Entities
+namespace SmartParking.EFCore.EntityFramework.Entities
 {
     /// <summary>
     /// 停车场分区表

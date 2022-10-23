@@ -1,4 +1,4 @@
-namespace ApiGateWay
+namespace SmartParking.Infrastructure.ApiGateWay
 {
     public class WeatherForecast
     {

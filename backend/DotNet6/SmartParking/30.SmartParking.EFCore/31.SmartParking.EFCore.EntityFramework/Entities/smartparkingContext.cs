@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
-namespace DataBaseHelper.Entities
+namespace SmartParking.EFCore.EntityFramework.Entities
 {
     public partial class smartparkingContext : DbContext
     {
-        public smartparkingContext()
+        private static IConfiguration _config;
+      
+        public smartparkingContext(IConfiguration configuration)
         {
-            _connectionString = AppHelper.AppSettings.ReadAppSettings("ConnectionStrings:mysql");
+            _config = configuration;
+            _connectionString = _config["ConnectionStrings:mysql"];
         }
         private string _connectionString;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -19,10 +24,11 @@ namespace DataBaseHelper.Entities
                 optionsBuilder.UseMySql(_connectionString, Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.27-mysql"));
             }
         }
-        public smartparkingContext(DbContextOptions<smartparkingContext> options)
+        public smartparkingContext(DbContextOptions<smartparkingContext> options, IConfiguration configuration)
             : base(options)
         {
-            _connectionString = AppHelper.AppSettings.ReadAppSettings("ConnectionString");
+            _config = configuration;
+            _connectionString = _config["ConnectionString"];
         }
         #region DbSet
         public virtual DbSet<CarInfo> Carinfos { get; set; } = null!;

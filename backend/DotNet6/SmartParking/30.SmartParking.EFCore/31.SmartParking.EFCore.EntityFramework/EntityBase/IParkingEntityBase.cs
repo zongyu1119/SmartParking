@@ -1,7 +1,7 @@
 ﻿
-namespace DataBaseHelper.EntityBase
+namespace SmartParking.EFCore.EntityFramework.EntityBase
 {
-    public interface IParkingEntityBase:IEntity,IAuditEntity,ITimeEntity
+    public interface IParkingEntityBase:IEntity,IFullAuditInfo, IDeptEntity
     {
 
         /// <summary>

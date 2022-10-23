@@ -1,4 +1,4 @@
-namespace IdentityServer
+namespace SmartParking.Auth.IdentityServer
 {
     public class WeatherForecast
     {

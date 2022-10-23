@@ -1,5 +1,5 @@
 ﻿
-namespace DataBaseHelper.Entities
+namespace SmartParking.EFCore.EntityFramework.Entities
 {
     /// <summary>
     /// 车主/车位业主信息表

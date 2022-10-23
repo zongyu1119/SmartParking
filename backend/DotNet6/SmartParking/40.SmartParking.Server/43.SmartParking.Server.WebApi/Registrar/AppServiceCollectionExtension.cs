@@ -1,8 +1,10 @@
-﻿using Common.Service;
-using System.Reflection;
+﻿using System.Reflection;
 
-namespace SmartParking.Registrar
+namespace SmartParking.Server.WebApi.Registrar
 {
+    /// <summary>
+    /// 注册服务扩展
+    /// </summary>
     public static class AppServiceCollectionExtension
     {
         /// <summary>

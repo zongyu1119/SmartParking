@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataBaseHelper.Entities
+namespace SmartParking.EFCore.EntityFramework.Entities
 {
     /// <summary>
     /// 用户表
@@ -39,6 +39,6 @@ namespace DataBaseHelper.Entities
         /// <summary>
         /// 权限ID
         /// </summary>
-        public int? RoleId { get; set; }
+        public long? RoleId { get; set; }
     }
 }

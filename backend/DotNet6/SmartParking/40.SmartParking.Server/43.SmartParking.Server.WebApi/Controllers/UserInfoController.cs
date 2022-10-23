@@ -2,11 +2,10 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Service.Comm;
-using Service.IService;
-using Service.Models;
-using Service.Params;
 using SmartParking.Common;
+using SmartParking.Server.Const.Dtos.DtoBase;
+using SmartParking.Server.Const.Dtos.User;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 ///  Namespace: SmartParking.Controllers
@@ -39,17 +38,15 @@ namespace SmartParking.Controllers
         /// <summary>
         /// 新增用户
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = $"{PowerType.Insert}:{PowerID.UserInfoManagement}")]
         [ServiceFilter(typeof(AuditFilterAttribute))]
-        public Res<bool> AddUserInfo([FromBody]UserInfoAddParam param)
+        public async Task<ResDto<bool>> AddUserInfo([FromBody]UserCreateDto dto)
         {
-            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name??""} Args:{param}");
-            param.TenantId = this.TenantId;
-            param.CreatedBy = this.UserId;
-            return service.AddUserInfo(param);
+            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name??""} Args:{dto}");           
+            return await service.CreateAsync(dto);
         }
         
         /// <summary>
@@ -57,83 +54,79 @@ namespace SmartParking.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet("{id}")]
         [Authorize(Roles = $"{PowerType.Select}:{PowerID.UserInfoManagement}")]
         [ServiceFilter(typeof(AuditFilterAttribute))]
-        public Res<UserInfo> GetUserInfo(int id)
+        public async Task<ResDto<UserOutputDto>> GetUserInfo([FromRoute]long id)
         {
-            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{id}");
-            return service.GetUserInfo(id);
+            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name} Args:{id}");
+            return await service.GetModelAsync(id);
         }
         /// <summary>
         /// 获得用户列表
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Authorize(Roles = $"{PowerType.Select}:{PowerID.UserInfoManagement}")]
         [ServiceFilter(typeof(AuditFilterAttribute))]
-        public Res<List<UserInfo>> GetUserInfoList([FromBody]UserInfoQueryParam param)
+        public async Task<ResDto<List<UserOutputDto>>> GetList([FromQuery]UserPageSearchDto dto)
         {
-            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{param}");
-            param.TenantId=this.TenantId;
-            return service.GetUserInfoList(param);
+            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name} Args:{dto}");
+            return await service.GetListAsync(dto);
         }
         /// <summary>
         /// 获得分页用户列表
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpGet]
         [Authorize(Roles = $"{PowerType.Select}:{PowerID.UserInfoManagement}")]
         [ServiceFilter(typeof(AuditFilterAttribute))]
-        public ResPage<UserInfo> GetUserInfoListPage([FromBody]ParamPage<UserInfoQueryParam> param)
+        public async Task<ResPageDto<UserOutputDto>> GetPageList([FromQuery]UserPageSearchDto dto)
         {
-            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name} Args:{param}");
-            if(param.Param==null)
-                param.Param=new UserInfoQueryParam();
-            param.Param.TenantId = TenantId;
-            return service.GetUserInfoList(param);
+            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name} Args:{dto}");
+            return await service.GetPageListAsync(dto);
         }
         /// <summary>
         /// 修改用户
         /// </summary>
-        /// <param name="param"></param>
+        /// <param name="dto"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPut("{id}")]
         [Authorize(Roles = $"{PowerType.Update}:{PowerID.UserInfoManagement}")]
         [ServiceFilter(typeof(AuditFilterAttribute))]
-        public Res<bool> UpdateUserInfo([FromBody]UserInfoUpdateParam param)
+        public async Task<ResDto<bool>> UpdateUserInfo([FromBody]UserUpdateDto dto, [FromRoute] long id)
         {
-            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{param}");
-            param.TenantId = TenantId;
-            return service.UpdateUserInfo(param);
+            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name} Args:{dto}");
+            return await service.UpdateAsync(dto,id);
         }
         /// <summary>
         /// 删除用户
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpDelete]
         [Authorize(Roles =$"{PowerType.Delete}:{PowerID.UserInfoManagement}")]
         [ServiceFilter(typeof(AuditFilterAttribute))]
-        public Res<bool> DeleteUserInfo(int id)
+        public async Task<ResDto<bool>> DeleteUserInfo(int id)
         {
             logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{id}");
-            return service.DeleteUserInfo(id);
+            return await service.DeleteAsync(id);
         }
         /// <summary>
         /// 修改用户密码
         /// </summary>
         /// <param name="param"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPut]
         [Authorize(Roles = $"{PowerType.Update}:{PowerID.UserInfoManagement}")]
         [ServiceFilter(typeof(AuditFilterAttribute))]
-        public Res<bool> UpdateUserInfoPassword([FromBody]UserInfoUpdatePasswordParam param)
+        public async Task<ResDto<bool>> UpdateUserPwd([FromBody] string pwd)
         {
-            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name} Args:{param}");
-            return service.UpdateUserInfoPassword(param);
+            logger.LogInformation($"{System.Reflection.MethodBase.GetCurrentMethod().Name}");
+            return await service.UpdatePwdAsync(pwd);
         }
     }
 }

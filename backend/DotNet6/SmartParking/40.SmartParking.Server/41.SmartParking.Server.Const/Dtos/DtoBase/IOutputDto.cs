@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Const.Dtos.DtoBase
+namespace SmartParking.Server.Const.Dtos.DtoBase
 {
     /// <summary>
     /// 输出对象接口

@@ -1,11 +1,5 @@
-﻿using DataBaseHelper.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using SmartParking.EFCore.EntityFramework.Entities;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 /// <summary>
 ///  Namespace: Service.Comm
@@ -15,17 +9,14 @@ using System.Threading.Tasks;
 ///  Version:  0.1
 /// </summary>
 
-namespace DataBaseHelper
+namespace SmartParking.EFCore.EntityFramework
 {
     /// <summary>
     /// 存储库
     /// </summary>
     public interface IEFRepository<TEntity> where TEntity : IEntity, new()
     {
-        /// <summary>
-        /// 停车场EFDbContext
-        /// </summary>
-        smartparkingContext SmartparkingContext { get; }
+       
         /// <summary>
         /// DbContext对象
         /// </summary>
@@ -220,19 +211,13 @@ namespace DataBaseHelper
         //     System.Threading.CancellationToken
         Task<int> DeleteAsync(long keyValue, CancellationToken cancellationToken = default(CancellationToken));
 
-        //
-        // 摘要:
-        //     批量删除实体
-        //
-        // 参数:
-        //   whereExpression:
-        //     查询条件
-        //
-        //   isForceDel:
-        //     是否强制删除
-        //
-        //   cancellationToken:
-        //     System.Threading.CancellationToken
+        /// <summary>
+        /// 批量删除
+        /// </summary>
+        /// <param name="whereExpression">查询条件</param>
+        /// <param name="isForceDel">强制删除</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         Task<int> DeleteRangeAsync(Expression<Func<TEntity, bool>> whereExpression, bool isForceDel = false, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

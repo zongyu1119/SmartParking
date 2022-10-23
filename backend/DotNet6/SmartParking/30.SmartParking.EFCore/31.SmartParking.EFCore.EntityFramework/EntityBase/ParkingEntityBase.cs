@@ -1,4 +1,4 @@
-﻿namespace DataBaseHelper.EntityBase
+﻿namespace SmartParking.EFCore.EntityFramework.EntityBase
 {
     public class ParkingEntityBase : IParkingEntityBase
     {

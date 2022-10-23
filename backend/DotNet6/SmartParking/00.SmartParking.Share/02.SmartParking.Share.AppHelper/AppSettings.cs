@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.Extensions.Configuration;
 
-namespace AppHelper
+namespace SmartParking.Share.AppHelper
 {
     public class AppSettings
     {

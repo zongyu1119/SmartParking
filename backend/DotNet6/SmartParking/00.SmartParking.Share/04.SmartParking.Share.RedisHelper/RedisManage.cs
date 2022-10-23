@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 ///  Version:  0.1
 /// </summary>
 
-namespace RedisHelper
+namespace SmartParking.Share.RedisHelper
 {
     /// <summary>
     /// Redis管理类
