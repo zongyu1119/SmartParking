@@ -11,10 +11,11 @@ namespace Service.Service
     /// 审计service
     /// </summary>
     [AppService(Lifetime = ServiceLifetime.Scoped)]
-    public class AuditService : ServiceBase<Audit>, IAuditService
+    public class AuditService : AbstractAppService, IAuditService
     {
         private readonly IEFRepository<Userinfo> _userRepository;
         private readonly IEFRepository<Audit> _repository;
+        private readonly ILogger<AuditService> _logger;
         /// <summary>
         /// 实现依赖自动注入
         /// </summary>
@@ -22,15 +23,14 @@ namespace Service.Service
         /// <param name="_logger"></param>
         /// <param name="repository"></param>
         /// <param name="_mapper"></param>
-        public AuditService(IConfiguration _configuration,
-             ILogger<AuditService> _logger,
+        public AuditService(
+             ILogger<AuditService> logger,
              IEFRepository<Audit> repository,
-             IMapper _mapper,
-             IEFRepository<Userinfo> userRepository) 
-            : base(_configuration, _logger, _mapper)
+             IEFRepository<Userinfo> userRepository)             
         {
             _userRepository = userRepository;
             _repository = repository;
+            _logger = logger;
         }
         /// <summary>
         /// 新增
@@ -40,7 +40,7 @@ namespace Service.Service
         /// <exception cref="NotImplementedException"></exception>
         public async Task<ResDto<bool>> CreateAsync(AuditCreateDto param)
         {
-            var model = mapper.Map<Audit>(param);//使用AutoMapper
+            var model = Mapper.Map<Audit>(param);//使用AutoMapper
             model.CreatedTime = DateTime.Now;
             model.Revision = 1;
             return new ResDto<bool>(await _repository.InsertAsync(model) > 0);
@@ -63,7 +63,7 @@ namespace Service.Service
             if (!res.Success)
             {
                 res.Message = "查询失败！";
-                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name}执行失败！", dto);
+                _logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod()?.Name}执行失败！", dto);
             }
             return res;
         }
@@ -89,7 +89,7 @@ namespace Service.Service
             if (!res.Success)
             {
                 res.Message = "查询失败！";
-                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}执行失败！", dto);
+                _logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}执行失败！", dto);
             }
             return res;
         }
@@ -107,7 +107,7 @@ namespace Service.Service
             if (!res.Success)
             {
                 res.Message = "查询失败！";
-                logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}执行失败！", Id);
+                _logger.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name}执行失败！", Id);
             }
             return res;
         }

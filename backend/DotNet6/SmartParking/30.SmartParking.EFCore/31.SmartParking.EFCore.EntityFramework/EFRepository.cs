@@ -19,11 +19,11 @@ namespace SmartParking.EFCore.EntityFramework
     /// 资源库
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class EFRepository<TDbContext,TEntity> : IEFRepository<TEntity> where TDbContext : DbContext where TEntity : Entity,new()
+    public class EFRepository<TEntity> : IEFRepository<TEntity>  where TEntity : Entity,new()
     {
-        protected virtual TDbContext _dbContext { get; }
+        protected virtual DbContext _dbContext { get; }
 
-        protected EFRepository(TDbContext dbContext)
+        protected EFRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }

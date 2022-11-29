@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 
-namespace SmartParking.Common
+namespace SmartParking.Share.Controller
 {
     /// <summary>
     /// 自定义的控制器基础类
@@ -88,7 +91,7 @@ namespace SmartParking.Common
         public long? TenantId
         {
             get
-            {
+            {               
                 return HttpContext.Session.GetInt32("TenantId");
             }
             set

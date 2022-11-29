@@ -5,6 +5,7 @@ using SmartParking.Authorize;
 using SmartParking.Common;
 using SmartParking.Share.Core;
 using SmartParking.Share.Entity;
+using SmartParking.Share.ObjExt;
 using SmartParking.Share.RedisHelper;
 using System.Reflection;
 
@@ -32,8 +33,8 @@ namespace SmartParking.Registrar
             /// AutoMapper依赖
             /// </summary>
             // builder.Services.AddAutoMapper(typeof(Service.Comm.AutoMapperConfig));//如果在web层可以这样
-            builder.Services.AddAutoMapper(Assembly.Load("Service"));//Service层可以这样，会自动寻找
-
+            builder.Services.AddAutoMapper(Assembly.Load("SmartParking.Server.Service"));//Service层可以这样，会自动寻找
+          
             /// <summary>
             /// 注入NewtonsoftJson
             /// </summary>
@@ -52,13 +53,20 @@ namespace SmartParking.Registrar
                 options.Cookie.HttpOnly = false;
                 //options.Cookie.IsEssential = true;
             });
+            builder.Services.AddScoped(typeof(DbContext),typeof(smartparkingContext));
+
+            //注入数据库资源
+            builder.Services.AddScoped(typeof(IEFRepository<Entity>),typeof(EFRepository<Entity>));
+
+            //批量注入service
+            builder.Services.registerLifetimesByAttribute(ServiceLifetime.Singleton);
+            builder.Services.registerLifetimesByAttribute(ServiceLifetime.Scoped);
+            builder.Services.registerLifetimesByAttribute(ServiceLifetime.Transient);
+
             builder.Services.AddSingleton(typeof(ServiceInterceptor));
-            builder.Services.AddSingleton(typeof(AuditFilterAttribute));
             builder.Services.AddScoped(typeof(ServiceInterceptor));
-            builder.Services.AddSingleton(typeof(ServiceInterceptor));
-            builder.Services.AddSingleton(typeof(ServiceInterceptor));
             builder.Services.AddScoped<IMapper, Mapper>();
-            builder.Services.AddScoped(typeof(DbContext));
+            
             builder.Services.AddScoped(typeof(smartparkingContext));
             //拦截器
             //过滤器
@@ -66,8 +74,6 @@ namespace SmartParking.Registrar
             //注入JWT
             builder.Services.AddScoped<IAuthorizeJWT, AuthorizeJWT>();
             builder.Services.AddScoped(typeof(UserContext));
-            //注入数据库资源
-            builder.Services.AddScoped<IEFRepository<Entity>, EFRepository<DbContext, Entity>>();
             // 注入Service程序集
 
             // 日志
@@ -96,6 +102,39 @@ namespace SmartParking.Registrar
             });
             return builder;
         }
-
+        /// <summary>
+        /// 批量注入依赖
+        /// </summary>
+        /// <param name="service"></param>
+        /// <param name="serviceLifetime"></param>
+        private static void registerLifetimesByAttribute(this IServiceCollection service, ServiceLifetime serviceLifetime)
+        {
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+              .SelectMany(x => x.GetTypes())
+              .Where(x => x.GetCustomAttributes(typeof(AppServiceAttribute), false).Any()
+              && x.GetCustomAttribute<AppServiceAttribute>()?.Lifetime ==serviceLifetime
+              &&x.IsClass&&!x.IsAbstract)
+              .ToList();
+            if (types.Any())
+                types.ForEach(x =>
+                {
+                    var interfaces = x.GetInterfaces();
+                    interfaces.ForEach(s =>
+                    {
+                        switch (serviceLifetime)
+                        {
+                            case ServiceLifetime.Transient:
+                                service.AddTransient(s, x);
+                                break;
+                            case ServiceLifetime.Singleton:
+                                service.AddSingleton(s, x);
+                                break;
+                            case ServiceLifetime.Scoped:
+                                service.AddScoped(s, x);
+                                break;
+                        }
+                    });
+                });
+        }
     }
 }

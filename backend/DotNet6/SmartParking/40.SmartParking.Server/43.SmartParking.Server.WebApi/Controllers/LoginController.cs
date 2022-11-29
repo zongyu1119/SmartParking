@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using SmartParking.Common;
 using SmartParking.Server.Const.Dtos.DtoBase;
 using SmartParking.Server.Const.Dtos.User;
+using SmartParking.Share.Controller;
 using SmartParking.Share.RedisHelper;
 
 namespace SmartParking.Controllers
@@ -92,6 +93,7 @@ namespace SmartParking.Controllers
         [ServiceFilter(typeof(AuditFilterAttribute))]
         public string Hello(string name)
         {
+           var a= HttpContext.User.Identity.Name;
             return $"Hello {name},you pass Authorize.UserID is {base.UserId};bear:{redis.Get("Bear:"+UserId)}";
         }
     }

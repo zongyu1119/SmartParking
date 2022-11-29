@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\00.SmartParking.Share\05.SmartParking.Share.WebApi\SmartParking.Share.WebApi.csproj" />
     <ProjectReference Include="..\41.SmartParking.Server.Const\SmartParking.Server.Const.csproj" />
     <ProjectReference Include="..\42.SmartParking.Server.Service\SmartParking.Server.Service.csproj" />
   </ItemGroup>

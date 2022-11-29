@@ -33,7 +33,7 @@ namespace SmartParking.Controllers
         /// <param name="_service"></param>
         public UserInfoController(IConfiguration _configuration, ILogger<LoginController> _logger, IUserInfoService _service) : base(_configuration, _logger)
         {
-            service = _service;
+            service = _service;            
         }
         /// <summary>
         /// 新增用户

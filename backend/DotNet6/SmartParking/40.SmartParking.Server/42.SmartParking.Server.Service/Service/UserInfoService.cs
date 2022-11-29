@@ -4,6 +4,7 @@ using SmartParking.Server.Const.Dtos.DtoBase;
 using SmartParking.Server.Const.Dtos.Power;
 using SmartParking.Server.Const.Dtos.Role;
 using SmartParking.Server.Const.Dtos.User;
+using SmartParking.Share.Core;
 using SmartParking.Share.Str;
 
 namespace Service.Service
@@ -11,6 +12,7 @@ namespace Service.Service
     /// <summary>
     /// 用户信息
     /// </summary>
+    [AppService(Lifetime = ServiceLifetime.Scoped)]
     public class UserInfoService : AbstractAppService,IUserInfoService
     {
         /// <summary>
@@ -21,6 +23,7 @@ namespace Service.Service
         private readonly IEFRepository<RolePower> _rolePowerRepository;
         private readonly IEFRepository<Power> _powerRepository;
         private readonly ILogger<UserInfoService> _logger;
+        private readonly UserContext _userContext;
         /// <summary>
         /// 实现依赖自动注入
         /// </summary>
@@ -33,7 +36,8 @@ namespace Service.Service
              IEFRepository<Userinfo> repository,
              IEFRepository<Role> roleRepository,
              IEFRepository<RolePower> rolePowerRepository,
-             IEFRepository<Power> powerRepository
+             IEFRepository<Power> powerRepository,
+             UserContext userContext
             ) 
         {
             this._repository = repository;
@@ -41,6 +45,7 @@ namespace Service.Service
             this._rolePowerRepository = rolePowerRepository;
             this._powerRepository = powerRepository;
             _logger = logger;
+            _userContext = userContext;
         }
         /// <summary>
         /// 新增用户
@@ -372,7 +377,7 @@ namespace Service.Service
         /// <returns></returns>
         public async Task<ResDto<bool>> UpdatePwdAsync(string pwd)
         {
-            var user = await _repository.FindAsync(x => x.Id.Equals(id));
+            var user = await _repository.FindAsync(x => x.Id.Equals(_userContext.Id));
             if (user == null)
             {
                 ResDto<bool> res = new ResDto<bool>(false);
