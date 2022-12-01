@@ -1,26 +1,13 @@
 ﻿namespace SmartParking.EFCore.EntityFramework.EntityBase
 {
-    public class ParkingEntityBase : IParkingEntityBase
+    public class ParkingEntityBase : Entity,IParkingEntityBase
     {
         /// <summary>
         /// 乐观锁
         /// </summary>
         [Comment("乐观锁")]
         [Column("REVISION")]
-        public int? Revision { get; set; }
-        /// <summary>
-        /// ID
-        /// </summary>
-        [Key]
-        [Column("ID")]
-        [Comment("ID")]
-        public long Id { get; set; }
-        /// <summary>
-        /// 租户ID
-        /// </summary>
-        [Column("TENANT_ID")]
-        [Comment("租户号")]
-        public long? TenantId { get; set; }
+        public int? Revision { get; set; }       
         /// <summary>
         /// 创建人
         /// </summary>

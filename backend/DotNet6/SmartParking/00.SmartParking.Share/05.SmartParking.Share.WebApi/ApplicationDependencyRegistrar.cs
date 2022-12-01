@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using SkyApm.Utilities.DependencyInjection;
+using SmartParking.Share.Consts;
 using SmartParking.Share.Core;
 using SmartParking.Share.Infra;
 using SmartParking.Share.ObjExt;
@@ -13,14 +15,35 @@ namespace SmartParking.Share.WebApi
 {
     public abstract class ApplicationDependencyRegistrar
     {
+        protected ApplicationDependencyRegistrar(IServiceCollection services)
+        {
+            Services = services ?? throw new ArgumentException("IServiceCollection is null.");
+            Configuration = services.GetConfiguration() ?? throw new ArgumentException("Configuration is null.");
+            ServiceInfo = services.GetServiceInfo() ?? throw new ArgumentException("ServiceInfo is null.");
+            RedisSection = Configuration.GetSection(AppSettings.Redis);
+            CachingSection = Configuration.GetSection(AppSettings.Caching);
+            MongoDbSection = Configuration.GetSection(AppSettings.MongoDb);
+            MysqlSection = Configuration.GetSection(AppSettings.Mysql);
+            ConsulSection = Configuration.GetSection(AppSettings.Consul);
+            RabbitMqSection = Configuration.GetSection(AppSettings.RabbitMq);
+            SkyApm = Services.AddSkyApmExtensions();
+            RpcAddressInfo = Configuration.GetSection(AppSettings.RpcAddressInfo).Get<List<Rpc.AddressNode>>();
+        }       
+        public string Name => "application";
+        public abstract Assembly ApplicationLayerAssembly { get; }
+        public abstract Assembly ContractsLayerAssembly { get; }
         public abstract Assembly RepositoryOrDomainLayerAssembly { get; }
-
+        protected SkyApmExtensions SkyApm { get; init; }
+        protected List<Rpc.AddressNode> RpcAddressInfo { get; init; }
         protected IServiceCollection Services { get; init; }
-        protected IServiceInfo ServiceInfo { get; init; }
-
         protected IConfiguration Configuration { get; init; }
-
+        protected IServiceInfo ServiceInfo { get; init; }
+        protected IConfigurationSection RedisSection { get; init; }
+        protected IConfigurationSection CachingSection { get; init; }
         protected IConfigurationSection MysqlSection { get; init; }
+        protected IConfigurationSection MongoDbSection { get; init; }
+        protected IConfigurationSection ConsulSection { get; init; }
+        protected IConfigurationSection RabbitMqSection { get; init; }
 
         protected virtual void AddEfCoreContextWithRepositories(int major, int minor, int build)
         {
@@ -56,12 +79,9 @@ namespace SmartParking.Share.WebApi
                 {
                     optionsBuilder.MinBatchSize(4).MigrationsAssembly(ServiceInfo.StartAssembly.GetName().Name!.Replace("WebApi", "Migrations")).UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
                 });
-                if (this.IsDevelopment())
-                {
-                    options.LogTo(new Action<string>(Console.WriteLine), LogLevel.Information).EnableSensitiveDataLogging().EnableDetailedErrors();
-                }
             });
         }
+       
         public virtual bool IsDevelopment()
         {
 #if DEBUG

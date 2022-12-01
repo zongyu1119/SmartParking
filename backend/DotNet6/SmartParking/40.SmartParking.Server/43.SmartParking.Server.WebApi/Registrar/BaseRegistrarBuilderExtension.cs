@@ -1,12 +1,19 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Options;
 using Serilog;
 using Service;
 using SmartParking.Authorize;
 using SmartParking.Common;
 using SmartParking.Share.Core;
 using SmartParking.Share.Entity;
+using SmartParking.Share.Infra;
 using SmartParking.Share.ObjExt;
 using SmartParking.Share.RedisHelper;
+using SmartParking.Share.WebApi;
+using System;
+using System.Configuration;
 using System.Reflection;
 
 namespace SmartParking.Registrar
@@ -20,7 +27,7 @@ namespace SmartParking.Registrar
         {
             builder.Configuration.AddJsonFile(AppContext.BaseDirectory + "/appsettings.shared." + builder.Environment.EnvironmentName + ".json", optional: true, reloadOnChange: true);
             builder.Configuration.AddJsonFile(AppContext.BaseDirectory + "/appsettings." + builder.Environment.EnvironmentName + ".json", optional: true, reloadOnChange: true);
-
+            var config = builder.Services.GetConfiguration();
             // Add services to the container.
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -53,11 +60,11 @@ namespace SmartParking.Registrar
                 options.Cookie.HttpOnly = false;
                 //options.Cookie.IsEssential = true;
             });
-            builder.Services.AddScoped(typeof(DbContext),typeof(smartparkingContext));
+            //builder.Services.AddScoped(typeof(DbContext));
 
             //注入数据库资源
-            builder.Services.AddScoped(typeof(IEFRepository<Entity>),typeof(EFRepository<Entity>));
-
+            builder.Services.AddScoped(typeof(IEFRepository<>),typeof(EFRepository<>));
+            builder.Services.AddScoped(typeof(UserContext));
             //批量注入service
             builder.Services.registerLifetimesByAttribute(ServiceLifetime.Singleton);
             builder.Services.registerLifetimesByAttribute(ServiceLifetime.Scoped);
@@ -66,14 +73,23 @@ namespace SmartParking.Registrar
             builder.Services.AddSingleton(typeof(ServiceInterceptor));
             builder.Services.AddScoped(typeof(ServiceInterceptor));
             builder.Services.AddScoped<IMapper, Mapper>();
-            
-            builder.Services.AddScoped(typeof(smartparkingContext));
+            MysqlConfig mysqlConfig = config.GetSection("Mysql").Get<MysqlConfig>();
+            MySqlServerVersion serverVersion = new MySqlServerVersion(new Version(8,0,27));
+           builder.Services.AddInfraEfCoreMySql(delegate (DbContextOptionsBuilder options)
+            {
+                options.UseLowerCaseNamingConvention();
+                options.UseMySql(mysqlConfig.ConnectionString, serverVersion, delegate (MySqlDbContextOptionsBuilder optionsBuilder)
+                {
+                    
+                    optionsBuilder.MinBatchSize(4).MigrationsAssembly(builder.Services.GetServiceInfo().StartAssembly.GetName().Name!.Replace("WebApi", "Migrations")).UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                });
+            });
             //拦截器
             //过滤器
             builder.Services.AddScoped<SmartParking.Common.AuditFilterAttribute>();
             //注入JWT
             builder.Services.AddScoped<IAuthorizeJWT, AuthorizeJWT>();
-            builder.Services.AddScoped(typeof(UserContext));
+           
             // 注入Service程序集
 
             // 日志
