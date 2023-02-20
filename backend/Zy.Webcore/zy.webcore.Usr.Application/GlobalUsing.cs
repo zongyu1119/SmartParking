@@ -1,0 +1,10 @@
+﻿global using System.Text;
+global using zy.webcore.Usr.Constraint.IServices;
+global using zy.webcore.Usr.Constraint.Dtos.Account;
+global using zy.webcore.Usr.WebApi.Authorize;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.Logging;
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Threading.Tasks;

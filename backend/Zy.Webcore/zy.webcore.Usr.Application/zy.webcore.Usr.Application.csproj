@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="CommonService\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.26.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\zy.webcore.Share.Application\zy.webcore.Share.Application.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.Constraint\zy.webcore.Share.Constraint.csproj" />
+    <ProjectReference Include="..\zy.webcore.share.Entity\zy.webcore.share.Repository.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share\zy.webcore.Share.csproj" />
+    <ProjectReference Include="..\zy.webcore.Usr.Constraint\zy.webcore.Usr.Constraint.csproj" />
+    <ProjectReference Include="..\zy.webcore.Usr.Repository\zy.webcore.Usr.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
