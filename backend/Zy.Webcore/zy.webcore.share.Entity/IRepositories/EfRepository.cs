@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Z.EntityFramework.Plus;
-using zy.webcore.Share.Config.Consts;
+using zy.webcore.Share.Consts;
 using zy.webcore.Share.Extensions;
 
 namespace zy.webcore.share.Repository.IRepositories

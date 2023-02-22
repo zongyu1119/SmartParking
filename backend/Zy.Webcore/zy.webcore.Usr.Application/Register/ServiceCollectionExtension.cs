@@ -16,7 +16,7 @@ namespace zy.webcore.Usr.Application.Register
         public static IServiceCollection AddZyWebCoreDefault(this IServiceCollection services)
         {
             var appServiceType = typeof(IAppService);
-            var serviceTypes = typeof(IUserInfoService).Assembly
+            var serviceTypes = typeof(IUserService).Assembly
                 .GetExportedTypes()
                 .Where(type => type.IsInterface && type.IsAssignableTo(appServiceType))
                 .ToList();

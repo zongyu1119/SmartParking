@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace zy.webcore.Share.Constraint.Dtos
 {
-    public class OutputDto : IDto
+    /// <summary>
+    /// 数据到处DTO
+    /// </summary>
+    public class ExportDto:IDto
     {
         /// <summary>
         /// ID 
         /// </summary>
-        public long Id { get; set; }
+        public long No { get; set; }
     }
 }

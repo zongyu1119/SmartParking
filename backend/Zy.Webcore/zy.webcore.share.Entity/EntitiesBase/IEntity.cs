@@ -15,6 +15,7 @@ namespace zy.webcore.share.Repository.EntitiesBase
     {
         [Key]
         [Column("id")]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]//不自动增长
         [Comment("ID")]
         public long Id { get; set; }
     }

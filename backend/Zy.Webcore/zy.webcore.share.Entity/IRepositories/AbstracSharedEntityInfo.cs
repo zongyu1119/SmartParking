@@ -77,7 +77,7 @@ namespace zy.webcore.share.Repository.IRepositories
 
             assemblies?.ForEach(assembly => builder.ApplyConfigurationsFromAssembly(assembly));
 
-            SetComment(modelBuilder, entityTypes);
+            //SetComment(modelBuilder, entityTypes);
         }
     }
 }

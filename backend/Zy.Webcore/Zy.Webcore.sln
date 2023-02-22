@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Share.Rpc", "zy.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Share.Config", "zy.webcore.Share.Config\zy.webcore.Share.Config.csproj", "{611A6A41-4D30-495A-B124-ABC24ECB1BFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zy.webcore.Share.WebApi", "zy.webcore.Share.WebApi\zy.webcore.Share.WebApi.csproj", "{0AB208D3-2A59-4FA2-AF7C-7F14CC321879}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Share.WebApi", "zy.webcore.Share.WebApi\zy.webcore.Share.WebApi.csproj", "{0AB208D3-2A59-4FA2-AF7C-7F14CC321879}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

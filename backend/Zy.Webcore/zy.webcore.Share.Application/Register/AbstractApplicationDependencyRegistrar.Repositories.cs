@@ -33,13 +33,13 @@ public abstract partial class AbstractApplicationDependencyRegistrar
     protected virtual void AddEfCoreContext()
     {
         var mysqlConfig = MysqlSection.Get<MysqlOptions>();
-        var serverVersion = new MariaDbServerVersion(new Version(10, 5, 4));
+        var serverVersion = new MariaDbServerVersion(new Version(8, 5, 4));
         Services.AddZyEfCoreMySql(options =>
         {
             options.UseMySql(mysqlConfig.ConnectionString, serverVersion, optionsBuilder =>
             {
                 optionsBuilder.MinBatchSize(4)
-                                        .MigrationsAssembly(ServiceInfo.StartAssembly.GetName().Name.Replace("WebApi", "Migrations"))
+                                        .MigrationsAssembly(ServiceInfo.StartAssembly.GetName().Name.Replace("WebApi", "Repository"))
                                         .UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
             });
 

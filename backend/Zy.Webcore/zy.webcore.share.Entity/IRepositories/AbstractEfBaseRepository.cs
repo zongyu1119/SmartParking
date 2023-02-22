@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using zy.webcore.Share.Config.Consts;
+using zy.webcore.Share.Consts;
 
 namespace zy.webcore.share.Repository.IRepositories
 {

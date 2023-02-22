@@ -14,14 +14,14 @@ namespace zy.webcore.Usr.Application.Services
     {
         private readonly IConfiguration configuration;
         private readonly ILogger<AuthorizeJWT> logger;
-        private readonly IUserInfoService service;
+        private readonly IUserService service;
         /// <summary>
         /// JWT认证
         /// </summary>
         /// <param name="_configuration"></param>
         /// <param name="_logger"></param>
         /// <param name="_service"></param>
-        public AuthorizeJWT(IConfiguration _configuration, ILogger<AuthorizeJWT> _logger, IUserInfoService _service)
+        public AuthorizeJWT(IConfiguration _configuration, ILogger<AuthorizeJWT> _logger, IUserService _service)
         {
             this.configuration = _configuration;
             this.logger = _logger;

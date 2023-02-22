@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace zy.webcore.Share.Config.Consts
+namespace zy.webcore.Share.Consts
 {
     public class RepositoryConsts
     {

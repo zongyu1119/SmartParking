@@ -14,7 +14,7 @@ namespace zy.webcore.Usr.WebApi.Register
     public class ApplicationDependencyRegistrar : AbstractApplicationDependencyRegistrar
     {
         public ApplicationDependencyRegistrar(IServiceCollection service) : base(service) { }
-        public override Assembly ApplicationLayerAssembly => typeof(IUserInfoService).Assembly;
+        public override Assembly ApplicationLayerAssembly => typeof(IUserService).Assembly;
 
         public override Assembly RepositoryOrDomainLayerAssembly => typeof(EntityInfo).Assembly;
 

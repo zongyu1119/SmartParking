@@ -2,27 +2,30 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using zy.webcore.share.Repository.IRepositories;
 
 #nullable disable
 
-namespace zy.webcore.share.Repository.Migrations
+namespace zy.webcore.Usr.Repository.Migrations
 {
-    [DbContext(typeof(SysDbContext))]
-    partial class SysDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MySqlDbContext))]
+    [Migration("20230221163144_InitialCreate-v0.2")]
+    partial class InitialCreatev02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("MySQL:Charset", "utf8mb4 ")
                 .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("zy.webcore.share.Repository.Entities.SysUserinfo", b =>
+            modelBuilder.Entity("zy.webcore.Usr.Repository.Entities.SysUserinfo", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
                         .HasComment("ID");
@@ -40,10 +43,14 @@ namespace zy.webcore.share.Repository.Migrations
                         .HasComment("住址");
 
                     b.Property<long>("CreateBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("create_by")
+                        .HasComment("创建人");
 
                     b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime")
+                        .HasColumnName("create_time")
+                        .HasComment("创建时间");
 
                     b.Property<long?>("JobId")
                         .HasColumnType("bigint")
@@ -51,10 +58,14 @@ namespace zy.webcore.share.Repository.Migrations
                         .HasComment("职务");
 
                     b.Property<long?>("ModifyBy")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("modify_by")
+                        .HasComment("修改人");
 
                     b.Property<DateTime?>("ModifyTime")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime")
+                        .HasColumnName("modify_time")
+                        .HasComment("修改时间");
 
                     b.Property<string>("Password")
                         .IsRequired()
