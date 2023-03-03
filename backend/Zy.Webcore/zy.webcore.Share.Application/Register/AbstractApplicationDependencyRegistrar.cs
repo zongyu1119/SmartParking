@@ -54,7 +54,6 @@ public abstract partial class AbstractApplicationDependencyRegistrar : IDependen
     {
         Services
             .AddZyCoreAutoMapper(ApplicationLayerAssembly);
-
         AddApplicationSharedServices();
         AddEfCoreContextWithRepositories();
     }

@@ -3,6 +3,7 @@ using zy.webcore.Share.Constraint.Core.Interfaces;
 using zy.webcore.Usr.Application.Register;
 using zy.webcore.Share.WebApi.Register;
 using zy.webcore.Share.Extensions;
+using zy.webcore.Share.Application.Registrar;
 
 namespace zy.webcore.Usr.WebApi.Register
 {
@@ -26,7 +27,7 @@ namespace zy.webcore.Usr.WebApi.Register
 
             builder.Services.AddCors(policy =>
             {
-                policy.AddPolicy("CorsPolicy", opt => opt
+                policy.AddPolicy(serviceInfo.CorsPolicy, opt => opt
                 .AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod());
@@ -39,7 +40,5 @@ namespace zy.webcore.Usr.WebApi.Register
             builder.Services.AddZyWebCore(serviceInfo);
             return builder;
         }
-
-      
     }
 }

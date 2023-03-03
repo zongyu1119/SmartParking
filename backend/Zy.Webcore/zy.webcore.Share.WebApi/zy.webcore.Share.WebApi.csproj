@@ -7,10 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\zy.webcore.Share.Application\zy.webcore.Share.Application.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Constraint\zy.webcore.Share.Constraint.csproj" />
     <ProjectReference Include="..\zy.webcore.Share\zy.webcore.Share.csproj" />
   </ItemGroup>
