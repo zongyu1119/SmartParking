@@ -10,20 +10,13 @@ using zy.webcore.Share.Constraint.Dtos;
 
 namespace zy.webcore.Usr.Constraint.Dtos.User
 {
-    /// <summary>
-    /// 新增用户对象
-    /// </summary>
-    public class UserInputDto : InputDto
+    public class UserOutputDto:OutputDto
     {
         /// <summary>
         /// 用户名
         /// </summary>
-        [Required(ErrorMessage ="用户名不可为空！")]
         public string Account { get; set; } = null!;
-        /// <summary>
-        /// 密码
-        /// </summary>
-        public string Password { get; set; } = null!;
+    
         /// <summary>
         /// 用户真实姓名
         /// </summary>

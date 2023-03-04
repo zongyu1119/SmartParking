@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace zy.webcore.Share.Constraint.Dtos.ResultModels
 {
-    public class AppSrvResult<T> where T : class
+    public class AppSrvResult<T> 
     {
-        public AppSrvResult(T? data)
+        public AppSrvResult(T data)
         {
             Data = data;
         }

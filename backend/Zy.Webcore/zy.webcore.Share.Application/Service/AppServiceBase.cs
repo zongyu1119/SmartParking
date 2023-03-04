@@ -12,16 +12,11 @@ namespace zy.webcore.Share.Application.Service
 {
     public abstract class AbstractAppService : IAppService
     {
-        //IHttpContextAccessor _httpContextAccessor;
-        //public AbstractAppService(IHttpContextAccessor httpContextAccessor)
-        //{
-        //    _httpContextAccessor = httpContextAccessor;
-        //}
+      
         public IObjectMapper Mapper
         {
             get
             {
-                //return _httpContextAccessor.HttpContext.RequestServices.GetRequiredService<IObjectMapper>();
                 var httpContext = HttpContextUtility.GetCurrentHttpContext();
                 if (httpContext is not null)
                     return httpContext.RequestServices.GetRequiredService<IObjectMapper>();
@@ -30,7 +25,7 @@ namespace zy.webcore.Share.Application.Service
                 throw new NotImplementedException();
             }
         }
-
+        public static IdGeneratorHelper IdGenerator => ServiceLocator.Instance.GetService<IdGeneratorHelper>() ?? new IdGeneratorHelper();
         protected AppSrvResult AppSrvResult() => new();
         protected AppSrvResult Problem(HttpStatusCode statusCode, string detail) => new(statusCode, detail);
 

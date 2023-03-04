@@ -14,12 +14,15 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
     <PackageReference Include="SkyAPM.Core" Version="2.1.0" />
     <PackageReference Include="SkyAPM.Utilities.DependencyInjection" Version="2.1.0" />
+    <PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\zy.webcore.Share.Cache\zy.webcore.Share.Cache.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Config\zy.webcore.Share.Config.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Constraint\zy.webcore.Share.Constraint.csproj" />
     <ProjectReference Include="..\zy.webcore.share.Entity\zy.webcore.share.Repository.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.Redis\zy.webcore.Share.Redis.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Rpc\zy.webcore.Share.Rpc.csproj" />
   </ItemGroup>
 

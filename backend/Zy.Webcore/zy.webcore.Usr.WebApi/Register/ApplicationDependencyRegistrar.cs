@@ -17,7 +17,6 @@ namespace zy.webcore.Usr.WebApi.Register
         public override Assembly ApplicationLayerAssembly => typeof(IUserService).Assembly;
 
         public override Assembly RepositoryOrDomainLayerAssembly => typeof(EntityInfo).Assembly;
-
         public override void AddZyWebCore()
         {
             AddApplicaitonDefault();

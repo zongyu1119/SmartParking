@@ -9,5 +9,6 @@ namespace zy.webcore.Usr.Constraint.Dtos.User
 {
     public class UserSearchDto:BasePageSearchDto
     {
+        public string? Name { get; set; }
     }
 }

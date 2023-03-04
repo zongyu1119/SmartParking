@@ -7,6 +7,10 @@ using zy.webcore.Share.ZyEfcore;
 using zy.webcore.Share.Rpc.RpcBase;
 using zy.webcore.Share.Extensions;
 using zy.webcore.Share.Consts.ConfigKey;
+using zy.webcore.Share.Application.Utilitys;
+using zy.webcore.Share.Redis.Registrar;
+using zy.webcore.Share.Application.Caching;
+using zy.webcore.Share.Cache.Register;
 
 namespace zy.webcore.Share.Application.Registrar;
 
@@ -56,6 +60,7 @@ public abstract partial class AbstractApplicationDependencyRegistrar : IDependen
             .AddZyCoreAutoMapper(ApplicationLayerAssembly);
         AddApplicationSharedServices();
         AddEfCoreContextWithRepositories();
+        AddRedisCaching();
     }
 
     /// <summary>
@@ -65,5 +70,24 @@ public abstract partial class AbstractApplicationDependencyRegistrar : IDependen
     {
         Services.AddSingleton(typeof(Lazy<>));
         Services.AddScoped<UserContext>();
+        Services.AddSingleton(typeof(IdGeneratorHelper),new IdGeneratorHelper());
+    }
+    /// <summary>
+    /// 注册缓存
+    /// </summary>
+    private void AddRedisCaching()
+    {
+        Services.AddZyRedisCaching(RedisSection, CachingSection);
+        var serviceType = typeof(ICachePreheatable);
+        var implTypes = ApplicationLayerAssembly.ExportedTypes.Where(type => type.IsAssignableTo(serviceType) && type.IsNotAbstractClass(true));
+        if (implTypes.IsNotNullOrEmpty())
+        {
+            implTypes.ForEach(implType =>
+            {
+                Services.AddSingleton(implType, implType);
+                Services.AddSingleton(x => x.GetRequiredService(implType) as ICachePreheatable);
+            });
+        }
+        Services.AddCacheService();
     }
 }
