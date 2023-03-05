@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using zy.webcore.Share.Application.Filter;
 using zy.webcore.Share.Constraint.Dtos.ResultModels;
 using zy.webcore.Share.Constraint.IService;
 using zy.webcore.Usr.Constraint.Dtos.Account;
@@ -13,6 +14,7 @@ namespace zy.webcore.Usr.Constraint.IServices
     /// <summary>
     /// 用户服务
     /// </summary>
+   
     public interface IUserService:IAppService
     {
         /// <summary>
@@ -20,7 +22,7 @@ namespace zy.webcore.Usr.Constraint.IServices
         /// </summary>
         /// <param name="account"></param>
         /// <returns></returns>
-        Task<UserDetailInfoDto> GetUserDetailInfoAsync(string account); 
+        Task<UserDetailInfoDto> GetUserDetailInfoAsync(string account);
         /// <summary>
         /// 查询用户
         /// </summary>

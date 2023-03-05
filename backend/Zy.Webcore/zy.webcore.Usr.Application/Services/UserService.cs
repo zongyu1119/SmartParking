@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using zy.webcore.share.Repository.IRepositories;
+using zy.webcore.Share.Application.Filter;
 using zy.webcore.Share.Application.Service;
 using zy.webcore.Share.Cache.Services;
 using zy.webcore.Share.Constraint.Dtos.ResultModels;
@@ -55,11 +56,22 @@ namespace zy.webcore.Usr.Application.Services
             var res = await _reposiory.Where(expression)
                 .ToListAsync();
             return Mapper.Map<List<UserOutputDto>>(res);
-        }
-
-        public Task<UserDetailInfoDto> GetUserDetailInfoAsync(string account)
+        }      
+        public async Task<UserDetailInfoDto> GetUserDetailInfoAsync(string account)
         {
-            throw new NotImplementedException();
+            var res=await _reposiory.Where(x=>x.Account==account)
+                .Select(x=>new UserDetailInfoDto
+                {
+                     Address=x.Address,
+                      JobId=x.JobId,
+                        Password=x.Password,
+                         Phone=x.Phone,
+                         Sex=x.Sex,
+                          UserId=x.Id,
+                           UserIdCardNum=x.UserIdCardNum,
+                            UserName=x.UserName
+                }).FirstOrDefaultAsync();
+            return res;
         }
 
         public async Task<AppSrvResult<bool>> SetCacheAsync(string key,string value)

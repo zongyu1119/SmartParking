@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using zy.webcore.Share.Application.Filter;
 using zy.webcore.Share.Constraint.Dtos.ResultModels;
+using zy.webcore.Share.WebApi.Controllers;
 using zy.webcore.Usr.Constraint.Dtos.User;
 using zy.webcore.Usr.Constraint.IServices;
 
@@ -11,8 +14,8 @@ namespace zy.webcore.Usr.WebApi.Controllers
     /// 用户
     /// </summary>
     [Route("api/[controller]")]
-    [ApiController]
-    public class UserController : ControllerBase
+   
+    public class UserController : ZyControllerBase
     {
         private IUserService _userService;
         public UserController(IUserService userService)
@@ -37,6 +40,7 @@ namespace zy.webcore.Usr.WebApi.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         public async Task<AppSrvResult<List<UserOutputDto>>> GetList([FromQuery]UserSearchDto dto)
         {
             return await _userService.GetListAsync(dto);

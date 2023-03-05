@@ -41,9 +41,15 @@ namespace zy.webcore.Share.WebApi.Register
                 App.UseSwaggerUI();
             }
             App.UseRealIp(x => x.HeaderKey = "X-Forwarded-For");
-            App.UseAuthorization();
+           
             App.MapControllers();
             App.UseRouting();
+            //用户认证
+            App.UseAuthentication();
+            App.UseAuthorization();
+            App.UseEndpoints(a =>
+            {
+            });
         }
     }
 }

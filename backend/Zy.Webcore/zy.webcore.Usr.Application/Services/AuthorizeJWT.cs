@@ -3,14 +3,16 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using zy.webcore.Share.Application.Service;
 using zy.webcore.Share.Extensions;
+using zy.webcore.Share.Options;
 
 namespace zy.webcore.Usr.Application.Services
 {
     /// <summary>
     /// JWT认证
     /// </summary>
-    public class AuthorizeJWT : IAuthorizeJWT
+    public class AuthorizeJWT : AbstractAppService, IAuthorizeJWT
     {
         private readonly IConfiguration configuration;
         private readonly ILogger<AuthorizeJWT> logger;
@@ -36,6 +38,7 @@ namespace zy.webcore.Usr.Application.Services
         /// <returns></returns>
         public async Task<(bool, string?, UserDetailInfoDto?)> GetJWTBearAsync(AccountLoginDto user)
         {
+            var jwtConfig = configuration.GetSection("JWT").Get<JwtOption>();
             string psdMd5 = GetPassword(user.Password);
             var userDetailInfoModel =await service.GetUserDetailInfoAsync(user.UserAccount);
             string errMsg = "";
@@ -56,11 +59,11 @@ namespace zy.webcore.Usr.Application.Services
             {
                 new Claim("Id", userDetailInfoModel.UserId.ToString()),
                 new Claim(ClaimTypes.Name, userDetailInfoModel.UserName),
-                new Claim("UserNameRel", userDetailInfoModel.UserNameRel),
+                new Claim("Account", userDetailInfoModel.Account),
             };
          
             // 2. 从 appsettings.json 中读取SecretKey
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:SecretKey"]));
+            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.SecretKey));
 
             // 3. 选择加密算法
             var algorithm = SecurityAlgorithms.HmacSha256;
@@ -69,12 +72,12 @@ namespace zy.webcore.Usr.Application.Services
             var signingCredentials = new SigningCredentials(secretKey, algorithm);
 
             // 5. 从 appsettings.json 中读取Expires
-            var expires = Convert.ToDouble(configuration["JWT:Expires"]);
-
+            var expires = Convert.ToDouble(jwtConfig.Expires);
+           
             // 6. 根据以上，生成token
             var token = new JwtSecurityToken(
-                configuration["JWT:Issuer"],     //Issuer
-                configuration["JWT:Audience"],   //Audience
+                jwtConfig.Issuer,     //Issuer
+                jwtConfig.Audience,   //Audience
                 claims,                          //Claims,
                 DateTime.Now,                    //notBefore
                 DateTime.Now.AddDays(expires),   //expires

@@ -13,6 +13,10 @@ namespace zy.webcore.Usr.Constraint.Dtos.Account
         /// </summary>
         public long UserId { get; set; }
         /// <summary>
+        /// zhanghu
+        /// </summary>
+        public string Account { get; set; }
+        /// <summary>
         /// 用户名
         /// </summary>
         public string UserName { get; set; } = null!;
@@ -28,10 +32,6 @@ namespace zy.webcore.Usr.Constraint.Dtos.Account
         /// 职务名称
         /// </summary>
         public string JobName { get; set; } = null!;    
-        /// <summary>
-        /// 用户真实姓名
-        /// </summary>
-        public string? UserNameRel { get; set; }
         /// <summary>
         /// 用户身份证号
         /// </summary>

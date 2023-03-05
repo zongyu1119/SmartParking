@@ -18,16 +18,17 @@ namespace zy.webcore.Share.Constraint.Dtos.ResultModels
             StatusCode = statusCode;
             Message = message;
         }
-        public AppSrvResult(string message)
-        {
-            StatusCode = HttpStatusCode.BadRequest;
-            Message = message;
-        }
+        //public AppSrvResult(string message)
+        //{
+        //    StatusCode = HttpStatusCode.BadRequest;
+        //    Message = message;
+        //}
         public T? Data { get; set; }
         public string? Message { get; set; }
+        public bool IsSuccess =>StatusCode== HttpStatusCode.OK;
         public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;
         public static implicit operator AppSrvResult<T>(T value) => new(value);
-        public static implicit operator AppSrvResult<T>(string message) => new(message);
+        //public static implicit operator AppSrvResult<T>(string message) => new(message);
     }
     public class AppSrvResult
     {
@@ -36,10 +37,12 @@ namespace zy.webcore.Share.Constraint.Dtos.ResultModels
             StatusCode = statusCode;
             Message = message;
         }
-        public AppSrvResult(string message) { StatusCode = HttpStatusCode.BadRequest; Message = message; }
+        //public AppSrvResult(string message) { StatusCode = HttpStatusCode.BadRequest; Message = message; }
         public AppSrvResult() { }
         public string? Message { get; set; }
+        public bool IsSuccess => StatusCode == HttpStatusCode.OK;
+
         public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.OK;
-        public static implicit operator AppSrvResult(string message) => new(message);
+        //public static implicit operator AppSrvResult(string message) => new(message);
     }
 }
