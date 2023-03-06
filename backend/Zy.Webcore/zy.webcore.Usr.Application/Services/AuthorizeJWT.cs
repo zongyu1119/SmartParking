@@ -1,9 +1,11 @@
 ﻿
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using zy.webcore.Share.Application.Service;
+using zy.webcore.Share.Constraint.Dtos.ResultModels;
 using zy.webcore.Share.Extensions;
 using zy.webcore.Share.Options;
 
@@ -36,7 +38,7 @@ namespace zy.webcore.Usr.Application.Services
         /// <param name="bear"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public async Task<(bool, string?, UserDetailInfoDto?)> GetJWTBearAsync(AccountLoginDto user)
+        public async Task<AppSrvResult<(string? token, UserDetailInfoDto? userInfo)>> GetJWTBearAsync(AccountLoginDto user)
         {
             var jwtConfig = configuration.GetSection("JWT").Get<JwtOption>();
             string psdMd5 = GetPassword(user.Password);
@@ -46,13 +48,13 @@ namespace zy.webcore.Usr.Application.Services
             {
                 logger.LogError("登录用户不存在！");
                 errMsg = "登录用户不存在！";
-                return (false,null,null);
+                return Problem<(string? token, UserDetailInfoDto? userInfo)>(HttpStatusCode.BadRequest,errMsg);
             }
             if (userDetailInfoModel.Password != user.Password.GetMd5())
             {
                 logger.LogError("用户名或密码错误！");
                 errMsg = "用户名或密码错误！";
-                return (false, null, null);
+                return Problem<(string? token, UserDetailInfoDto? userInfo)>(HttpStatusCode.BadRequest, errMsg);
             }
             // 1. 定义需要使用到的Claims
             var claims = new List<Claim>()
@@ -86,7 +88,7 @@ namespace zy.webcore.Usr.Application.Services
             // 7. 将token变为string
             var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
            
-            return (true, $"Bearer {jwtToken}", userDetailInfoModel);
+            return ($"Bearer {jwtToken}", userDetailInfoModel);
         }
         /// <summary>
         /// 获得字符串的MD5
