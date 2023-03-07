@@ -23,6 +23,7 @@ namespace zy.webcore.Usr.Constraint.Dtos.User
         /// <summary>
         /// 密码
         /// </summary>
+        [Required(ErrorMessage ="密码不可为空！")]
         public string Password { get; set; } = null!;
         /// <summary>
         /// 用户真实姓名

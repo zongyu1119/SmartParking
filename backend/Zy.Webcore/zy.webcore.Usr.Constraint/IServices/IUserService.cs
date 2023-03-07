@@ -35,8 +35,18 @@ namespace zy.webcore.Usr.Constraint.IServices
         /// <param name="dto"></param>
         /// <returns></returns>
         Task<AppSrvResult<bool>> AddAsync(UserInputDto dto);
-
+        /// <summary>
+        /// 获取缓存
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         Task<AppSrvResult<object>> GetCacheAsync(string key);
+        /// <summary>
+        /// 设置缓存
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         Task<AppSrvResult<bool>> SetCacheAsync(string key,string value);
     }
 }

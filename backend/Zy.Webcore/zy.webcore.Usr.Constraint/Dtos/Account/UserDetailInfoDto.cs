@@ -6,6 +6,20 @@ using System.Threading.Tasks;
 
 namespace zy.webcore.Usr.Constraint.Dtos.Account
 {
+    /// <summary>
+    /// 登录返回数据
+    /// </summary>
+    public class LoginResDto
+    {
+        /// <summary>
+        /// Token
+        /// </summary>
+        public string Token { get; set; }
+        /// <summary>
+        /// 用户信息
+        /// </summary>
+        public UserDetailInfoDto UserInfo { get; set; }
+    }
     public class UserDetailInfoDto
     {
         /// <summary>
@@ -48,6 +62,10 @@ namespace zy.webcore.Usr.Constraint.Dtos.Account
         /// 住址
         /// </summary>
         public string? Address { get; set; }
+        /// <summary>
+        /// 角色ID
+        /// </summary>
+        public List<long> RoleIds { get; set; }
         /// <summary>
         /// 权限/菜单编码
         /// </summary>

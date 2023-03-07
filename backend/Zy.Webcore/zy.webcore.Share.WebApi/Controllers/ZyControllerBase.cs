@@ -11,6 +11,7 @@ namespace zy.webcore.Share.WebApi.Controllers
     [ApiController]
     [ZyResource]
     [ZyAuthorization]
+    [Route("api/[controller]")]
     public class ZyControllerBase: ControllerBase
     {
     }

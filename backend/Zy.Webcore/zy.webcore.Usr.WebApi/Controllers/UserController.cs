@@ -13,8 +13,6 @@ namespace zy.webcore.Usr.WebApi.Controllers
     /// <summary>
     /// 用户
     /// </summary>
-    [Route("api/[controller]")]
-   
     public class UserController : ZyControllerBase
     {
         private IUserService _userService;
@@ -40,7 +38,6 @@ namespace zy.webcore.Usr.WebApi.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpGet]
-        [Authorize]
         public async Task<AppSrvResult<List<UserOutputDto>>> GetList([FromQuery]UserSearchDto dto)
         {
             return await _userService.GetListAsync(dto);
