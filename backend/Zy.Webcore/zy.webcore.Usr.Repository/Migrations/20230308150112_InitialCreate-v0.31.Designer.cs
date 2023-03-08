@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using zy.webcore.share.Repository.IRepositories;
 
@@ -10,9 +11,11 @@ using zy.webcore.share.Repository.IRepositories;
 namespace zy.webcore.Usr.Repository.Migrations
 {
     [DbContext(typeof(MySqlDbContext))]
-    partial class MySqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230308150112_InitialCreate-v0.31")]
+    partial class InitialCreatev031
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,11 +86,6 @@ namespace zy.webcore.Usr.Repository.Migrations
                         .HasColumnType("int")
                         .HasColumnName("order")
                         .HasComment("排序");
-
-                    b.Property<long?>("ParentMenuId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("parent_menu_id")
-                        .HasComment("父菜单");
 
                     b.Property<string>("Remark")
                         .HasMaxLength(255)
@@ -271,51 +269,6 @@ namespace zy.webcore.Usr.Repository.Migrations
                     b.ToTable("sys_user", t =>
                         {
                             t.HasComment("用户表");
-                        });
-                });
-
-            modelBuilder.Entity("zy.webcore.Usr.Repository.Entities.SysUserRole", b =>
-                {
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint")
-                        .HasColumnName("user_role_id")
-                        .HasComment("ID");
-
-                    b.Property<long>("CreateBy")
-                        .HasColumnType("bigint")
-                        .HasColumnName("create_by")
-                        .HasComment("创建人");
-
-                    b.Property<DateTime>("CreateTime")
-                        .HasColumnType("datetime")
-                        .HasColumnName("create_time")
-                        .HasComment("创建时间");
-
-                    b.Property<long?>("ModifyBy")
-                        .HasColumnType("bigint")
-                        .HasColumnName("modify_by")
-                        .HasComment("修改人");
-
-                    b.Property<DateTime?>("ModifyTime")
-                        .HasColumnType("datetime")
-                        .HasColumnName("modify_time")
-                        .HasComment("修改时间");
-
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("role_id")
-                        .HasComment("角色ID");
-
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint")
-                        .HasColumnName("user_id")
-                        .HasComment("用户ID");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("sys_user_role", t =>
-                        {
-                            t.HasComment("用户角色表");
                         });
                 });
 #pragma warning restore 612, 618

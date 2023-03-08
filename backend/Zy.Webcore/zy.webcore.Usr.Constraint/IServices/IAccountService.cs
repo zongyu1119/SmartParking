@@ -7,7 +7,7 @@ namespace zy.webcore.Usr.WebApi.Authorize
     /// <summary>
     /// 用户验证相关接口
     /// </summary>
-    public interface IAccountService:IAppService
+    public interface IAccountService: IAppService
     {
         /// <summary>
         /// 获得JWTBear

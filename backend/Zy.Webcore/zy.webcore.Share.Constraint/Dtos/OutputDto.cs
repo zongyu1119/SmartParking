@@ -11,6 +11,6 @@ namespace zy.webcore.Share.Constraint.Dtos
         /// <summary>
         /// ID 
         /// </summary>
-        public long Id { get; set; }
+        public virtual long Id { get; set; }
     }
 }

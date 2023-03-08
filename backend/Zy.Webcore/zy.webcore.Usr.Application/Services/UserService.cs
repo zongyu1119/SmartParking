@@ -1,34 +1,31 @@
-﻿
-
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
-using zy.webcore.share.Repository.IRepositories;
-using zy.webcore.Share.Application.Filter;
-using zy.webcore.Share.Application.Service;
-using zy.webcore.Share.Cache.Services;
-using zy.webcore.Share.Constraint.Dtos.ResultModels;
-using zy.webcore.Share.Encode;
-using zy.webcore.Share.Extensions;
-using zy.webcore.Share.Redis.CacheProvider;
-using zy.webcore.Share.ZyEfcore;
-using zy.webcore.Usr.Constraint.Dtos.User;
-using zy.webcore.Usr.Repository.Entities;
+﻿using zy.webcore.Usr.Constraint.Dtos.Menu;
 
 namespace zy.webcore.Usr.Application.Services
 {
     public class UserService : AbstractAppService, IUserService
     {
-        private readonly IEfRepository<SysUserinfo> _reposiory;
+        private readonly IEfRepository<SysUser> _reposiory;
+        private readonly IEfRepository<SysRole> _roleReposiory;
+        private readonly IEfRepository<SysRoleMenu> _roleMenuReposiory;
+        private readonly IEfRepository<SysUserRole> _userRoleReposiory;
+        private readonly IEfRepository<SysMenu> _menuReposiory;
         private readonly ICacheService _cacheService;
         private readonly UserContext _userContext;
-        public UserService(IEfRepository<SysUserinfo> repository,
+        public UserService(IEfRepository<SysUser> repository,
             ICacheService cacheService,
-            UserContext userContext)
+            UserContext userContext,
+            IEfRepository<SysRole> roleReposiory,
+            IEfRepository<SysRoleMenu> roleMenuReposiory,
+            IEfRepository<SysUserRole> userRoleReposiory,
+            IEfRepository<SysMenu> menuReposiory)
         {
             _reposiory = repository;
             _cacheService = cacheService;
             _userContext = userContext;
+            _roleReposiory = roleReposiory;
+            _roleMenuReposiory = roleMenuReposiory;
+            _userRoleReposiory= userRoleReposiory;
+            _menuReposiory = menuReposiory;
         }
 
         /// <summary>
@@ -42,7 +39,7 @@ namespace zy.webcore.Usr.Application.Services
             if (await _reposiory.AnyAsync(x => x.Account == dto.Account))
                 return Problem<bool>(System.Net.HttpStatusCode.BadRequest, "用户账户已存在！");
             var psd = RSAEncode.RSAEncryption(dto.Password);
-            var model = Mapper.Map<SysUserinfo>(dto);            
+            var model = Mapper.Map<SysUser>(dto);            
             model.Id=IdGenerator.NextId();
             model.Password = psd;
             return await _reposiory.InsertAsync(model)>0;
@@ -55,7 +52,7 @@ namespace zy.webcore.Usr.Application.Services
         /// <returns></returns>
         public async Task<AppSrvResult<List<UserOutputDto>>> GetListAsync(UserSearchDto dto)
         {
-            var expression = ExpressionCreator.New<SysUserinfo>()
+            var expression = ExpressionCreator.New<SysUser>()
                 .AndIf(dto.Name.IsNotNullOrWhiteSpace(),x=>x.UserName.Contains(dto.Name));
             var res = await _reposiory.Where(expression)
                 .ToListAsync();
@@ -63,6 +60,8 @@ namespace zy.webcore.Usr.Application.Services
         }
         public async Task<UserDetailInfoDto> GetUserDetailInfoAsync(string account)
         {
+            var userRoleRep = _userRoleReposiory.GetAll();
+            var roleMenuRep=_roleMenuReposiory.GetAll();
             var res = await _reposiory.Where(x => x.Account == account)
                 .Select(x => new UserDetailInfoDto
                 {
@@ -74,8 +73,12 @@ namespace zy.webcore.Usr.Application.Services
                     UserId = x.Id,
                     UserIdCardNum = x.UserIdCardNum,
                     UserName = x.UserName,
-                    Account=x.Account
+                    Account=x.Account,
+                    RoleIds=userRoleRep.Where(s=>s.UserId==x.Id).Select(s=>s.Id).ToList(),
                 }).FirstOrDefaultAsync();
+            var menuList = await _menuReposiory
+                .Where(x => roleMenuRep.Where(s => res.RoleIds.Contains(s.RoleId)).Select(s => s.MenuId).Contains(x.Id)).ToListAsync();
+            res.MenuList = Mapper.Map<List<MenuOutputDto>>(menuList);
             return res;
         }
 

@@ -4,23 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace zy.webcore.Usr.Constraint.Dtos.Account
+namespace zy.webcore.Share.Constraint.Dtos.Login
 {
-    /// <summary>
-    /// 登录返回数据
-    /// </summary>
-    public class LoginResDto
-    {
-        /// <summary>
-        /// Token
-        /// </summary>
-        public string Token { get; set; }
-        /// <summary>
-        /// 用户信息
-        /// </summary>
-        public UserDetailInfoDto UserInfo { get; set; }
-    }
-    public class UserDetailInfoDto
+    public class UserInfo
     {
         /// <summary>
         /// 用户ID
@@ -35,17 +21,13 @@ namespace zy.webcore.Usr.Constraint.Dtos.Account
         /// </summary>
         public string UserName { get; set; } = null!;
         /// <summary>
-        /// 密码
-        /// </summary>
-        public string Password { get; set; } = null!;
-        /// <summary>
         /// 职务ID
         /// </summary>
         public long? JobId { get; set; }
         /// <summary>
         /// 职务名称
         /// </summary>
-        public string JobName { get; set; } = null!;    
+        public string JobName { get; set; } = null!;
         /// <summary>
         /// 用户身份证号
         /// </summary>
@@ -69,6 +51,10 @@ namespace zy.webcore.Usr.Constraint.Dtos.Account
         /// <summary>
         /// 权限/菜单编码
         /// </summary>
-        public List<MenuOutputDto>? MenuList { get; set; }
+        public List<string>? MenuCodeList { get; set; }
+        /// <summary>
+        /// Token
+        /// </summary>
+        public string Token { get; set; }
     }
 }

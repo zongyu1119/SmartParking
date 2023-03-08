@@ -16,5 +16,7 @@ namespace zy.webcore.Share.ZyEfcore
         public List<long> RoleIds { get; set; }
         public string Device { get; set; } = string.Empty;
         public string RemoteIpAddress { get; set; } = string.Empty;
+        public long DeptId { get; set; }
+        //TODO 数据权限
     }
 }
