@@ -66,7 +66,6 @@ namespace zy.webcore.Usr.Application.Services
                 .Select(x => new UserDetailInfoDto
                 {
                     Address = x.Address,
-                    JobId = x.JobId,
                     Password = x.Password,
                     Phone = x.Phone,
                     Sex = x.Sex,

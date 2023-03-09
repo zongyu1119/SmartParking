@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using zy.webcore.Share.Enum.Usr;
 
 namespace zy.webcore.Share.Constraint.Dtos.Login
 {
@@ -20,10 +24,6 @@ namespace zy.webcore.Share.Constraint.Dtos.Login
         /// 用户名
         /// </summary>
         public string UserName { get; set; } = null!;
-        /// <summary>
-        /// 职务ID
-        /// </summary>
-        public long? JobId { get; set; }
         /// <summary>
         /// 职务名称
         /// </summary>
@@ -45,13 +45,21 @@ namespace zy.webcore.Share.Constraint.Dtos.Login
         /// </summary>
         public string? Address { get; set; }
         /// <summary>
+        /// 数据权限
+        /// </summary>
+        public DataScopeEnum DataScope { get; set; } = DataScopeEnum.None;
+        /// <summary>
+        /// 邮箱
+        /// </summary>
+        public string Email { get; set; }
+        /// <summary>
         /// 角色ID
         /// </summary>
         public List<long> RoleIds { get; set; }
         /// <summary>
         /// 权限/菜单编码
         /// </summary>
-        public List<string>? MenuCodeList { get; set; }
+        public List<string> MenuCodeList { get; set; }
         /// <summary>
         /// Token
         /// </summary>

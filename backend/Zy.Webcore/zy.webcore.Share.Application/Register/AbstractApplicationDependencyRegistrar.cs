@@ -11,6 +11,7 @@ using zy.webcore.Share.Application.Utilitys;
 using zy.webcore.Share.Redis.Registrar;
 using zy.webcore.Share.Application.Caching;
 using zy.webcore.Share.Cache.Register;
+using zy.webcore.Share.Application.Extensions;
 
 namespace zy.webcore.Share.Application.Registrar;
 

@@ -22,6 +22,8 @@ namespace zy.webcore.Usr.Repository.Entities
         /// </summary>
         [Comment("角色ID")]
         [Column("role_id")]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]//不自动增长
         public override long Id { get => base.Id; set => base.Id = value; }
         /// <summary>
         /// 角色名称

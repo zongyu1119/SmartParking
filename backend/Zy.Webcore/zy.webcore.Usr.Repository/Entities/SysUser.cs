@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using zy.webcore.share.Repository.EntitiesBase;
+using zy.webcore.Share.Enum.Usr;
 
 namespace zy.webcore.Usr.Repository.Entities
 {
@@ -10,8 +11,16 @@ namespace zy.webcore.Usr.Repository.Entities
     /// </summary>
     [Table("sys_user")]
     [Comment("用户表")]
-    public partial class SysUser:FullAuditInfo
+    public partial class SysUser: FullAuditSoftDeleteInfo
     {
+        /// <summary>
+        /// 用户ID
+        /// </summary>
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]//不自动增长
+        [Column("user_id")]
+        [Comment("ID")]
+        public override long Id { get => base.Id; set => base.Id = value; }
         /// <summary>
         /// 用户名
         /// </summary>
@@ -33,12 +42,7 @@ namespace zy.webcore.Usr.Repository.Entities
         [Comment("用户姓名")]
         [MaxLength(32, ErrorMessage = "用户姓名不能超过32个字！")]
         public string? UserName { get; set; }
-        /// <summary>
-        /// 职务ID
-        /// </summary>
-        [Column("user_job")]
-        [Comment("职务")]
-        public long? JobId { get; set; }
+      
         /// <summary>
         /// 用户身份证号
         /// </summary>
@@ -67,5 +71,25 @@ namespace zy.webcore.Usr.Repository.Entities
         [Comment("住址")]
         [MaxLength(255, ErrorMessage = "住址不能超过255个字！")]
         public string? Address { get; set; }
+        /// <summary>
+        /// 数据权限
+        /// </summary>
+        [Comment("数据权限")]
+        [Column("data_scope")]
+        public DataScopeEnum DataScope { get; set; } = DataScopeEnum.None;
+        /// <summary>
+        /// 邮箱
+        /// </summary>
+        [Comment("邮箱")]
+        [Column("email")]
+        [MaxLength(128,ErrorMessage ="邮箱不能超过128位！")]
+        public string? Email { get; set; }
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [Comment("备注")]
+        [Column("remark")]
+        [MaxLength(256,ErrorMessage ="备注不能大于256位!")]
+        public string? Remark { get; set; }
     }
 }

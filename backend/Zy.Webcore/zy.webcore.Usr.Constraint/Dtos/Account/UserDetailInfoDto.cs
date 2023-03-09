@@ -39,10 +39,6 @@ namespace zy.webcore.Usr.Constraint.Dtos.Account
         /// </summary>
         public string Password { get; set; } = null!;
         /// <summary>
-        /// 职务ID
-        /// </summary>
-        public long? JobId { get; set; }
-        /// <summary>
         /// 职务名称
         /// </summary>
         public string JobName { get; set; } = null!;    

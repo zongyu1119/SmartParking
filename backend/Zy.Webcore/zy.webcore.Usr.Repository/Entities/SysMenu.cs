@@ -10,17 +10,22 @@ using System.Threading.Tasks;
 using zy.webcore.share.Repository.EntitiesBase;
 using zy.webcore.Share.Enum.Usr;
 
-namespace zy.webcore.Usr.Repository.Entities
+namespace zy.webcore.Usr.Repository.Entities 
 {
+    /// <summary>
+    /// 菜单表
+    /// </summary>
     [Comment("菜单表")]
     [Table("sys_menu")]
-    public class SysMenu : FullAuditInfo
+    public class SysMenu : FullAuditSoftDeleteInfo
     {
         /// <summary>
         /// 菜单ID
         /// </summary>
         [Comment("菜单ID")]
         [Column("menu_id")]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]//不自动增长
         public override long Id { get => base.Id; set => base.Id = value; }
         /// <summary>
         /// 菜单名称

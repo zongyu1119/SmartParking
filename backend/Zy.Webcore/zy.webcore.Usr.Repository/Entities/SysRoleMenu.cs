@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,9 @@ namespace zy.webcore.Usr.Repository.Entities
         /// ID 
         /// </summary>
         [Comment("ID")]
-        [Column("role_power_id")]
+        [Column("role_menu_id")]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]//不自动增长
         public override long Id { get => base.Id; set => base.Id = value; }
         /// <summary>
         /// 角色ID

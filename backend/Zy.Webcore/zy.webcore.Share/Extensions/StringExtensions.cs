@@ -79,6 +79,14 @@ namespace zy.webcore.Share.Extensions
         /// <param name="s2"></param>
         /// <returns></returns>
         public static bool EqualsIgnoreCase(this string s1, string s2) => string.Equals(s1, s2, StringComparison.OrdinalIgnoreCase);
-
+        /// <summary>
+        /// 获得字符串的Base64
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string GetBase64String(this string str)
+        {
+            return Convert.ToBase64String(Encoding.Default.GetBytes(str));
+        }
     }
 }

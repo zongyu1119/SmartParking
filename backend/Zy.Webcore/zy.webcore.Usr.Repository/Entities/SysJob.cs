@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,32 +11,33 @@ using zy.webcore.share.Repository.EntitiesBase;
 namespace zy.webcore.Usr.Repository.Entities
 {
     /// <summary>
-    /// 用户角色表
+    /// 职务表
     /// </summary>
-    [Table("sys_user_role")]
-    [Comment("用户角色表")]
-    public class SysUserRole : FullAuditInfo
+    [Table("sys_job")]
+    [Comment("职务表")]
+    public class SysJob: FullAuditSoftDeleteInfo
     {
         /// <summary>
-        /// ID 
+        /// 职务ID
         /// </summary>
-        [Comment("ID")]
-        [Column("user_role_id")]
+        [Column("job_id")]
+        [Comment("职务ID")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]//不自动增长
         public override long Id { get => base.Id; set => base.Id = value; }
         /// <summary>
-        /// 权限ID
+        /// 职务名称
         /// </summary>
-        [Column("user_id")]
-        [Comment("用户ID")]
-        public long UserId { get; set; }
+        [MaxLength(32, ErrorMessage = "职务名称不能大于32位！")]
+        [Column("job_name")]
+        [Comment("职务名称")]
+        public string JobName { get; set; }
         /// <summary>
-        /// 角色ID
+        /// 备注
         /// </summary>
-        [Column("role_id")]
-        [Comment("角色ID")]
-        public long RoleId { get; set; }
-       
+        [Comment("备注")]
+        [Column("remark")]
+        [MaxLength(256, ErrorMessage = "备注不能大于256位!")]
+        public string? Remark { get; set; }
     }
 }

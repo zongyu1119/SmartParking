@@ -99,9 +99,16 @@ namespace zy.webcore.share.Repository.IRepositories
 
             if (entity == null)
                 entity = new TEntity { Id = keyValue };
-
-            DbContext.Remove(entity);
-
+            var enityType = typeof(TEntity);
+            var hasSoftDeleteMember = typeof(ISoftDelete).IsAssignableFrom(enityType);
+            if (hasSoftDeleteMember)
+            {
+                entity.GetType().GetProperty("IsDeleted").SetValue(entity,true);
+            }
+            else
+            {
+                DbContext.Remove(entity);
+            }
             try
             {
                 rows = await DbContext.SaveChangesAsync(cancellationToken);

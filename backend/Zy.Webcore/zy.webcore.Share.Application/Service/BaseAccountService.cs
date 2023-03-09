@@ -19,18 +19,20 @@ namespace zy.webcore.Share.Application.Service
     public abstract class BaseAccountService:AbstractAppService
     {
         private readonly ICacheService _cacheService;
-        public BaseAccountService(ICacheService cacheService) {
+        protected readonly JwtOption _jwtConfig;
+        public BaseAccountService(ICacheService cacheService,IConfiguration configuration) {
             _cacheService= cacheService;
+            _jwtConfig = configuration.GetSection("JWT").Get<JwtOption>();
         }
         /// <summary>
-        /// 设置用户缓存
+        /// 设置登录用户缓存
         /// </summary>
         /// <param name="userInfo"></param>
         /// <returns></returns>
        public async Task SetUserInfoCacheAsync(UserInfo userInfo)
         {
             var cacheKey = CacheKeyConsts.userLoginObjCacheKeyPrefix + ":" + userInfo.UserId;
-            await _cacheService.SetAsync(cacheKey, userInfo);
+            await _cacheService.SetAsync<UserInfo>(cacheKey, userInfo,_jwtConfig.Expires*24*60*60);
         }
         /// <summary>
         /// 获得token
