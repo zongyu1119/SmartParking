@@ -7,11 +7,11 @@ using zy.webcore.Share.ZyEfcore;
 using zy.webcore.Share.Rpc.RpcBase;
 using zy.webcore.Share.Extensions;
 using zy.webcore.Share.Consts.ConfigKey;
-using zy.webcore.Share.Application.Utilitys;
 using zy.webcore.Share.Redis.Registrar;
 using zy.webcore.Share.Application.Caching;
 using zy.webcore.Share.Cache.Register;
 using zy.webcore.Share.Application.Extensions;
+using zy.webcore.Share.Application.Yitter;
 
 namespace zy.webcore.Share.Application.Registrar;
 
@@ -71,7 +71,7 @@ public abstract partial class AbstractApplicationDependencyRegistrar : IDependen
     {
         Services.AddSingleton(typeof(Lazy<>));
         Services.AddScoped<UserContext>();
-        Services.AddSingleton(typeof(IdGeneratorHelper),new IdGeneratorHelper());
+        Services.AddSingleton(typeof(ZyIdGenerator),new ZyIdGenerator());
     }
     /// <summary>
     /// 注册缓存

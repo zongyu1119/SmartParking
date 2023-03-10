@@ -4,15 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yitter.IdGenerator;
+using zy.webcore.Share.Cache.Services;
+using zy.webcore.Share.Constraint.Core.Interfaces;
 
-namespace zy.webcore.Share.Application.Utilitys
+namespace zy.webcore.Share.Application.Yitter
 {
     /// <summary>
     /// 雪花漂移算法ID,使用单实例模式
     /// </summary>
-    public class IdGeneratorHelper
+    public class ZyIdGenerator
     {
-        public IdGeneratorHelper()
+      
+        public ZyIdGenerator()
         {
             var options = new IdGeneratorOptions(1); //构造方法初始化雪花Id
             YitIdHelper.SetIdGenerator(options);

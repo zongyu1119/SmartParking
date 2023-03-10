@@ -26,9 +26,10 @@ namespace zy.webcore.Share.Application.Filter
         }
         public void OnException(ExceptionContext context)
         {
-            var res= new ObjectResult(new AppSrvResult(System.Net.HttpStatusCode.InternalServerError, context.Exception.Message));
-            res.StatusCode = 500;
-            context.Result = res;
+            context.Result = new ObjectResult(new AppSrvResult(System.Net.HttpStatusCode.InternalServerError, context.Exception.Message))
+            {
+                StatusCode = 500
+            };
             _logger.LogError("[Error]" + context.Exception.Message ?? "");
         }
     }

@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using zy.webcore.Share.Application.Utilitys;
+using zy.webcore.Share.Application.Yitter;
 using zy.webcore.Share.Constraint.Core.Mapper;
 using zy.webcore.Share.Constraint.Dtos.ResultModels;
 using zy.webcore.Share.Constraint.IService;
@@ -25,7 +26,7 @@ namespace zy.webcore.Share.Application.Service
                 throw new NotImplementedException();
             }
         }
-        public static IdGeneratorHelper IdGenerator => ServiceLocator.Instance.GetService<IdGeneratorHelper>() ?? new IdGeneratorHelper();
+        public static ZyIdGenerator IdGenerator => ServiceLocator.Instance.GetService<ZyIdGenerator>() ?? new ZyIdGenerator();
         protected AppSrvResult AppSrvResult() => new();
         protected AppSrvResult Problem(HttpStatusCode statusCode, string detail) => new(statusCode, detail);
         protected AppSrvResult<T> Problem<T>(HttpStatusCode statusCode, string detail) => new(statusCode, detail);
