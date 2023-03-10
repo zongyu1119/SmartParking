@@ -26,4 +26,10 @@
     <ProjectReference Include="..\zy.webcore.Share\zy.webcore.Share.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.Development.shared.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
