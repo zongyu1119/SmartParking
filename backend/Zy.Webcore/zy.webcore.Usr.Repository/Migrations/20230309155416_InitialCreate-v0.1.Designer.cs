@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using zy.webcore.share.Repository.IRepositories;
 
@@ -10,9 +11,11 @@ using zy.webcore.share.Repository.IRepositories;
 namespace zy.webcore.Usr.Repository.Migrations
 {
     [DbContext(typeof(MySqlDbContext))]
-    partial class MySqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230309155416_InitialCreate-v0.1")]
+    partial class InitialCreatev01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,11 +46,6 @@ namespace zy.webcore.Usr.Repository.Migrations
                         .HasColumnType("varchar(32)")
                         .HasColumnName("dept_name")
                         .HasComment("部门名称");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("is_delete")
-                        .HasComment("是否已删除");
 
                     b.Property<long?>("ModifyBy")
                         .HasColumnType("bigint")
@@ -94,11 +92,6 @@ namespace zy.webcore.Usr.Repository.Migrations
                         .HasColumnType("datetime")
                         .HasColumnName("create_time")
                         .HasComment("创建时间");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("is_delete")
-                        .HasComment("是否已删除");
 
                     b.Property<string>("JobName")
                         .IsRequired()
@@ -153,11 +146,6 @@ namespace zy.webcore.Usr.Repository.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasColumnName("enable")
                         .HasComment("是否启用");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("is_delete")
-                        .HasComment("是否已删除");
 
                     b.Property<string>("MenuCode")
                         .IsRequired()
@@ -346,11 +334,6 @@ namespace zy.webcore.Usr.Repository.Migrations
                         .HasColumnType("varchar(128)")
                         .HasColumnName("email")
                         .HasComment("邮箱");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("tinyint(1)")
-                        .HasColumnName("is_delete")
-                        .HasComment("是否已删除");
 
                     b.Property<long?>("ModifyBy")
                         .HasColumnType("bigint")

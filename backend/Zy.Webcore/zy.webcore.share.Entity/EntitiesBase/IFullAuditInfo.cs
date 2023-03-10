@@ -34,4 +34,16 @@ namespace zy.webcore.share.Repository.EntitiesBase
         [Comment("修改时间")]
         public DateTime? ModifyTime { get; set; }
     }
+    /// <summary>
+    /// 软删除
+    /// </summary>
+    public class FullAuditSoftDeleteInfo : FullAuditInfo, ISoftDelete
+    {
+        /// <summary>
+        /// 是否已删除
+        /// </summary>
+        [Column("is_delete")]
+        [Comment("是否已删除")]
+        public bool IsDeleted { get; set; } = false;
+    }
 }

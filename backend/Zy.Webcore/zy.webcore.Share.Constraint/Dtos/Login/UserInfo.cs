@@ -1,26 +1,16 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using zy.webcore.Share.Enum.Usr;
 
-namespace zy.webcore.Usr.Constraint.Dtos.Account
+namespace zy.webcore.Share.Constraint.Dtos.Login
 {
-    /// <summary>
-    /// 登录返回数据
-    /// </summary>
-    public class LoginResDto
-    {
-        /// <summary>
-        /// Token
-        /// </summary>
-        public string Token { get; set; }
-        /// <summary>
-        /// 用户信息
-        /// </summary>
-        public UserDetailInfoDto UserInfo { get; set; }
-    }
-    public class UserDetailInfoDto
+    public class UserInfo
     {
         /// <summary>
         /// 用户ID
@@ -35,13 +25,9 @@ namespace zy.webcore.Usr.Constraint.Dtos.Account
         /// </summary>
         public string UserName { get; set; } = null!;
         /// <summary>
-        /// 密码
-        /// </summary>
-        public string Password { get; set; } = null!;
-        /// <summary>
         /// 职务名称
         /// </summary>
-        public string JobName { get; set; } = null!;    
+        public string JobName { get; set; } = null!;
         /// <summary>
         /// 用户身份证号
         /// </summary>
@@ -59,12 +45,24 @@ namespace zy.webcore.Usr.Constraint.Dtos.Account
         /// </summary>
         public string? Address { get; set; }
         /// <summary>
+        /// 数据权限
+        /// </summary>
+        public DataScopeEnum DataScope { get; set; } = DataScopeEnum.None;
+        /// <summary>
+        /// 邮箱
+        /// </summary>
+        public string Email { get; set; }
+        /// <summary>
         /// 角色ID
         /// </summary>
         public List<long> RoleIds { get; set; }
         /// <summary>
         /// 权限/菜单编码
         /// </summary>
-        public List<MenuOutputDto>? MenuList { get; set; }
+        public List<string> MenuCodeList { get; set; }
+        /// <summary>
+        /// Token
+        /// </summary>
+        public string Token { get; set; }
     }
 }
