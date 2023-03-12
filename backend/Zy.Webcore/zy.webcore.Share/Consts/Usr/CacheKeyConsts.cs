@@ -8,7 +8,14 @@ namespace zy.webcore.Share.Consts.Usr
 {
     public static class CacheKeyConsts
     {
-        public const string userLoginObjCacheKeyPrefix = "zy:webcore:usr:login:obj";
-        public const string userLoginTokenCacheKeyPrefix = "zy:webcore:usr:login:token";
+        /// <summary>
+        /// 保存用户登录信息的缓存前缀
+        /// </summary>
+        public const string userLoginObjCacheKeyPrefix = "zy:webcore:usr:login";
+       
+        /// <summary>
+        /// 验证码缓存前缀
+        /// </summary>
+        public const string userCaptchCacheKeyPrefix = "zy:webcore:usr:login:captch";
     }
 }

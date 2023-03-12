@@ -50,11 +50,9 @@ namespace zy.webcore.Share.Redis.Units
         /// <typeparam name="T">The 1st type parameter.</typeparam>
         public byte[] Serialize<T>(T value)
         {
-            using (var ms = new MemoryStream())
-            {
-                Serializer.Serialize(ms, value);
-                return ms.ToArray();
-            }
+            using var ms = new MemoryStream();
+            Serializer.Serialize(ms, value);
+            return ms.ToArray();
         }
 
         #region Mainly For Memcached

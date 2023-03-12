@@ -31,7 +31,7 @@ namespace zy.webcore.Share.ZyEfcore
         /// <summary>
         /// Email
         /// </summary>
-        public string Email { get; set; } = string.Empty;
+        public string? Email { get; set; } = string.Empty;
         /// <summary>
         /// 角色ID
         /// </summary>
@@ -52,5 +52,9 @@ namespace zy.webcore.Share.ZyEfcore
         /// 数据权限
         /// </summary>
         public DataScopeEnum DataScope {get; set; }
+        /// <summary>
+        /// 客户端类型
+        /// </summary>
+        public ClientTypeEnum ClientType { get; set; }
     }
 }

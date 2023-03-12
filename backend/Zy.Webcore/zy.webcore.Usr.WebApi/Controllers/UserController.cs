@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using zy.webcore.Share.Application.Filter;
+using zy.webcore.Share.Constraint.Dtos;
 using zy.webcore.Share.Constraint.Dtos.ResultModels;
 using zy.webcore.Share.WebApi.Controllers;
 using zy.webcore.Usr.Constraint.Dtos.User;
@@ -38,7 +39,7 @@ namespace zy.webcore.Usr.WebApi.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<AppSrvResult<List<UserOutputDto>>> GetList([FromQuery]UserSearchDto dto)
+        public async Task<AppSrvResult<PageResDto<UserOutputDto>>> GetList([FromQuery]UserSearchDto dto)
         {
             return await _userService.GetListAsync(dto);
         }
@@ -77,6 +78,7 @@ namespace zy.webcore.Usr.WebApi.Controllers
         /// <param name="key"></param>
         /// <returns></returns>
         [HttpGet("GetCache")]
+        [ZyAllowUnAuthorization]
         public async Task<AppSrvResult<object>> GetCacheAsync([FromQuery]string key)
         {
             return await _userService.GetCacheAsync(key);
@@ -88,6 +90,7 @@ namespace zy.webcore.Usr.WebApi.Controllers
         /// <param name="value"></param>
         /// <returns></returns>
         [HttpGet("SetCache")]
+        [ZyAllowUnAuthorization]
         public async Task<AppSrvResult<bool>> SetCacheAsync([FromQuery]string key, [FromQuery]string value)
         {
             return await _userService.SetCacheAsync(key, value);

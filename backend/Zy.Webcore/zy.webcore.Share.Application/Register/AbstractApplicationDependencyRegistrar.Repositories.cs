@@ -1,13 +1,4 @@
 ﻿
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using zy.webcore.Share.Config.ConfigSection;
-using zy.webcore.share.Repository.EntitiesBase;
-using zy.webcore.Share.Extensions;
-using zy.webcore.Share.Application.Extensions;
-
 namespace zy.webcore.Share.Application.Registrar;
 
 public abstract partial class AbstractApplicationDependencyRegistrar
@@ -46,7 +37,7 @@ public abstract partial class AbstractApplicationDependencyRegistrar
             if (this.IsDevelopment())
             {
                 //options.AddInterceptors(new DefaultDbCommandInterceptor())
-                options.LogTo(Console.WriteLine, LogLevel.Information)
+                options.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information)
                             .EnableSensitiveDataLogging()
                             .EnableDetailedErrors();
             }

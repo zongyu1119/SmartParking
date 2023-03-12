@@ -10,10 +10,10 @@ namespace zy.webcore.Usr.WebApi.Controllers
 {   
     public class AccountController : ZyControllerBase
     {
-        private readonly IAccountService _jwtService;
-        public AccountController(IAccountService jwtService)
+        private readonly IAccountService _accountService;
+        public AccountController(IAccountService accountService)
         {
-            _jwtService = jwtService;
+            _accountService = accountService;
         }
         /// <summary>
         /// 登录
@@ -22,9 +22,19 @@ namespace zy.webcore.Usr.WebApi.Controllers
         /// <returns></returns>
         [HttpPost("login")]
         [ZyAllowUnAuthorization]
-        public async Task<AppSrvResult<LoginResDto>> Login(AccountLoginDto dto)
+        public async Task<AppSrvResult<LoginResDto>> PcLogin(AccountLoginDto dto)
         {
-            return await _jwtService.GetJWTBearAsync(dto);
+            return await _accountService.LoginAsync(dto,Share.Enum.Usr.ClientTypeEnum.PC);
+        }
+        /// <summary>
+        /// 获取验证码
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("captch")]
+        [ZyAllowUnAuthorization]
+        public async Task<AppSrvResult<CaptchOutputDto>> GetCaptchAsync()
+        {
+            return await _accountService.GetCaptchAsync();
         }
     }
 }

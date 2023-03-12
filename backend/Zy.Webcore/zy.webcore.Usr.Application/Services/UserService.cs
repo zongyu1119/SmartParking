@@ -1,4 +1,5 @@
-﻿using zy.webcore.Usr.Constraint.Dtos.Menu;
+﻿
+using zy.webcore.Share.Constraint.Dtos;
 
 namespace zy.webcore.Usr.Application.Services
 {
@@ -46,18 +47,33 @@ namespace zy.webcore.Usr.Application.Services
         }
 
         /// <summary>
-        /// 查找用户
+        /// 分页查找用户
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        public async Task<AppSrvResult<List<UserOutputDto>>> GetListAsync(UserSearchDto dto)
+        public async Task<AppSrvResult<PageResDto<UserOutputDto>>> GetListAsync(UserSearchDto dto)
         {
             var expression = ExpressionCreator.New<SysUser>()
                 .AndIf(dto.Name.IsNotNullOrWhiteSpace(),x=>x.UserName.Contains(dto.Name));
+            var count=await _reposiory.CountAsync(expression);
             var res = await _reposiory.Where(expression)
+                .Skip(dto.SkipRows)
+                .Take(dto.PageSize)
                 .ToListAsync();
-            return Mapper.Map<List<UserOutputDto>>(res);
+            var data= Mapper.Map<List<UserOutputDto>>(res);
+            return new PageResDto<UserOutputDto>
+            {
+                Data = data,
+                PageSize = dto.PageSize,
+                PageIndex = dto.PageIndex,
+                TotalCount = count
+            };
         }
+        /// <summary>
+        /// 查找用户详细信息
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
         public async Task<UserDetailInfoDto> GetUserDetailInfoAsync(string account)
         {
             var userRoleRep = _userRoleReposiory.GetAll();
@@ -83,12 +99,12 @@ namespace zy.webcore.Usr.Application.Services
 
         public async Task<AppSrvResult<object>> GetCacheAsync(string key)
         {
-            return await _cacheService.GetAsync<string>(key);
+            return await _cacheService.GetAsync(key);
         }
 
         public async Task<AppSrvResult<bool>> SetCacheAsync(string key,string value)
         {
-             await _cacheService.SetAsync(key,value,500);
+            await _cacheService.SetAsync(key,value,500);
             return true;
         }
     }

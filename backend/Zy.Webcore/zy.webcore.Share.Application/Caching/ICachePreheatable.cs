@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace zy.webcore.Share.Application.Caching
+﻿namespace zy.webcore.Share.Application.Caching
 {
     public interface ICachePreheatable
     {

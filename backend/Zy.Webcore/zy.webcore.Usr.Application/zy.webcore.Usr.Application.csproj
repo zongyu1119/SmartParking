@@ -27,4 +27,10 @@
     <ProjectReference Include="..\zy.webcore.Usr.Repository\zy.webcore.Usr.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Fonts\ARIAL.TTF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

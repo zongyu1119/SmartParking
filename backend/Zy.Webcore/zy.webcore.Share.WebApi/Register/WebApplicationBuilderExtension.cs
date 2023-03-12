@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Nacos.AspNetCore.V2;
 using Nacos.V2;
 using Nacos.V2.DependencyInjection;
 using System;
@@ -30,7 +32,13 @@ namespace zy.webcore.Share.WebApi.Register
             }
 
             builder.Configuration.AddJsonFile($"{AppContext.BaseDirectory}/appsettings.{builder.Environment.EnvironmentName}.json", true, true);
-            
+            // 注册服务到Nacos
+            builder.Services.AddNacosAspNet(builder.Configuration, "NacosConfig"); //默认节点Nacos
+            // 添加配置中心
+            builder.Host.ConfigureAppConfiguration((context, b) =>
+            {
+                b.AddNacosV2Configuration(builder.Configuration.GetSection("NacosConfig"));
+            });
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -84,6 +92,8 @@ namespace zy.webcore.Share.WebApi.Register
             builder.Services.AddSingleton(builder);
             builder.Services.ReplaceConfiguration(builder.Configuration);
             builder.Services.AddSingleton(typeof(IServiceInfo), serviceInfo);
+            // 关闭netcore自动处理参数校验机制
+            builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
             builder.Services.AddZyWebCore(serviceInfo);
             return builder;
         }

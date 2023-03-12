@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\zy.webcore.Share.Redis\zy.webcore.Share.Redis.csproj" />
     <ProjectReference Include="..\zy.webcore.Share\zy.webcore.Share.csproj" />
   </ItemGroup>
 

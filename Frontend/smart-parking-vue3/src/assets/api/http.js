@@ -2,8 +2,8 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 // 请求
 const http = axios.create({
-    baseURL: 'https://localhost:44381/api/',
-    timeout: 6000
+    baseURL: 'http://localhost:10010/api/',
+    timeout: 30000
 })
 // 请求拦截
 http.interceptors.request.use(config => {
@@ -19,9 +19,12 @@ http.interceptors.response.use(arr => {
     // 对响应码的处理
     switch (arr.status) {
         case 200:
+            if(arr.data&&arr.data.isSuccess){
+                return arr.data.data
+            }
             ElMessage({
-                message: arr.statusText,
-                type: 'success',
+                message: arr.data.message,
+                type: 'warning',
             })
             break;
         case 201:
@@ -44,9 +47,10 @@ http.interceptors.response.use(arr => {
             break;
         case 401:
             ElMessage({
-                message: arr.statusText,
+                message: arr.data.message,
                 type: 'warning',
             })
+            this.$router.push('/login')
             break;
         case 403:
             ElMessage({
@@ -73,7 +77,6 @@ http.interceptors.response.use(arr => {
             })
             break;
     }
-    return arr
 }, err => {
     console.log(err);
 })

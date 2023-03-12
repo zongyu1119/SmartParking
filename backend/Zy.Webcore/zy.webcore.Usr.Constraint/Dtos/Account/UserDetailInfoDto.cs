@@ -20,6 +20,9 @@ namespace zy.webcore.Usr.Constraint.Dtos.Account
         /// </summary>
         public UserDetailInfoDto UserInfo { get; set; }
     }
+    /// <summary>
+    /// 登录用户信息
+    /// </summary>
     public class UserDetailInfoDto
     {
         /// <summary>
@@ -27,7 +30,7 @@ namespace zy.webcore.Usr.Constraint.Dtos.Account
         /// </summary>
         public long UserId { get; set; }
         /// <summary>
-        /// zhanghu
+        /// 账户
         /// </summary>
         public string Account { get; set; }
         /// <summary>

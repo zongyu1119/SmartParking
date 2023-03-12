@@ -18,9 +18,14 @@ namespace zy.webcore.Usr.Constraint.Dtos.Account
         [Required(ErrorMessage ="密码不可为空！")]
         public string Password { get; set; }
         /// <summary>
-        /// 验证码
+        /// 验证码ID
         /// </summary>
         [Required(ErrorMessage ="验证码不能为空！")]
-        public string VerificationCode { get; set; }
+        public long CaptchId { get; set; }
+        /// <summary>
+        /// 验证码
+        /// </summary>
+        [Required(ErrorMessage = "验证码不能为空！")]
+        public string CaptchCode { get; set; }
     }
 }

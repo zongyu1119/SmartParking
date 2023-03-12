@@ -1,14 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using zy.webcore.Share.Constraint.Dtos;
-
-namespace zy.webcore.Usr.Constraint.Dtos.User
+﻿namespace zy.webcore.Usr.Constraint.Dtos.User
 {
     /// <summary>
     /// 用户输出对象
@@ -18,11 +8,7 @@ namespace zy.webcore.Usr.Constraint.Dtos.User
         /// <summary>
         /// 用户名
         /// </summary>
-        public string Account { get; set; } = null!;
-        /// <summary>
-        /// 密码
-        /// </summary>
-        public string Password { get; set; } = null!;
+        public string Account { get; set; }
         /// <summary>
         /// 用户真实姓名
         /// </summary>

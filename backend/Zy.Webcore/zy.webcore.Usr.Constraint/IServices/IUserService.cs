@@ -28,7 +28,7 @@ namespace zy.webcore.Usr.Constraint.IServices
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<AppSrvResult<List<UserOutputDto>>> GetListAsync(UserSearchDto dto);
+        Task<AppSrvResult<PageResDto<UserOutputDto>>> GetListAsync(UserSearchDto dto);
         /// <summary>
         /// 新增用户
         /// </summary>

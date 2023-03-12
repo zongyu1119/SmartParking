@@ -1,7 +1,4 @@
-﻿using zy.webcore.Share.Application.Registrar;
-using zy.webcore.Share.Extensions;
-
-namespace zy.webcore.Share.Application.Extensions
+﻿namespace zy.webcore.Share.Application.Extensions
 {
     public static class AbstractApplicationDependencyRegistrarExtensions
     {

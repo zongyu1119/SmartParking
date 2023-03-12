@@ -10,10 +10,16 @@ namespace zy.webcore.Usr.WebApi.Authorize
     public interface IAccountService: IAppService
     {
         /// <summary>
-        /// 获得JWTBear
+        /// 用户登录
         /// </summary>
         /// <param name="user"></param>
+        /// <param name="clientType"></param>
         /// <returns></returns>
-        Task<AppSrvResult<LoginResDto>> GetJWTBearAsync(AccountLoginDto user);
+        Task<AppSrvResult<LoginResDto>> LoginAsync(AccountLoginDto user, ClientTypeEnum clientType = ClientTypeEnum.PC);
+        /// <summary>
+        /// 获取验证码
+        /// </summary>
+        /// <returns></returns>
+        Task<AppSrvResult<CaptchOutputDto>> GetCaptchAsync();
     }
 }
