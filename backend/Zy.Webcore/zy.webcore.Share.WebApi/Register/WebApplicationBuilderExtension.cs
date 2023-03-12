@@ -39,6 +39,8 @@ namespace zy.webcore.Share.WebApi.Register
             {
                 b.AddNacosV2Configuration(builder.Configuration.GetSection("NacosConfig"));
             });
+
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

@@ -14,7 +14,6 @@ namespace zy.webcore.Share.Application.Yitter
     /// </summary>
     public class ZyIdGenerator
     {
-      
         public ZyIdGenerator()
         {
             var options = new IdGeneratorOptions(1); //构造方法初始化雪花Id
@@ -26,9 +25,10 @@ namespace zy.webcore.Share.Application.Yitter
         /// <summary>
         /// 设置参数，建议程序初始化时执行一次
         /// </summary>
-        /// <param name="options"></param>
-        private static void SetIdGenerator(IdGeneratorOptions options)
+        private void SetIdGenerator()
         {
+            var options = new IdGeneratorOptions(1); //构造方法初始化雪花Id
+            YitIdHelper.SetIdGenerator(options);
             _IdGenInstance = new DefaultIdGenerator(options);
         }
 
