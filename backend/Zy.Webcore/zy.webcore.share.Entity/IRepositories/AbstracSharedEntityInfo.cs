@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using zy.webcore.Share.Extensions;
 using zy.webcore.Share.ZyEfcore;
 
-namespace zy.webcore.share.Repository.IRepositories
+namespace zy.webcore.Share.Repository.IRepositories
 {
     public abstract class AbstracSharedEntityInfo : IEntityInfo
     {

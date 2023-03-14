@@ -3,7 +3,7 @@ global using zy.webcore.Usr.Constraint.Dtos.Account;
 global using System;
 global using zy.webcore.Share.Constraint.Dtos.ResultModels;
 global using Microsoft.EntityFrameworkCore;
-global using zy.webcore.share.Repository.IRepositories;
+global using zy.webcore.Share.Repository.IRepositories;
 global using zy.webcore.Usr.Constraint.Dtos.User;
 global using zy.webcore.Usr.Repository.Entities;
 global using System.Collections.Generic;

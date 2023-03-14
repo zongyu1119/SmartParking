@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using zy.webcore.share.Repository.EntitiesBase;
+using zy.webcore.Share.Repository.EntitiesBase;
 using zy.webcore.Share.Enum.Usr;
 
 namespace zy.webcore.Usr.Repository.Entities

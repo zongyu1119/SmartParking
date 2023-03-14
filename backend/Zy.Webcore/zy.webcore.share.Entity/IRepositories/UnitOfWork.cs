@@ -2,7 +2,7 @@
 using System.Data;
 
 
-namespace zy.webcore.share.Repository.IRepositories
+namespace zy.webcore.Share.Repository.IRepositories
 {
     public abstract class UnitOfWork<TDbContext> : IUnitOfWork
         where TDbContext : DbContext

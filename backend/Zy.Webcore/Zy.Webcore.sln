@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Usr.Constraint",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Share.Constraint", "zy.webcore.Share.Constraint\zy.webcore.Share.Constraint.csproj", "{AF4A20F2-07AB-4444-9ED6-3D4B23280F02}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.share.Repository", "zy.webcore.share.Entity\zy.webcore.share.Repository.csproj", "{CD380AFC-5252-4FCC-B795-E729E81D8E9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Share.Repository", "zy.webcore.share.Entity\zy.webcore.Share.Repository.csproj", "{CD380AFC-5252-4FCC-B795-E729E81D8E9B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{B3C332FE-4928-4259-A5E1-4C2425599A24}"
 EndProject
@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Share.Cache", "z
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Share.ApplicationTests", "zy.webcore.Share.ApplicationTests\zy.webcore.Share.ApplicationTests.csproj", "{02B3A9BA-C525-4A6E-8FCB-09507ED985A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zy.webcore.Share.CacheTests", "zy.webcore.Share.CacheTests\zy.webcore.Share.CacheTests.csproj", "{103F2540-ED10-41F1-A67F-73621A819B0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Share.CacheTests", "zy.webcore.Share.CacheTests\zy.webcore.Share.CacheTests.csproj", "{103F2540-ED10-41F1-A67F-73621A819B0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

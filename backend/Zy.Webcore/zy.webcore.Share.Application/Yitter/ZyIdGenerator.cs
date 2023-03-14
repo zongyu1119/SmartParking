@@ -25,9 +25,10 @@ namespace zy.webcore.Share.Application.Yitter
         /// <summary>
         /// 设置参数，建议程序初始化时执行一次
         /// </summary>
-        private void SetIdGenerator()
+        /// <param name="workId"></param>
+        public static void SetIdGenerator(ushort workId)
         {
-            var options = new IdGeneratorOptions(1); //构造方法初始化雪花Id
+            var options = new IdGeneratorOptions(workId); //构造方法初始化雪花Id
             YitIdHelper.SetIdGenerator(options);
             _IdGenInstance = new DefaultIdGenerator(options);
         }

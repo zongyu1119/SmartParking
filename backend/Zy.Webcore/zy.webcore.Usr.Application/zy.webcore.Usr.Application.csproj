@@ -21,7 +21,7 @@
     <ProjectReference Include="..\zy.webcore.Share.Application\zy.webcore.Share.Application.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Cache\zy.webcore.Share.Cache.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Constraint\zy.webcore.Share.Constraint.csproj" />
-    <ProjectReference Include="..\zy.webcore.share.Entity\zy.webcore.share.Repository.csproj" />
+    <ProjectReference Include="..\zy.webcore.share.Entity\zy.webcore.Share.Repository.csproj" />
     <ProjectReference Include="..\zy.webcore.Share\zy.webcore.Share.csproj" />
     <ProjectReference Include="..\zy.webcore.Usr.Constraint\zy.webcore.Usr.Constraint.csproj" />
     <ProjectReference Include="..\zy.webcore.Usr.Repository\zy.webcore.Usr.Repository.csproj" />

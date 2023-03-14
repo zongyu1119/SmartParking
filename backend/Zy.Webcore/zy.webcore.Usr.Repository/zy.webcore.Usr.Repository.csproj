@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\zy.webcore.share.Entity\zy.webcore.share.Repository.csproj" />
+    <ProjectReference Include="..\zy.webcore.share.Entity\zy.webcore.Share.Repository.csproj" />
   </ItemGroup>
 
   <ItemGroup>

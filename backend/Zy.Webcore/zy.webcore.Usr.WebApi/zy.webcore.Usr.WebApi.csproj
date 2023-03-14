@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\zy.webcore.share.Entity\zy.webcore.share.Repository.csproj" />
+    <ProjectReference Include="..\zy.webcore.share.Entity\zy.webcore.Share.Repository.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.WebApi\zy.webcore.Share.WebApi.csproj" />
     <ProjectReference Include="..\zy.webcore.Usr.Application\zy.webcore.Usr.Application.csproj" />
     <ProjectReference Include="..\zy.webcore.Usr.Constraint\zy.webcore.Usr.Constraint.csproj" />

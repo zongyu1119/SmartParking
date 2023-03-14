@@ -58,7 +58,8 @@ public abstract partial class AbstractApplicationDependencyRegistrar : IDependen
     {
         Services.AddSingleton(typeof(Lazy<>));
         Services.AddScoped<UserContext>();
-        Services.AddSingleton(typeof(ZyIdGenerator),new ZyIdGenerator());
+        Services.AddSingleton(typeof(ZyIdGenerator));
+        Services.AddHostedService<ShareBackgroundService>();
     }
     /// <summary>
     /// 注册缓存

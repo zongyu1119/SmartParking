@@ -10,7 +10,7 @@ using Z.EntityFramework.Plus;
 using zy.webcore.Share.Consts;
 using zy.webcore.Share.Extensions;
 
-namespace zy.webcore.share.Repository.IRepositories
+namespace zy.webcore.Share.Repository.IRepositories
 {
     /// <summary>
     /// Ef默认的、全功能的仓储实现

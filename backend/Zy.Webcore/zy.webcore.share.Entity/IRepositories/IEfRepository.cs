@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System.Data;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using zy.webcore.share.Repository.EntitiesBase;
 
-namespace zy.webcore.share.Repository.IRepositories
+namespace zy.webcore.Share.Repository.IRepositories
 {
     /// <summary>
     /// Ef默认的、全功能的仓储接口

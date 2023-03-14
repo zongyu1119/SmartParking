@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using zy.webcore.share.Repository.EntitiesBase;
+using zy.webcore.Share.Repository.EntitiesBase;
 using zy.webcore.Share.Constraint.IService;
 using zy.webcore.Usr.Repository.EntitiesBase;
 

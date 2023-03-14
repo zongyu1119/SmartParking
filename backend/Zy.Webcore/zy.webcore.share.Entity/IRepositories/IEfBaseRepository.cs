@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace zy.webcore.share.Repository.IRepositories
+namespace zy.webcore.Share.Repository.IRepositories
 {
     /// <summary>
     /// Ef仓储的基类接口

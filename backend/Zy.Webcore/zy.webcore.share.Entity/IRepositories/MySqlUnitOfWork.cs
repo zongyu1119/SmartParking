@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace zy.webcore.share.Repository.IRepositories
+namespace zy.webcore.Share.Repository.IRepositories
 {
     public class MySqlUnitOfWork<TDbContext> : UnitOfWork<TDbContext>
     where TDbContext : MySqlDbContext

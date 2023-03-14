@@ -15,7 +15,7 @@ global using zy.webcore.Share.Encode;
 global using zy.webcore.Share.Extensions;
 global using zy.webcore.Share.Options;
 global using Microsoft.EntityFrameworkCore;
-global using zy.webcore.share.Repository.IRepositories;
+global using zy.webcore.Share.Repository.IRepositories;
 global using zy.webcore.Share.Cache.Services;
 global using zy.webcore.Share.ZyEfcore;
 global using zy.webcore.Usr.Constraint.Dtos.User;

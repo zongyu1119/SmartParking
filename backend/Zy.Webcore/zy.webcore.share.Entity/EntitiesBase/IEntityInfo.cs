@@ -1,6 +1,6 @@
 ﻿using zy.webcore.Share.ZyEfcore;
 
-namespace zy.webcore.share.Repository.EntitiesBase
+namespace zy.webcore.Share.Repository.EntitiesBase
 {
     public interface IEntityInfo
     {

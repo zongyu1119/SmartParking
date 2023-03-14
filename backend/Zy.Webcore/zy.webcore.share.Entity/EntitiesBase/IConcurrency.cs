@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace zy.webcore.share.Repository.EntitiesBase
+namespace zy.webcore.Share.Repository.EntitiesBase
 {
     public interface IConcurrency
     {

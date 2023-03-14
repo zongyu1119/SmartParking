@@ -7,7 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using zy.webcore.share.Repository.EntitiesBase;
+using zy.webcore.Share.Repository.EntitiesBase;
 using zy.webcore.Share.Enum.Usr;
 
 namespace zy.webcore.Usr.Repository.Entities 

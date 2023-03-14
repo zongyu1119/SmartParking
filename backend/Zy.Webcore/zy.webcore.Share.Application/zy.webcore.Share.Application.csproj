@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.26.1" />
     <PackageReference Include="nacos-sdk-csharp" Version="1.3.4" />
     <PackageReference Include="nacos-sdk-csharp.AspNetCore" Version="1.3.4" />
+    <PackageReference Include="nacos-sdk-csharp.Extensions.Configuration" Version="1.3.4" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.0.0" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta15" />
@@ -28,7 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\zy.webcore.Share.Cache\zy.webcore.Share.Cache.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Constraint\zy.webcore.Share.Constraint.csproj" />
-    <ProjectReference Include="..\zy.webcore.share.Entity\zy.webcore.share.Repository.csproj" />
+    <ProjectReference Include="..\zy.webcore.share.Entity\zy.webcore.Share.Repository.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Redis\zy.webcore.Share.Redis.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Rpc\zy.webcore.Share.Rpc.csproj" />
     <ProjectReference Include="..\zy.webcore.Share\zy.webcore.Share.csproj" />

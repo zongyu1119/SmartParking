@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using zy.webcore.share.Repository.IRepositories;
+using zy.webcore.Share.Repository.IRepositories;
 using zy.webcore.Share.ZyEfcore;
 
 namespace zy.webcore.Usr.Repository.EntitiesBase

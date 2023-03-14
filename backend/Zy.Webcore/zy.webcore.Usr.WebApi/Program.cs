@@ -12,5 +12,3 @@ await builder.Build()
     .ChangeThreadPoolSettings()
     .RunAsync();
 
-
-

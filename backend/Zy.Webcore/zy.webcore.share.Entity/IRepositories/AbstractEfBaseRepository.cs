@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using zy.webcore.Share.Consts;
 
-namespace zy.webcore.share.Repository.IRepositories
+namespace zy.webcore.Share.Repository.IRepositories
 {
     /// <summary>
     /// Ef仓储的基类实现,抽象类

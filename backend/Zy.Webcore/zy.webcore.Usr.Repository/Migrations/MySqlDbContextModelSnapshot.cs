@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using zy.webcore.share.Repository.IRepositories;
+using zy.webcore.Share.Repository.IRepositories;
 
 #nullable disable
 
