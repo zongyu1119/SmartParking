@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Yitter.IdGenerator;
-using zy.webcore.Share.Cache.Services;
 using zy.webcore.Share.Constraint.Core.Interfaces;
+using zy.webcore.Share.Consts;
 
-namespace zy.webcore.Share.Application.Yitter
+namespace zy.webcore.Share.Yitter.Services
 {
-    /// <summary>
-    /// 雪花漂移算法ID,使用单实例模式
-    /// </summary>
     public class ZyIdGenerator
     {
-        public ZyIdGenerator()
+        private readonly IServiceInfo _serviceInfo;
+        private readonly string _cacheKey;
+        public ZyIdGenerator(IServiceInfo serviceInfo)
         {
+            _serviceInfo = serviceInfo;
+            _cacheKey= CacheKeyPrefix.cacheKeyPrefixShare+serviceInfo.ServiceName;
             var options = new IdGeneratorOptions(1); //构造方法初始化雪花Id
             YitIdHelper.SetIdGenerator(options);
         }
@@ -32,14 +33,14 @@ namespace zy.webcore.Share.Application.Yitter
             YitIdHelper.SetIdGenerator(options);
             _IdGenInstance = new DefaultIdGenerator(options);
         }
-
+     
         /// <summary>
         /// 生成新的Id
         /// 调用本方法前，请确保调用了 SetIdGenerator 方法做初始化。
         /// 否则将会初始化一个WorkerId为0的对象。
         /// </summary>
         /// <returns></returns>
-        public long NextId()
+        public static long NextId()
         {
             _IdGenInstance ??= new DefaultIdGenerator(
                     new IdGeneratorOptions() { WorkerId = 0 }

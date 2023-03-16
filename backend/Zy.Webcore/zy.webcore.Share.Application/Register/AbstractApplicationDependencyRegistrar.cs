@@ -1,5 +1,8 @@
 ﻿
 
+using zy.webcore.Share.DistributedLock.Register;
+using zy.webcore.Share.Yitter.Register;
+
 namespace zy.webcore.Share.Application.Registrar;
 
 public abstract partial class AbstractApplicationDependencyRegistrar : IDependencyRegistrar
@@ -49,6 +52,9 @@ public abstract partial class AbstractApplicationDependencyRegistrar : IDependen
         AddApplicationSharedServices();
         AddEfCoreContextWithRepositories();
         AddRedisCaching();
+        Services.AddDistributeLockService()
+            .AddYitter();
+
     }
 
     /// <summary>
@@ -58,7 +64,7 @@ public abstract partial class AbstractApplicationDependencyRegistrar : IDependen
     {
         Services.AddSingleton(typeof(Lazy<>));
         Services.AddScoped<UserContext>();
-        Services.AddSingleton(typeof(ZyIdGenerator));
+
         Services.AddHostedService<ShareBackgroundService>();
     }
     /// <summary>

@@ -1,5 +1,6 @@
 ﻿
 using zy.webcore.Share.Constraint.Dtos;
+using zy.webcore.Share.Yitter.Services;
 
 namespace zy.webcore.Usr.Application.Services
 {
@@ -41,7 +42,7 @@ namespace zy.webcore.Usr.Application.Services
                 return Problem<bool>(System.Net.HttpStatusCode.BadRequest, "用户账户已存在！");
             var psd = RSAEncode.RSAEncryption(dto.Password);
             var model = Mapper.Map<SysUser>(dto);            
-            model.Id=IdGenerator.NextId();
+            model.Id=ZyIdGenerator.NextId();
             model.Password = psd;
             return await _reposiory.InsertAsync(model)>0;
         }

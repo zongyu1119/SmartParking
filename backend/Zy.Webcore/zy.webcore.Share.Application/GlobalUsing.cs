@@ -22,7 +22,6 @@ global using zy.webcore.Share.Constraint.Dtos.ResultModels;
 global using zy.webcore.Share.Consts.Usr;
 global using zy.webcore.Share.Extensions;
 global using zy.webcore.Share.ZyEfcore;
-global using zy.webcore.Share.Application.Yitter;
 global using zy.webcore.Share.Constraint.Core.Mapper;
 global using zy.webcore.Share.Constraint.IService;
 global using zy.webcore.Share.Options;

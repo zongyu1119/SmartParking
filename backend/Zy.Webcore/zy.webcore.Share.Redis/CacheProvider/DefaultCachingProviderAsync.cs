@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using zy.webcore.Share.Redis.Options;
 using zy.webcore.Share.Redis.Units;
+using static Pipelines.Sockets.Unofficial.Threading.MutexSlim;
 
 namespace zy.webcore.Share.Redis
 {
@@ -387,6 +388,31 @@ namespace zy.webcore.Share.Redis
         {
             ArgumentCheck.NotNullAndCountGTZero(cacheKeys, nameof(cacheKeys));
             await _redisDb.KeyExpireAsync(cacheKeys, seconds);
+        }
+        /// <summary>
+        /// 分布式锁
+        /// </summary>
+        /// <param name="lockName"></param>
+        /// <param name="expiry"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public async override Task<string> LockAsync(string lockName, int expiry = 10)
+        {
+            var lockToken=Guid.NewGuid().ToString("N");
+            if (await _redisDb.LockTakeAsync(lockName, lockToken, TimeSpan.FromSeconds(expiry)))
+                return lockToken;
+            else
+                throw new InvalidOperationException($"获取分布式锁失败:{lockName}");
+        }
+        /// <summary>
+        /// 分布式锁解锁
+        /// </summary>
+        /// <param name="lockName">锁名称</param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public async override Task<bool> UnLockAsync(string lockName,string lockToken)
+        {
+            return await _redisDb.LockReleaseAsync(lockName, lockToken);
         }
     }
 }

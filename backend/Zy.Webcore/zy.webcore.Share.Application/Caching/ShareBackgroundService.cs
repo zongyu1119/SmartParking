@@ -2,6 +2,7 @@
 using Nacos.AspNetCore.V2;
 using Nacos.Microsoft.Extensions.Configuration;
 using Nacos.V2;
+using zy.webcore.Share.Yitter.Services;
 
 namespace zy.webcore.Share.Application.Caching
 {

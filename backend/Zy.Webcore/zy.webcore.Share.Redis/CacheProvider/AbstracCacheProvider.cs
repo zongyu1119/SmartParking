@@ -1,5 +1,8 @@
 ﻿
 
+using StackExchange.Redis;
+using static Pipelines.Sockets.Unofficial.Threading.MutexSlim;
+
 namespace zy.webcore.Share.Redis.CacheProvider
 {
     public abstract class AbstracCacheProvider : ICacheProvider
@@ -487,5 +490,18 @@ namespace zy.webcore.Share.Redis.CacheProvider
             {
             }
         }
+        /// <summary>
+        /// 分布式锁
+        /// </summary>
+        /// <param name="lockName"></param>
+        /// <param name="expiry"></param>
+        /// <returns></returns>
+        public abstract Task<string> LockAsync(string lockName, int expiry = 10);
+        /// <summary>
+        /// 分布式锁解锁
+        /// </summary>
+        /// <param name="lockName"></param>
+        /// <returns></returns>
+        public abstract Task<bool> UnLockAsync(string lockName, string lockToken);
     }
 }

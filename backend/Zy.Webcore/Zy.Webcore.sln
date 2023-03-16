@@ -47,7 +47,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Share.Applicatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Share.CacheTests", "zy.webcore.Share.CacheTests\zy.webcore.Share.CacheTests.csproj", "{103F2540-ED10-41F1-A67F-73621A819B0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zy.webcore.Share.DistributedLock", "zy.webcore.Share.DistributedLock\zy.webcore.Share.DistributedLock.csproj", "{DCE2BCE3-4F96-41A7-B87A-FDFAA83E756D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Share.DistributedLock", "zy.webcore.Share.DistributedLock\zy.webcore.Share.DistributedLock.csproj", "{DCE2BCE3-4F96-41A7-B87A-FDFAA83E756D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zy.webcore.Share.Yitter", "zy.webcore.Share.Yitter\zy.webcore.Share.Yitter.csproj", "{F937B8A6-0E22-4F95-98F9-540772778121}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{657ABC25-7622-4FF6-A162-627C13F8E4E5}"
+	ProjectSection(SolutionItems) = preProject
+		zy.webcore.MD = zy.webcore.MD
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +130,10 @@ Global
 		{DCE2BCE3-4F96-41A7-B87A-FDFAA83E756D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCE2BCE3-4F96-41A7-B87A-FDFAA83E756D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCE2BCE3-4F96-41A7-B87A-FDFAA83E756D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F937B8A6-0E22-4F95-98F9-540772778121}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F937B8A6-0E22-4F95-98F9-540772778121}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F937B8A6-0E22-4F95-98F9-540772778121}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F937B8A6-0E22-4F95-98F9-540772778121}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -147,6 +158,7 @@ Global
 		{02B3A9BA-C525-4A6E-8FCB-09507ED985A8} = {B3C332FE-4928-4259-A5E1-4C2425599A24}
 		{103F2540-ED10-41F1-A67F-73621A819B0E} = {B3C332FE-4928-4259-A5E1-4C2425599A24}
 		{DCE2BCE3-4F96-41A7-B87A-FDFAA83E756D} = {1A436BCF-74D0-4452-B1E4-AF778BFD3E22}
+		{F937B8A6-0E22-4F95-98F9-540772778121} = {1A436BCF-74D0-4452-B1E4-AF778BFD3E22}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84BA487C-3542-4FDA-98A2-FEDFC4D6EE6C}

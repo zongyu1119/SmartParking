@@ -1,26 +1,21 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using zy.webcore.Share.DistributedLock.Services;
 
 namespace zy.webcore.Share.DistributedLock.Register
 {
     /// <summary>
-    /// 注册缓存
+    /// 注册分布式锁
     /// </summary>
     public static class ServiceCollectionExtension
     {
         /// <summary>
-        /// 注册缓存
+        /// 注册分布式锁
         /// </summary>
         /// <param name="service"></param>
         /// <returns></returns>
         public static IServiceCollection AddDistributeLockService(this IServiceCollection service)
         {
-            service.AddSingleton(typeof(ICacheService),typeof(CacheService));
+            service.AddSingleton(typeof(IDistributedLockService),typeof(DistributedLockService));
             return service;
         }
     }

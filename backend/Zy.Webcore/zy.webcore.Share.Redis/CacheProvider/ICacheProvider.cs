@@ -163,5 +163,18 @@
         /// <param name="seconds">Expiration .</param>
         /// <returns></returns>
         Task KeyExpireAsync(IEnumerable<string> cacheKeys, int seconds);
+        /// <summary>
+        /// 分布式锁
+        /// </summary>
+        /// <param name="lockName">锁名称</param>
+        /// <param name="expiry">过期时间</param>
+        /// <returns></returns>
+        Task<string> LockAsync(string lockName, int expiry = 10);
+        /// <summary>
+        /// 分布式锁解锁
+        /// </summary>
+        /// <param name="lockName"></param>
+        /// <returns></returns>
+        Task<bool> UnLockAsync(string lockName, string lockToken);
     }
 }

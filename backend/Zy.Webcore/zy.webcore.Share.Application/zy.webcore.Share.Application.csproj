@@ -29,9 +29,11 @@
   <ItemGroup>
     <ProjectReference Include="..\zy.webcore.Share.Cache\zy.webcore.Share.Cache.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Constraint\zy.webcore.Share.Constraint.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.DistributedLock\zy.webcore.Share.DistributedLock.csproj" />
     <ProjectReference Include="..\zy.webcore.share.Entity\zy.webcore.Share.Repository.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Redis\zy.webcore.Share.Redis.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Rpc\zy.webcore.Share.Rpc.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.Yitter\zy.webcore.Share.Yitter.csproj" />
     <ProjectReference Include="..\zy.webcore.Share\zy.webcore.Share.csproj" />
   </ItemGroup>
 

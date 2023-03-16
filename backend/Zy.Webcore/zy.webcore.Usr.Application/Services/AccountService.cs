@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using zy.webcore.Share.Yitter.Services;
 
 namespace zy.webcore.Usr.Application.Services
 {
@@ -82,7 +83,7 @@ namespace zy.webcore.Usr.Application.Services
         public async Task<AppSrvResult<CaptchOutputDto>> GetCaptchAsync()
         {
             var (code, bytes) = Captcha.CreateValidateGraphic(4, 100, 36);           
-            var id = IdGenerator.NextId();
+            var id = ZyIdGenerator.NextId();
             await _cacheService.SetAsync($"{_userCaptchCacheKeyPrefix}:{id}", code,30);
             return new CaptchOutputDto
             {

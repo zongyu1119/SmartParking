@@ -15,10 +15,9 @@ namespace zy.webcore.Share.DistributedLock.Services
         /// 上锁
         /// </summary>
         /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <param name="autoRenewal"></param>
+        /// <param name="expiry"></param>
         /// <returns>值</returns>
-        Task<long> DistributedLock(string key, bool autoRenewal=false);
+        Task<string> DistributedLock(string key,  int expiry = 10);
         /// <summary>
         /// 解锁
         /// </summary>
