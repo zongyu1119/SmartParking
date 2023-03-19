@@ -1,7 +1,4 @@
-﻿
-using zy.webcore.Share.Redis.CacheProvider;
-
-namespace zy.webcore.Share.DistributedLock.Services
+﻿namespace zy.webcore.Share.DistributedLock.Services
 {
     public class DistributedLockService : IDistributedLockService
     {

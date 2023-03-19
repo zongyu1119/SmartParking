@@ -2,13 +2,12 @@ import * as VueRouter from 'vue-router';
 import Hello from '@/components/Hello.vue'
 import HelloWorld from '@/components/HelloWorld.vue'
 import Parking from '@/components/Parking.vue'
-import Home from '@/views/Home.vue'
 
 const routes = [  
   {
     path: "/Home",
     name: "Home",
-    component: Home,
+    component: ()=>import('@/views/Home/index.vue'),
     children:[
       { path: "/Hello", name: Hello, component: Hello },
       { path: "/HelloWorld", name: HelloWorld, component: HelloWorld },
@@ -18,7 +17,7 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: ()=>import('@/views/Login.vue'),
+    component: ()=>import('@/views/Login/index.vue'),
   },
 ];
 

@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { login, getCaptch } from "@/assets/api/account"
+import { login, getCaptch } from "@/api/account"
 export default {
   name: 'Login',
   data () {

@@ -11,14 +11,8 @@ namespace zy.webcore.Share.Yitter.Services
 {
     public class ZyIdGenerator
     {
-        private readonly IServiceInfo _serviceInfo;
-        private readonly string _cacheKey;
-        public ZyIdGenerator(IServiceInfo serviceInfo)
+        public ZyIdGenerator()
         {
-            _serviceInfo = serviceInfo;
-            _cacheKey= CacheKeyPrefix.cacheKeyPrefixShare+serviceInfo.ServiceName;
-            var options = new IdGeneratorOptions(1); //构造方法初始化雪花Id
-            YitIdHelper.SetIdGenerator(options);
         }
 
         private static IIdGenerator _IdGenInstance = null;

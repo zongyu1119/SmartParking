@@ -37,4 +37,3 @@ global using zy.webcore.Share.Application.Caching;
 global using zy.webcore.Share.Cache.Register;
 global using zy.webcore.Share.Application.Registrar;
 global using zy.webcore.Share.Enum.Usr;
-

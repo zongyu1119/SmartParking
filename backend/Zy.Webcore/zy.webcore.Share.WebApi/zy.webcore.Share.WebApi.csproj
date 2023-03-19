@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\zy.webcore.Share.Application\zy.webcore.Share.Application.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Constraint\zy.webcore.Share.Constraint.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.Nacos\zy.webcore.Share.Nacos.csproj" />
     <ProjectReference Include="..\zy.webcore.Share\zy.webcore.Share.csproj" />
   </ItemGroup>
 

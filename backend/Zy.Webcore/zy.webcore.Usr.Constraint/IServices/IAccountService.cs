@@ -21,5 +21,10 @@ namespace zy.webcore.Usr.WebApi.Authorize
         /// </summary>
         /// <returns></returns>
         Task<AppSrvResult<CaptchOutputDto>> GetCaptchAsync();
+        /// <summary>
+        /// 获取验证信息
+        /// </summary>
+        /// <returns></returns>
+        Task<AppSrvResult<UserDetailInfoDto>> GetVerifyInfoAsync();
     }
 }

@@ -13,6 +13,7 @@ namespace zy.webcore.Usr.Application.Services
         private const string _userCaptchCacheKeyPrefix = CacheKeyConsts.userCaptchCacheKeyPrefix;
         private bool _captchEnable;
         private List<string> _disableCaptchAccount;
+        private readonly UserContext _userContext;
         /// <summary>
         /// JWT认证
         /// </summary>
@@ -22,13 +23,15 @@ namespace zy.webcore.Usr.Application.Services
         public AccountService(IConfiguration configuration, 
             ILogger<AccountService> _logger,
             IUserService _service,
-            ICacheService cacheService)
-            :base(cacheService, configuration)
+            ICacheService cacheService,
+            UserContext userContext)
+            : base(cacheService, configuration)
         {
             this.logger = _logger;
             this.service = _service;
             this._captchEnable = configuration.GetValue<bool>("Login:Captch:Enable");
             this._disableCaptchAccount = configuration.GetSection("Login:Captch:DisableAccount").Get<List<string>>();
+            _userContext = userContext;
         }
         /// <summary>
         /// 获得JWTBear
@@ -90,6 +93,14 @@ namespace zy.webcore.Usr.Application.Services
                 CaptchId = id,
                 CaptchBase64Str = Convert.ToBase64String(bytes)
             };
+        }
+
+        public async Task<AppSrvResult<UserDetailInfoDto>> GetVerifyInfoAsync()
+        {
+            if (_userContext == null || _userContext.Id == 0)
+                return Problem<UserDetailInfoDto>(HttpStatusCode.BadRequest, "用户未登录！");
+            var userDetailInfoModel = await service.GetUserDetailInfoAsync(_userContext.Account);
+            return userDetailInfoModel;
         }
     }
 }

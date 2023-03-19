@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using zy.webcore.Share.Application.Registrar;
 using zy.webcore.Share.Constraint.Core.Interfaces;
 using zy.webcore.Share.Extensions;
+using zy.webcore.Share.Nacos.Register;
 using zy.webcore.Share.Options;
 
 namespace zy.webcore.Share.WebApi.Register
@@ -32,14 +33,8 @@ namespace zy.webcore.Share.WebApi.Register
             }
 
             builder.Configuration.AddJsonFile($"{AppContext.BaseDirectory}/appsettings.{builder.Environment.EnvironmentName}.json", true, true);
-            // 注册服务到Nacos
-            builder.Services.AddNacosAspNet(builder.Configuration, "NacosConfig"); //默认节点Nacos
-            // 添加配置中心
-            builder.Host.ConfigureAppConfiguration((context, b) =>
-            {
-                b.AddNacosV2Configuration(builder.Configuration.GetSection("NacosConfig"));
-            });
 
+            builder.AddNacos(serviceInfo);
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

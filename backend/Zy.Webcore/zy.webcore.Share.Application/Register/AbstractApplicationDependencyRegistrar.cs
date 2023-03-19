@@ -1,5 +1,8 @@
 ﻿
 
+using Nacos.V2;
+using zy.webcore.Share.Application.Nacos;
+using zy.webcore.Share.Application.Service;
 using zy.webcore.Share.DistributedLock.Register;
 using zy.webcore.Share.Yitter.Register;
 
@@ -64,7 +67,7 @@ public abstract partial class AbstractApplicationDependencyRegistrar : IDependen
     {
         Services.AddSingleton(typeof(Lazy<>));
         Services.AddScoped<UserContext>();
-
+        Services.AddSingleton(typeof(IEventListener), typeof(NacosListener));
         Services.AddHostedService<ShareBackgroundService>();
     }
     /// <summary>

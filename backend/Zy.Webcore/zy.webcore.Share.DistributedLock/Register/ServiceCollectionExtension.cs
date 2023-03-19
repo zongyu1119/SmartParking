@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using zy.webcore.Share.DistributedLock.Services;
-
-namespace zy.webcore.Share.DistributedLock.Register
+﻿namespace zy.webcore.Share.DistributedLock.Register
 {
     /// <summary>
     /// 注册分布式锁

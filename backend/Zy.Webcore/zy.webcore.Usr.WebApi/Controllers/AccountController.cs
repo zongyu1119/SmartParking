@@ -36,5 +36,14 @@ namespace zy.webcore.Usr.WebApi.Controllers
         {
             return await _accountService.GetCaptchAsync();
         }
+        /// <summary>
+        /// 获取已登录用户的信息
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<AppSrvResult<UserDetailInfoDto>> GetVerifyInfoAsync()
+        {
+            return await _accountService.GetVerifyInfoAsync();
+        }
     }
 }

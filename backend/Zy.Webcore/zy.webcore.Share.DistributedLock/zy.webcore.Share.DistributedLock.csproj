@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\zy.webcore.Share.Cache\zy.webcore.Share.Cache.csproj" />
-    <ProjectReference Include="..\zy.webcore.Share.Yitter\zy.webcore.Share.Yitter.csproj" />
   </ItemGroup>
 
 </Project>
