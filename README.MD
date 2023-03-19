@@ -15,6 +15,7 @@
 微服务架构图：
 http://naotu.baidu.com/file/c9e343006d65a3e7fec3480821f27b7a?token=413d860b1840254d
 ![微服务架构图](Doc/%E5%8E%9F%E5%9E%8B/SmartParking.png)
+
 后期系统后端会使用spring boot开发，数据库使用mysql 8以后的版本，ORM框架使用Mybatis，安全认证使用spring security。
 
 2.3	设备控制类
