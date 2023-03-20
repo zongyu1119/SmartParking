@@ -81,7 +81,7 @@ http.interceptors.response.use(arr => {
             break;
     }
 }, err => {
-    console.log(err)
+    loadingInstance.close()
     switch (err.response.status) {
         case 200:
             if(err.response.data&&err.response.data.isSuccess){

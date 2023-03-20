@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 using zy.webcore.Share.Application.Filter;
 using zy.webcore.Share.Constraint.Dtos.ResultModels;
 using zy.webcore.Share.Constraint.IService;
-using zy.webcore.Usr.Constraint.Dtos.Account;
-using zy.webcore.Usr.Constraint.Dtos.User;
 
 namespace zy.webcore.Usr.Constraint.IServices
 {
     /// <summary>
     /// 用户服务
     /// </summary>
-   
+
     public interface IUserService:IAppService
     {
         /// <summary>
@@ -34,7 +32,7 @@ namespace zy.webcore.Usr.Constraint.IServices
         /// </summary>
         /// <param name="dto"></param>
         /// <returns></returns>
-        Task<AppSrvResult<bool>> AddAsync(UserInputDto dto);
+        Task<AppSrvResult> AddAsync(UserInputDto dto);
         /// <summary>
         /// 获取缓存
         /// </summary>

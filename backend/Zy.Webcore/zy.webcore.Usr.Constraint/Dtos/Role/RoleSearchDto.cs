@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using zy.webcore.Share.Constraint.Dtos;
 
-namespace zy.webcore.Usr.Constraint.Dtos.User
+namespace zy.webcore.Usr.Constraint.Dtos.Role
 {
     /// <summary>
-    /// 用户查询参数
+    /// 角色查询
     /// </summary>
-    public class UserSearchDto: NamePageSearchDto
+    public class RoleSearchDto:NamePageSearchDto
     {
-
     }
 }

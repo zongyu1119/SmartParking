@@ -120,6 +120,7 @@ export default {
   mounted () {
     getUserInfo().then((res) => {
       this.userInfo = res;
+      console.log(res)
     });
   },
   methods: {

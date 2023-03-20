@@ -41,5 +41,9 @@
         /// 备注
         /// </summary>
         public string? Remark { get; set; }
+        /// <summary>
+        /// 子菜单
+        /// </summary>
+        public List<MenuOutputDto> Child { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using zy.webcore.Share.Constraint.Dtos.ResultModels;
 using zy.webcore.Share.Constraint.IService;
-using zy.webcore.Usr.Constraint.Dtos.Account;
 
 namespace zy.webcore.Usr.WebApi.Authorize
 {

@@ -32,5 +32,13 @@ namespace zy.webcore.Usr.Repository.Entities
         [Comment("角色名称")]
         [MaxLength(32,ErrorMessage ="角色名称不能大于32位！")]
         public string RoleName { get; set; }
+
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [Comment("备注")]
+        [Column("remark")]
+        [MaxLength(256, ErrorMessage = "备注不能大于256位!")]
+        public string? Remark { get; set; }
     }
 }

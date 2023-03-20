@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using zy.webcore.Share.Constraint.Dtos;
 using zy.webcore.Share.Yitter.Services;
 
@@ -36,15 +37,16 @@ namespace zy.webcore.Usr.Application.Services
         /// <param name="dto"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<AppSrvResult<bool>> AddAsync(UserInputDto dto)
+        public async Task<AppSrvResult> AddAsync(UserInputDto dto)
         {
             if (await _reposiory.AnyAsync(x => x.Account == dto.Account))
-                return Problem<bool>(System.Net.HttpStatusCode.BadRequest, "用户账户已存在！");
+                return Problem(System.Net.HttpStatusCode.BadRequest, "用户账户已存在！");
             var psd = RSAEncode.RSAEncryption(dto.Password);
             var model = Mapper.Map<SysUser>(dto);            
             model.Id=ZyIdGenerator.NextId();
             model.Password = psd;
-            return await _reposiory.InsertAsync(model)>0;
+            await _reposiory.InsertAsync(model);
+            return new AppSrvResult();
         }
 
         /// <summary>
@@ -61,10 +63,9 @@ namespace zy.webcore.Usr.Application.Services
                 .Skip(dto.SkipRows)
                 .Take(dto.PageSize)
                 .ToListAsync();
-            var data= Mapper.Map<List<UserOutputDto>>(res);
             return new PageResDto<UserOutputDto>
             {
-                Data = data,
+                Data = Mapper.Map<List<UserOutputDto>>(res),
                 PageSize = dto.PageSize,
                 PageIndex = dto.PageIndex,
                 TotalCount = count
@@ -83,7 +84,6 @@ namespace zy.webcore.Usr.Application.Services
                 .Select(x => new UserDetailInfoDto
                 {
                     Address = x.Address,
-                    Password = x.Password,
                     Phone = x.Phone,
                     Sex = x.Sex,
                     UserId = x.Id,
@@ -94,10 +94,29 @@ namespace zy.webcore.Usr.Application.Services
                 }).FirstOrDefaultAsync();
             var menuList = await _menuReposiory
                 .Where(x => roleMenuRep.Where(s => res.RoleIds.Contains(s.RoleId)).Select(s => s.MenuId).Contains(x.Id)).ToListAsync();
-            res.MenuList = Mapper.Map<List<MenuOutputDto>>(menuList);
+            res.MenuList = getMenuList(menuList);
             return res;
         }
-
+        private List<MenuOutputDto> getMenuList(List<SysMenu> menus, long? parentMenuId = null)
+        {
+            if (!menus.Any())
+                return new List<MenuOutputDto>();
+            var topMenuList = new List<MenuOutputDto>();
+            if (parentMenuId == null)
+            {
+                topMenuList = Mapper.Map<List<MenuOutputDto>>(menus.Where(x => !x.ParentMenuId.HasValue).ToList());
+            }
+            else
+            {
+                topMenuList = Mapper.Map<List<MenuOutputDto>>(menus.Where(x => x.ParentMenuId.Value == parentMenuId.Value).ToList());
+            }
+            if (topMenuList.Any())
+                topMenuList.ForEach(item =>
+                {
+                    item.Child = getMenuList(menus.Where(x => x.ParentMenuId.HasValue && x.ParentMenuId == item.Id).ToList(), item.Id);
+                });
+            return topMenuList;
+        }
         public async Task<AppSrvResult<object>> GetCacheAsync(string key)
         {
             return await _cacheService.GetAsync(key);

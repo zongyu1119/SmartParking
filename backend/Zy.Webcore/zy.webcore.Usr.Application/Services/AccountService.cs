@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.Security.Principal;
 using zy.webcore.Share.Yitter.Services;
 
 namespace zy.webcore.Usr.Application.Services
@@ -14,6 +15,12 @@ namespace zy.webcore.Usr.Application.Services
         private bool _captchEnable;
         private List<string> _disableCaptchAccount;
         private readonly UserContext _userContext;
+        private readonly IEfRepository<SysUser> _reposiory;
+        private readonly IEfRepository<SysRoleMenu> _roleMenuReposiory;
+        private readonly IEfRepository<SysUserRole> _userRoleReposiory;
+        private readonly IEfRepository<SysMenu> _menuReposiory;
+        private readonly IEfRepository<SysJob> _jobReposiory;
+        private readonly IEfRepository<SysUserJob> _userJobReposiory;
         /// <summary>
         /// JWT认证
         /// </summary>
@@ -24,7 +31,13 @@ namespace zy.webcore.Usr.Application.Services
             ILogger<AccountService> _logger,
             IUserService _service,
             ICacheService cacheService,
-            UserContext userContext)
+            UserContext userContext,
+            IEfRepository<SysUser> reposiory,
+            IEfRepository<SysRoleMenu> roleMenuReposiory,
+            IEfRepository<SysUserRole> userRoleReposiory,
+            IEfRepository<SysMenu> menuReposiory,
+            IEfRepository<SysJob> jobReposiory,
+            IEfRepository<SysUserJob> userJobReposiory)
             : base(cacheService, configuration)
         {
             this.logger = _logger;
@@ -32,6 +45,12 @@ namespace zy.webcore.Usr.Application.Services
             this._captchEnable = configuration.GetValue<bool>("Login:Captch:Enable");
             this._disableCaptchAccount = configuration.GetSection("Login:Captch:DisableAccount").Get<List<string>>();
             _userContext = userContext;
+            _reposiory = reposiory;
+            _roleMenuReposiory = roleMenuReposiory;
+            _userRoleReposiory = userRoleReposiory;
+            _menuReposiory = menuReposiory;
+            _jobReposiory = jobReposiory;
+            _userJobReposiory = userJobReposiory;
         }
         /// <summary>
         /// 获得JWTBear
@@ -47,36 +66,57 @@ namespace zy.webcore.Usr.Application.Services
                 if (captchCode == null || captchCode.ToUpper() != user.CaptchCode.ToUpper())
                     return Problem<LoginResDto>(HttpStatusCode.BadRequest, "验证码不正确！");
             }
-            var userDetailInfoModel = await service.GetUserDetailInfoAsync(user.UserAccount);
-            if (userDetailInfoModel == null)
+            var userRoleRep = _userRoleReposiory.GetAll();
+            var roleMenuRep = _roleMenuReposiory.GetAll();
+            var userInfo = await _reposiory.Where(x => x.Account == user.UserAccount)
+                .Select(x => new
+                {
+                    x.Address,
+                    x.Password,
+                    x.Phone,
+                    x.Sex,
+                    UserId = x.Id,
+                    x.UserIdCardNum,
+                    UserName = x.UserName,
+                    Account = x.Account,
+                    RoleIds = userRoleRep.Where(s => s.UserId == x.Id).Select(s => s.Id).ToList(),
+                }).FirstOrDefaultAsync();
+            if (userInfo == null)
             {
                 logger.LogError("登录用户不存在！");
                 return Problem<LoginResDto>(HttpStatusCode.BadRequest, "登录用户不存在！");
             }
-            var psd = RSAEncode.RSADecrypt(userDetailInfoModel.Password);
+          
+            var psd = RSAEncode.RSADecrypt(userInfo.Password);
             if (user.Password != psd)
             {
                 logger.LogError("用户名或密码错误！");
                 return Problem<LoginResDto>(HttpStatusCode.BadRequest, "用户名或密码错误！");
             }
+            var menuList = await _menuReposiory
+              .Where(x => roleMenuRep.Where(s => userInfo.RoleIds.Contains(s.RoleId)).Select(s => s.MenuId).Contains(x.Id)).ToListAsync();
+            var MenuList = Mapper.Map<List<MenuOutputDto>>(menuList);
+            var userJob = _userJobReposiory.GetAll();
+            var jobName = await _jobReposiory
+                .Where(s => s.Id == userJob.FirstOrDefault(x => x.UserId == userInfo.UserId && x.IsMainJob).JobId)
+                .Select(x => x.JobName).FirstOrDefaultAsync();
             var userinfo = new UserInfo
             {
-                Account = userDetailInfoModel.Account,
-                Address = userDetailInfoModel.Address,
-                JobName = userDetailInfoModel.JobName,
-                MenuCodeList = userDetailInfoModel?.MenuList?.Select(x => x.MenuCode).ToList(),
-                Phone = userDetailInfoModel?.Phone,
-                RoleIds = userDetailInfoModel.RoleIds,
-                Sex = userDetailInfoModel.Sex,
-                UserId = userDetailInfoModel.UserId,
-                UserIdCardNum = userDetailInfoModel.UserIdCardNum,
-                UserName = userDetailInfoModel.UserName,
+                Account = userInfo.Account,
+                Address = userInfo.Address,
+                JobName = jobName,
+                MenuCodeList = menuList?.Select(x => x.MenuCode).ToList(),
+                Phone = userInfo?.Phone,
+                RoleIds = userInfo.RoleIds,
+                Sex = userInfo.Sex,
+                UserId = userInfo.UserId,
+                UserIdCardNum = userInfo.UserIdCardNum,
+                UserName = userInfo.UserName,
             };
              await base.GetJwtTokenAsync(userinfo, ClientTypeEnum.PC);
             return new LoginResDto
             {
-                Token = $"Bearer {userinfo.Token}",
-                UserInfo = userDetailInfoModel
+                Token = $"Bearer {userinfo.Token}"
             };
         }
         /// <summary>

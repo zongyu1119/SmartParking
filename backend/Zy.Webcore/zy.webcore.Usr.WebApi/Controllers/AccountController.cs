@@ -4,10 +4,14 @@ using zy.webcore.Share.Application.Filter;
 using zy.webcore.Share.Constraint.Dtos.ResultModels;
 using zy.webcore.Share.WebApi.Controllers;
 using zy.webcore.Usr.Constraint.Dtos.Account;
+using zy.webcore.Usr.Constraint.Dtos.User;
 using zy.webcore.Usr.WebApi.Authorize;
 
 namespace zy.webcore.Usr.WebApi.Controllers
-{   
+{
+    /// <summary>
+    /// 账户相关
+    /// </summary>
     public class AccountController : ZyControllerBase
     {
         private readonly IAccountService _accountService;

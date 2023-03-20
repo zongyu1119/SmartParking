@@ -49,7 +49,7 @@ namespace zy.webcore.Usr.WebApi.Controllers
         /// <param name="value"></param>
         [HttpPost]
         [ZyAllowUnAuthorization]
-        public async Task<AppSrvResult<bool>> Post([FromBody] UserInputDto dto)
+        public async Task<AppSrvResult> Post([FromBody] UserInputDto dto)
         {
             return await _userService.AddAsync(dto);
         }
