@@ -56,7 +56,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决�
 		zy.webcore.MD = zy.webcore.MD
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zy.webcore.Share.Nacos", "zy.webcore.Share.Nacos\zy.webcore.Share.Nacos.csproj", "{32C89E5D-BE9C-43D7-ACC2-645D3028EECE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "zy.webcore.Share.Nacos", "zy.webcore.Share.Nacos\zy.webcore.Share.Nacos.csproj", "{32C89E5D-BE9C-43D7-ACC2-645D3028EECE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zy.webcore.GetWay", "zy.webcore.GetWay\zy.webcore.GetWay.csproj", "{BA3A9F64-A809-4210-B894-59649430FBF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -140,6 +142,10 @@ Global
 		{32C89E5D-BE9C-43D7-ACC2-645D3028EECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32C89E5D-BE9C-43D7-ACC2-645D3028EECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32C89E5D-BE9C-43D7-ACC2-645D3028EECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA3A9F64-A809-4210-B894-59649430FBF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA3A9F64-A809-4210-B894-59649430FBF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA3A9F64-A809-4210-B894-59649430FBF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA3A9F64-A809-4210-B894-59649430FBF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -166,6 +172,7 @@ Global
 		{DCE2BCE3-4F96-41A7-B87A-FDFAA83E756D} = {1A436BCF-74D0-4452-B1E4-AF778BFD3E22}
 		{F937B8A6-0E22-4F95-98F9-540772778121} = {1A436BCF-74D0-4452-B1E4-AF778BFD3E22}
 		{32C89E5D-BE9C-43D7-ACC2-645D3028EECE} = {1A436BCF-74D0-4452-B1E4-AF778BFD3E22}
+		{BA3A9F64-A809-4210-B894-59649430FBF9} = {DE30B8AA-B7C0-421C-A99E-58D0A0DD206F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84BA487C-3542-4FDA-98A2-FEDFC4D6EE6C}
