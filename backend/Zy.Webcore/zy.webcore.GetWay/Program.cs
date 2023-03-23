@@ -1,6 +1,6 @@
 using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 using Ocelot.Provider.Nacos;
-using Ocelot.Provider.Nacos.NacosClient.V2;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 // 添加Ocelot对应Nacos扩展
 builder.Services.AddOcelot().AddNacosDiscovery();
-
+//builder.Services.AddNacosAspNet(builder.Configuration); //默认节点Nacos
 // 添加配置中心
 builder.Host.ConfigureAppConfiguration((context, builder) =>
 {
@@ -29,7 +29,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-
+app.Use(async (context, next) =>
+{
+    Console.WriteLine(context.Request.Path);
+    await next.Invoke();
+});
+app.UseOcelot().Wait();
 app.MapControllers();
 
 app.Run();

@@ -8,7 +8,7 @@ namespace zy.webcore.Share.Nacos.Register
         {
             //builder.WebHost.UseKestrel();
             // 注册服务到Nacos
-            builder.Services.AddNacosAspNet(builder.Configuration, "NacosConfig"); //默认节点Nacos
+            builder.Services.AddNacosAspNet(builder.Configuration); //默认节点Nacos
             //builder.Services.AddNacosAspNet(config =>
             //{
             //    config = builder.Configuration.GetSection("NacosConfig").Get<NacosAspNetOptions>();
