@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using zy.webcore.Share.Redis.Options;
 
 namespace zy.webcore.Share.Cache.Services
 {
@@ -45,5 +46,15 @@ namespace zy.webcore.Share.Cache.Services
         /// <param name="cacheKey"></param>
         /// <returns></returns>
         Task<T> GetAsync<T>(string cacheKey);
+
+        /// <summary>
+        /// 获取指定的cacheKey、dataRetriever和过期。
+        /// </summary>
+        /// <returns>The async.</returns>
+        /// <param name="cacheKey">Cache key.</param>
+        /// <param name="dataRetriever">Data retriever.</param>
+        /// <param name="expiration">Expiration.</param>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        Task<T> GetAsync<T>(string cacheKey, Func<Task<T>> dataRetriever, TimeSpan expiration);
     }
 }

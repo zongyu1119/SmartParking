@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using zy.webcore.Share.Redis.CacheProvider;
+using zy.webcore.Share.Redis.Options;
 
 namespace zy.webcore.Share.Cache.Services
 {
@@ -30,6 +31,12 @@ namespace zy.webcore.Share.Cache.Services
         {
             var cache = await _cacheProvider.GetAsync<string>(cacheKey);
             return cache.HasValue && !cache.IsNull ? cache.Value : null;
+        }
+
+        public async Task<T> GetAsync<T>(string cacheKey, Func<Task<T>> dataRetriever, TimeSpan expiration)
+        {
+            var cache = await _cacheProvider.GetAsync<T>(cacheKey, dataRetriever, expiration);
+            return cache.HasValue && !cache.IsNull ? cache.Value : default(T);
         }
 
         /// <summary>

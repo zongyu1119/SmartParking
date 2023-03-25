@@ -3,6 +3,8 @@ using Nacos.AspNetCore.V2;
 using Nacos.Microsoft.Extensions.Configuration;
 using Nacos.V2;
 using Nacos.V2.Naming.Dtos;
+using System.Linq;
+using System.Threading;
 using zy.webcore.Share.Application.Nacos;
 using zy.webcore.Share.Consts;
 using zy.webcore.Share.DistributedLock.Services;
@@ -21,6 +23,8 @@ namespace zy.webcore.Share.Application.Service
         private const int MaxYitterId = 512;
         private readonly ILogger<ShareBackgroundService> _logger;
         private readonly IEventListener _eventListener;
+        private readonly IServiceInfo _serviceInfo;
+        private Timer _timer;
         public ShareBackgroundService(
             Lazy<INacosNamingService> nacosService,
             Lazy<IConfiguration> configuration,
@@ -37,6 +41,7 @@ namespace zy.webcore.Share.Application.Service
             YitterWorkerIDCacheKey = CacheKeyPrefix.cacheKeyPrefixShare + $"{service.ShortName}:Yitter:WorkerId";
             _logger = logger;
             _eventListener = eventListener;
+            _serviceInfo = service;
         }
         public override void Dispose()
         {
@@ -64,45 +69,67 @@ namespace zy.webcore.Share.Application.Service
             finally
             {
                 await _lock.DistributedUnLock(lockKey, lockValue);
+                await _timer.DisposeAsync();
             }
           }
         protected async override Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            
+        }
+        public async override Task StartAsync(CancellationToken cancellationToken)
+        {
             await _nacosService.Value.Subscribe("usr", _eventListener);
             await InitYitter();
+            _timer = new Timer(checkWorkId, null, 60*1000, 60*1000);
+        }
+        private async void checkWorkId(Object stateInfo)
+        {
+            Console.WriteLine($"Yitter Check Timer Run.");
+            var workerIds = await _cacheService.GetAsync<Dictionary<int, long>>(YitterWorkerIDCacheKey);
+            if(workerIds.TryGetValue(YitterWorkerId, out var ticks))
+            {
+                ticks = DateTime.Now.Ticks;
+                workerIds.Remove(YitterWorkerId);
+                workerIds.Add(YitterWorkerId, ticks);
+            }
+            var expiredList = workerIds.Where(x => x.Value < (DateTime.Now.Ticks - TimeSpan.FromSeconds(120).Ticks));
+            expiredList.ForEach(item =>
+            {
+                workerIds.Remove((int)item.Key);
+            });
+            await _cacheService.SetAsync(YitterWorkerIDCacheKey, workerIds, (long)TimeSpan.FromSeconds(61).TotalSeconds);
         }
         /// <summary>
-        /// 
+        /// 初始化YitterId
         /// </summary>
         /// <returns></returns>
         private async Task InitYitter()
         {
             var lockKey = CacheKeyPrefix.cacheKeyPrefixShare + "Yitter:Lock";
-            var instances = await _nacosService.Value.GetAllInstances("usr");
             var lockValue = await _lock.DistributedLock(lockKey);
             try
             {
-                var workerIds = await _cacheService.GetAsync<List<int>>(YitterWorkerIDCacheKey);
+                var workerIds = await _cacheService.GetAsync<Dictionary<int,long>>(YitterWorkerIDCacheKey);
                 if (workerIds != null && workerIds.Any())
                 {
-                    YitterWorkerId = workerIds.OrderByDescending(x => x).First() + 1;
+                    YitterWorkerId = workerIds.OrderByDescending(x => x.Key).FirstOrDefault().Key + 1;
                     if (YitterWorkerId >= MaxYitterId)
                     {
                         for (int i = 0; i < MaxYitterId; i++)
                         {
-                            if (workerIds[i] != i)
+                            if (workerIds.Any(x=>x.Value==i))
                             { YitterWorkerId = i; break; }
                         }
                     }
-                    workerIds.Add(YitterWorkerId);
                 }
                 else
                 {
-                    workerIds = new List<int>() { 0 };
+                    workerIds = new Dictionary<int, long>();                   
                 }
+                workerIds.Add(YitterWorkerId, DateTime.Now.Ticks);
                 ZyIdGenerator.SetIdGenerator((ushort)YitterWorkerId);
                 _logger.LogInformation($"Yitter ZyIdGenerator:{YitterWorkerId}.");
-                await _cacheService.SetAsync(YitterWorkerIDCacheKey, workerIds, (long)TimeSpan.FromDays(30).TotalSeconds);
+                await _cacheService.SetAsync(YitterWorkerIDCacheKey, workerIds, (long)TimeSpan.FromSeconds(61).TotalSeconds);
             }
             finally
             {
@@ -110,4 +137,6 @@ namespace zy.webcore.Share.Application.Service
             }
         }
     }
+
+   
 }
