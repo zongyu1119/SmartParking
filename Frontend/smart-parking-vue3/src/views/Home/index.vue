@@ -4,6 +4,7 @@
     <el-aside style="{boxShadow:var(--el-box-shadow)}">
       <el-scrollbar>
         <el-menu default-active="2"
+                 :router="true"
                  class="el-menu-vertical-zyweb"
                  :collapse="isCollapse"
                  @open="handleOpen"
@@ -25,7 +26,7 @@
             </template>
             <el-menu-item-group>
               <template #title><span>Group One</span></template>
-              <el-menu-item index="1-1">item one</el-menu-item>
+              <el-menu-item index="/dept">部门管理</el-menu-item>
               <el-menu-item index="1-2">item two</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group title="Group Two">
@@ -93,7 +94,8 @@
 
       <el-main>
         <el-scrollbar>
-          main
+          <router-view>
+          </router-view>
         </el-scrollbar>
       </el-main>
       <el-footer>

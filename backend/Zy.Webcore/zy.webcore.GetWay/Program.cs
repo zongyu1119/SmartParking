@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Configuration;
+using Microsoft.Net.Http.Headers;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Nacos;
@@ -10,6 +12,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
+          builder =>
+          {
+              builder.AllowAnyMethod()
+                  .SetIsOriginAllowed(_ => true)
+                  .AllowAnyHeader()
+                  .AllowCredentials();
+          }));
 // 添加Ocelot对应Nacos扩展
 builder.Services.AddOcelot().AddNacosDiscovery();
 //builder.Services.AddNacosAspNet(builder.Configuration); //默认节点Nacos
@@ -28,13 +38,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
 app.Use(async (context, next) =>
 {
-    Console.WriteLine(context.Request.Path);
+    Console.WriteLine(context.Request.Path);   
     await next.Invoke();
 });
 app.UseOcelot().Wait();
 app.MapControllers();
-
 app.Run();

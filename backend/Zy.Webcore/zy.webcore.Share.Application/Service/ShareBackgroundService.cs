@@ -97,7 +97,7 @@ namespace zy.webcore.Share.Application.Service
             {
                 workerIds.Remove((int)item.Key);
             });
-            await _cacheService.SetAsync(YitterWorkerIDCacheKey, workerIds, (long)TimeSpan.FromSeconds(61).TotalSeconds);
+            await _cacheService.SetAsync(YitterWorkerIDCacheKey, workerIds, (long)TimeSpan.FromSeconds(120).TotalSeconds);
         }
         /// <summary>
         /// 初始化YitterId
@@ -129,7 +129,7 @@ namespace zy.webcore.Share.Application.Service
                 workerIds.Add(YitterWorkerId, DateTime.Now.Ticks);
                 ZyIdGenerator.SetIdGenerator((ushort)YitterWorkerId);
                 _logger.LogInformation($"Yitter ZyIdGenerator:{YitterWorkerId}.");
-                await _cacheService.SetAsync(YitterWorkerIDCacheKey, workerIds, (long)TimeSpan.FromSeconds(61).TotalSeconds);
+                await _cacheService.SetAsync(YitterWorkerIDCacheKey, workerIds, (long)TimeSpan.FromSeconds(120).TotalSeconds);
             }
             finally
             {

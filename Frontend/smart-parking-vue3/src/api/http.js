@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ElMessage,ElLoading } from 'element-plus'
 // 请求
 const http = axios.create({
-    baseURL: 'http://localhost:10010/api/',
+    baseURL: 'http://localhost:10101/',
     timeout: 30000
 })
 let loadingInstance;
@@ -82,6 +82,8 @@ http.interceptors.response.use(arr => {
     }
 }, err => {
     loadingInstance.close()
+    
+    console.log(err)
     switch (err.response.status) {
         case 200:
             if(err.response.data&&err.response.data.isSuccess){
