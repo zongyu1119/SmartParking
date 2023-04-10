@@ -8,9 +8,13 @@ namespace zy.webcore.Share.Application.Filter
     [AttributeUsage(AttributeTargets.All, Inherited = true)]
     public class ZyAuthorizationAttribute : Attribute, IAsyncAuthorizationFilter
     {
-        private readonly string _permissions;
+        private readonly string? _permissions;
         private readonly ILogger<ZyAuthorizationAttribute> _logger;
-        public ZyAuthorizationAttribute(string permissions = null)
+        /// <summary>
+        /// 鉴权
+        /// </summary>
+        /// <param name="permissions">权限/菜单编码</param>
+        public ZyAuthorizationAttribute(string? permissions = null)
         {
             _permissions = permissions;
             _logger = ServiceLocator.Instance.GetService<ILogger<ZyAuthorizationAttribute>>();

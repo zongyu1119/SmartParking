@@ -17,6 +17,10 @@ namespace zy.webcore.Usr.WebApi.Controllers
     public class UserController : ZyControllerBase
     {
         private IUserService _userService;
+        /// <summary>
+        /// 用户相关控制器
+        /// </summary>
+        /// <param name="userService"></param>
         public UserController(IUserService userService)
         {
             _userService = userService;
@@ -46,7 +50,7 @@ namespace zy.webcore.Usr.WebApi.Controllers
         /// <summary>
         /// 新增用户
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="dto"></param>
         [HttpPost]
         [ZyAllowUnAuthorization]
         public async Task<AppSrvResult> Post([FromBody] UserInputDto dto)

@@ -6,6 +6,9 @@ using zy.webcore.Share.WebApi.Controllers;
 
 namespace zy.webcore.Usr.WebApi.Controllers
 {
+    /// <summary>
+    /// 测试控制器
+    /// </summary>
     [ZyAllowUnAuthorization]
     public class TestController : ZyControllerBase
     {
