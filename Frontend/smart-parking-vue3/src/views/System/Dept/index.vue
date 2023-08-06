@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableData"
+  <el-table :data="dataList"
             style="width: 100%">
     <el-table-column fixed
                      prop="date"

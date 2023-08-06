@@ -1,4 +1,4 @@
-global using zy.webcore.Usr.WebApi.Register;
+using zy.webcore.Usr.WebApi.Register;
 using zy.webcore.Share.WebApi;
 
 var webApiAssembly = System.Reflection.Assembly.GetExecutingAssembly();

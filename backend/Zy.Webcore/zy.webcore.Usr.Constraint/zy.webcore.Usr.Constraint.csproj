@@ -12,9 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\zy.webcore.Share.Application\zy.webcore.Share.Application.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Constraint\zy.webcore.Share.Constraint.csproj" />
-    <ProjectReference Include="..\zy.webcore.Share.Redis\zy.webcore.Share.Redis.csproj" />
     <ProjectReference Include="..\zy.webcore.Usr.Repository\zy.webcore.Usr.Repository.csproj" />
   </ItemGroup>
 

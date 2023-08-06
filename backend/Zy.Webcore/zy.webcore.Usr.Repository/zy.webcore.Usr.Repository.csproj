@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,15 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\zy.webcore.share.Entity\zy.webcore.Share.Repository.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\zy.webcore.share.Repository\zy.webcore.Share.Repository.csproj" />
   </ItemGroup>
 
 </Project>

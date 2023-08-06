@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DotNetCore.CAP;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using zy.webcore.Share.Application.Filter;
 using zy.webcore.Share.Constraint.Dtos.ResultModels;
@@ -13,9 +14,11 @@ namespace zy.webcore.Usr.WebApi.Controllers
     public class TestController : ZyControllerBase
     {
         private IConfiguration _configuration;
-        public TestController(IConfiguration configuration)
+        private ICapPublisher _publisher;
+        public TestController(IConfiguration configuration,ICapPublisher publisher)
         {
             _configuration = configuration;
+            _publisher = publisher;
         }
         /// <summary>
         /// 获得缓存值
@@ -26,6 +29,17 @@ namespace zy.webcore.Usr.WebApi.Controllers
         public AppSrvResult<object> GetConfig([FromQuery] string key)
         {
             return new AppSrvResult<string>(_configuration[key]);
+        }
+        /// <summary>
+        /// 消息发布测试
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        [HttpGet("Publish")]
+        public AppSrvResult<bool> Publish([FromQuery]string msg)
+        {
+            _publisher.Publish("zy.test", msg);
+            return new AppSrvResult<bool>(true);
         }
     }
 }

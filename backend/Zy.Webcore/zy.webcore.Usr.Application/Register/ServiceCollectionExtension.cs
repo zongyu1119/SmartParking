@@ -2,7 +2,8 @@
 using System.Reflection;
 using zy.webcore.Share.Repository.EntitiesBase;
 using zy.webcore.Share.Constraint.IService;
-using zy.webcore.Usr.Repository.EntitiesBase;
+using zy.webcore.Usr.Repository.Entities;
+using zy.webcore.Usr.Application.CommonServices;
 
 namespace zy.webcore.Usr.Application.Register
 {
@@ -28,6 +29,8 @@ namespace zy.webcore.Usr.Application.Register
                     return;
                 services.AddScoped(serviceType,implType);
             });
+            //CAP Subcriber
+            services.AddTransient<SubscriberService>();
             return services;
         }
     }

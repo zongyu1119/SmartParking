@@ -1,4 +1,6 @@
-﻿namespace zy.webcore.Usr.Constraint.Dtos.Menu
+﻿using zy.webcore.Share.Constraint.Dtos;
+
+namespace zy.webcore.Usr.Constraint.Dtos.Menu
 {
     /// <summary>
     /// 菜单输出DTO

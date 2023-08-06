@@ -148,7 +148,7 @@ namespace zy.webcore.Share.Redis.Units
 
         #endregion Expire keys
 
-        #region Bloom Filter
+        #region Bloom Filter ===>redis服务器可能需要安装redisbloom插件
 
         public static async Task BfReserveAsync(this IDatabase redisDb, RedisKey key, double errorRate, int initialCapacity)
             => await redisDb.ExecuteAsync("BF.RESERVE", key, errorRate, initialCapacity);

@@ -1,4 +1,6 @@
 ﻿
+using zy.webcore.Share.Repository.IRepositories;
+
 namespace zy.webcore.Share.Application.Registrar
 {
     public static class ServiceCollectionExtension
