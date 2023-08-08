@@ -41,6 +41,7 @@ namespace zy.webcore.Share.WebApi.Register
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
+                c.SwaggerDoc($"{serviceInfo.ShortName}", new OpenApiInfo { Title = $"{serviceInfo.ServiceName}", Version = $"{serviceInfo.Version}" });
                 //添加安全定义
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {

@@ -14,6 +14,7 @@ namespace zy.webcore.Usr.WebApi.Controllers
     /// <summary>
     /// 用户
     /// </summary>
+    [Route("usr/[controller]")]
     public class UserController : ZyControllerBase
     {
         private IUserService _userService;

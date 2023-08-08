@@ -11,6 +11,7 @@ namespace zy.webcore.Usr.WebApi.Controllers
     /// <summary>
     /// 角色
     /// </summary>
+    [Route("usr/[controller]")]
     public class RoleController : ZyControllerBase
     {
         private readonly IRoleService _service;

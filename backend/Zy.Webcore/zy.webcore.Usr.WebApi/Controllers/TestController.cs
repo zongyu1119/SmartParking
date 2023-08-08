@@ -11,6 +11,7 @@ namespace zy.webcore.Usr.WebApi.Controllers
     /// 测试控制器
     /// </summary>
     [ZyAllowUnAuthorization]
+    [Route("usr/[controller]")]
     public class TestController : ZyControllerBase
     {
         private IConfiguration _configuration;

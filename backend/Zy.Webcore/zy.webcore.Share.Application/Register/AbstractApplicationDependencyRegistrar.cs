@@ -55,6 +55,7 @@ public abstract partial class AbstractApplicationDependencyRegistrar : IDependen
         AddApplicationSharedServices();
         AddEfCoreContextWithRepositories();
         AddRedisCaching();
+        AddCapEventBus();
         Services.AddDistributeLockService()
             .AddYitter();
 

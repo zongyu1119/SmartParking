@@ -12,8 +12,7 @@ namespace zy.webcore.Share.WebApi.Controllers
     [ZyResource]
     [ZyAuthorization]
     [ZyGlobalException]
-    [ZyAction]
-    [Route("api/[controller]")]
+    [ZyAction]  
     public class ZyControllerBase: ControllerBase
     {
     }

@@ -37,9 +37,23 @@ namespace zy.webcore.Share.WebApi.Register
             // Configure the HTTP request pipeline.
             if (App.Environment.IsDevelopment())
             {
-                App.UseSwagger();
-                App.UseSwaggerUI();
+                App.UseSwagger(option =>
+                {
+                    option.RouteTemplate = "{documentName}/swagger.json";
+                });
+                App.UseSwaggerUI(option =>
+                {
+                    option.SwaggerEndpoint($"/{serviceInfo.ShortName}/swagger.json", $"{serviceInfo.ServiceName}");
+                    option.RoutePrefix = $"{serviceInfo.ShortName}/swagger";
+                });
             }
+            //App.Map($"/{serviceInfo.ShortName}", (app) =>
+            //{
+            //    app.Use(async (context, next) =>
+            //    {
+            //        await next.Invoke();
+            //    });              
+            //});
             App.UseRealIp(x => x.HeaderKey = "X-Forwarded-For");
            
             App.MapControllers();
@@ -49,6 +63,7 @@ namespace zy.webcore.Share.WebApi.Register
             App.UseAuthorization();
             App.UseEndpoints(a =>
             {
+
             });
         }
     }

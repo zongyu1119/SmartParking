@@ -12,6 +12,7 @@ namespace zy.webcore.Usr.WebApi.Controllers
     /// <summary>
     /// 账户相关
     /// </summary>
+    [Route("usr/[controller]")]
     public class AccountController : ZyControllerBase
     {
         private readonly IAccountService _accountService;
