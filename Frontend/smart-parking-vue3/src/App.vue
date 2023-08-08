@@ -1,27 +1,28 @@
 
 <template>
   <div class="common-layout">
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
 <script setup>
 import { ref } from "vue";
+//import home from '@/views/Home'
 </script>
 <script>
 export default {
   name: "App",
-  data() {
-    return {    
-      auth:{
-        isLogin:false
+  data () {
+    return {
+      auth: {
+        isLogin: false
       }
     };
   },
-  mounted() {
-  
+  mounted () {
+
   },
   methods: {
-   
+
   },
 };
 </script>

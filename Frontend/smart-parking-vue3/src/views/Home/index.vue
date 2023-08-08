@@ -3,93 +3,17 @@
                 style="height: 100vh;">
     <el-aside style="{boxShadow:var(--el-box-shadow)}">
       <el-scrollbar>
-        <el-menu default-active="2"
-                 :router="true"
-                 class="el-menu-vertical-zyweb"
-                 :collapse="isCollapse"
-                 @open="handleOpen"
-                 @close="handleClose">
-          <div class="logo"
-               style="background-color: whitesmoke;">
-            <el-image src="src\assets\logo.png"
-                      style="width: 40px;margin-top: 5px;"
-                      :fit="fit" />
-            <el-text v-show="!isCollapse">Smart Parking</el-text>
-          </div>
-
-          <el-sub-menu index="1">
-            <template #title>
-              <el-icon>
-                <location />
-              </el-icon>
-              <span>Navigator One</span>
-            </template>
-            <el-menu-item-group>
-              <template #title><span>Group One</span></template>
-              <el-menu-item index="/dept">部门管理</el-menu-item>
-              <el-menu-item index="1-2">item two</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="Group Two">
-              <el-menu-item index="1-3">item three</el-menu-item>
-            </el-menu-item-group>
-            <el-sub-menu index="1-4">
-              <template #title><span>item four</span></template>
-              <el-menu-item index="1-4-1">item one</el-menu-item>
-            </el-sub-menu>
-          </el-sub-menu>
-          <el-menu-item index="2">
-            <el-icon><icon-menu /></el-icon>
-            <template #title>Navigator Two</template>
-          </el-menu-item>
-          <el-menu-item index="3"
-                        disabled>
-            <el-icon>
-              <document />
-            </el-icon>
-            <template #title>Navigator Three</template>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <el-icon>
-              <setting />
-            </el-icon>
-            <template #title>Navigator Four</template>
-          </el-menu-item>
-        </el-menu>
+        <Menu @menuCollapse="menuCollapse"
+              @handleOpen="handleOpen"
+              @handleClose="handleClose"
+              :isCollapse="isCollapse" />
       </el-scrollbar>
     </el-aside>
 
     <el-container>
       <el-header>
-        <el-row :gutter="2"
-                style="height: 100%;">
-          <el-col :span="1"
-                  style="height: 100%;text-align: left;">
-            <div @click="menuCollapse()"
-                 class="toolbar">
-              <el-icon size="20px">
-                <Fold v-if="!isCollapse" />
-                <Expand v-else />
-              </el-icon>
-            </div>
-          </el-col>
-          <el-col :span="20"></el-col>
-          <el-col :span="3"
-                  class="toolbar">
-            <el-dropdown>
-              <el-icon style="margin-right: 8px; margin-top: 1px">
-                <setting />
-              </el-icon>
-              <template #dropdown>
-                <el-dropdown-menu>
-                  <el-dropdown-item>个人信息</el-dropdown-item>
-                  <el-dropdown-item>修改密码</el-dropdown-item>
-                  <el-dropdown-item>退出登录</el-dropdown-item>
-                </el-dropdown-menu>
-              </template>
-            </el-dropdown>
-            <span>{{userInfo?userInfo.userName:''}}</span>
-          </el-col>
-        </el-row>
+        <Header @menuCollapse="menuCollapse"
+                :isCollapse="isCollapse" />
       </el-header>
 
       <el-main>
@@ -98,8 +22,8 @@
           </router-view>
         </el-scrollbar>
       </el-main>
-      <el-footer>
-        footer
+      <el-footer style="font-size: small;font-weight: 300;">
+        <Footer />
       </el-footer>
     </el-container>
   </el-container>
@@ -108,7 +32,11 @@
 <script>
 import { ref } from 'vue'
 import { getUserInfo } from '@/api/account'
+import Footer from '@/components/home/footer.vue';
+import Menu from '@/components/home/menu.vue';
+import Header from '@/components/home/header.vue';
 export default {
+  components: { Menu, Footer, Header },
   name: "Home",
   data () {
     return {
