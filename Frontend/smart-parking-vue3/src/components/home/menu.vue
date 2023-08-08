@@ -9,7 +9,8 @@
          style="background-color: whitesmoke;height: 30px;">
       <el-image src="src\assets\logo.png"
                 style="width: 30px;margin-top: 5px;"
-                :fit="fit" />
+                :fit="fit"
+                @click="goHome" />
       <span v-show="!isCollapse"
             style="line-height: 30px;height: 30px;">Smart Parking</span>
     </div>
@@ -19,20 +20,18 @@
         <el-icon>
           <location />
         </el-icon>
-        <span>Navigator One</span>
+        <span>系统管理</span>
       </template>
       <el-menu-item-group>
-        <template #title><span>Group One</span></template>
+        <template #title><span>部门和用户</span></template>
         <el-menu-item index="/dept">部门管理</el-menu-item>
-        <el-menu-item index="1-2">item two</el-menu-item>
+        <el-menu-item index="1-3">用户管理</el-menu-item>
       </el-menu-item-group>
-      <el-menu-item-group title="Group Two">
-        <el-menu-item index="1-3">item three</el-menu-item>
+      <el-menu-item-group title="角色和菜单">
+        <el-menu-item index="1-3">菜单管理</el-menu-item>
+        <el-menu-item index="1-4">角色管理</el-menu-item>
       </el-menu-item-group>
-      <el-sub-menu index="1-4">
-        <template #title><span>item four</span></template>
-        <el-menu-item index="1-4-1">item one</el-menu-item>
-      </el-sub-menu>
+      <el-menu-item index="1-5">参数配置</el-menu-item>
     </el-sub-menu>
     <el-menu-item index="2">
       <el-icon><icon-menu /></el-icon>
@@ -79,6 +78,10 @@ export default {
     },
     menuCollapse () {
       this.$emit('handleClose')
+    },
+    goHome () {
+      console.log('goHome')
+      this.$router.push('/home')
     }
 
   }

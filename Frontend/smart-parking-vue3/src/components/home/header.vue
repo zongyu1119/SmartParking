@@ -52,7 +52,7 @@ export default {
   methods: {
     menuCollapse () {
       this.$emit('menuCollapse')
-    }
+    },
   }
 }
 </script>
