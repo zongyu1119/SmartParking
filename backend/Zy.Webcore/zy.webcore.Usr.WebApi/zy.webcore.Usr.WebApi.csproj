@@ -7,12 +7,17 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <DocumentationFile>/Swagger/doc.xml</DocumentationFile>
     <Description>用户服务</Description>
+    <UserSecretsId>84e93073-6402-49d1-b6ca-a8d506fd1206</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
   
   
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.26.1" />
+  
+  
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.1" />
   </ItemGroup>
