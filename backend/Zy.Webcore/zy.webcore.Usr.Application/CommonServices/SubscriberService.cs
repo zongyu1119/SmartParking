@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using zy.webcore.Share.ZyCap.Events;
 
 namespace zy.webcore.Usr.Application.CommonServices
 {
@@ -12,10 +13,10 @@ namespace zy.webcore.Usr.Application.CommonServices
     /// </summary>
     public class  SubscriberService:ICapSubscribe
     {
-        [CapSubscribe("zy.test")]
-        public void TestReceivedMessage(string msg)
+        [CapSubscribe(nameof(TestEvent))]
+        public void TestReceivedMessage(TestEvent t)
         {
-            Console.WriteLine("Service:" + msg);
+            Console.WriteLine("Service:" + t.Name);
         }
     }
 }

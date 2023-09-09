@@ -34,6 +34,7 @@
     <ProjectReference Include="..\zy.webcore.share.Repository\zy.webcore.Share.Repository.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Rpc\zy.webcore.Share.Rpc.csproj" />
     <ProjectReference Include="..\zy.webcore.Share.Yitter\zy.webcore.Share.Yitter.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.ZyCap\zy.webcore.Share.ZyCap.csproj" />
     <ProjectReference Include="..\zy.webcore.Share\zy.webcore.Share.csproj" />
   </ItemGroup>
 

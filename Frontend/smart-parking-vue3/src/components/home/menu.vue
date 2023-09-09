@@ -6,13 +6,13 @@
            @open="handleOpen"
            @close="handleClose">
     <div class="logo"
-         style="background-color: whitesmoke;height: 30px;">
+         @click="goHome"
+         style="background-color: whitesmoke;height: 50px;">
       <el-image src="src\assets\logo.png"
                 style="width: 30px;margin-top: 5px;"
-                :fit="fit"
-                @click="goHome" />
+                :fit="fit" />
       <span v-show="!isCollapse"
-            style="line-height: 30px;height: 30px;">Smart Parking</span>
+            style="line-height: 50px;height: 50px;">Smart Parking</span>
     </div>
 
     <el-sub-menu index="1">
@@ -28,7 +28,7 @@
         <el-menu-item index="1-3">用户管理</el-menu-item>
       </el-menu-item-group>
       <el-menu-item-group title="角色和菜单">
-        <el-menu-item index="1-3">菜单管理</el-menu-item>
+        <el-menu-item index="/menu">菜单管理</el-menu-item>
         <el-menu-item index="1-4">角色管理</el-menu-item>
       </el-menu-item-group>
       <el-menu-item index="1-5">参数配置</el-menu-item>
@@ -89,4 +89,12 @@ export default {
 </script>
 
 <style>
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo:hover {
+  cursor: pointer;
+}
 </style>

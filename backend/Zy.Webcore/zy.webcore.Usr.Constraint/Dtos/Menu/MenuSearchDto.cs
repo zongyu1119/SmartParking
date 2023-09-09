@@ -5,12 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using zy.webcore.Share.Constraint.Dtos.SearchDtos;
 
-namespace zy.webcore.Usr.Constraint.Dtos.Role
+namespace zy.webcore.Usr.Constraint.Dtos.Menu
 {
-    /// <summary>
-    /// 角色查询
-    /// </summary>
-    public class RoleSearchDto:NamePageSearchDto
+    public class MenuSearchDto:NameCodePageSearchDto
     {
     }
 }

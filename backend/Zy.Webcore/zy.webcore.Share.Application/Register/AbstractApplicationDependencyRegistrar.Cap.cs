@@ -1,6 +1,7 @@
 ﻿using DotNetCore.CAP;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.Extensions.DependencyInjection;
+using zy.webcore.Share.ZyCap.Registrar;
 
 namespace zy.webcore.Share.Application.Registrar;
 public abstract partial class AbstractApplicationDependencyRegistrar
@@ -50,5 +51,6 @@ public abstract partial class AbstractApplicationDependencyRegistrar
             s.ConsumerThreadCount = 1;
           
         });
+        this.Services.AddZyCap();
     }
 }

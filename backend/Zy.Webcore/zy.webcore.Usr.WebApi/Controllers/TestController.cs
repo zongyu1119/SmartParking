@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using zy.webcore.Share.Application.Filter;
 using zy.webcore.Share.Constraint.Dtos.ResultModels;
 using zy.webcore.Share.WebApi.Controllers;
+using zy.webcore.Share.ZyCap;
+using zy.webcore.Share.ZyCap.Events;
 
 namespace zy.webcore.Usr.WebApi.Controllers
 {
@@ -15,8 +17,8 @@ namespace zy.webcore.Usr.WebApi.Controllers
     public class TestController : ZyControllerBase
     {
         private IConfiguration _configuration;
-        private ICapPublisher _publisher;
-        public TestController(IConfiguration configuration,ICapPublisher publisher)
+        private CapPublisher _publisher;
+        public TestController(IConfiguration configuration, CapPublisher publisher)
         {
             _configuration = configuration;
             _publisher = publisher;
@@ -39,7 +41,8 @@ namespace zy.webcore.Usr.WebApi.Controllers
         [HttpGet("Publish")]
         public AppSrvResult<bool> Publish([FromQuery]string msg)
         {
-            _publisher.Publish("zy.test", msg);
+            var x=new TestEvent() { Name = msg };
+            _publisher.Publish(x);
             return new AppSrvResult<bool>(true);
         }
     }

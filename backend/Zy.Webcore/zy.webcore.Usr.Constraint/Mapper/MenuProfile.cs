@@ -12,6 +12,7 @@ namespace zy.webcore.Usr.Constraint.Mapper
         public MenuProfile()
         {
             CreateMap<SysMenu, MenuOutputDto>();
+            CreateMap<MenuInputDto, SysMenu>();
         }
     }
 }

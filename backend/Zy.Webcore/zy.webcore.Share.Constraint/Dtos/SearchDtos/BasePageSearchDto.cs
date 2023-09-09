@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace zy.webcore.Share.Constraint.Dtos
+namespace zy.webcore.Share.Constraint.Dtos.SearchDtos
 {
     /// <summary>
     /// 分页查询参数
     /// </summary>
-    public class BasePageSearchDto
+    public class BasePageSearchDto : BaseSearchDto
     {
-        private int _pageIndex=1;
+        private int _pageIndex = 1;
         /// <summary>
         /// 页码
         /// </summary>
@@ -23,6 +23,6 @@ namespace zy.webcore.Share.Constraint.Dtos
         /// <summary>
         /// 计算查询需要跳过的行数
         /// </summary>
-        public int SkipRows { get { return (this.PageIndex - 1) * this.PageSize; } }
+        public int SkipRows { get { return (PageIndex - 1) * PageSize; } }
     }
 }

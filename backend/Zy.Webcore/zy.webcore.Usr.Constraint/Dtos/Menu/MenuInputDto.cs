@@ -1,16 +1,13 @@
-﻿using zy.webcore.Share.Constraint.Dtos;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace zy.webcore.Usr.Constraint.Dtos.Menu
 {
-    /// <summary>
-    /// 菜单输出DTO
-    /// </summary>
-    public class MenuOutputDto:OutputDto
+    public class MenuInputDto:InputDto
     {
-        /// <summary>
-        /// 菜单ID
-        /// </summary>
-        public override long Id { get => base.Id; set => base.Id = value; }
         /// <summary>
         /// 菜单名称
         /// </summary>
@@ -43,9 +40,5 @@ namespace zy.webcore.Usr.Constraint.Dtos.Menu
         /// 备注
         /// </summary>
         public string? Remark { get; set; }
-        /// <summary>
-        /// 子菜单
-        /// </summary>
-        public List<MenuOutputDto> Child { get; set; }
     }
 }

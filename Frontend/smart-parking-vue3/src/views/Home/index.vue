@@ -1,6 +1,10 @@
 <template>
-  <div>
-    Hello Home!
+  <div style="display: flex;  
+  flex-direction: column;  
+  align-items: center;  ">
+    <div>
+      Hello Home!
+    </div>
   </div>
 </template>
 

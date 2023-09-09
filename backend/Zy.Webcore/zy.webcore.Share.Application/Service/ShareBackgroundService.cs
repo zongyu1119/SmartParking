@@ -80,24 +80,29 @@ namespace zy.webcore.Share.Application.Service
         {
             await _nacosService.Value.Subscribe("usr", _eventListener);
             await InitYitter();
-            _timer = new Timer(checkWorkId, null, 60*1000, 60*1000);
+            _timer = new Timer(checkWorkId, null, 600*1000, 600*1000);
         }
         private async void checkWorkId(Object stateInfo)
         {
-            Console.WriteLine($"Yitter Check Timer Run.");
+            Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss}Yitter Check Timer Run.");
             var workerIds = await _cacheService.GetAsync<Dictionary<int, long>>(YitterWorkerIDCacheKey);
-            if(workerIds.TryGetValue(YitterWorkerId, out var ticks))
+            if(workerIds!=null&& workerIds.TryGetValue(YitterWorkerId, out var ticks))
             {
                 ticks = DateTime.Now.Ticks;
                 workerIds.Remove(YitterWorkerId);
                 workerIds.Add(YitterWorkerId, ticks);
             }
-            var expiredList = workerIds.Where(x => x.Value < (DateTime.Now.Ticks - TimeSpan.FromSeconds(120).Ticks));
-            expiredList.ForEach(item =>
+            if (workerIds == null)
+                await InitYitter();
+            else
             {
-                workerIds.Remove((int)item.Key);
-            });
-            await _cacheService.SetAsync(YitterWorkerIDCacheKey, workerIds, (long)TimeSpan.FromSeconds(120).TotalSeconds);
+                var expiredList = workerIds.Where(x => x.Value < (DateTime.Now.Ticks - TimeSpan.FromSeconds(1200).Ticks));
+                expiredList.ForEach(item =>
+                {
+                    workerIds.Remove((int)item.Key);
+                });
+                await _cacheService.SetAsync(YitterWorkerIDCacheKey, workerIds, (long)TimeSpan.FromSeconds(1200).TotalSeconds);
+            }
         }
         /// <summary>
         /// 初始化YitterId
@@ -129,7 +134,7 @@ namespace zy.webcore.Share.Application.Service
                 workerIds.Add(YitterWorkerId, DateTime.Now.Ticks);
                 ZyIdGenerator.SetIdGenerator((ushort)YitterWorkerId);
                 _logger.LogInformation($"Yitter ZyIdGenerator:{YitterWorkerId}.");
-                await _cacheService.SetAsync(YitterWorkerIDCacheKey, workerIds, (long)TimeSpan.FromSeconds(120).TotalSeconds);
+                await _cacheService.SetAsync(YitterWorkerIDCacheKey, workerIds, (long)TimeSpan.FromSeconds(1200).TotalSeconds);
             }
             finally
             {
