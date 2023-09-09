@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "zy.webcore.Test.Console": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:65454;http://localhost:65457"
+    }
+  }
+}

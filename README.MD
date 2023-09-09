@@ -4,14 +4,17 @@
 
 2	技术选型
 
-系统使用前后端分离的方式开发。
+系统使用前后端分离的方式开发，跨平台部署。
 2.1	前端
 
 系统前端使用VUE3开发，必要时使用前端开源框架Element UI，并使用axios实现Ajax请求。
 
 2.2	后端
 
-系统后端前期用.Net6开发，使用Ocelot网关，Identity Server 4身份认证，Autofac依赖注入，ORM框架使用EF Core,使用AutoMap对象关系映射，缓存使用Redis,不使用持久化,数据库使用MySql，消息推送使用RabbitMQ,前后端实时通信使用WebSocket。
+系统后端前期用.Net6开发，使用Ocelot网关，JWT身份认证，IServiceCollection依赖注入，ORM框架使用EF Core,使用AutoMap对象关系映射，缓存使用Redis,不使用持久化,数据库使用MySql，消息推送使用RabbitMQ（.netcore cap）,前后端实时通信使用WebSocket（SignalR）,动态配置、服务注册、服务发现使用nacos，主键生成器使用Yitter，使用Skywalking实现全链路监控，定时任务使用XXL-Job。
+微服务架构图：
+http://naotu.baidu.com/file/c9e343006d65a3e7fec3480821f27b7a?token=413d860b1840254d
+![微服务架构图](Doc/%E5%8E%9F%E5%9E%8B/SmartParking.png)
 
 后期系统后端会使用spring boot开发，数据库使用mysql 8以后的版本，ORM框架使用Mybatis，安全认证使用spring security。
 

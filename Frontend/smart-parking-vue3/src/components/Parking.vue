@@ -1,10 +1,12 @@
 <template>
-<div>
-  <div class="Parking">
-    <ParkingSpace v-for="ps in ParkingSpaceList" :key="ps.Id" :ParkingSpaceData="ps" ></ParkingSpace>
+  <div>
+    <div class="Parking">
+      <ParkingSpace v-for="ps in ParkingSpaceList"
+                    :key="ps.Id"
+                    :ParkingSpaceData="ps"></ParkingSpace>
+    </div>
+    <button v-on:click="addParkingSpace">加一个车位</button>
   </div>
-  <button v-on:click="addParkingSpace">加一个车位</button>
-</div>
 </template>
 <script>
 import ParkingSpace from '@/components/ParkingSpace.vue'

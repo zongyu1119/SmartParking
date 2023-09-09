@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.26.1" />
+    <PackageReference Include="nacos-sdk-csharp" Version="1.3.4" />
+    <PackageReference Include="nacos-sdk-csharp.AspNetCore" Version="1.3.4" />
+    <PackageReference Include="nacos-sdk-csharp.Extensions.Configuration" Version="1.3.4" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.0" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta15" />
+    <PackageReference Include="SkyAPM.Core" Version="2.1.0" />
+    <PackageReference Include="SkyAPM.Utilities.DependencyInjection" Version="2.1.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.26.1" />
+    <PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\zy.webcore.Share.Cache\zy.webcore.Share.Cache.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.Constraint\zy.webcore.Share.Constraint.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.DistributedLock\zy.webcore.Share.DistributedLock.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.Redis\zy.webcore.Share.Redis.csproj" />
+    <ProjectReference Include="..\zy.webcore.share.Repository\zy.webcore.Share.Repository.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.Rpc\zy.webcore.Share.Rpc.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.Yitter\zy.webcore.Share.Yitter.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.ZyCap\zy.webcore.Share.ZyCap.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share\zy.webcore.Share.csproj" />
+  </ItemGroup>
+
+</Project>

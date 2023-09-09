@@ -1,27 +1,26 @@
 
 <template>
-  <div class="common-layout">
-    <router-view></router-view>
-  </div>
+  <router-view>
+  </router-view>
 </template>
 <script setup>
 import { ref } from "vue";
+import Layout from '@/views/layout/index.vue'
 </script>
 <script>
 export default {
+  components: { Layout },
   name: "App",
-  data() {
-    return {    
-      auth:{
-        isLogin:false
-      }
+  data () {
+    return {
+
     };
   },
-  mounted() {
-  
+  mounted () {
+
   },
   methods: {
-   
+
   },
 };
 </script>
@@ -39,3 +38,4 @@ export default {
   overflow: hidden;
 }
 </style>
+

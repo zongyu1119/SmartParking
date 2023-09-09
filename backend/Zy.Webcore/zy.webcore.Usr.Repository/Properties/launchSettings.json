@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "zy.webcore.Usr.Repository": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:65453;http://localhost:65455"
+    }
+  }
+}

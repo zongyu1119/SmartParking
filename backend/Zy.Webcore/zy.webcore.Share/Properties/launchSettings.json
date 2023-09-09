@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "zy.webcore.Share": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:51610;http://localhost:51611"
+    }
+  }
+}
