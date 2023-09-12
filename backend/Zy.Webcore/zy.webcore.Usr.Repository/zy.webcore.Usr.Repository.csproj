@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\zy.webcore.share.Repository\zy.webcore.Share.Repository.csproj" />
+    <ProjectReference Include="..\zy.webcore.Share.Repository\zy.webcore.Share.Repository.csproj" />
   </ItemGroup>
 
 </Project>
