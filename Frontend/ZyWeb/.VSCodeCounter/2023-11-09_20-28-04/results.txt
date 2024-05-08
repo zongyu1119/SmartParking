@@ -1,0 +1,72 @@
+Date : 2023-11-09 20:28:04
+Directory : e:\Study\ZyMsg\ZyMessageFront\ZyWeb
+Total : 26 files,  3415 codes, 39 comments, 112 blanks, all 3566 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          3 |      2,741 |          0 |          2 |      2,743 |
+| Vue        |         12 |        411 |         12 |         53 |        476 |
+| JavaScript |          6 |        127 |         25 |         20 |        172 |
+| CSS        |          2 |        100 |          2 |         21 |        123 |
+| Markdown   |          1 |         22 |          0 |         14 |         36 |
+| HTML       |          1 |         13 |          0 |          1 |         14 |
+| XML        |          1 |          1 |          0 |          1 |          2 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                      | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                         |         26 |      3,415 |         39 |        112 |      3,566 |
+| . (Files)                                                                                 |          7 |      2,803 |          2 |         22 |      2,827 |
+| src                                                                                       |         19 |        612 |         37 |         90 |        739 |
+| src (Files)                                                                               |          2 |         70 |         10 |         18 |         98 |
+| src\api                                                                                   |          1 |         50 |          4 |          1 |         55 |
+| src\assets                                                                                |          3 |        101 |          2 |         22 |        125 |
+| src\components                                                                            |          8 |        237 |          1 |         35 |        273 |
+| src\components (Files)                                                                    |          3 |        191 |          0 |         30 |        221 |
+| src\components\icons                                                                      |          5 |         46 |          1 |          5 |         52 |
+| src\router                                                                                |          1 |         13 |          0 |          3 |         16 |
+| src\untils                                                                                |          1 |         27 |         19 |          7 |         53 |
+| src\views                                                                                 |          3 |        114 |          1 |          4 |        119 |
+| src\views\Chat                                                                            |          3 |        114 |          1 |          4 |        119 |
+| src\views\Chat (Files)                                                                    |          1 |        114 |          1 |          2 |        117 |
+| src\views\Chat\components                                                                 |          2 |          0 |          0 |          2 |          2 |
+| src\views\Chat\components (Files)                                                         |          1 |          0 |          0 |          1 |          1 |
+| src\views\Chat\components\chatUser                                                        |          1 |          0 |          0 |          1 |          1 |
++-------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                  | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\.eslintrc.cjs                                       | JavaScript |         12 |          1 |          2 |         15 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\.prettierrc.json                                    | JSON       |          8 |          0 |          0 |          8 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\README.md                                           | Markdown   |         22 |          0 |         14 |         36 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\index.html                                          | HTML       |         13 |          0 |          1 |         14 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\package-lock.json                                   | JSON       |      2,699 |          0 |          1 |      2,700 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\package.json                                        | JSON       |         34 |          0 |          1 |         35 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\App.vue                                         | Vue        |         60 |         10 |         14 |         84 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\api\http.js                                     | JavaScript |         50 |          4 |          1 |         55 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\assets\base.css                                 | CSS        |         71 |          2 |         14 |         87 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\assets\logo.svg                                 | XML        |          1 |          0 |          1 |          2 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\assets\main.css                                 | CSS        |         29 |          0 |          7 |         36 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\components\HelloWorld.vue                       | Vue        |         39 |          0 |          6 |         45 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\components\TheWelcome.vue                       | Vue        |         76 |          0 |         13 |         89 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\components\WelcomeItem.vue                      | Vue        |         76 |          0 |         11 |         87 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\components\icons\IconCommunity.vue              | Vue        |          7 |          0 |          1 |          8 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\components\icons\IconDocumentation.vue          | Vue        |          7 |          0 |          1 |          8 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\components\icons\IconEcosystem.vue              | Vue        |          7 |          0 |          1 |          8 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\components\icons\IconSupport.vue                | Vue        |          7 |          0 |          1 |          8 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\components\icons\IconTooling.vue                | Vue        |         18 |          1 |          1 |         20 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\main.js                                         | JavaScript |         10 |          0 |          4 |         14 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\router\index.js                                 | JavaScript |         13 |          0 |          3 |         16 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\untils\Rsa.js                                   | JavaScript |         27 |         19 |          7 |         53 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\views\Chat\Chat.vue                             | Vue        |        114 |          1 |          2 |        117 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\views\Chat\components\ChatForm.vue              | Vue        |          0 |          0 |          1 |          1 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\src\views\Chat\components\chatUser\ChatUserList.vue | Vue        |          0 |          0 |          1 |          1 |
+| e:\Study\ZyMsg\ZyMessageFront\ZyWeb\vite.config.js                                      | JavaScript |         15 |          1 |          3 |         19 |
+| Total                                                                                     |            |      3,415 |         39 |        112 |      3,566 |
++-------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
