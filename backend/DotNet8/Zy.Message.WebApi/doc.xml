@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Zy.Message.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:Zy.Message.WebApi.BackGroundServices.Worker">
+            <summary>
+            后台进程
+            </summary>
+        </member>
+        <member name="M:Zy.Message.WebApi.BackGroundServices.Worker.#ctor(Microsoft.Extensions.Logging.ILogger{Zy.Message.WebApi.BackGroundServices.Worker},Microsoft.AspNetCore.SignalR.IHubContext{Zy.Message.WebApi.ChatHubs.ChatHub})">
+            <summary>
+            后台进程
+            </summary>
+        </member>
+        <member name="T:Zy.Message.WebApi.ChatHubs.ChatHub">
+            <summary>
+            HUB
+            </summary>
+        </member>
+        <member name="M:Zy.Message.WebApi.ChatHubs.ChatHub.#ctor(Zy.Shared.Respository.Contexts.ZyShardingCoreContext)">
+            <summary>
+            HUB
+            </summary>
+        </member>
+        <member name="M:Zy.Message.WebApi.ChatHubs.ChatHub.SendMessage(Zy.Message.Constraint.Dtos.ChatDtos.SendMessageInputDto)">
+            <summary>
+            客户端发送消息
+            </summary>
+            <param name="msg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zy.Message.WebApi.ChatHubs.ChatHub.OnConnectedAsync">
+            <summary>
+            连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Zy.Message.WebApi.Controllers.MessageController">
+            <summary>
+            消息相关
+            </summary>
+        </member>
+        <member name="M:Zy.Message.WebApi.Controllers.MessageController.#ctor(Zy.Message.Services.AppService.MessageService)">
+            <summary>
+            消息相关
+            </summary>
+        </member>
+        <member name="M:Zy.Message.WebApi.Controllers.MessageController.GetNewMessageAsync(Zy.Message.Constraint.Dtos.MessageSearchDto)">
+            <summary>
+            获取最近的100条消息（某个时间以前的100条）
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Zy.Message.WebApi.Controllers.SessionController">
+            <summary>
+            登录相关
+            </summary>
+        </member>
+        <member name="M:Zy.Message.WebApi.Controllers.SessionController.#ctor(Zy.Message.Constraint.IServices.ISessionService)">
+            <summary>
+            登录相关
+            </summary>
+        </member>
+        <member name="M:Zy.Message.WebApi.Controllers.SessionController.LoginAsync(Zy.Message.Constraint.Dtos.LoginDto)">
+            <summary>
+            登录
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Zy.Message.WebApi.Controllers.TestController">
+            <summary>
+            测试
+            </summary>
+            <param name="cache"></param>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Zy.Message.WebApi.Controllers.TestController.#ctor(Zy.Shared.Cache.Services.ICacheService,Microsoft.Extensions.Configuration.IConfiguration,Zy.Message.Constraint.IServices.ITestService)">
+            <summary>
+            测试
+            </summary>
+            <param name="cache"></param>
+            <param name="configuration"></param>
+        </member>
+        <member name="T:Zy.Message.WebApi.Controllers.UserController">
+            <summary>
+            用户
+            </summary>
+            <remarks>
+            用户
+            </remarks>  
+            <param name="service"></param>
+        </member>
+        <member name="M:Zy.Message.WebApi.Controllers.UserController.#ctor(Zy.Message.Constraint.IServices.IUserService)">
+            <summary>
+            用户
+            </summary>
+            <remarks>
+            用户
+            </remarks>  
+            <param name="service"></param>
+        </member>
+        <member name="M:Zy.Message.WebApi.Controllers.UserController.GetList">
+            <summary>
+            获取所有用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Zy.Message.WebApi.Controllers.UserController.GetChatGroupAsync">
+            <summary>
+            获得聊天组
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Zy.Message.WebApi.Controllers.UserController.GetFirendAsync(System.String)">
+            <summary>
+            查询我的好友
+            </summary>
+            <param name="searchVal"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Zy.Message.WebApi.Migrations.init">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Zy.Message.WebApi.Migrations.addtable">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.addtable.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.addtable.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.addtable.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Zy.Message.WebApi.Migrations.addtablemodify">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.addtablemodify.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.addtablemodify.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.addtablemodify.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Zy.Message.WebApi.Migrations.addtablemodify01">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.addtablemodify01.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.addtablemodify01.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.addtablemodify01.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Zy.Message.WebApi.Migrations.addtablemodify011">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.addtablemodify011.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.addtablemodify011.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.addtablemodify011.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Zy.Message.WebApi.Migrations.changetable012">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.changetable012.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.changetable012.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.changetable012.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Zy.Message.WebApi.Migrations.changetable013">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.changetable013.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.changetable013.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.changetable013.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Zy.Message.WebApi.Migrations.changetable014">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.changetable014.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.changetable014.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.changetable014.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Zy.Message.WebApi.Migrations.changeall">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.changeall.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.changeall.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Zy.Message.WebApi.Migrations.changeall.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Zy.Message.WebApi.Registers.RegisterZyBackGroundService">
+            <summary>
+            后台进程
+            </summary>
+        </member>
+        <member name="M:Zy.Message.WebApi.Registers.RegisterZyBackGroundService.AddZyBackGroundService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            增加后台线程
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

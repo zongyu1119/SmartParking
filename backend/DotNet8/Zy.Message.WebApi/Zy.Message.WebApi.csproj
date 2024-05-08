@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <UserSecretsId>5c334dc5-3238-4b6b-b6fb-f7872bf2cf6e</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>doc.xml</DocumentationFile>
+    <SignAssembly>False</SignAssembly>
+    <Copyright>Zy1119</Copyright>
+    <Description>消息模块</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zy.Message.Constraint\Zy.Message.Constraint.csproj" />
+    <ProjectReference Include="..\Zy.Message.Respository\Zy.Message.Respository.csproj" />
+    <ProjectReference Include="..\Zy.Message.Services\Zy.Message.Services.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Cache\Zy.Shared.Cache.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Constraint\Zy.Shared.Constraint.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Extensions\Zy.Shared.Extensions.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Nacos\Zy.Shared.Nacos.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Redis\Zy.Shared.Redis.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Respository\Zy.Shared.Respository.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Service\Zy.Shared.Service.csproj" />
+    <ProjectReference Include="..\Zy.Shared.WebApi\Zy.Shared.WebApi.csproj" />
+    <ProjectReference Include="..\Zy.Shared\Zy.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="doc.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
+    <PackageReference Include="nacos-sdk-csharp" Version="1.3.5" />
+    <PackageReference Include="nacos-sdk-csharp.AspNetCore" Version="1.3.5" />
+    <PackageReference Include="nacos-sdk-csharp.Extensions.Configuration" Version="1.3.5" />
+    <PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zy.Shared.Cache\Zy.Shared.Cache.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Constraint\Zy.Shared.Constraint.csproj" />
+    <ProjectReference Include="..\Zy.Shared.DistributedLock\Zy.Shared.DistributedLock.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Extensions\Zy.Shared.Extensions.csproj" />
+    <ProjectReference Include="..\Zy.Shared\Zy.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

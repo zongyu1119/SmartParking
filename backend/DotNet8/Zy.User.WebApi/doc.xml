@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Zy.User.WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:Zy.User.WebApi.BackGroundServices.Worker">
+            <summary>
+            后台进程
+            </summary>
+        </member>
+        <member name="M:Zy.User.WebApi.BackGroundServices.Worker.#ctor(Microsoft.Extensions.Logging.ILogger{Zy.User.WebApi.BackGroundServices.Worker})">
+            <summary>
+            后台进程
+            </summary>
+        </member>
+        <member name="T:Zy.User.WebApi.Controllers.SessionController">
+            <summary>
+            登录相关
+            </summary>
+        </member>
+        <member name="M:Zy.User.WebApi.Controllers.SessionController.#ctor(Zy.User.Constraint.IServices.ISessionService)">
+            <summary>
+            登录相关
+            </summary>
+        </member>
+        <member name="M:Zy.User.WebApi.Controllers.SessionController.LoginAsync(Zy.User.Constraint.Dtos.SessionDto)">
+            <summary>
+            登录
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Zy.User.WebApi.Controllers.TestController">
+            <summary>
+            测试
+            </summary>
+            <param name="cache"></param>
+            <param name="configuration"></param>
+        </member>
+        <member name="M:Zy.User.WebApi.Controllers.TestController.#ctor(Zy.Shared.Cache.Services.ICacheService,Microsoft.Extensions.Configuration.IConfiguration,Zy.User.Constraint.IServices.ITestService)">
+            <summary>
+            测试
+            </summary>
+            <param name="cache"></param>
+            <param name="configuration"></param>
+        </member>
+        <member name="T:Zy.User.WebApi.Registers.RegisterZyBackGroundService">
+            <summary>
+            后台进程
+            </summary>
+        </member>
+        <member name="M:Zy.User.WebApi.Registers.RegisterZyBackGroundService.AddZyBackGroundService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            增加后台线程
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetCore.CAP" Version="8.1.0-preview-226548602" />
+    <PackageReference Include="DotNetCore.CAP.MySql" Version="8.1.0-preview-226548602" />
+    <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="8.1.0-preview-226548602" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zy.Shared.Constraint\Zy.Shared.Constraint.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Respository\Zy.Shared.Respository.csproj" />
+  </ItemGroup>
+
+</Project>

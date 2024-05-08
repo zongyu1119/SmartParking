@@ -1,0 +1,36 @@
+image Path:O:\Docker\Images\DockerDesktopWSL
+
+docker run --name mysql  -e  MYSQL_ROOT_PASSWORD=Qwer12345 --volume=/o/Docker/Data/Mysql/log:/var/log/mysql --volume=/o/Docker/Data/Mysql/data:/var/lib/mysql --volume=/o/Docker/Data/Mysql/conf:/etc/mysql  -p 3306:3306 --restart=always  -d mysql
+
+
+docker run -d --name nacos -p 8848:8848  -p 9848:9848 -p 9849:9849 --privileged=true -e JVM_XMS=256m -e JVM_XMX=256m -e MODE=standalone -v /o/docker/data/nacos/logs/:/home/nacos/logs -v/o/docker/data/nacos/conf/:/home/nacos/conf/ --restart=always nacos/nacos-server
+
+
+docker run --name oracle --user=oracle --env=ORACLE_CHARACTERSET=AL32UTF8 --env=ORACLE_SID=ORCL --env=ORACLE_PDB=ORCLPDB1 --env=ORACLE_PWD=Qwer12345 --env=ORACLE_EDITION=standard --volume=O:\Docker\Data\Oracle\OraData:/opt/oracle/oradata  -p 1521:1521 -p 5500:5500 --restart=always -d registry.aliyuncs.com/zhuyijun/oracle:19c
+
+
+docker run --restart=always -p 6379:6379 --name redis -d redis  --requirepass Qwer12345
+
+docker run -d --restart=always -p 15672:15672  -p  5672:5672  -e RABBITMQ_DEFAULT_USER=zy1119 -e RABBITMQ_DEFAULT_PASS=Qwer12345 --name rabbitmq  rabbitmq
+开启UI：rabbitmq-plugins enable rabbitmq_management
+新增vhost：rabbitmqctl  add_vhost /zy
+为用户设置virtual host：rabbitmqctl  set_permissions  -p  /zy  zy1119 '.*' '.*' '.*'
+
+
+docker run --name postgres  --restart=always -e POSTGRES_PASSWORD=Qwer12345 -p 5040:5040 -p 5432:5432 -v O:\Docker\Data\Postgres:/var/lib/postgresql/data -d postgres
+
+
+docker run -itd --name mongo --restart=always -v O:\Docker\Data\Mongo:/data/db -p 27017:27017 mongo:4.4.9
+ docker exec -it mongo mongo admin
+db.createUser({ user:'zy1119',pwd:'Qwer12345',roles:[ { role:'userAdminAnyDatabase', db: 'admin'},'readWriteAnyDatabase']});
+
+
+docker run -e  "ACCEPT_EULA=Y" --restart=always -e "MSSQL_SA_PASSWORD=Qwer@12345" --memory 2000M -v O:\Docker\Data\Mssql\log:/var/opt/mssql/log -v O:\Docker\Data\Mssql\data:/var/opt/mssql/data   -p 1433:1433 --name mssql --hostname sql1    -d    mcr.microsoft.com/mssql/server:2019-latest
+
+
+
+docker pull apache/skywalking-oap-server
+docker run -d --name skywalking-oap --restart=always  -e SW_STORAGE=mysql -e SW_JDBC_URL=jdbc:mysql://host.docker.internal:3306/skywalking -e SW_DATA_SOURCE_USER=root -e SW_DATA_SOURCE_PASSWORD=Qwer12345 -v O:\Docker\Data\skywalking\ext-libs:/skywalking/ext-libs -p 11800:11800 -p 12800:12800 apache/skywalking-oap-server
+docker pull apache/skywalking-ui
+docker run --name skywalking-ui -d --restart=always -p 8080:8080 -e SW_OAP_ADDRESS=http://host.docker.internal:12800 apache/skywalking-ui
+

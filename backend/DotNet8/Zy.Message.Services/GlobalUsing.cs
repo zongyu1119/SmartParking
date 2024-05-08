@@ -1,0 +1,12 @@
+﻿global using Zy.Message.Constraint.Dtos;
+global using Zy.Message.Constraint.IServices;
+global using Zy.Message.Services.AppServices;
+global using Zy.Shared.Constraint.IServices;
+global using Zy.Shared.Constraint.Dtos;
+global using Zy.Shared.Cap.Events;
+global using Zy.Shared.Cap.Publish;
+global using Zy.Shared.Entitys;
+global using Zy.Shared.Enums;
+global using Zy.Shared.Respository.Respositorys;
+global using Zy.Shared.Consts;
+global using Zy.Shared.YitterHelper.Services;

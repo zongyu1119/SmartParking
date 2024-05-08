@@ -1,0 +1,6 @@
+@Zy.User.WebApi_HostAddress = http://localhost:5140
+
+GET {{Zy.User.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

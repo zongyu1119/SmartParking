@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageReference Include="SwaggerDoc" Version="1.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Zy.Shared.Cache\Zy.Shared.Cache.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Cap\Zy.Shared.Cap.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Constraint\Zy.Shared.Constraint.csproj" />
+    <ProjectReference Include="..\Zy.Shared.DistributedLock\Zy.Shared.DistributedLock.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Extensions\Zy.Shared.Extensions.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Nacos\Zy.Shared.Nacos.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Respository\Zy.Shared.Respository.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Service\Zy.Shared.Service.csproj" />
+    <ProjectReference Include="..\Zy.Shared.SkyApm\Zy.Shared.SkyApm.csproj" />
+    <ProjectReference Include="..\Zy.Shared.YitterHelper\Zy.Shared.YitterHelper.csproj" />
+    <ProjectReference Include="..\Zy.Shared\Zy.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
