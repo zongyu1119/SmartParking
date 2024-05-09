@@ -1,4 +1,6 @@
-﻿namespace Zy.User.Constraint.IServices
+﻿
+
+namespace Zy.User.Constraint.IServices
 {
     /// <summary>
     /// 用户登录验证服务

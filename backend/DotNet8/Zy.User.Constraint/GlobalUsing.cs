@@ -13,4 +13,4 @@ global using Zy.Shared.Constraint;
 global using Zy.Shared.Enums;
 global using Zy.Shared.Constraint.IServices;
 global using Zy.User.Constraint.Dtos;
-global using Zy.Shared.Constraint.Interceptors;
+global using Zy.Shared.Audit.Interceptors;

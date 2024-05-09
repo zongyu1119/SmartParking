@@ -63,7 +63,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resource", "Resource", "{35
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Shared.Getway", "Zy.Shared.Getway\Zy.Shared.Getway.csproj", "{D10B2793-8D69-4DC2-8600-BE170D2CBE52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zy.Shared.ZyLog", "Zy.Shared.ZyLog\Zy.Shared.ZyLog.csproj", "{1401AA27-17CE-4D0B-B522-B213FD5C2FFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Shared.ZyLog", "Zy.Shared.ZyLog\Zy.Shared.ZyLog.csproj", "{1401AA27-17CE-4D0B-B522-B213FD5C2FFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zy.Shared.Audit", "Zy.Shared.Audit\Zy.Shared.Audit.csproj", "{56840A16-CDBD-41C2-B536-24D19A4A5DDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -167,6 +169,10 @@ Global
 		{1401AA27-17CE-4D0B-B522-B213FD5C2FFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1401AA27-17CE-4D0B-B522-B213FD5C2FFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1401AA27-17CE-4D0B-B522-B213FD5C2FFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56840A16-CDBD-41C2-B536-24D19A4A5DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56840A16-CDBD-41C2-B536-24D19A4A5DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56840A16-CDBD-41C2-B536-24D19A4A5DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56840A16-CDBD-41C2-B536-24D19A4A5DDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -197,6 +203,7 @@ Global
 		{3536760A-3A84-4F34-91A5-5E216EACE345} = {4514C176-75D6-4E56-9DC9-2CC3FDD6A34C}
 		{D10B2793-8D69-4DC2-8600-BE170D2CBE52} = {C1AAB4AB-B77C-45F6-A057-6E0CD9E16B78}
 		{1401AA27-17CE-4D0B-B522-B213FD5C2FFD} = {4514C176-75D6-4E56-9DC9-2CC3FDD6A34C}
+		{56840A16-CDBD-41C2-B536-24D19A4A5DDD} = {4514C176-75D6-4E56-9DC9-2CC3FDD6A34C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E89F69BE-672D-4640-9C90-81ECCAA304D8}

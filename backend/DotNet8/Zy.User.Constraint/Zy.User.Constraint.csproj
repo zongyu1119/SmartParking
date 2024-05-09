@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Zy.Shared.Audit\Zy.Shared.Audit.csproj" />
     <ProjectReference Include="..\Zy.Shared.Constraint\Zy.Shared.Constraint.csproj" />
     <ProjectReference Include="..\Zy.User.Respository\Zy.User.Respository.csproj" />
   </ItemGroup>
