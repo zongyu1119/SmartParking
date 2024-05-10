@@ -42,7 +42,7 @@ namespace Zy.Shared.Service.Register
                     return;
                 services.AddScoped(serviceType, implType);
             });
-
+            services.AddAutoMapper(serviceAssembly);
             services.ConfigureDynamicProxy();
             services.WeaveDynamicProxyService();
             return services;

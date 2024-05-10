@@ -1,4 +1,5 @@
 ﻿using DotNetCore.CAP;
+using DotNetCore.CAP.MySql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;

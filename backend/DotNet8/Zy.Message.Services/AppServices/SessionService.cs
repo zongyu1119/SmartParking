@@ -22,10 +22,10 @@ namespace Zy.Message.Services.AppServices
         {
             var user = await efRespository.FirstOrDefaultAsync(x => x.Account == loginDto.Account);
             if (user == null)
-                return new ZyResult<JwtTokenResult>("用户不存在！");
+                return Problem<JwtTokenResult>(System.Net.HttpStatusCode.BadRequest,"用户不存在！");
             var md5 = loginDto.Password.MD5Encrypt32();
             if (md5 != user.Password)
-                return new ZyResult<JwtTokenResult>("用户名或密码错误！");
+                return Problem<JwtTokenResult>(System.Net.HttpStatusCode.BadRequest, "用户名或密码错误！");
             var claims = new LoginUserModel()
             {
                 Name = user.Name,
@@ -50,7 +50,7 @@ namespace Zy.Message.Services.AppServices
                 UserIdCardNum = user.UserIdCardNum
             };
             await cacheService.SetAsync<UserInfoCacheAble>(cacheKey, userInfoCache);
-            return Result(jwtTokenResult);
+            return (jwtTokenResult);
         }
     }
 }

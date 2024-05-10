@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Threading;
 using Z.EntityFramework.Plus;
 using Zy.Shared.Entitys;
 using Zy.Shared.Respository.Contexts;
@@ -22,7 +24,34 @@ namespace Zy.Shared.Respository.Respositorys
 
         public int Delete(long id) => _dbContext.Set<T>().Where(x => x.Id == id).Delete();
 
-        public Task<int> DeleteAsync(long id)=>_dbContext.Set<T>().Where(x => x.Id == id).DeleteAsync();
+        public async Task<int> DeleteAsync(long id)
+        {
+            int rows = 0;
+            //查询当前上下文中，有没有同Id实体
+            var entity = _dbContext.Set<T>().Local.FirstOrDefault(x => x.Id == id);
+
+            if (entity == null)
+                entity = new T { Id = id };
+            var enityType = typeof(T);
+            var hasSoftDeleteMember = typeof(ISoftDeleted).IsAssignableFrom(enityType);
+            if (hasSoftDeleteMember)
+            {
+                ((ISoftDeleted)entity).IsDeleted = true;
+            }
+            else
+            {
+                _dbContext.Remove(entity);
+            }
+            try
+            {
+                rows = await _dbContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                rows = 0;
+            }
+            return rows;
+        } 
 
         public Task<int> DeleteRangeAsync(List<T> entities) => _dbContext.Set<T>().DeleteRangeByKeyAsync(entities);
 
@@ -30,6 +59,64 @@ namespace Zy.Shared.Respository.Respositorys
 
         public Task<int> DeleteRangeAsync(List<long> ids) => _dbContext.Set<T>().Where(x=>ids.Contains(x.Id)).DeleteFromQueryAsync();
 
+        public int Update(T entity, Expression<Func<T, object>>[] updatedProperties)
+        {
+            _dbContext.Set<T>().Attach(entity);
+            if (updatedProperties.Any())
+            {
+                foreach (var property in updatedProperties)
+                {
+                    _dbContext.Entry<T>(entity).Property(property).IsModified = true;
+                }
+            }
+            return _dbContext.SaveChanges();
+        }
+
+        public Task<int> UpdateAsync(T entity, Expression<Func<T, object>>[] updatedProperties)
+        {
+            _dbContext.Set<T>().Attach(entity);
+            if (updatedProperties.Length != 0)
+            {
+                foreach (var property in updatedProperties)
+                {
+                    _dbContext.Entry<T>(entity).Property(property).IsModified = true;
+                }
+            }
+            return _dbContext.SaveChangesAsync();
+        }
+
+        public Task<int> UpdateRangeAsync(List<T> entities, Expression<Func<T, object>>[] updatedProperties)
+        {
+            entities.ForEach(entity =>
+            {
+                _dbContext.Set<T>().Attach(entity);
+                if (updatedProperties.Length != 0)
+                {
+                    foreach (var property in updatedProperties)
+                    {
+                        _dbContext.Entry<T>(entity).Property(property).IsModified = true;
+                    }
+                }
+            });
+            return _dbContext.SaveChangesAsync();
+        }
+        public int Insert(T entity)
+        {
+            _dbContext.Set<T>().Add(entity);
+            return _dbContext.SaveChanges();
+        }
+
+        public async Task<int> InsertAsync(T entity)
+        {
+            _dbContext.Set<T>().Add(entity);
+            return await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> InsertRangeAsync(List<T> entities)
+        {
+            _dbContext.Set<T>().AddRange(entities);
+            return await _dbContext.SaveChangesAsync();
+        }
         public T Find(Expression<Func<T, bool>> expression)
         {
             return _dbContext.Set<T>().FirstOrDefault(expression);
@@ -62,23 +149,6 @@ namespace Zy.Shared.Respository.Respositorys
 
         public IQueryable<T> GetAll() => _dbContext.Set<T>();
 
-        public int Insert(T entity)
-        {
-            _dbContext.Set<T>().Add(entity);
-            return  _dbContext.SaveChanges();
-        }
-
-        public async Task<int> InsertAsync(T entity)
-        {
-            _dbContext.Set<T>().Add(entity);
-            return await _dbContext.SaveChangesAsync();
-        }
-
-        public async Task<int> InsertRangeAsync(List<T> entities)
-        {
-            _dbContext.Set<T>().AddRange(entities);
-            return await _dbContext.SaveChangesAsync();
-        }
 
         public IEnumerable<T> Tolist(Expression<Func<T, bool>> expression)
         {
@@ -90,47 +160,6 @@ namespace Zy.Shared.Respository.Respositorys
             return _dbContext.Set<T>().Where(expression).ToListAsync();
         }
 
-        public int Update(T entity, Expression<Func<T, object>>[] updatedProperties)
-        {
-            _dbContext.Set<T>().Attach(entity);
-            if (updatedProperties.Any())
-            {
-                foreach (var property in updatedProperties)
-                {
-                    _dbContext.Entry<T>(entity).Property(property).IsModified = true;
-                }
-            }
-           return _dbContext.SaveChanges();
-        }
-
-        public Task<int> UpdateAsync(T entity, Expression<Func<T, object>>[] updatedProperties)
-        {
-            _dbContext.Set<T>().Attach(entity);
-            if (updatedProperties.Length != 0)
-            {
-                foreach (var property in updatedProperties)
-                {
-                    _dbContext.Entry<T>(entity).Property(property).IsModified = true;
-                }
-            }
-            return _dbContext.SaveChangesAsync();
-        }
-
-        public Task<int> UpdateRangeAsync(List<T> entities, Expression<Func<T, object>>[] updatedProperties)
-        {
-            entities.ForEach(entity =>
-            {
-                _dbContext.Set<T>().Attach(entity);
-                if (updatedProperties.Length != 0)
-                {
-                    foreach (var property in updatedProperties)
-                    {
-                        _dbContext.Entry<T>(entity).Property(property).IsModified = true;
-                    }
-                }
-            });
-            return _dbContext.SaveChangesAsync();
-        }
 
         public IQueryable<T> Where(Expression<Func<T, bool>> expression) => _dbContext.Set<T>().Where(expression);
     }

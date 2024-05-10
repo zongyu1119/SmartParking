@@ -31,6 +31,44 @@
             <param name="dto"></param>
             <returns></returns>
         </member>
+        <member name="T:Zy.User.WebApi.Controllers.SysUserController">
+            <summary>
+            用户表
+            </summary>
+        </member>
+        <member name="M:Zy.User.WebApi.Controllers.SysUserController.#ctor(Zy.User.Constraint.IServices.ISysUserService)">
+            <summary>
+            用户表
+            </summary>
+        </member>
+        <member name="M:Zy.User.WebApi.Controllers.SysUserController.AddAsync(Zy.User.Constraint.Dtos.SysUserInputDto)">
+            <summary>
+            新增用户表
+            </summary>
+            <param name="dto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zy.User.WebApi.Controllers.SysUserController.DeleteAsync(System.Int64)">
+            <summary>
+            删除用户表
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zy.User.WebApi.Controllers.SysUserController.DeleteRangeAsync(System.Collections.Generic.List{System.Int64})">
+            <summary>
+            批量删除用户表
+            </summary>
+            <param name="ids"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Zy.User.WebApi.Controllers.SysUserController.UpdateAsync(System.Int64,Zy.User.Constraint.Dtos.SysUserInputDto)">
+            <summary>
+            用户表修改
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:Zy.User.WebApi.Controllers.TestController">
             <summary>
             测试

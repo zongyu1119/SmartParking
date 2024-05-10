@@ -8,5 +8,6 @@
         /// <param name="message"></param>
         /// <returns></returns>
         Task<string> Publish(string message);
+
     }
 }
