@@ -19,7 +19,7 @@
             HUB
             </summary>
         </member>
-        <member name="M:Zy.Message.WebApi.ChatHubs.ChatHub.#ctor(Zy.Shared.Respository.Contexts.ZyShardingCoreContext)">
+        <member name="M:Zy.Message.WebApi.ChatHubs.ChatHub.#ctor(Zy.Shared.Repository.Contexts.ZyShardingCoreContext)">
             <summary>
             HUB
             </summary>

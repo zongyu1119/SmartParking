@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Yitter.IdGenerator;
 using Zy.Message.Constraint.Dtos.ChatDtos;
-using Zy.Message.Respository.Entitys;
-using Zy.Shared.Respository.Contexts;
+using Zy.Message.Repository.Entitys;
+using Zy.Shared.Repository.Contexts;
 
 namespace Zy.Message.WebApi.ChatHubs
 {
@@ -12,7 +12,7 @@ namespace Zy.Message.WebApi.ChatHubs
     /// HUB
     /// </summary>
     [Authorize]
-    public class ChatHub(ZyShardingCoreContext context) : Hub
+    public class ChatHub(ZyShardingCoreDbContext context) : Hub
     {
         /// <summary>
         /// 客户端发送消息
@@ -23,7 +23,7 @@ namespace Zy.Message.WebApi.ChatHubs
         {
             var userId = long.Parse(Context.User.Claims.FirstOrDefault(x => x.Type == "userid")?.Value ?? "0");
             var time = DateTime.Now;           
-            var model = new Zy.Message.Respository.Entitys.Message
+            var model = new Zy.Message.Repository.Entitys.Message
             {
                 Content = msg.Message,
                 CreateTime = time,
@@ -33,7 +33,7 @@ namespace Zy.Message.WebApi.ChatHubs
                 SendTime = time,
                 SendUserId = userId,
             };
-            await context.Set<Zy.Message.Respository.Entitys.Message>().AddAsync(model);
+            await context.Set<Zy.Message.Repository.Entitys.Message>().AddAsync(model);
             await context.SaveChangesAsync();
             var msgRes = new SendMessageOutputDto
             {

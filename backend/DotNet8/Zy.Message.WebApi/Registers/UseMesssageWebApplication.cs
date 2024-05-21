@@ -1,6 +1,6 @@
 ﻿using Nacos.V2.Naming.Dtos;
 using Zy.Message.WebApi.ChatHubs;
-using Zy.Message.Respository.Registers;
+using Zy.Message.Repository.Registers;
 using Zy.Shared.Constraint;
 using Zy.Shared.Cache.Register;
 using Zy.Message.WebApi.Registers;

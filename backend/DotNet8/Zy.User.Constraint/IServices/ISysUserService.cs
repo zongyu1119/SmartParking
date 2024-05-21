@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zy.Shared.Repository.UnitOfWorks;
 
 namespace Zy.User.Constraint.IServices
 {
@@ -17,6 +18,7 @@ namespace Zy.User.Constraint.IServices
         /// <param name="dto"></param>
         /// <returns></returns>
         [AuditInterceptor("新增用户表")]
+        [UnitOfWork]
         Task<ZyResult<bool>> AddAsync(SysUserInputDto dto);
         /// <summary>
         /// 用户表修改

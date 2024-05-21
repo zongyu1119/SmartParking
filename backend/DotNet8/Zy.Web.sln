@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Shared.Extensions", "Zy.Shared.Extensions\Zy.Shared.Extensions.csproj", "{E0326649-5DE3-4E47-853A-3059E8089517}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Shared.Respository", "Zy.Shared.Respository\Zy.Shared.Respository.csproj", "{D7BE28C4-31A8-4FD6-9A0B-6CEF0AC53EE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Shared.Repository", "Zy.Shared.Repository\Zy.Shared.Repository.csproj", "{D7BE28C4-31A8-4FD6-9A0B-6CEF0AC53EE3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Shared.Redis", "Zy.Shared.Redis\Zy.Shared.Redis.csproj", "{E2C2D056-5AFF-482D-892C-85CFB5A4ED10}"
 EndProject
@@ -39,7 +39,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Zy.User", "Zy.User", "{C4DE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.User.Constraint", "Zy.User.Constraint\Zy.User.Constraint.csproj", "{D9A7A87B-EA1F-4375-8B0C-66ABC8952B28}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.User.Respository", "Zy.User.Respository\Zy.User.Respository.csproj", "{7847595F-C330-4010-9049-E377C83D3FB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.User.Repository", "Zy.User.Repository\Zy.User.Repository.csproj", "{7847595F-C330-4010-9049-E377C83D3FB0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.User.WebApi", "Zy.User.WebApi\Zy.User.WebApi.csproj", "{BF579EBF-FB1C-4694-9223-C30A6D4B4A94}"
 EndProject
@@ -49,7 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Zy.Message", "Zy.Message", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Message.Constraint", "Zy.Message.Constraint\Zy.Message.Constraint.csproj", "{F747BF65-D451-45C6-AC53-1DECDE84A489}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Message.Respository", "Zy.Message.Respository\Zy.Message.Respository.csproj", "{48B249BB-4FCF-4FE8-A201-297F7615DCE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Message.Repository", "Zy.Message.Repository\Zy.Message.Repository.csproj", "{48B249BB-4FCF-4FE8-A201-297F7615DCE0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Message.Services", "Zy.Message.Services\Zy.Message.Services.csproj", "{CC8CAB25-6D2F-497F-AEE7-AA98C5A44AD4}"
 EndProject
@@ -65,7 +65,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Shared.Getway", "Zy.Shar
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Shared.ZyLog", "Zy.Shared.ZyLog\Zy.Shared.ZyLog.csproj", "{1401AA27-17CE-4D0B-B522-B213FD5C2FFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zy.Shared.Audit", "Zy.Shared.Audit\Zy.Shared.Audit.csproj", "{56840A16-CDBD-41C2-B536-24D19A4A5DDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zy.Shared.Audit", "Zy.Shared.Audit\Zy.Shared.Audit.csproj", "{56840A16-CDBD-41C2-B536-24D19A4A5DDD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTest", "UnitTest", "{38150DCB-4DAB-4F28-9B30-0AEC91944D0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zy.User.ServicesTests", "Zy.User.ServicesTests\Zy.User.ServicesTests.csproj", "{2212EE49-21BD-4EC7-B3D6-EE2C1F8027A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zy.Test.Console", "Zy.Test.Console\Zy.Test.Console.csproj", "{C645DEDD-5C67-416F-8C6A-ACB4C687F139}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -173,6 +179,14 @@ Global
 		{56840A16-CDBD-41C2-B536-24D19A4A5DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56840A16-CDBD-41C2-B536-24D19A4A5DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56840A16-CDBD-41C2-B536-24D19A4A5DDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2212EE49-21BD-4EC7-B3D6-EE2C1F8027A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2212EE49-21BD-4EC7-B3D6-EE2C1F8027A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2212EE49-21BD-4EC7-B3D6-EE2C1F8027A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2212EE49-21BD-4EC7-B3D6-EE2C1F8027A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C645DEDD-5C67-416F-8C6A-ACB4C687F139}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C645DEDD-5C67-416F-8C6A-ACB4C687F139}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C645DEDD-5C67-416F-8C6A-ACB4C687F139}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C645DEDD-5C67-416F-8C6A-ACB4C687F139}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -204,6 +218,8 @@ Global
 		{D10B2793-8D69-4DC2-8600-BE170D2CBE52} = {C1AAB4AB-B77C-45F6-A057-6E0CD9E16B78}
 		{1401AA27-17CE-4D0B-B522-B213FD5C2FFD} = {4514C176-75D6-4E56-9DC9-2CC3FDD6A34C}
 		{56840A16-CDBD-41C2-B536-24D19A4A5DDD} = {4514C176-75D6-4E56-9DC9-2CC3FDD6A34C}
+		{2212EE49-21BD-4EC7-B3D6-EE2C1F8027A1} = {38150DCB-4DAB-4F28-9B30-0AEC91944D0F}
+		{C645DEDD-5C67-416F-8C6A-ACB4C687F139} = {38150DCB-4DAB-4F28-9B30-0AEC91944D0F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E89F69BE-672D-4640-9C90-81ECCAA304D8}

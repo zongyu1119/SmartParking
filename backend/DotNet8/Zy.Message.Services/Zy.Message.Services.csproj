@@ -8,9 +8,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Zy.Message.Constraint\Zy.Message.Constraint.csproj" />
-    <ProjectReference Include="..\Zy.Message.Respository\Zy.Message.Respository.csproj" />
+    <ProjectReference Include="..\Zy.Message.Repository\Zy.Message.Repository.csproj" />
     <ProjectReference Include="..\Zy.Shared.Cap\Zy.Shared.Cap.csproj" />
-    <ProjectReference Include="..\Zy.Shared.Respository\Zy.Shared.Respository.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Repository\Zy.Shared.Repository.csproj" />
     <ProjectReference Include="..\Zy.Shared.Service\Zy.Shared.Service.csproj" />
     <ProjectReference Include="..\Zy.Shared.YitterHelper\Zy.Shared.YitterHelper.csproj" />
   </ItemGroup>

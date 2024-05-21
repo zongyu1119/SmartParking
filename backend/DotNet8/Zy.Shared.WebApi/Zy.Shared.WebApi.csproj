@@ -20,7 +20,7 @@
     <ProjectReference Include="..\Zy.Shared.DistributedLock\Zy.Shared.DistributedLock.csproj" />
     <ProjectReference Include="..\Zy.Shared.Extensions\Zy.Shared.Extensions.csproj" />
     <ProjectReference Include="..\Zy.Shared.Nacos\Zy.Shared.Nacos.csproj" />
-    <ProjectReference Include="..\Zy.Shared.Respository\Zy.Shared.Respository.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Repository\Zy.Shared.Repository.csproj" />
     <ProjectReference Include="..\Zy.Shared.Service\Zy.Shared.Service.csproj" />
     <ProjectReference Include="..\Zy.Shared.SkyApm\Zy.Shared.SkyApm.csproj" />
     <ProjectReference Include="..\Zy.Shared.YitterHelper\Zy.Shared.YitterHelper.csproj" />

@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Zy.Shared.Constraint\Zy.Shared.Constraint.csproj" />
-    <ProjectReference Include="..\Zy.Shared.Respository\Zy.Shared.Respository.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Repository\Zy.Shared.Repository.csproj" />
     <ProjectReference Include="..\Zy.Shared.YitterHelper\Zy.Shared.YitterHelper.csproj" />
   </ItemGroup>
 

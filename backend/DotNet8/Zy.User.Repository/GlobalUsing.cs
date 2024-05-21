@@ -1,0 +1,13 @@
+﻿global using Microsoft.EntityFrameworkCore;
+global using System.ComponentModel;
+global using System.ComponentModel.DataAnnotations;
+global using System.ComponentModel.DataAnnotations.Schema;
+global using Zy.Shared.Entitys;
+global using Zy.Shared.Constraint.Dtos;
+global using Zy.Shared.Repository.Contexts;
+global using System.Reflection;
+global using Zy.Shared.Repository.Registers;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Zy.Shared.Constraint;
+global using Zy.Shared.Enums;

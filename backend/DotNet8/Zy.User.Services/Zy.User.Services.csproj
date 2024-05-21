@@ -18,7 +18,7 @@
     <ProjectReference Include="..\Zy.Shared.Service\Zy.Shared.Service.csproj" />
     <ProjectReference Include="..\Zy.Shared.YitterHelper\Zy.Shared.YitterHelper.csproj" />
     <ProjectReference Include="..\Zy.User.Constraint\Zy.User.Constraint.csproj" />
-    <ProjectReference Include="..\Zy.User.Respository\Zy.User.Respository.csproj" />
+    <ProjectReference Include="..\Zy.User.Repository\Zy.User.Repository.csproj" />
   </ItemGroup>
 
 </Project>

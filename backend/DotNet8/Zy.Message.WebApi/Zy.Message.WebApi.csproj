@@ -25,14 +25,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Zy.Message.Constraint\Zy.Message.Constraint.csproj" />
-    <ProjectReference Include="..\Zy.Message.Respository\Zy.Message.Respository.csproj" />
+    <ProjectReference Include="..\Zy.Message.Repository\Zy.Message.Repository.csproj" />
     <ProjectReference Include="..\Zy.Message.Services\Zy.Message.Services.csproj" />
     <ProjectReference Include="..\Zy.Shared.Cache\Zy.Shared.Cache.csproj" />
     <ProjectReference Include="..\Zy.Shared.Constraint\Zy.Shared.Constraint.csproj" />
     <ProjectReference Include="..\Zy.Shared.Extensions\Zy.Shared.Extensions.csproj" />
     <ProjectReference Include="..\Zy.Shared.Nacos\Zy.Shared.Nacos.csproj" />
     <ProjectReference Include="..\Zy.Shared.Redis\Zy.Shared.Redis.csproj" />
-    <ProjectReference Include="..\Zy.Shared.Respository\Zy.Shared.Respository.csproj" />
+    <ProjectReference Include="..\Zy.Shared.Repository\Zy.Shared.Repository.csproj" />
     <ProjectReference Include="..\Zy.Shared.Service\Zy.Shared.Service.csproj" />
     <ProjectReference Include="..\Zy.Shared.WebApi\Zy.Shared.WebApi.csproj" />
     <ProjectReference Include="..\Zy.Shared\Zy.Shared.csproj" />

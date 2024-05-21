@@ -23,7 +23,7 @@ namespace Zy.User.WebApi.Controllers
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ZyAuthorize("user_sysUser_add")]
+        //[ZyAuthorize("user_sysUser_add")]
         public async Task<ZyResult<bool>> AddAsync([FromBody] SysUserInputDto dto)
         {
             return await sysUserService.AddAsync(dto);

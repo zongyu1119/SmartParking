@@ -6,7 +6,7 @@ namespace Zy.User.Services.AppServices
     /// <summary>
     /// 用户表增删改服务
     /// </summary>
-    public class SysUserService(IEfRespository<SysUser> repository) : AbstractService, ISysUserService
+    public class SysUserService(IEfRepository<SysUser> repository) : AbstractService, ISysUserService
     {
         #region 新增用户表
         /// <summary>

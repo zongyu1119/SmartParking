@@ -1,17 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Zy.Message.Constraint.Dtos;
-using Zy.Message.Respository.Entitys;
-using Zy.Shared.Respository.Contexts;
+using Zy.Message.Repository.Entitys;
+using Zy.Shared.Repository.Contexts;
 using Zy.Shared.Extensions;
 using Zy.Message.Constraint.IServices;
 using Zy.Shared.Constraint.Dtos;
 
 namespace Zy.Message.WebApi.Services
 {
-    public class UserService(IEfRespository<User> userRespository,
-         IEfRespository<GroupUser> groupRespository,
-          IEfRespository<ChatGroup> chatGroupRespository,
-           IEfRespository<UserRelation> userRelRespository,
+    public class UserService(IEfRepository<User> userRepository,
+         IEfRepository<GroupUser> groupRepository,
+          IEfRepository<ChatGroup> chatGroupRepository,
+           IEfRepository<UserRelation> userRelRepository,
         ZyUserContext httpContext) : IUserService
     {
         /// <summary>
@@ -20,7 +20,7 @@ namespace Zy.Message.WebApi.Services
         /// <returns></returns>
         public async Task<ZyResult<List<UserOutputDto>>> GetList()
         {
-            var list = await userRespository.GetAll().Select(x => new UserOutputDto
+            var list = await userRepository.GetAll().Select(x => new UserOutputDto
             {
                 Account = x.Account,
                 Id = x.Id,
@@ -35,14 +35,14 @@ namespace Zy.Message.WebApi.Services
         public async Task<ZyResult<List<GroupOutputDto>>> GetChatGroupAsync()
         {
             var id = httpContext.Id;
-            var resDate = await chatGroupRespository
-                .Where(x => groupRespository.Where(s => s.UserId == id).Select(s => s.GroupId).Distinct().Contains(x.Id))
+            var resDate = await chatGroupRepository
+                .Where(x => groupRepository.Where(s => s.UserId == id).Select(s => s.GroupId).Distinct().Contains(x.Id))
                 .Select(x => new GroupOutputDto
                 {
                     Id = x.Id,
                     IsGroup = x.IsGroup,
                     Name = x.GroupName,
-                    Users = userRespository.Where(u => groupRespository.Where(s => s.GroupId == x.Id).Select(s => s.UserId).Distinct().Contains(u.Id))
+                    Users = userRepository.Where(u => groupRepository.Where(s => s.GroupId == x.Id).Select(s => s.UserId).Distinct().Contains(u.Id))
                         .Select(u => new UserOutputDto
                         {
                             Account = u.Account,
@@ -61,8 +61,8 @@ namespace Zy.Message.WebApi.Services
         /// <returns></returns>
         public async Task<ZyResult<List<UserOutputDto>>> GetFirendAsync(string? searchVal)
         {
-            var listQueryable = userRespository
-                .Where(x => userRelRespository.Where(s => s.UserId == httpContext.Id).Select(s => s.FirendUserId).Distinct().Contains(x.Id));
+            var listQueryable = userRepository
+                .Where(x => userRelRepository.Where(s => s.UserId == httpContext.Id).Select(s => s.FirendUserId).Distinct().Contains(x.Id));
             if (searchVal.IsNotNullOrWhiteSpace())
             {
                 listQueryable = listQueryable.Where(x => x.Name.Contains(searchVal) || x.Account.Contains(searchVal));

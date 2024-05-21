@@ -1,4 +1,4 @@
-﻿using Zy.Message.Respository.Registers;
+﻿using Zy.Message.Repository.Registers;
 using Zy.Shared.Service.Register;
 using Zy.Shared.Constraint;
 using Zy.Shared.Cache.Register;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Zy.Message.Constraint.Dtos;
 using Zy.Message.Constraint.Dtos.ChatDtos;
-using Zy.Shared.Respository.Contexts;
+using Zy.Shared.Repository.Contexts;
 using Zy.Shared.Constraint.Dtos;
 using Zy.Shared.Constraint.IServices;
 namespace Zy.Message.Services.AppService
@@ -17,7 +17,7 @@ namespace Zy.Message.Services.AppService
         /// <returns></returns>
         public async Task<ZyResult<List<SendMessageOutputDto>>> GetNewMessageAsync(MessageSearchDto dto)
         {
-            var listIQueryable = dbcontext.Set<Zy.Message.Respository.Entitys.Message>().Where(x => x.RecriveId == dto.GroupId);
+            var listIQueryable = dbcontext.Set<Zy.Message.Repository.Entitys.Message>().Where(x => x.RecriveId == dto.GroupId);
             if (dto.Time.HasValue)
             {
                 listIQueryable = listIQueryable.Where(x => x.SendTime <= dto.Time.Value);

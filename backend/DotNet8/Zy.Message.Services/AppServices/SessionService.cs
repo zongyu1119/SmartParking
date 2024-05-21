@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Xml.Linq;
 using Zy.Message.Constraint.Dtos;
-using Zy.Message.Respository.Entitys;
-using Zy.Shared.Respository.Contexts;
+using Zy.Message.Repository.Entitys;
+using Zy.Shared.Repository.Contexts;
 using Zy.Shared.Extensions;
 using Zy.Message.Constraint.IServices;
 using Zy.Shared.Service.Services;
@@ -15,12 +15,12 @@ namespace Zy.Message.Services.AppServices
     /// </summary>
     public class SessionService(
         GenerateJwtService generateJwt,
-        IEfRespository<User> efRespository,
+        IEfRepository<User> efRepository,
         ICacheService cacheService) :AbstractService, ISessionService
     {
         public async Task<ZyResult<JwtTokenResult>> SessionAsync(LoginDto loginDto, ClientTypeEnum clientType= ClientTypeEnum.PC)
         {
-            var user = await efRespository.FirstOrDefaultAsync(x => x.Account == loginDto.Account);
+            var user = await efRepository.FirstOrDefaultAsync(x => x.Account == loginDto.Account);
             if (user == null)
                 return Problem<JwtTokenResult>(System.Net.HttpStatusCode.BadRequest,"用户不存在！");
             var md5 = loginDto.Password.MD5Encrypt32();

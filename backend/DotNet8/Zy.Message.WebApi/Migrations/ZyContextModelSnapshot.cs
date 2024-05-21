@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Zy.Shared.Respository.Contexts;
+using Zy.Shared.Repository.Contexts;
 
 #nullable disable
 
@@ -19,7 +19,7 @@ namespace Zy.Message.WebApi.Migrations
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Zy.Message.Respository.Entitys.ChatGroup", b =>
+            modelBuilder.Entity("Zy.Message.Repository.Entitys.ChatGroup", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint")
@@ -65,7 +65,7 @@ namespace Zy.Message.WebApi.Migrations
                     b.ToTable("chat_group");
                 });
 
-            modelBuilder.Entity("Zy.Message.Respository.Entitys.GroupUser", b =>
+            modelBuilder.Entity("Zy.Message.Repository.Entitys.GroupUser", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint")
@@ -109,7 +109,7 @@ namespace Zy.Message.WebApi.Migrations
                     b.ToTable("group_user");
                 });
 
-            modelBuilder.Entity("Zy.Message.Respository.Entitys.Message", b =>
+            modelBuilder.Entity("Zy.Message.Repository.Entitys.Message", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint")
@@ -166,7 +166,7 @@ namespace Zy.Message.WebApi.Migrations
                     b.ToTable("message");
                 });
 
-            modelBuilder.Entity("Zy.Message.Respository.Entitys.User", b =>
+            modelBuilder.Entity("Zy.Message.Repository.Entitys.User", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint")
@@ -225,7 +225,7 @@ namespace Zy.Message.WebApi.Migrations
                     b.ToTable("user");
                 });
 
-            modelBuilder.Entity("Zy.Message.Respository.Entitys.UserRelation", b =>
+            modelBuilder.Entity("Zy.Message.Repository.Entitys.UserRelation", b =>
                 {
                     b.Property<long>("Id")
                         .HasColumnType("bigint")

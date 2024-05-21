@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Zy.Shared.Cap.Publish;
 using Zy.Shared.Constraint;
 using Zy.Shared.Constraint.IServices;
-using Zy.Shared.Respository.Contexts;
+using Zy.Shared.Repository.Contexts;
 
 namespace Zy.Shared.Cap.Register
 {
@@ -21,7 +21,7 @@ namespace Zy.Shared.Cap.Register
             services.AddCap(s =>
              {
                  //this.RabbitMqSection.Get<RabbitMQOptions>()
-                 s.UseEntityFramework<ZyShardingCoreContext>();
+                 s.UseEntityFramework<ZyShardingCoreDbContext>();
                  //s.UseRabbitMQ("127.0.0.1");
                  s.UseRabbitMQ(option =>
                  {

@@ -1,4 +1,4 @@
-﻿using Zy.User.Respository.Registers;
+﻿using Zy.User.Repository.Registers;
 using Zy.Shared.Constraint;
 using Zy.Shared.WebApi.Register;
 using Zy.User.Services.Register;

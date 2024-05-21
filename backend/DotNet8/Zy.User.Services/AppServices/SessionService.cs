@@ -8,7 +8,7 @@ namespace Zy.User.Services.AppServices
     /// 用户登录验证服务
     /// </summary>
     public class SessionService(GenerateJwtService generateJwt,
-        IEfRespository<SysUser> efRespository,
+        IEfRepository<SysUser> efRepository,
         ICacheService cacheService,
         ILogger<SessionService> logger) :AbstractService, ISessionService
     {
@@ -21,7 +21,7 @@ namespace Zy.User.Services.AppServices
         public async Task<ZyResult<JwtTokenResult>> SessionAsync(SessionDto loginDto, ClientTypeEnum clientType= ClientTypeEnum.PC)
         {
             logger.LogInformation($"登录：{loginDto.Account}");
-            var user = await efRespository.FirstOrDefaultAsync(x => x.Account == loginDto.Account);
+            var user = await efRepository.FirstOrDefaultAsync(x => x.Account == loginDto.Account);
             if (user == null)
                 return Problem<JwtTokenResult>(System.Net.HttpStatusCode.BadRequest, "用户不存在！");
             var md5 = loginDto.Password.MD5Encrypt32();

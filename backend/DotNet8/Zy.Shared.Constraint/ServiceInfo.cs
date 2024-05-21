@@ -42,10 +42,10 @@ namespace Zy.Shared.Constraint
 
                 startAssembly ??= Assembly.GetEntryAssembly();
 
-                var description = startAssembly.GetCustomAttribute<AssemblyDescriptionAttribute>().Description;
-                var assemblyName = startAssembly.GetName();
-                var version = assemblyName.Version;
-                var fullName = assemblyName.Name.ToLower();
+                var description = startAssembly?.GetCustomAttribute<AssemblyDescriptionAttribute>()?.Description??"";
+                var assemblyName = startAssembly?.GetName();
+                var version = assemblyName?.Version;
+                var fullName = assemblyName?.Name?.ToLower()??"";
                 var serviceName = fullName.Replace(".", "-");
                 var ticks = (long)DateTime.Now.Ticks;
                 var ticksHex = Convert.ToString(ticks, 16);
@@ -69,7 +69,7 @@ namespace Zy.Shared.Constraint
                     CorsPolicy = "default",
                     StartAssembly = startAssembly,
                     Description = description,
-                    Version = $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}",
+                    Version = $"{version?.Major}.{version?.Minor}.{version?.Build}.{version?.Revision}",
                     EnvName = envName,
                 };
             }
