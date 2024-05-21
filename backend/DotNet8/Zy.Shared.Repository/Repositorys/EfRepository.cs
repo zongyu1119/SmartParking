@@ -14,8 +14,6 @@ namespace Zy.Shared.Repository.Repositorys
 
         public int Count(Expression<Func<T, bool>> expression)
         {
-            if(typeof(T).IsAssignableFrom(typeof(ISoftDeleted)))
-                expression
            return _dbContext.Set<T>().Count(expression);
         }
 
