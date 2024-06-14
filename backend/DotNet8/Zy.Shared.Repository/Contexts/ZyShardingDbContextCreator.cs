@@ -15,7 +15,7 @@ namespace Zy.Shared.Repository.Contexts
 {
     public class ZyShardingDbContextCreator : ActivatorDbContextCreator<ZyShardingCoreDbContext>, IDbContextCreator
     {
-        public DbContext CreateDbContext(DbContext mainDbContext, ShardingDbContextOptions shardingDbContextOptions)
+        public override DbContext CreateDbContext(DbContext mainDbContext, ShardingDbContextOptions shardingDbContextOptions)
         {
             var dbContext = new ZyShardingCoreDbContext((DbContextOptions<ZyShardingCoreDbContext>)shardingDbContextOptions.DbContextOptions, ((ZyShardingCoreDbContext)mainDbContext).ServiceProvider);
             Console.WriteLine("IsFrozen" + shardingDbContextOptions.DbContextOptions.IsFrozen);
@@ -27,7 +27,7 @@ namespace Zy.Shared.Repository.Contexts
             return dbContext;
         }
 
-        public DbContext GetShellDbContext(IShardingProvider shardingProvider)
+        public override DbContext GetShellDbContext(IShardingProvider shardingProvider)
         {
             return shardingProvider.GetService<ZyShardingCoreDbContext>();
         }

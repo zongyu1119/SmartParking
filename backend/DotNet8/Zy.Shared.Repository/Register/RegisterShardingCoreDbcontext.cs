@@ -103,7 +103,8 @@ namespace Zy.Shared.Repository.Register
                     };
                 }, ReadStrategyEnum.Loop, ReadWriteDefaultEnableBehavior.DefaultDisable);
             })
-                .ReplaceService<IDbContextCreator,ZyShardingDbContextCreator>()
+                .ReplaceService<IDbContextCreator, ZyShardingDbContextCreator>()
+                
             .AddShardingCore();
             services.AddScoped(typeof(IEfRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(IUnitOfWork), typeof(MySqlUnitOfWork));//UnitOfWork

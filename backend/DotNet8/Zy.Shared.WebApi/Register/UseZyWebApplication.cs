@@ -63,7 +63,7 @@ namespace Zy.Shared.WebApi.Register
         public static IApplicationBuilder UseShardingCoreDbcontext(this IApplicationBuilder app)
         {
             //not required, enable check table missing and auto create,非必须  启动检查缺少的表并且创建
-            app.ApplicationServices.UseAutoTryCompensateTable();
+            // app.ApplicationServices.UseAutoTryCompensateTable();
             return app;
           }
         /// <summary>
